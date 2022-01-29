@@ -9,29 +9,29 @@ class ListViewModel(database: TransactionDatabaseDao) : ViewModel() {
     val transactions = database.getAllTransactions()
 
     /**
-     * Variable that tells the Fragment to navigate to a specific [com.xpense.android.ui.DetailFragment]
+     * Variable that tells the Fragment to navigate to a specific [com.xpense.android.ui.edit.EditTransactionFragment]
      *
      * This is private because we don't want to expose setting this value to the Fragment.
      */
-    private val _navigateToDetail = MutableLiveData<Boolean>()
+    private val _navigateToEdit = MutableLiveData<Boolean>()
 
     /**
-     * If this is true, immediately navigate to [com.xpense.android.ui.DetailFragment] and
+     * If this is true, immediately navigate to [com.xpense.android.ui.edit.EditTransactionFragment] and
      * call [doneNavigating]
      */
-    val navigateToDetail: LiveData<Boolean>
-        get() = _navigateToDetail
+    val navigateToEdit: LiveData<Boolean>
+        get() = _navigateToEdit
 
     /**
-     * Call this immediately after navigating to [com.xpense.android.ui.DetailFragment]
+     * Call this immediately after navigating to [com.xpense.android.ui.edit.EditTransactionFragment]
      *
      * It will clear the navigation request, so if the device is rotated it won't navigate twice.
      */
     fun doneNavigating() {
-        _navigateToDetail.value = false
+        _navigateToEdit.value = false
     }
 
-    fun navigateToDetail() {
-        _navigateToDetail.value = true
+    fun navigateToEdit() {
+        _navigateToEdit.value = true
     }
 }

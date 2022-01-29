@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.xpense.android.R
 import com.xpense.android.databinding.FragmentListBinding
 import com.xpense.android.db.TransactionDatabase
@@ -32,21 +33,26 @@ class ListFragment : Fragment() {
 
         binding.viewModel = viewModel
 
+        binding.lifecycleOwner = this
+
         // Add an Observer on the state variable for navigating when button is pressed.
-        viewModel.navigateToDetail.observe(viewLifecycleOwner) {
+        viewModel.navigateToEdit.observe(viewLifecycleOwner) {
             if (it) {
-                findNavController().navigate(ListFragmentDirections.actionListFragmentToDetailFragment())
+                findNavController().navigate(ListFragmentDirections
+                    .actionListFragmentToEditTransactionFragment())
                 viewModel.doneNavigating()
             }
         }
 
-        val adapter = TransactionAdapter()
-
-        binding.transactionList.adapter = adapter
+        val transactionAdapter = TransactionAdapter()
+        binding.transactionList.apply {
+            adapter = transactionAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
 
         viewModel.transactions.observe(viewLifecycleOwner) {
             it?.let {
-                adapter.submitList(it)
+                transactionAdapter.submitList(it)
             }
         }
 
