@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.xpense.android.R
 import com.xpense.android.databinding.FragmentEditTransactionBinding
 import com.xpense.android.db.TransactionDatabase
@@ -28,6 +29,15 @@ class EditTransactionFragment : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory).get(EditTransactionViewModel::class.java)
 
         binding.viewModel = viewModel
+
+        binding.lifecycleOwner = this
+
+        viewModel.navigateExit.observe(viewLifecycleOwner) {
+            if (it) {
+                findNavController().popBackStack()
+                viewModel.doneNavigating()
+            }
+        }
 
         return binding.root
     }
