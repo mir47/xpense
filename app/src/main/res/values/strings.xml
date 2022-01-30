@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">xpense</string>
+    <string name="sms_notification_channel_id" translatable="false">sms_channel</string>
+    <string name="sms_notification_channel_name" translatable="true">SMS</string>
+    <string name="sms_notification_channel_description" translatable="true">SMS detection</string>
+    <string name="sms_notification_title">SMS Detected</string>
+    <string name="sms_notification_text">New SMS detected!</string>
 </resources>

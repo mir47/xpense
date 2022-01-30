@@ -1,11 +1,12 @@
 package com.xpense.android.sms
 
+import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.telephony.SmsMessage
-import kotlinx.coroutines.runBlocking
+import com.xpense.android.util.sendNotification
 
 class SmsReceiver : BroadcastReceiver() {
 
@@ -23,9 +24,10 @@ class SmsReceiver : BroadcastReceiver() {
                 if (messages.size > -1) {
                     println("mmmmm Message received: " + messages[0]?.messageBody)
                     println("mmmmm Message received from: " + messages[0]?.originatingAddress)
-                    runBlocking {
-                        println("mmmmm ok")
-                    }
+
+                    val notificationManager: NotificationManager =
+                        context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                    notificationManager.sendNotification(context)
                 }
             }
         }
