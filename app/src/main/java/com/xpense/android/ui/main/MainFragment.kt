@@ -1,4 +1,4 @@
-package com.xpense.android.ui.list
+package com.xpense.android.ui.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,10 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xpense.android.R
-import com.xpense.android.databinding.FragmentListBinding
+import com.xpense.android.databinding.FragmentMainBinding
 import com.xpense.android.db.TransactionDatabase
 
-class ListFragment : Fragment() {
+class MainFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,25 +21,25 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        val binding: FragmentListBinding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_list, container, false)
+        val binding: FragmentMainBinding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_main, container, false)
 
         val dataSource = TransactionDatabase
             .getInstance(requireActivity().application).transactionDatabaseDao
 
-        val viewModelFactory = ListViewModelFactory(dataSource)
+        val viewModelFactory = MainViewModelFactory(dataSource)
 
-        val viewModel = ViewModelProvider(this, viewModelFactory).get(ListViewModel::class.java)
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         binding.viewModel = viewModel
 
         binding.lifecycleOwner = this
 
         // Add an Observer on the state variable for navigating when button is pressed.
-        viewModel.navigateToEdit.observe(viewLifecycleOwner) {
+        viewModel.navigateToTransaction.observe(viewLifecycleOwner) {
             if (it) {
-                findNavController().navigate(ListFragmentDirections
-                    .actionListFragmentToEditTransactionFragment())
+                findNavController().navigate(MainFragmentDirections
+                    .actionMainFragmentToTransactionFragment())
                 viewModel.doneNavigating()
             }
         }

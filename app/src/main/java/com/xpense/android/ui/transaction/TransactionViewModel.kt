@@ -1,4 +1,4 @@
-package com.xpense.android.ui.edit
+package com.xpense.android.ui.transaction
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
@@ -10,7 +10,7 @@ import com.xpense.android.db.TransactionDatabaseDao
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class EditTransactionViewModel(private val database: TransactionDatabaseDao) : ViewModel() {
+class TransactionViewModel(private val database: TransactionDatabaseDao) : ViewModel() {
 
     val amount = ObservableField<String>()
 

@@ -1,4 +1,4 @@
-package com.xpense.android.ui.list
+package com.xpense.android.ui.main
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter

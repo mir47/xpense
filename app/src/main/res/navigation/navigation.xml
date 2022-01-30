@@ -3,24 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/list_fragment">
+    app:startDestination="@id/main_fragment">
 
     <fragment
-        android:id="@+id/list_fragment"
-        android:name="com.xpense.android.ui.list.ListFragment"
-        android:label="list_fragment"
-        tools:layout="@layout/fragment_list" >
+        android:id="@+id/main_fragment"
+        android:name="com.xpense.android.ui.main.MainFragment"
+        android:label="main_fragment"
+        tools:layout="@layout/fragment_main" >
         <action
-            android:id="@+id/action_list_fragment_to_edit_transaction_fragment"
-            app:destination="@id/edit_transaction_fragment"
+            android:id="@+id/action_main_fragment_to_transaction_fragment"
+            app:destination="@id/transaction_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@+id/list_fragment" />
+            app:popUpTo="@+id/main_fragment" />
     </fragment>
     <fragment
-        android:id="@+id/edit_transaction_fragment"
-        android:name="com.xpense.android.ui.edit.EditTransactionFragment"
-        android:label="edit_transaction_fragment" />
+        android:id="@+id/transaction_fragment"
+        android:name="com.xpense.android.ui.transaction.TransactionFragment"
+        android:label="transaction_fragment"
+        tools:layout="@layout/fragment_transaction" />
 </navigation>

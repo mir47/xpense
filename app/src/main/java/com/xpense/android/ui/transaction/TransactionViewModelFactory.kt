@@ -1,4 +1,4 @@
-package com.xpense.android.ui.list
+package com.xpense.android.ui.transaction
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -9,13 +9,13 @@ import com.xpense.android.db.TransactionDatabaseDao
  *
  * Provides the TransactionDatabaseDao to the ViewModel.
  */
-class ListViewModelFactory(
+class TransactionViewModelFactory(
     private val dataSource: TransactionDatabaseDao
     ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ListViewModel::class.java)) {
-            return ListViewModel(dataSource) as T
+        if (modelClass.isAssignableFrom(TransactionViewModel::class.java)) {
+            return TransactionViewModel(dataSource) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

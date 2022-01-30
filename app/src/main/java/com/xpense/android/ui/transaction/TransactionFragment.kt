@@ -1,4 +1,4 @@
-package com.xpense.android.ui.edit
+package com.xpense.android.ui.transaction
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,24 +9,24 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.xpense.android.R
-import com.xpense.android.databinding.FragmentEditTransactionBinding
+import com.xpense.android.databinding.FragmentTransactionBinding
 import com.xpense.android.db.TransactionDatabase
 
-class EditTransactionFragment : Fragment() {
+class TransactionFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: FragmentEditTransactionBinding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_edit_transaction, container, false)
+        val binding: FragmentTransactionBinding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_transaction, container, false)
 
         val dataSource = TransactionDatabase
             .getInstance(requireActivity().application).transactionDatabaseDao
 
-        val viewModelFactory = EditTransactionViewModelFactory(dataSource)
+        val viewModelFactory = TransactionViewModelFactory(dataSource)
 
-        val viewModel = ViewModelProvider(this, viewModelFactory).get(EditTransactionViewModel::class.java)
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(TransactionViewModel::class.java)
 
         binding.viewModel = viewModel
 

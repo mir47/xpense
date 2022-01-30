@@ -1,11 +1,11 @@
-package com.xpense.android.ui.list
+package com.xpense.android.ui.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.xpense.android.databinding.ListItemTransactionBinding
+import com.xpense.android.databinding.ItemTransactionBinding
 import com.xpense.android.db.Transaction
 
 class TransactionAdapter : ListAdapter<Transaction, RecyclerView.ViewHolder>(TransactionDiffCallback()) {
@@ -19,7 +19,7 @@ class TransactionAdapter : ListAdapter<Transaction, RecyclerView.ViewHolder>(Tra
         return TransactionViewHolder.from(parent)
     }
 
-    class TransactionViewHolder private constructor(private val binding: ListItemTransactionBinding)
+    class TransactionViewHolder private constructor(private val binding: ItemTransactionBinding)
         : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Transaction) {
@@ -30,7 +30,7 @@ class TransactionAdapter : ListAdapter<Transaction, RecyclerView.ViewHolder>(Tra
         companion object {
             fun from(parent: ViewGroup): TransactionViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ListItemTransactionBinding.inflate(layoutInflater, parent, false)
+                val binding = ItemTransactionBinding.inflate(layoutInflater, parent, false)
                 return TransactionViewHolder(binding)
             }
         }
