@@ -1,4 +1,4 @@
-package com.xpense.android.db
+package com.xpense.android.data.local
 
 import android.content.Context
 import androidx.room.Database
@@ -11,7 +11,7 @@ abstract class TransactionDatabase : RoomDatabase() {
     /**
      * Connects the database to the DAO.
      */
-    abstract val transactionDatabaseDao: TransactionDatabaseDao
+    abstract val transactionDao: TransactionDao
 
     /**
      * Define a companion object, this allows us to add functions on the TransactionDatabase class.

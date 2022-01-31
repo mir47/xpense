@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.xpense.android.R
 import com.xpense.android.databinding.FragmentTransactionBinding
-import com.xpense.android.db.TransactionDatabase
+import com.xpense.android.data.local.TransactionDatabase
 
 class TransactionFragment : Fragment() {
     override fun onCreateView(
@@ -22,7 +22,7 @@ class TransactionFragment : Fragment() {
             inflater, R.layout.fragment_transaction, container, false)
 
         val dataSource = TransactionDatabase
-            .getInstance(requireActivity().application).transactionDatabaseDao
+            .getInstance(requireActivity().application).transactionDao
 
         val viewModelFactory = TransactionViewModelFactory(dataSource)
 

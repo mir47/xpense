@@ -1,4 +1,4 @@
-package com.xpense.android.db
+package com.xpense.android.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -10,7 +10,7 @@ import androidx.room.Update
  * Defines methods for using the Transaction class with Room.
  */
 @Dao
-interface TransactionDatabaseDao {
+interface TransactionDao {
 
     @Insert
     suspend fun insert(transaction: Transaction)

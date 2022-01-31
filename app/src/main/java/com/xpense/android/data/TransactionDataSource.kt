@@ -1,7 +1,8 @@
 package com.xpense.android.data
 
-import com.xpense.android.db.Transaction
+import androidx.lifecycle.LiveData
+import com.xpense.android.data.local.Transaction
 
 interface TransactionDataSource {
-    suspend fun observeTransactions(): List<Transaction>
+    suspend fun observeTransactions(): LiveData<List<Transaction>>
 }

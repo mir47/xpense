@@ -1,4 +1,4 @@
-package com.xpense.android.db
+package com.xpense.android.data.local
 
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -14,7 +14,7 @@ import java.io.IOException
 @RunWith(AndroidJUnit4::class)
 class TransactionDatabaseTest {
 
-    private lateinit var dao: TransactionDatabaseDao
+    private lateinit var dao: TransactionDao
     private lateinit var db: TransactionDatabase
 
     @Before
@@ -26,7 +26,7 @@ class TransactionDatabaseTest {
                 // Allowing main thread queries, just for testing.
             .allowMainThreadQueries()
             .build()
-        dao = db.transactionDatabaseDao
+        dao = db.transactionDao
     }
 
     @After

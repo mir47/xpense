@@ -1,4 +1,4 @@
-package com.xpense.android.db
+package com.xpense.android.data.local
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

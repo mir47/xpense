@@ -1,10 +1,12 @@
 package com.xpense.android.data.local
 
+import androidx.lifecycle.LiveData
 import com.xpense.android.data.TransactionDataSource
-import com.xpense.android.db.Transaction
 
-class TransactionLocalDataSource : TransactionDataSource {
-    override suspend fun observeTransactions(): List<Transaction> {
-        TODO("Not yet implemented")
+class TransactionLocalDataSource internal constructor(
+    private val transactionDao: TransactionDao,
+): TransactionDataSource {
+    override suspend fun observeTransactions(): LiveData<List<Transaction>> {
+        return transactionDao.getAllTransactions()
     }
 }

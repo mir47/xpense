@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xpense.android.R
 import com.xpense.android.databinding.FragmentMainBinding
-import com.xpense.android.db.TransactionDatabase
+import com.xpense.android.data.local.TransactionDatabase
 
 class MainFragment : Fragment() {
 
@@ -25,7 +25,7 @@ class MainFragment : Fragment() {
             inflater, R.layout.fragment_main, container, false)
 
         val dataSource = TransactionDatabase
-            .getInstance(requireActivity().application).transactionDatabaseDao
+            .getInstance(requireActivity().application).transactionDao
 
         val viewModelFactory = MainViewModelFactory(dataSource)
 

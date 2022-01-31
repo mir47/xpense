@@ -2,7 +2,7 @@ package com.xpense.android.ui.transaction
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.xpense.android.db.TransactionDatabaseDao
+import com.xpense.android.data.local.TransactionDao
 
 /**
  * This is boiler plate code for a ViewModel Factory.
@@ -10,7 +10,7 @@ import com.xpense.android.db.TransactionDatabaseDao
  * Provides the TransactionDatabaseDao to the ViewModel.
  */
 class TransactionViewModelFactory(
-    private val dataSource: TransactionDatabaseDao
+    private val dataSource: TransactionDao
     ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

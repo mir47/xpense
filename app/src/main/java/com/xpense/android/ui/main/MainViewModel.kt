@@ -3,9 +3,9 @@ package com.xpense.android.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.xpense.android.db.TransactionDatabaseDao
+import com.xpense.android.data.local.TransactionDao
 
-class MainViewModel(database: TransactionDatabaseDao) : ViewModel() {
+class MainViewModel(database: TransactionDao) : ViewModel() {
     val transactions = database.getAllTransactions()
 
     /**

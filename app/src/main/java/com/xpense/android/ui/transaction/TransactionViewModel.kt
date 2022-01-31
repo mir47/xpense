@@ -5,12 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.xpense.android.db.Transaction
-import com.xpense.android.db.TransactionDatabaseDao
+import com.xpense.android.data.local.Transaction
+import com.xpense.android.data.local.TransactionDao
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class TransactionViewModel(private val database: TransactionDatabaseDao) : ViewModel() {
+class TransactionViewModel(private val database: TransactionDao) : ViewModel() {
 
     val amount = ObservableField<String>()
 

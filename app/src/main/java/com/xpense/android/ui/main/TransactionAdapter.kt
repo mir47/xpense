@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.xpense.android.databinding.ItemTransactionBinding
-import com.xpense.android.db.Transaction
+import com.xpense.android.data.local.Transaction
 
 class TransactionAdapter :
     ListAdapter<Transaction, TransactionAdapter.TransactionViewHolder>(TransactionDiffCallback()) {
