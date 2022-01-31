@@ -35,10 +35,8 @@ fun NotificationManager.sendNotification(context: Context) {
             .bigPicture(icon)
             .bigLargeIcon(null)
 
-    val builder = NotificationCompat.Builder(
-        context,
-        context.getString(R.string.sms_notification_channel_id)
-    )
+    val channelId = context.getString(R.string.sms_notification_channel_id)
+    val notification = NotificationCompat.Builder(context, channelId)
         .setSmallIcon(android.R.drawable.ic_dialog_info)
         .setContentTitle(context.getString(R.string.sms_notification_title))
         .setContentText(context.getString(R.string.sms_notification_text))
@@ -47,6 +45,7 @@ fun NotificationManager.sendNotification(context: Context) {
         .setStyle(bigPicStyle)
         .setLargeIcon(icon)
         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        .build()
 
-    notify(NOTIFICATION_ID, builder.build())
+    notify(NOTIFICATION_ID, notification)
 }
