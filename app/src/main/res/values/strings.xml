@@ -5,4 +5,7 @@
     <string name="sms_notification_channel_description" translatable="true">SMS detection</string>
     <string name="sms_notification_title">SMS Detected</string>
     <string name="sms_notification_text">New SMS detected!</string>
+    <string name="static_shortcut_label_short">label_short</string>
+    <string name="static_shortcut_label_long">label_long</string>
+    <string name="static_shortcut_disabled_message">disabled_message</string>
 </resources>

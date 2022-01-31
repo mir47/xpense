@@ -23,5 +23,9 @@
         android:id="@+id/transaction_fragment"
         android:name="com.xpense.android.ui.transaction.TransactionFragment"
         android:label="transaction_fragment"
-        tools:layout="@layout/fragment_transaction" />
+        tools:layout="@layout/fragment_transaction">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="xpense://xpense.com/transaction" />
+    </fragment>
 </navigation>
