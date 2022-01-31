@@ -8,7 +8,10 @@ class TransactionRepositoryImpl constructor(
     private val transactionRemoteDataSource: TransactionDataSource
 ) : TransactionRepository {
 
-    override suspend fun observeTransactions(): LiveData<List<Transaction>> =
+    override fun observeTransactions(): LiveData<List<Transaction>> =
         transactionLocalDataSource.observeTransactions()
+
+    override suspend fun insertTransaction(transaction: Transaction) =
+        transactionLocalDataSource.insertTransaction(transaction)
 
 }

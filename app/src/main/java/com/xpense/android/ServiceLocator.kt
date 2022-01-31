@@ -28,8 +28,8 @@ object ServiceLocator {
 
     private fun createTransactionRepository(context: Context): TransactionRepository {
         val newRepo = TransactionRepositoryImpl(
-            TransactionRemoteDataSource,
-            createTransactionLocalDataSource(context)
+            createTransactionLocalDataSource(context),
+            TransactionRemoteDataSource
         )
         transactionRepository = newRepo
         return newRepo

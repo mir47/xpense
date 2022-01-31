@@ -25,11 +25,10 @@ class MainFragment : Fragment() {
         val binding: FragmentMainBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_main, container, false)
 
-        val dataSource = TransactionDatabase
-            .getInstance(requireActivity().application).transactionDao
-//        val dataSource = (requireContext().applicationContext as XpenseApplication).transactionRepository
+        val transactionRepository =
+            (requireContext().applicationContext as XpenseApplication).transactionRepository
 
-        val viewModelFactory = MainViewModelFactory(dataSource)
+        val viewModelFactory = MainViewModelFactory(transactionRepository)
 
         val viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 

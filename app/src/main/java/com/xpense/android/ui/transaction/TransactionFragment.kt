@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.xpense.android.R
+import com.xpense.android.XpenseApplication
 import com.xpense.android.databinding.FragmentTransactionBinding
-import com.xpense.android.data.local.TransactionDatabase
 
 class TransactionFragment : Fragment() {
     override fun onCreateView(
@@ -21,10 +21,10 @@ class TransactionFragment : Fragment() {
         val binding: FragmentTransactionBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_transaction, container, false)
 
-        val dataSource = TransactionDatabase
-            .getInstance(requireActivity().application).transactionDao
+        val transactionRepository =
+            (requireContext().applicationContext as XpenseApplication).transactionRepository
 
-        val viewModelFactory = TransactionViewModelFactory(dataSource)
+        val viewModelFactory = TransactionViewModelFactory(transactionRepository)
 
         val viewModel = ViewModelProvider(this, viewModelFactory).get(TransactionViewModel::class.java)
 

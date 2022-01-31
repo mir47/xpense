@@ -5,7 +5,11 @@ import com.xpense.android.data.TransactionDataSource
 import com.xpense.android.data.local.Transaction
 
 object TransactionRemoteDataSource : TransactionDataSource {
-    override suspend fun observeTransactions(): LiveData<List<Transaction>> {
+    override fun observeTransactions(): LiveData<List<Transaction>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun insertTransaction(transaction: Transaction) {
         TODO("Not yet implemented")
     }
 }

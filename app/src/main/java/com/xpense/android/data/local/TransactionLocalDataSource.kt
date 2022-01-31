@@ -6,7 +6,9 @@ import com.xpense.android.data.TransactionDataSource
 class TransactionLocalDataSource internal constructor(
     private val transactionDao: TransactionDao,
 ): TransactionDataSource {
-    override suspend fun observeTransactions(): LiveData<List<Transaction>> {
-        return transactionDao.getAllTransactions()
-    }
+    override fun observeTransactions(): LiveData<List<Transaction>> =
+        transactionDao.getAllTransactions()
+
+    override suspend fun insertTransaction(transaction: Transaction) =
+        transactionDao.insert(transaction)
 }

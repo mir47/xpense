@@ -3,10 +3,10 @@ package com.xpense.android.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.xpense.android.data.local.TransactionDao
+import com.xpense.android.data.TransactionRepository
 
-class MainViewModel(database: TransactionDao) : ViewModel() {
-    val transactions = database.getAllTransactions()
+class MainViewModel(private val transactionRepository: TransactionRepository) : ViewModel() {
+    val transactions = transactionRepository.observeTransactions()
 
     /**
      * Variable that tells the Fragment to navigate to a specific [com.xpense.android.ui.transaction.TransactionFragment]
