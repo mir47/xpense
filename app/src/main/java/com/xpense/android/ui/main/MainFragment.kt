@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xpense.android.R
+import com.xpense.android.XpenseApplication
 import com.xpense.android.databinding.FragmentMainBinding
 import com.xpense.android.data.local.TransactionDatabase
 
@@ -26,6 +27,7 @@ class MainFragment : Fragment() {
 
         val dataSource = TransactionDatabase
             .getInstance(requireActivity().application).transactionDao
+//        val dataSource = (requireContext().applicationContext as XpenseApplication).transactionRepository
 
         val viewModelFactory = MainViewModelFactory(dataSource)
 
