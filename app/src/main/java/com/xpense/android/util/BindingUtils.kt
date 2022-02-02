@@ -10,3 +10,10 @@ fun TextView.setTransactionAmountString(item: Transaction?) {
         text = item.amount.toString()
     }
 }
+
+@BindingAdapter("transactionTimestampString")
+fun TextView.setTransactionTimestampString(item: Transaction?) {
+    item?.let {
+        text = item.createdTimestamp.toString()
+    }
+}

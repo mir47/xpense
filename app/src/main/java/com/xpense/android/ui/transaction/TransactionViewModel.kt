@@ -9,6 +9,7 @@ import com.xpense.android.data.TransactionRepository
 import com.xpense.android.data.local.Transaction
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import java.util.Date
 
 class TransactionViewModel(private val transactionRepository: TransactionRepository) : ViewModel() {
 
@@ -44,7 +45,12 @@ class TransactionViewModel(private val transactionRepository: TransactionReposit
         try {
             amount.get()?.toDouble()?.let {
                 viewModelScope.launch {
-                    transactionRepository.insertTransaction(Transaction(amount = it))
+                    transactionRepository.insertTransaction(
+                        Transaction(
+                            createdTimestamp = Date(System.currentTimeMillis()),
+                            amount = it
+                        )
+                    )
                     navigateExit()
                 }
             }
