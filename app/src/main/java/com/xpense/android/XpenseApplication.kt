@@ -4,8 +4,8 @@ import android.app.Application
 import com.xpense.android.data.TransactionDataSource
 import com.xpense.android.data.TransactionRepository
 import com.xpense.android.data.TransactionRepositoryImpl
-import com.xpense.android.data.local.LocalDB
-import com.xpense.android.data.local.TransactionLocalDataSource
+import com.xpense.android.data.local.TransactionDatabase
+import com.xpense.android.data.local.TransactionDataSourceLocal
 import com.xpense.android.ui.main.MainViewModel
 import com.xpense.android.ui.transaction.TransactionViewModel
 import org.koin.android.ext.koin.androidContext
@@ -28,8 +28,8 @@ class XpenseApplication : Application() {
             // Declare singleton definitions to be later injected using by inject()
             // This view model is declared singleton to be used across multiple fragments
             single { TransactionRepositoryImpl(get(), get()) as TransactionRepository }
-            single { TransactionLocalDataSource(get()) as TransactionDataSource }
-            single { LocalDB.createTransactionDao(this@XpenseApplication) }
+            single { TransactionDataSourceLocal(get()) as TransactionDataSource }
+            single { TransactionDatabase.createTransactionDao(this@XpenseApplication) }
         }
 
         startKoin {
