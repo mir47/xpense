@@ -6,15 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xpense.android.R
-import com.xpense.android.XpenseApplication
 import com.xpense.android.databinding.FragmentMainBinding
-import com.xpense.android.data.local.TransactionDatabase
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
+
+    // use Koin to retrieve the ViewModel instance
+    private val _viewModel: MainViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,23 +26,16 @@ class MainFragment : Fragment() {
         val binding: FragmentMainBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_main, container, false)
 
-        val transactionRepository =
-            (requireContext().applicationContext as XpenseApplication).transactionRepository
-
-        val viewModelFactory = MainViewModelFactory(transactionRepository)
-
-        val viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-
-        binding.viewModel = viewModel
+        binding.viewModel = _viewModel
 
         binding.lifecycleOwner = this
 
         // Add an Observer on the state variable for navigating when button is pressed.
-        viewModel.navigateToTransaction.observe(viewLifecycleOwner) {
+        _viewModel.navigateToTransaction.observe(viewLifecycleOwner) {
             if (it) {
                 findNavController().navigate(MainFragmentDirections
                     .actionMainFragmentToTransactionFragment())
-                viewModel.doneNavigating()
+                _viewModel.doneNavigating()
             }
         }
 
@@ -51,7 +45,7 @@ class MainFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
         }
 
-        viewModel.transactions.observe(viewLifecycleOwner) {
+        _viewModel.transactions.observe(viewLifecycleOwner) {
             it?.let {
                 transactionAdapter.submitList(it)
             }
