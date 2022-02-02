@@ -52,10 +52,9 @@ dependencies {
     // Android KTX
     implementation "androidx.core:core-ktx:$version_core"
 
-    // Room and Lifecycle dependencies
+    // Room
     implementation "androidx.room:room-runtime:$version_room"
     kapt "androidx.room:room-compiler:$version_room"
-    implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
 
     // Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$version_room"

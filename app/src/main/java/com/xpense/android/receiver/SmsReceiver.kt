@@ -1,4 +1,4 @@
-package com.xpense.android.sms
+package com.xpense.android.receiver
 
 import android.app.NotificationManager
 import android.content.BroadcastReceiver
