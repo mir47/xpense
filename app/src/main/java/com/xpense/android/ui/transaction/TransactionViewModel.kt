@@ -8,12 +8,12 @@ import androidx.lifecycle.viewModelScope
 import com.xpense.android.data.TransactionRepository
 import com.xpense.android.data.local.Transaction
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import java.util.Date
 
 class TransactionViewModel(private val transactionRepository: TransactionRepository) : ViewModel() {
 
-    val amount = ObservableField<String>()
+    val amountField = ObservableField<String>()
+    val descriptionField = ObservableField<String>()
 
     /**
      * Variable that tells the Fragment to close.
@@ -42,19 +42,17 @@ class TransactionViewModel(private val transactionRepository: TransactionReposit
     }
 
     fun submit() {
-        try {
-            amount.get()?.toDouble()?.let {
-                viewModelScope.launch {
-                    transactionRepository.insertTransaction(
-                        Transaction(
-                            createdTimestamp = Date(System.currentTimeMillis()),
-                            amount = it
-                        )
-                    )
-                    navigateExit()
-                }
-            }
-        } catch (e: Exception) {
+        val description = descriptionField.get().orEmpty()
+        val amount = amountField.get()?.toDoubleOrNull() ?: 0.0
+        viewModelScope.launch {
+            transactionRepository.insertTransaction(
+                Transaction(
+                    createdTimestamp = Date(System.currentTimeMillis()),
+                    description = description,
+                    amount = amount
+                )
+            )
+            navigateExit()
         }
     }
 }

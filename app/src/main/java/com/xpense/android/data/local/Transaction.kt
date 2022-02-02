@@ -14,5 +14,8 @@ data class Transaction(
         val createdTimestamp: Date? = null,
 
         @ColumnInfo(name = "amount")
-        var amount: Double = 0.0
+        var amount: Double = 0.0,
+
+        @ColumnInfo(name = "description")
+        var description: String = ""
 )
