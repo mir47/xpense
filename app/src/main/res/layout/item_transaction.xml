@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -26,46 +27,48 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/image"
+                android:id="@+id/star_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@null"
-                android:src="@android:drawable/ic_menu_gallery"
+                android:contentDescription="@string/yellow_star"
+                android:src="@android:drawable/btn_star_big_on"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/timestamp"
+                style="@style/TextStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_half"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/image"
+                app:layout_constraintStart_toEndOf="@id/star_image"
                 app:layout_constraintTop_toTopOf="parent"
-                app:transactionTimestampString="@{transaction}" />
+                app:transactionTimestampString="@{transaction}"
+                tools:text="09 February 2022" />
 
             <TextView
                 android:id="@+id/amount"
+                style="@style/AmountTextStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_half"
-                android:textSize="@dimen/text_size"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/image"
+                app:layout_constraintStart_toEndOf="@id/star_image"
                 app:layout_constraintTop_toBottomOf="@id/timestamp"
-                app:transactionAmountString="@{transaction}" />
+                app:transactionAmountString="@{transaction}"
+                tools:text="123.00" />
 
             <TextView
                 android:id="@+id/description"
+                style="@style/TextStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_half"
                 android:text="@{transaction.description}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/image"
-                app:layout_constraintTop_toBottomOf="@id/amount" />
+                app:layout_constraintStart_toEndOf="@id/star_image"
+                app:layout_constraintTop_toBottomOf="@id/amount"
+                tools:text="Some description" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
