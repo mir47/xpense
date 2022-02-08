@@ -8,4 +8,7 @@
     <string name="static_shortcut_label_short">label_short</string>
     <string name="static_shortcut_label_long">label_long</string>
     <string name="static_shortcut_disabled_message">disabled_message</string>
+    <string name="description">Description</string>
+    <string name="save">Save</string>
+    <string name="amount">Amount</string>
 </resources>
