@@ -6,4 +6,5 @@
     <dimen name="spacing_normal">16dp</dimen>
     <dimen name="spacing_double">32dp</dimen>
     <dimen name="text_size">20sp</dimen>
+    <dimen name="image_header_height">200dp</dimen>
 </resources>
