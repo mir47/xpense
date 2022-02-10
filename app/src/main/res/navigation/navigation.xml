@@ -27,6 +27,9 @@
         <deepLink
             android:id="@+id/deepLink"
             app:uri="xpense://xpense.com/transaction" />
+        <argument
+            android:name="transaction"
+            app:argType="com.xpense.android.data.local.Transaction" />
     </fragment>
     <fragment
         android:id="@+id/about_fragment"

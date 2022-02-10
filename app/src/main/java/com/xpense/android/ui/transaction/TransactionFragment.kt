@@ -35,6 +35,13 @@ class TransactionFragment : Fragment() {
             }
         }
 
+        val args = TransactionFragmentArgs.fromBundle(requireArguments())
+        if (args.transaction.transactionId == 0L) {
+            // create new transaction - default empty fields
+        } else {
+            // edit existing transaction - pre-populate fields
+        }
+
         return binding.root
     }
 }

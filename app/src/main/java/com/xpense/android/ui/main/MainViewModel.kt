@@ -9,18 +9,19 @@ class MainViewModel(private val transactionRepository: TransactionRepository) : 
     val transactions = transactionRepository.observeTransactions()
 
     /**
-     * Variable that tells the Fragment to navigate to a specific [com.xpense.android.ui.transaction.TransactionFragment]
+     * Variable that tells the Fragment to navigate to a specific
+     * [com.xpense.android.ui.transaction.TransactionFragment]
      *
      * This is private because we don't want to expose setting this value to the Fragment.
      */
-    private val _navigateToTransaction = MutableLiveData<Boolean>()
+    private val _navigateToCreateTransaction = MutableLiveData<Boolean>()
 
     /**
-     * If this is true, immediately navigate to [com.xpense.android.ui.transaction.TransactionFragment] and
-     * call [doneNavigating]
+     * If this is true, immediately navigate to [com.xpense.android.ui.transaction.TransactionFragment]
+     * and call [doneNavigating]
      */
-    val navigateToTransaction: LiveData<Boolean>
-        get() = _navigateToTransaction
+    val navigateToCreateTransaction: LiveData<Boolean>
+        get() = _navigateToCreateTransaction
 
     /**
      * Call this immediately after navigating to [com.xpense.android.ui.transaction.TransactionFragment]
@@ -28,10 +29,10 @@ class MainViewModel(private val transactionRepository: TransactionRepository) : 
      * It will clear the navigation request, so if the device is rotated it won't navigate twice.
      */
     fun doneNavigating() {
-        _navigateToTransaction.value = false
+        _navigateToCreateTransaction.value = false
     }
 
-    fun navigateToTransaction() {
-        _navigateToTransaction.value = true
+    fun navigateToCreateTransaction() {
+        _navigateToCreateTransaction.value = true
     }
 }
