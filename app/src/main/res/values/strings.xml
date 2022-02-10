@@ -18,4 +18,5 @@
     <string name="about_menu_item">About</string>
     <string name="about_android">About Android</string>
     <string name="about_text">Xpense is an app to help keep track of your expenses.\n\nIt is still in early development with more updates to come.</string>
+    <string name="share">Share</string>
 </resources>

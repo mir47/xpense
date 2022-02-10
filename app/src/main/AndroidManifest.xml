@@ -36,4 +36,13 @@
 <!--        </receiver>-->
     </application>
 
+    <!-- Related to restrictions on "package visibility" introduced in Android 11. -->
+    <!-- See https://developer.android.com/about/versions/11/privacy/package-visibility -->
+    <!-- Example: when calling intent.resolveActivity(requireActivity().packageManager) -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+        </intent>
+    </queries>
+
 </manifest>
