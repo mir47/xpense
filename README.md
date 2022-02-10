@@ -18,3 +18,4 @@
   - migrate room db to use kotlin flow
   - unit tests
   - instrumented tests
+  - Proguard obfuscation
