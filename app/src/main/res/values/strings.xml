@@ -12,11 +12,11 @@
     <string name="save">Save</string>
     <string name="amount">Amount</string>
     <string name="yellow_star">Yellow star</string>
+    <string name="green_question_mark">Green Question Mark</string>
     <string name="main_screen_title">Expense</string>
     <string name="transaction_screen_title">Transaction</string>
     <string name="about_screen_title">About</string>
     <string name="about_menu_item">About</string>
-    <string name="about_android">About Android</string>
     <string name="about_text">Xpense is an app to help keep track of your expenses.\n\nIt is still in early development with more updates to come.</string>
     <string name="share">Share</string>
 </resources>
