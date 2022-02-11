@@ -10,7 +10,7 @@ buildscript {
         version_junit = '4.13.2'
         version_koin = '2.0.1'
         version_material = '1.5.0'
-        version_navigation = '1.0.0'
+        version_navigation = '2.4.1'
         version_room = '2.4.1'
         version_test_junit = '1.1.3'
     }
