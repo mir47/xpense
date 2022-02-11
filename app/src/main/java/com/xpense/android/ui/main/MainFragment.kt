@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xpense.android.R
-import com.xpense.android.data.local.Transaction
 import com.xpense.android.databinding.FragmentMainBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -36,9 +35,11 @@ class MainFragment : Fragment() {
         _viewModel.navigateToCreateTransaction.observe(viewLifecycleOwner) {
             if (it) {
                 // empty object to imply the creation of a new Transaction
-                val transaction = Transaction()
-                findNavController().navigate(MainFragmentDirections
-                    .actionMainFragmentToTransactionFragment(transaction))
+                findNavController().navigate(
+                    MainFragmentDirections
+                        .actionMainFragmentToTransactionFragment()
+                        .setTransactionId(123L)
+                )
                 _viewModel.doneNavigating()
             }
         }
