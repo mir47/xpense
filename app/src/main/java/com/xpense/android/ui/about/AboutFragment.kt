@@ -41,7 +41,11 @@ class AboutFragment : Fragment() {
     private fun shareAbout() = startActivity(getShareIntent())
 
     private fun getShareIntent() = ShareCompat.IntentBuilder(requireActivity())
-        .setText(getString(R.string.about_text))
+        .setText(APP_STORE_LINK)
         .setType("text/plain")
         .intent
+
+    companion object {
+        const val APP_STORE_LINK = "https://play.google.com/store/apps/details?id=com.xpense.android"
+    }
 }
