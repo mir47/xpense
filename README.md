@@ -1,4 +1,5 @@
 # Xpense
+App is on [Play Store](https://play.google.com/store/apps/details?id=com.xpense.android)
 
 ## Feature Wishlist:
   - migrate koin to hilt
