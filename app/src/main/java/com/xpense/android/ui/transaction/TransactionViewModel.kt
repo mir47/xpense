@@ -45,17 +45,39 @@ class TransactionViewModel(
         _navigateExit.value = true
     }
 
+    init {
+        if (transactionId != 0L) {
+            viewModelScope.launch {
+                transactionRepository.getTransaction(transactionId)?.let {
+                    amountField.set(it.amount.toString())
+                    descriptionField.set(it.description)
+                }
+            }
+        }
+    }
+
     fun submit() {
         val description = descriptionField.get().orEmpty()
         val amount = amountField.get()?.toDoubleOrNull() ?: 0.0
         viewModelScope.launch {
-            transactionRepository.insertTransaction(
-                Transaction(
-                    createdTimestamp = Date(System.currentTimeMillis()),
-                    description = description,
-                    amount = amount
+            if (transactionId != 0L) {
+                transactionRepository.getTransaction(transactionId)?.let {
+                    transactionRepository.updateTransaction(
+                        it.apply {
+                            it.amount = amount
+                            it.description = description
+                        }
+                    )
+                }
+            } else {
+                transactionRepository.insertTransaction(
+                    Transaction(
+                        createdTimestamp = Date(System.currentTimeMillis()),
+                        amount = amount,
+                        description = description
+                    )
                 )
-            )
+            }
             navigateExit()
         }
     }

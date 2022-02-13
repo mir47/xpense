@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -39,14 +38,6 @@ class TransactionFragment : Fragment() {
                 findNavController().popBackStack()
                 _viewModel.doneNavigating()
             }
-        }
-
-        val args = TransactionFragmentArgs.fromBundle(requireArguments())
-        Toast.makeText(context, "${args.transactionId}", Toast.LENGTH_SHORT).show()
-        if (args.transactionId == 0L) {
-            // create new transaction - default empty fields
-        } else {
-            // edit existing transaction - pre-populate fields
         }
 
         return binding.root

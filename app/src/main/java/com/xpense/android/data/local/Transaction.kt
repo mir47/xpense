@@ -11,6 +11,7 @@ import java.util.Date
 @Parcelize
 data class Transaction(
         @PrimaryKey(autoGenerate = true)
+        @ColumnInfo(name = "transaction_id")
         var transactionId: Long = 0L,
 
         /**

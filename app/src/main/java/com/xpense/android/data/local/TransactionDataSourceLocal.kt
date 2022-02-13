@@ -11,4 +11,10 @@ class TransactionDataSourceLocal internal constructor(
 
     override suspend fun insertTransaction(transaction: Transaction) =
         transactionDao.insert(transaction)
+
+    override suspend fun getTransaction(transactionId: Long): Transaction? =
+        transactionDao.getTransactionWithId(transactionId)
+
+    override suspend fun updateTransaction(transaction: Transaction) =
+        transactionDao.update(transaction)
 }

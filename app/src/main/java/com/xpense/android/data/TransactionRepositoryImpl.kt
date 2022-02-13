@@ -14,4 +14,10 @@ class TransactionRepositoryImpl constructor(
     override suspend fun insertTransaction(transaction: Transaction) =
         transactionDataSourceLocal.insertTransaction(transaction)
 
+    override suspend fun getTransaction(transactionId: Long) =
+        transactionDataSourceLocal.getTransaction(transactionId)
+
+    override suspend fun updateTransaction(transaction: Transaction) =
+        transactionDataSourceLocal.updateTransaction(transaction)
+
 }

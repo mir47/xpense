@@ -3,6 +3,7 @@ package com.xpense.android.data.local
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 
@@ -21,7 +22,7 @@ interface TransactionDao {
      *
      * @param transaction new value to write
      */
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(transaction: Transaction)
 
     /**
@@ -29,7 +30,7 @@ interface TransactionDao {
      *
      * @param key transactionId to match
      */
-    @Query("SELECT * from transaction_table WHERE transactionId = :key")
+    @Query("SELECT * from transaction_table WHERE transaction_id = :key")
     suspend fun get(key: Long): Transaction?
 
     /**
@@ -37,19 +38,25 @@ interface TransactionDao {
      *
      * sorted by id in descending order.
      */
-    @Query("SELECT * FROM transaction_table ORDER BY transactionId DESC")
+    @Query("SELECT * FROM transaction_table ORDER BY transaction_id DESC")
     fun getAllTransactions(): LiveData<List<Transaction>>
+
+    /**
+     * Selects and returns an observable transaction with given transactionId.
+     */
+    @Query("SELECT * from transaction_table WHERE transaction_id = :key")
+    fun observeTransactionWithId(key: Long): LiveData<Transaction>
 
     /**
      * Selects and returns the transaction with given transactionId.
      */
-    @Query("SELECT * from transaction_table WHERE transactionId = :key")
-    fun getTransactionWithId(key: Long): LiveData<Transaction>
+    @Query("SELECT * from transaction_table WHERE transaction_id = :key")
+    suspend fun getTransactionWithId(key: Long): Transaction?
 
     /**
      * Selects and returns the last inserted transaction.
      */
-    @Query("SELECT * from transaction_table ORDER BY transactionId DESC LIMIT 1")
+    @Query("SELECT * from transaction_table ORDER BY transaction_id DESC LIMIT 1")
     suspend fun getLastTransaction(): Transaction?
 
     /**
@@ -58,4 +65,3 @@ interface TransactionDao {
     @Query("DELETE from transaction_table")
     fun clear()
 }
-

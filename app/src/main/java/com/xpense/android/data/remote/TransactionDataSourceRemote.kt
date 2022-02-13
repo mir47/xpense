@@ -12,4 +12,12 @@ object TransactionDataSourceRemote : TransactionDataSource {
     override suspend fun insertTransaction(transaction: Transaction) {
         TODO("Not yet implemented")
     }
+
+    override suspend fun getTransaction(transactionId: Long): Transaction? {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun updateTransaction(transaction: Transaction) {
+        TODO("Not yet implemented")
+    }
 }
