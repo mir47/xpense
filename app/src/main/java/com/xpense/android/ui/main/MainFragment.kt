@@ -11,7 +11,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.xpense.android.R
 import com.xpense.android.databinding.FragmentMainBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -37,21 +36,24 @@ class MainFragment : Fragment() {
         // Add an Observer on the state variable for navigating when button is pressed.
         _viewModel.navigateToCreateTransaction.observe(viewLifecycleOwner) {
             if (it) {
-                // empty object to imply the creation of a new Transaction
                 findNavController().navigate(
                     MainFragmentDirections
                         .actionMainFragmentToTransactionFragment()
-                        .setTransactionId(123L)
                 )
                 _viewModel.doneNavigating()
             }
         }
 
-        val transactionAdapter = TransactionAdapter()
-        binding.transactionList.apply {
-            adapter = transactionAdapter
-            layoutManager = LinearLayoutManager(context)
-        }
+        val transactionAdapter = TransactionAdapter(TransactionListener { transactionId ->
+            // TODO: click logic should be handled in the view model, with navigation event sent to fragment via LiveData
+            findNavController().navigate(
+                MainFragmentDirections
+                    .actionMainFragmentToTransactionFragment()
+                    .setTransactionId(transactionId)
+            )
+        })
+
+        binding.transactionList.adapter = transactionAdapter
 
         _viewModel.transactions.observe(viewLifecycleOwner) {
             it?.let { transactionAdapter.submitList(it) }

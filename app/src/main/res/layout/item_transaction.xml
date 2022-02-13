@@ -8,6 +8,10 @@
         <variable
             name="transaction"
             type="com.xpense.android.data.local.Transaction" />
+
+        <variable
+            name="clickListener" type="com.xpense.android.ui.main.TransactionListener"/>
+
     </data>
 
     <androidx.cardview.widget.CardView
@@ -24,6 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/spacing_half"
+            android:onClick="@{() -> clickListener.onClick(transaction)}"
             android:orientation="vertical">
 
             <ImageView
