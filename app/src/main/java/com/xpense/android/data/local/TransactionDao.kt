@@ -45,5 +45,17 @@ interface TransactionDao {
      */
     @Query("SELECT * from transaction_table WHERE transactionId = :key")
     fun getTransactionWithId(key: Long): LiveData<Transaction>
+
+    /**
+     * Selects and returns the last inserted transaction.
+     */
+    @Query("SELECT * from transaction_table ORDER BY transactionId DESC LIMIT 1")
+    suspend fun getLastTransaction(): Transaction?
+
+    /**
+     * Delete all transactions.
+     */
+    @Query("DELETE from transaction_table")
+    fun clear()
 }
 

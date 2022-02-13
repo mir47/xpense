@@ -6,6 +6,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
+/**
+ *
+ * exportSchema is true by default. It saves the schema of the db to a folder
+ * to provide a version history of the db, that can be helpful for complex
+ * databases that change often.
+ */
 @Database(entities = [Transaction::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class TransactionDatabase : RoomDatabase() {
@@ -25,7 +31,10 @@ abstract class TransactionDatabase : RoomDatabase() {
                 context.applicationContext,
                 TransactionDatabase::class.java,
                 "transaction_database"
-            ).build().transactionDao()
+            )
+                // migration strategy - use destructive to recreate a new db
+                .fallbackToDestructiveMigration()
+                .build().transactionDao()
         }
     }
 }

@@ -23,6 +23,7 @@ class TransactionViewModel(
      *
      * This is private because we don't want to expose setting this value to the Fragment.
      */
+    // TODO: maybe use toSingleEvent()
     private val _navigateExit = MutableLiveData<Boolean>()
 
     /**

@@ -13,6 +13,10 @@ data class Transaction(
         @PrimaryKey(autoGenerate = true)
         var transactionId: Long = 0L,
 
+        /**
+         * Room can't store Date type, so we use a TypeConverter to convert Date to Long.
+         * See [Converters.toTimestamp]
+         */
         @ColumnInfo(name = "created_timestamp")
         val createdTimestamp: Date? = null,
 

@@ -20,13 +20,13 @@ class TransactionDatabaseTest {
     @Before
     fun createDb() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
-        // Using an in-memory database because the information stored here disappears when the
-        // process is killed.
+        // Using an in-memory database because the information stored here
+        // disappears when the process is killed.
         db = Room.inMemoryDatabaseBuilder(context, TransactionDatabase::class.java)
-                // Allowing main thread queries, just for testing.
+            // Allowing main thread queries, just for testing.
             .allowMainThreadQueries()
             .build()
-        dao = db.transactionDao
+        dao = db.transactionDao()
     }
 
     @After
@@ -38,10 +38,16 @@ class TransactionDatabaseTest {
     @Test
     @Throws(Exception::class)
     fun insertAndGetTransaction() = runBlocking {
-        val transaction = Transaction(transactionId = 123, amount = 1.23)
-        dao.insert(transaction)
-        val getTransaction = dao.get(123)
-        assertEquals(1.23, getTransaction?.amount)
+        dao.insert(Transaction(amount = 1.23))
+        assertEquals(1.23, dao.get(key = 1)?.amount)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun insertAndDeleteTransaction() = runBlocking {
+        dao.insert(Transaction(amount = 2.34))
+        dao.insert(Transaction(amount = 3.45))
+        assertEquals(2.34, dao.get(key = 1)?.amount)
+        assertEquals(3.45, dao.get(key = 2)?.amount)
     }
 }
-

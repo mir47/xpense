@@ -25,8 +25,10 @@ This app integrates with Firebase service. To build the app, you need to link it
   - migrate room db to use kotlin flow
   - unit tests
   - instrumented tests
+  - test coverage 
   - Proguard obfuscation
   - Support dark mode (current app uses default dark styling, which can be improved)
   - Jetpack DataStore (replaces shared prefs)
+  - Lint
 
 App is available for download on [Play Store](https://play.google.com/store/apps/details?id=com.xpense.android)
