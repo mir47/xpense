@@ -25,6 +25,14 @@
                 android:resource="@xml/shortcuts" />
         </activity>
 
+        <service
+            android:name=".services.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
 <!--    TODO: re-enable when SMS receiver permission is resolved on Play Store -->
 <!--        <receiver-->
 <!--            android:name=".receiver.SmsReceiver"-->
