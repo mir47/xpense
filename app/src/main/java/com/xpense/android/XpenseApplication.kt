@@ -28,7 +28,7 @@ class XpenseApplication : Application() {
         val appModule = module {
             // Declare a ViewModel - be later inject into Fragment with dedicated injector using by viewModel()
             viewModel { MainViewModel(get()) }
-            viewModel { TransactionViewModel(get()) }
+            viewModel { (transactionId: Long) -> TransactionViewModel(transactionId, get()) }
             // Declare singleton definitions to be later injected using by inject()
             // This view model is declared singleton to be used across multiple fragments
             single { TransactionRepositoryImpl(get(), get()) as TransactionRepository }

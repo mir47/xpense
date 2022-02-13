@@ -28,7 +28,10 @@ class MainFragment : Fragment() {
     ): View {
         val binding: FragmentMainBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_main, container, false)
+
         binding.viewModel = _viewModel
+
+        // Make data binding lifecycle aware, to automatically update layout with LiveData
         binding.lifecycleOwner = this
 
         // Add an Observer on the state variable for navigating when button is pressed.

@@ -10,7 +10,10 @@ import com.xpense.android.data.local.Transaction
 import kotlinx.coroutines.launch
 import java.util.Date
 
-class TransactionViewModel(private val transactionRepository: TransactionRepository) : ViewModel() {
+class TransactionViewModel(
+    private val transactionId: Long,
+    private val transactionRepository: TransactionRepository
+) : ViewModel() {
 
     val amountField = ObservableField<String>()
     val descriptionField = ObservableField<String>()

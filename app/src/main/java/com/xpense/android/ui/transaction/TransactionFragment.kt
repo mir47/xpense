@@ -11,11 +11,15 @@ import androidx.navigation.fragment.findNavController
 import com.xpense.android.R
 import com.xpense.android.databinding.FragmentTransactionBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class TransactionFragment : Fragment() {
 
     // use Koin to retrieve the ViewModel instance
-    private val _viewModel: TransactionViewModel by viewModel()
+    private val _viewModel: TransactionViewModel by viewModel {
+        val args = TransactionFragmentArgs.fromBundle(requireArguments())
+        parametersOf(args.transactionId)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,6 +31,7 @@ class TransactionFragment : Fragment() {
 
         binding.viewModel = _viewModel
 
+        // Make data binding lifecycle aware, to automatically update layout with LiveData
         binding.lifecycleOwner = this
 
         _viewModel.navigateExit.observe(viewLifecycleOwner) {
