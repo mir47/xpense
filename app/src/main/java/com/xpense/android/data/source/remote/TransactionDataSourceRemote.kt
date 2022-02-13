@@ -1,8 +1,8 @@
-package com.xpense.android.data.remote
+package com.xpense.android.data.source.remote
 
 import androidx.lifecycle.LiveData
 import com.xpense.android.data.TransactionDataSource
-import com.xpense.android.data.local.Transaction
+import com.xpense.android.data.Transaction
 
 object TransactionDataSourceRemote : TransactionDataSource {
     override fun observeTransactions(): LiveData<List<Transaction>> {

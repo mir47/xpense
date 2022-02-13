@@ -1,4 +1,4 @@
-package com.xpense.android.data.local
+package com.xpense.android.data
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo

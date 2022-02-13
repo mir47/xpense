@@ -1,4 +1,4 @@
-package com.xpense.android.ui.transaction
+package com.xpense.android.ui.addoredittransaction
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
@@ -6,11 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.xpense.android.data.TransactionRepository
-import com.xpense.android.data.local.Transaction
+import com.xpense.android.data.Transaction
 import kotlinx.coroutines.launch
 import java.util.Date
 
-class TransactionViewModel(
+class AddEditTransactionViewModel(
     private val transactionId: Long,
     private val transactionRepository: TransactionRepository
 ) : ViewModel() {

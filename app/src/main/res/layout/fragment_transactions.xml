@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.xpense.android.ui.main.MainViewModel" />
+            type="com.xpense.android.ui.transactions.TransactionsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

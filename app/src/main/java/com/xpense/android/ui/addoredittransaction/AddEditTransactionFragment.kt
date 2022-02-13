@@ -1,4 +1,4 @@
-package com.xpense.android.ui.transaction
+package com.xpense.android.ui.addoredittransaction
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,15 +8,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.xpense.android.R
-import com.xpense.android.databinding.FragmentTransactionBinding
+import com.xpense.android.databinding.FragmentAddEditTransactionBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class TransactionFragment : Fragment() {
+class AddEditTransactionFragment : Fragment() {
 
     // use Koin to retrieve the ViewModel instance
-    private val _viewModel: TransactionViewModel by viewModel {
-        val args = TransactionFragmentArgs.fromBundle(requireArguments())
+    private val _viewModelAddEdit: AddEditTransactionViewModel by viewModel {
+        val args = AddEditTransactionFragmentArgs.fromBundle(requireArguments())
         parametersOf(args.transactionId)
     }
 
@@ -25,18 +25,18 @@ class TransactionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: FragmentTransactionBinding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_transaction, container, false)
+        val binding: FragmentAddEditTransactionBinding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_add_edit_transaction, container, false)
 
-        binding.viewModel = _viewModel
+        binding.viewModel = _viewModelAddEdit
 
         // Make data binding lifecycle aware, to automatically update layout with LiveData
         binding.lifecycleOwner = this
 
-        _viewModel.navigateExit.observe(viewLifecycleOwner) {
+        _viewModelAddEdit.navigateExit.observe(viewLifecycleOwner) {
             if (it) {
                 findNavController().popBackStack()
-                _viewModel.doneNavigating()
+                _viewModelAddEdit.doneNavigating()
             }
         }
 

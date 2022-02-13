@@ -1,4 +1,4 @@
-package com.xpense.android.data.local
+package com.xpense.android.data.source.local
 
 import androidx.room.TypeConverter
 import java.util.Date

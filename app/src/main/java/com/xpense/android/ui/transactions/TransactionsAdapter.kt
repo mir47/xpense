@@ -1,4 +1,4 @@
-package com.xpense.android.ui.main
+package com.xpense.android.ui.transactions
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.xpense.android.databinding.ItemTransactionBinding
-import com.xpense.android.data.local.Transaction
+import com.xpense.android.data.Transaction
 
 /**
  * Adapter for transactions
  */
-class TransactionAdapter(private val clickListener: TransactionListener):
+class TransactionsAdapter(private val clickListener: TransactionListener):
     ListAdapter<Transaction, TransactionViewHolder>(TransactionDiffCallback()) {
 
     override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) =

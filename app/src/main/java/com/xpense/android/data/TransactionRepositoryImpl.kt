@@ -1,7 +1,6 @@
 package com.xpense.android.data
 
 import androidx.lifecycle.LiveData
-import com.xpense.android.data.local.Transaction
 
 class TransactionRepositoryImpl constructor(
     private val transactionDataSourceLocal: TransactionDataSource,

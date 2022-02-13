@@ -1,6 +1,7 @@
-package com.xpense.android.data.local
+package com.xpense.android.data.source.local
 
 import androidx.lifecycle.LiveData
+import com.xpense.android.data.Transaction
 import com.xpense.android.data.TransactionDataSource
 
 class TransactionDataSourceLocal internal constructor(

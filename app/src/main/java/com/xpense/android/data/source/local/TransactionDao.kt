@@ -1,4 +1,4 @@
-package com.xpense.android.data.local
+package com.xpense.android.data.source.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import com.xpense.android.data.Transaction
 
 /**
  * Defines methods for using the Transaction class with Room.
