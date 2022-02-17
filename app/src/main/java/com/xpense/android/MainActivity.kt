@@ -47,6 +47,12 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp() =
         NavigationUI.navigateUp(findNavController(R.id.nav_host_fragment), appBarConfig)
 
+    override fun onBackPressed() {
+        val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
+        if (drawer.isOpen) drawer.close()
+        else super.onBackPressed()
+    }
+
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
