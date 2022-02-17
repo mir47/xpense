@@ -7,7 +7,7 @@ import com.xpense.android.data.TransactionRepositoryImpl
 import com.xpense.android.data.source.local.TransactionDatabase
 import com.xpense.android.data.source.local.TransactionDataSourceLocal
 import com.xpense.android.ui.transactions.TransactionsViewModel
-import com.xpense.android.ui.addoredittransaction.AddEditTransactionViewModel
+import com.xpense.android.ui.addedittransaction.AddEditTransactionViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin

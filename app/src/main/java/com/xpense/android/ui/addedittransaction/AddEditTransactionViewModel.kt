@@ -1,4 +1,4 @@
-package com.xpense.android.ui.addoredittransaction
+package com.xpense.android.ui.addedittransaction
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData

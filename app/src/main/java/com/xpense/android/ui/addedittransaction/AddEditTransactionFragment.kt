@@ -1,4 +1,4 @@
-package com.xpense.android.ui.addoredittransaction
+package com.xpense.android.ui.addedittransaction
 
 import android.os.Bundle
 import android.view.LayoutInflater

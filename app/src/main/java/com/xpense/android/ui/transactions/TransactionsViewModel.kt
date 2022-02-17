@@ -13,21 +13,21 @@ class TransactionsViewModel(
 
     /**
      * Variable that tells the Fragment to navigate to a specific
-     * [com.xpense.android.ui.addoredittransaction.AddEditTransactionFragment]
+     * [com.xpense.android.ui.addedittransaction.AddEditTransactionFragment]
      *
      * This is private because we don't want to expose setting this value to the Fragment.
      */
     private val _navigateToCreateTransaction = MutableLiveData<Boolean>()
 
     /**
-     * If this is true, immediately navigate to [com.xpense.android.ui.addoredittransaction.AddEditTransactionFragment]
+     * If this is true, immediately navigate to [com.xpense.android.ui.addedittransaction.AddEditTransactionFragment]
      * and call [doneNavigating]
      */
     val navigateToCreateTransaction: LiveData<Boolean>
         get() = _navigateToCreateTransaction
 
     /**
-     * Call this immediately after navigating to [com.xpense.android.ui.addoredittransaction.AddEditTransactionFragment]
+     * Call this immediately after navigating to [com.xpense.android.ui.addedittransaction.AddEditTransactionFragment]
      *
      * It will clear the navigation request, so if the device is rotated it won't navigate twice.
      */

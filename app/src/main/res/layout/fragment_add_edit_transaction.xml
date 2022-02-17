@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.xpense.android.ui.addoredittransaction.AddEditTransactionViewModel" />
+            type="com.xpense.android.ui.addedittransaction.AddEditTransactionViewModel" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
