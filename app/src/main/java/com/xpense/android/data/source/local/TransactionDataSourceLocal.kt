@@ -16,6 +16,10 @@ class TransactionDataSourceLocal internal constructor(
     override suspend fun getTransaction(transactionId: Long): Transaction? =
         transactionDao.getTransactionWithId(transactionId)
 
+    override suspend fun getTransactions(): List<Transaction> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun updateTransaction(transaction: Transaction) =
         transactionDao.update(transaction)
 }

@@ -6,5 +6,7 @@ interface TransactionRepository {
     fun observeTransactions(): LiveData<List<Transaction>>
     suspend fun insertTransaction(transaction: Transaction)
     suspend fun getTransaction(transactionId: Long): Transaction?
+    suspend fun getTransactions(): List<Transaction>
     suspend fun updateTransaction(transaction: Transaction)
+    suspend fun refreshTasks()
 }

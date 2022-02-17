@@ -7,6 +7,6 @@ import com.xpense.android.data.Transaction
 @BindingAdapter("transactionTimestampString")
 fun TextView.setTransactionTimestampString(item: Transaction?) {
     item?.let {
-        text = item.createdTimestamp.toString()
+        text = getFormattedDateString(item.createdTimestamp)
     }
 }
