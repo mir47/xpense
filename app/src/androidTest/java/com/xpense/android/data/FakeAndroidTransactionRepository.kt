@@ -14,13 +14,14 @@ class FakeAndroidTransactionRepository : TransactionRepository {
 
     var transactionsServiceData: LinkedHashMap<Long, Transaction> = LinkedHashMap()
 
-    private val observableTransactions = MutableLiveData<List<Transaction>>()
+    private val _observableTransactions = MutableLiveData<List<Transaction>>()
 
     override fun observeTransactions(): LiveData<List<Transaction>> =
-        observableTransactions
+        _observableTransactions
 
     override suspend fun insertTransaction(transaction: Transaction) {
-        TODO("Not yet implemented")
+        transactionsServiceData[transaction.transactionId] = transaction
+        _observableTransactions.postValue(transactionsServiceData.values.toList())
     }
 
     override suspend fun getTransaction(transactionId: Long): Transaction? {
@@ -35,7 +36,7 @@ class FakeAndroidTransactionRepository : TransactionRepository {
     }
 
     override suspend fun refreshTasks() {
-        observableTransactions.value = getTransactions()
+        _observableTransactions.value = getTransactions()
     }
 
     fun addTasks(vararg transactions: Transaction) {
