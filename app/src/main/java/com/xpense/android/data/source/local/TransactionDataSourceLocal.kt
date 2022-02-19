@@ -22,4 +22,8 @@ class TransactionDataSourceLocal internal constructor(
 
     override suspend fun updateTransaction(transaction: Transaction) =
         transactionDao.update(transaction)
+
+    override suspend fun deleteAllTransactions() {
+        TODO("Not yet implemented")
+    }
 }

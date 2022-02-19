@@ -5,6 +5,11 @@ import com.xpense.android.data.TransactionDataSource
 import com.xpense.android.data.Transaction
 
 object TransactionDataSourceRemote : TransactionDataSource {
+
+    private const val SERVICE_LATENCY_IN_MILLIS = 2000L
+
+    private var TRANSACTIONS_SERVICE_DATA = LinkedHashMap<String, Transaction>(2)
+
     override fun observeTransactions(): LiveData<List<Transaction>> {
         TODO("Not yet implemented")
     }
@@ -23,5 +28,9 @@ object TransactionDataSourceRemote : TransactionDataSource {
 
     override suspend fun updateTransaction(transaction: Transaction) {
         TODO("Not yet implemented")
+    }
+
+    override suspend fun deleteAllTransactions() {
+        TRANSACTIONS_SERVICE_DATA.clear()
     }
 }

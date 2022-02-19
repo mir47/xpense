@@ -28,4 +28,8 @@ class TransactionDataSourceFake(
             transactions?.add(transaction)
         }
     }
+
+    override suspend fun deleteAllTransactions() {
+        TODO("Not yet implemented")
+    }
 }

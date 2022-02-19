@@ -4,9 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.runBlocking
 
-// this class is copied from TransactionRepositoryFake in the local test source set
-// TODO: consider using a shared class for fakes
-class AndroidTransactionRepositoryFake : TransactionRepository {
+// TODO:
+//  this class is a copy of TransactionRepositoryFake in the local test source set
+//  If you'd like to share files between the test and androidTest source set, you can
+//  configure,via gradle (https://github.com/android/architecture-samples/blob/f4128dd8dbea5d1aac5d5acd5f346bb82187fbe6/app/build.gradle#L20),
+//  a sharedTest folder (https://github.com/android/architecture-samples/tree/reactive/app/src)
+//  as seen in the Architecture Blueprints reactive sample (https://github.com/android/architecture-samples/tree/reactive).
+class FakeAndroidTransactionRepository : TransactionRepository {
 
     var transactionsServiceData: LinkedHashMap<Long, Transaction> = LinkedHashMap()
 
