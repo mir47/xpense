@@ -4,8 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.runBlocking
 
-// this class is copied from TransactionRepositoryFake in the local test source set
-// TODO: consider using a shared class for fakes
+// TODO:
+//  consider using a shared class for fakes, because this class is
+//  copied from TransactionRepositoryFake in the local test source set
 class AndroidTransactionRepositoryFake : TransactionRepository {
 
     var transactionsServiceData: LinkedHashMap<Long, Transaction> = LinkedHashMap()

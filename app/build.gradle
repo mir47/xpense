@@ -19,7 +19,8 @@ android {
         targetSdk 31
         versionCode 6
         versionName "0.6.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.xpense.android.KoinTestRunner"
     }
 
     buildTypes {
@@ -47,6 +48,7 @@ android {
     testOptions {
         unitTests.includeAndroidResources = true
         unitTests.returnDefaultValues = true
+        animationsDisabled = true
     }
 
     packagingOptions {

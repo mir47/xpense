@@ -5,6 +5,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.xpense.android.R
 import com.xpense.android.data.AndroidTransactionRepositoryFake
 import com.xpense.android.data.Transaction
@@ -23,7 +24,7 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 import org.koin.test.KoinTest
 
-@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4ClassRunner::class)
 @MediumTest
 @ExperimentalCoroutinesApi
 class TransactionsFragmentTest : KoinTest {
@@ -47,12 +48,21 @@ class TransactionsFragmentTest : KoinTest {
         mockModule = module {
             single(override = true) { fakeRepository as TransactionRepository }
         }
+        // TODO:
+        //  this is unsafe... recommended approach is to add a module of
+        //  overrides to modules used by startKoin in Application class:
+        //  https://insert-koin.io/docs/reference/koin-android/instrumented-testing/
         loadKoinModules(mockModule)
     }
 
     @After
     fun tearDown() {
+        // TODO:
+        //  this is unsafe... recommended approach is to add a module of
+        //  overrides to modules used by startKoin in Application class:
+        //  https://insert-koin.io/docs/reference/koin-android/instrumented-testing/
         unloadKoinModules(mockModule)
+
         stopKoin()
     }
 
