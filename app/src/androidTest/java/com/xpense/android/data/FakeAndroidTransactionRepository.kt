@@ -2,6 +2,7 @@ package com.xpense.android.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.xpense.android.data.Result.Success
 import kotlinx.coroutines.runBlocking
 
 // TODO:
@@ -14,22 +15,22 @@ class FakeAndroidTransactionRepository : TransactionRepository {
 
     var transactionsServiceData: LinkedHashMap<Long, Transaction> = LinkedHashMap()
 
-    private val _observableTransactions = MutableLiveData<List<Transaction>>()
+    private val _observableTransactions = MutableLiveData<Result<List<Transaction>>>()
 
-    override fun observeTransactions(): LiveData<List<Transaction>> =
+    override fun observeTransactions(): LiveData<Result<List<Transaction>>> =
         _observableTransactions
 
     override suspend fun insertTransaction(transaction: Transaction) {
         transactionsServiceData[transaction.transactionId] = transaction
-        _observableTransactions.postValue(transactionsServiceData.values.toList())
+        _observableTransactions.postValue(Success(transactionsServiceData.values.toList()))
     }
 
-    override suspend fun getTransaction(transactionId: Long): Transaction? {
+    override suspend fun getTransaction(transactionId: Long): Result<Transaction> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getTransactions(): List<Transaction> =
-        transactionsServiceData.values.toList()
+    override suspend fun getTransactions(): Result<List<Transaction>> =
+        Success(transactionsServiceData.values.toList())
 
     override suspend fun updateTransaction(transaction: Transaction) {
         TODO("Not yet implemented")
