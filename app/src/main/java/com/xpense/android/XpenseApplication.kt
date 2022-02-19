@@ -33,8 +33,8 @@ class XpenseApplication : Application() {
             viewModel { (transactionId: Long) -> AddEditTransactionViewModel(transactionId, get()) }
             // Declare singleton definitions to be later injected using by inject()
             // This view model is declared singleton to be used across multiple fragments
-            single { TransactionRepositoryImpl(get(), get()) as TransactionRepository }
-            single { TransactionDataSourceLocal(get()) as TransactionDataSource }
+            single<TransactionRepository> { TransactionRepositoryImpl(get(), get()) }
+            single<TransactionDataSource> { TransactionDataSourceLocal(get()) }
             single { TransactionDatabase.createTransactionDao(this@XpenseApplication) }
         }
 
