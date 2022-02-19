@@ -32,9 +32,6 @@ class TransactionRepositoryImplTest: BaseTest() {
 
         // Get reference to the class under test
         repository = TransactionRepositoryImpl(
-            // TODO Dispatchers.Unconfined should be replaced with Dispatchers.Main
-            //  this requires understanding more about coroutines + testing
-            //  so we will keep this as Unconfined for now.
             fakeLocalDataSource, fakeRemoteDataSource, Dispatchers.Main
         )
     }

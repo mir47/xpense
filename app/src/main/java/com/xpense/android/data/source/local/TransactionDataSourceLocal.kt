@@ -7,9 +7,12 @@ import com.xpense.android.data.Result.Error
 import com.xpense.android.data.Result.Success
 import com.xpense.android.data.Transaction
 import com.xpense.android.data.TransactionDataSource
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 
 class TransactionDataSourceLocal internal constructor(
     private val transactionDao: TransactionDao,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ): TransactionDataSource {
     override fun observeTransactions(): LiveData<Result<List<Transaction>>> =
         transactionDao.observeTransactions().map {
@@ -29,6 +32,9 @@ class TransactionDataSourceLocal internal constructor(
 
     override suspend fun updateTransaction(transaction: Transaction) =
         transactionDao.update(transaction)
+
+    override suspend fun flagTransaction(transactionId: Long, flagged: Boolean) =
+        transactionDao.updateFlagged(transactionId, flagged)
 
     override suspend fun deleteAllTransactions() {
         TODO("Not yet implemented")

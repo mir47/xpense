@@ -36,6 +36,10 @@ object TransactionDataSourceRemote : TransactionDataSource {
         TODO("Not yet implemented")
     }
 
+    override suspend fun flagTransaction(transactionId: Long, flagged: Boolean) {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun deleteAllTransactions() {
         TRANSACTIONS_SERVICE_DATA.clear()
     }

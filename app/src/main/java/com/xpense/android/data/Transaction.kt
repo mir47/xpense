@@ -16,7 +16,7 @@ data class Transaction(
 
         /**
          * Room can't store Date type, so we use a TypeConverter to convert Date to Long.
-         * See [Converters.toTimestamp]
+         * See [com.xpense.android.data.source.local.Converters.toTimestamp]
          */
         @ColumnInfo(name = "created_timestamp")
         val createdTimestamp: Date? = null,
@@ -25,5 +25,8 @@ data class Transaction(
         var amount: Double = 0.0,
 
         @ColumnInfo(name = "description")
-        var description: String = ""
+        var description: String = "",
+
+        @ColumnInfo(name = "flagged")
+        var flagged: Boolean = false
 ) : Parcelable

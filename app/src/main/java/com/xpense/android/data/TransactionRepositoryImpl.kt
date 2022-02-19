@@ -27,6 +27,10 @@ class TransactionRepositoryImpl constructor(
     override suspend fun updateTransaction(transaction: Transaction) =
         transactionDataSourceLocal.updateTransaction(transaction)
 
+    override suspend fun flagTransaction(transactionId: Long, flagged: Boolean) {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun refreshTransactions() =
         updateTransactionsFromRemoteDataSource()
 

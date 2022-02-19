@@ -46,6 +46,10 @@ class FakeTransactionRepository : TransactionRepository {
         TODO("Not yet implemented")
     }
 
+    override suspend fun flagTransaction(transactionId: Long, flagged: Boolean) {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun refreshTransactions() {
         observableTransactions.value = getTransactions()
     }

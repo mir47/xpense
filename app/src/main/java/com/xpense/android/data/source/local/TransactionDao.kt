@@ -27,6 +27,15 @@ interface TransactionDao {
     suspend fun update(transaction: Transaction)
 
     /**
+     * Update the flagged status of a transaction
+     *
+     * @param transactionId id of the transaction
+     * @param flagged       status to be updated
+     */
+    @Query("UPDATE transaction_table SET flagged = :flagged WHERE transaction_id = :transactionId")
+    suspend fun updateFlagged(transactionId: Long, flagged: Boolean)
+
+    /**
      * Selects and returns the row that matches the supplied id, which is our key.
      *
      * @param key transactionId to match

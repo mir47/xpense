@@ -33,6 +33,10 @@ class FakeTransactionDataSource(
         }
     }
 
+    override suspend fun flagTransaction(transactionId: Long, flagged: Boolean) {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun deleteAllTransactions() {
         TODO("Not yet implemented")
     }
