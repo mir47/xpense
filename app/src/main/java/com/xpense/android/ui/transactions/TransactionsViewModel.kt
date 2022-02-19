@@ -3,6 +3,7 @@ package com.xpense.android.ui.transactions
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.xpense.android.data.TransactionRepository
 
 class TransactionsViewModel(
@@ -37,5 +38,13 @@ class TransactionsViewModel(
 
     fun navigateToCreateTransaction() {
         _navigateToCreateTransaction.value = true
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    class TransactionsViewModelFactory (
+        private val transactionRepository: TransactionRepository
+    ) : ViewModelProvider.NewInstanceFactory() {
+        override fun <T : ViewModel> create(modelClass: Class<T>) =
+            TransactionsViewModel(transactionRepository) as T
     }
 }

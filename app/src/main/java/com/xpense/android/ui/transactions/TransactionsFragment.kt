@@ -9,16 +9,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.xpense.android.R
+import com.xpense.android.XpenseApplication
 import com.xpense.android.databinding.FragmentTransactionsBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TransactionsFragment : Fragment() {
 
-    // use Koin to retrieve the ViewModel instance
-    private val _viewModel: TransactionsViewModel by viewModel()
+    private val _viewModel by viewModels<TransactionsViewModel> {
+        TransactionsViewModel.TransactionsViewModelFactory(
+            (requireContext().applicationContext as XpenseApplication).transactionRepository
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

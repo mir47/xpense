@@ -4,6 +4,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.xpense.android.data.TransactionRepository
 import com.xpense.android.data.Transaction
@@ -80,5 +81,14 @@ class AddEditTransactionViewModel(
             }
             navigateExit()
         }
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    class AddEditTransactionViewModelFactory (
+        private val transactionId: Long,
+        private val transactionRepository: TransactionRepository
+    ) : ViewModelProvider.NewInstanceFactory() {
+        override fun <T : ViewModel> create(modelClass: Class<T>) =
+            AddEditTransactionViewModel(transactionId, transactionRepository) as T
     }
 }

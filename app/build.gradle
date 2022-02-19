@@ -79,10 +79,6 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"
 
-    // Koin
-    implementation "org.koin:koin-android:$version_koin"
-    implementation "org.koin:koin-androidx-viewmodel:$version_koin"
-
     // Logging
     implementation "com.jakewharton.timber:timber:$version_timber"
 
@@ -115,8 +111,6 @@ dependencies {
 
     androidTestImplementation "androidx.test:core-ktx:$version_androidx_test_core"
     androidTestImplementation "androidx.test:core:$version_androidx_test_core"
-
-    androidTestImplementation "org.koin:koin-test:$version_koin"
 
     // AndroidX and Espresso Test
     androidTestImplementation "androidx.test.ext:junit:$version_androidx_test_ext_kotlin_runner"
