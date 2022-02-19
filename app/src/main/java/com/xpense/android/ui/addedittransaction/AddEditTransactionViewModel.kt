@@ -6,8 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.xpense.android.data.TransactionRepository
+import com.xpense.android.data.Result
 import com.xpense.android.data.Transaction
+import com.xpense.android.data.TransactionRepository
 import kotlinx.coroutines.launch
 import java.util.Date
 
@@ -49,9 +50,10 @@ class AddEditTransactionViewModel(
     init {
         if (transactionId != 0L) {
             viewModelScope.launch {
-                transactionRepository.getTransaction(transactionId)?.let {
-                    amountField.set(it.amount.toString())
-                    descriptionField.set(it.description)
+                val txn = transactionRepository.getTransaction(transactionId)
+                if (txn is Result.Success) {
+                    amountField.set(txn.data.amount.toString())
+                    descriptionField.set(txn.data.description)
                 }
             }
         }
@@ -62,11 +64,12 @@ class AddEditTransactionViewModel(
         val amount = amountField.get()?.toDoubleOrNull() ?: 0.0
         viewModelScope.launch {
             if (transactionId != 0L) {
-                transactionRepository.getTransaction(transactionId)?.let {
+                val txn = transactionRepository.getTransaction(transactionId)
+                if (txn is Result.Success) {
                     transactionRepository.updateTransaction(
-                        it.apply {
-                            it.amount = amount
-                            it.description = description
+                        txn.data.apply {
+                            txn.data.amount = amount
+                            txn.data.description = description
                         }
                     )
                 }

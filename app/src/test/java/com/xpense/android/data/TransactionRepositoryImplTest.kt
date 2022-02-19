@@ -8,6 +8,7 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsEqual
 import org.junit.Before
 import org.junit.Test
+import com.xpense.android.data.Result.Success
 
 @ExperimentalCoroutinesApi
 class TransactionRepositoryImplTest: BaseTest() {
@@ -44,7 +45,7 @@ class TransactionRepositoryImplTest: BaseTest() {
         val transaction = repository.getTransaction(1)
 
         // Then transaction is returned
-        assertThat(transaction, IsEqual(transaction1))
+        assertThat((transaction as Success).data, IsEqual(transaction1))
     }
 
     @Test
@@ -53,7 +54,7 @@ class TransactionRepositoryImplTest: BaseTest() {
         val transactions = repository.getTransactions()
 
         // Then transactions are loaded from local data source
-        assertThat(transactions, IsEqual(localTransactions))
+        assertThat((transactions as Success).data, IsEqual(localTransactions))
     }
 
     @Test
@@ -62,7 +63,7 @@ class TransactionRepositoryImplTest: BaseTest() {
         val transactions = repository.observeTransactions().getOrAwaitValue()
 
         // Then transactions are loaded from local data source
-        assertThat(transactions, IsEqual(localTransactions))
+        assertThat((transactions as Success).data, IsEqual(localTransactions))
     }
 
     @Test
@@ -72,10 +73,10 @@ class TransactionRepositoryImplTest: BaseTest() {
 
         // Then transaction is added to all transactions
         val transactions = repository.getTransactions()
-        assertThat(transactions.size, IsEqual(3))
-        assertThat(transactions[0], IsEqual(transaction1))
-        assertThat(transactions[1], IsEqual(transaction2))
-        assertThat(transactions[2], IsEqual(transaction3))
+        assertThat((transactions as Success).data.size, IsEqual(3))
+        assertThat(transactions.data[0], IsEqual(transaction1))
+        assertThat(transactions.data[1], IsEqual(transaction2))
+        assertThat(transactions.data[2], IsEqual(transaction3))
     }
 
     @Test
@@ -88,9 +89,9 @@ class TransactionRepositoryImplTest: BaseTest() {
 
         // Then transaction is updated in all transactions
         val transactions = repository.getTransactions()
-        assertThat(transactions.size, IsEqual(2))
-        assertThat(transactions[0], IsEqual(transaction2))
-        assertThat(transactions[1].transactionId, IsEqual(1))
-        assertThat(transactions[1].description, IsEqual(updatedTransaction1.description))
+        assertThat((transactions as Success).data.size, IsEqual(2))
+        assertThat(transactions.data[0], IsEqual(transaction2))
+        assertThat(transactions.data[1].transactionId, IsEqual(1))
+        assertThat(transactions.data[1].description, IsEqual(updatedTransaction1.description))
     }
 }

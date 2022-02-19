@@ -4,7 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import com.xpense.android.data.Result.Error
+import com.xpense.android.data.Result.Success
 import com.xpense.android.data.TransactionRepository
 import kotlinx.coroutines.launch
 
@@ -31,6 +34,9 @@ class TransactionsViewModel(
 
     private val _dataLoading = MutableLiveData(false)
     val dataLoading: LiveData<Boolean> = _dataLoading
+
+    val error: LiveData<Boolean> = transactions.map { it is Error }
+    val empty: LiveData<Boolean> = transactions.map { (it as? Success)?.data.isNullOrEmpty() }
 
     /**
      * Call this immediately after navigating to [com.xpense.android.ui.addedittransaction.AddEditTransactionFragment]

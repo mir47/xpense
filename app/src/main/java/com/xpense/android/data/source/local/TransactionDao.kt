@@ -40,7 +40,7 @@ interface TransactionDao {
      * sorted by id in descending order.
      */
     @Query("SELECT * FROM transaction_table ORDER BY transaction_id DESC")
-    fun getAllTransactions(): LiveData<List<Transaction>>
+    fun observeTransactions(): LiveData<List<Transaction>>
 
     /**
      * Selects and returns an observable transaction with given transactionId.

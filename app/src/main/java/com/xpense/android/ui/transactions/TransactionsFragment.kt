@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.xpense.android.R
 import com.xpense.android.XpenseApplication
+import com.xpense.android.data.Result.Success
 import com.xpense.android.databinding.FragmentTransactionsBinding
 
 class TransactionsFragment : Fragment() {
@@ -60,7 +61,9 @@ class TransactionsFragment : Fragment() {
         binding.transactionList.adapter = transactionsAdapter
 
         _viewModel.transactions.observe(viewLifecycleOwner) {
-            it?.let { transactionsAdapter.submitList(it) }
+            if (it is Success) {
+                transactionsAdapter.submitList(it.data)
+            }
         }
 
         setHasOptionsMenu(true)

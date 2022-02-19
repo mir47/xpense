@@ -3,6 +3,7 @@ package com.xpense.android.ui.transactions
 import com.xpense.android.BaseTest
 import com.xpense.android.data.Transaction
 import com.xpense.android.data.FakeTransactionRepository
+import com.xpense.android.data.Result.Success
 import com.xpense.android.getOrAwaitValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.hamcrest.CoreMatchers.`is`
@@ -38,7 +39,7 @@ class TransactionsViewModelTest : BaseTest() {
         val transactions = viewModel.transactions.getOrAwaitValue()
 
         // Then
-        assertThat(transactions.size, IsEqual(3))
+        assertThat((transactions as Success).data.size, IsEqual(3))
     }
 
     @Test
@@ -74,5 +75,17 @@ class TransactionsViewModelTest : BaseTest() {
 
         // Then assert that the progress indicator is hidden
         assertThat(viewModel.dataLoading.getOrAwaitValue(), `is`(false))
+    }
+
+    @Test
+    fun loadStatisticsWhenTasksAreUnavailable_callErrorToDisplay() {
+        // Make the repository return errors
+        fakeRepository.setReturnError(true)
+
+        viewModel.refresh()
+
+        // Then empty and error are true (which triggers an error message to be shown).
+        assertThat(viewModel.empty.getOrAwaitValue(), `is`(true))
+        assertThat(viewModel.error.getOrAwaitValue(), `is`(true))
     }
 }

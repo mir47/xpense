@@ -61,6 +61,7 @@ dependencies {
     implementation "com.google.android.material:material:$version_material"
     implementation "androidx.constraintlayout:constraintlayout:$version_constraint_layout"
     implementation "androidx.fragment:fragment-ktx:$version_fragment"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$version_lifecycle"
 
     // Android KTX
     implementation "androidx.core:core-ktx:$version_core"
