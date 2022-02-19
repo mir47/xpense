@@ -2,8 +2,14 @@ package com.xpense.android.ui.transactions
 
 import android.os.Bundle
 import androidx.fragment.app.testing.launchFragmentInContainer
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
@@ -20,6 +26,8 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.verify
 
 @MediumTest
 @RunWith(AndroidJUnit4::class)
@@ -42,10 +50,8 @@ class TransactionsFragmentTest {
     @Test
     fun activeTaskDetails_DisplayedInUi() = runBlockingTest {
         // GIVEN - Add active (incomplete) task to the DB
-        val t1 = Transaction(1, amount = 1.2, description = "one")
-        repository.insertTransaction(t1)
-        val t2 = Transaction(2, amount = 2.22, description = "two")
-        repository.insertTransaction(t2)
+        repository.insertTransaction(Transaction(1, amount = 1.2, description = "one"))
+        repository.insertTransaction(Transaction(2, amount = 2.22, description = "two"))
 
         // WHEN - Details fragment launched to display task
         launchFragmentInContainer<TransactionsFragment>(Bundle(), R.style.Theme_Xpense)
@@ -90,5 +96,44 @@ class TransactionsFragmentTest {
             .check(matches(isDisplayed()))
         onView(withText("two"))
             .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun clickItem_navigateTo() = runBlockingTest {
+        // GIVEN - On the transactions screen with two items
+        repository.insertTransaction(Transaction(1, amount = 1.2, description = "one"))
+        repository.insertTransaction(Transaction(2, amount = 2.22, description = "two"))
+
+        val scenario = launchFragmentInContainer<TransactionsFragment>(Bundle(), R.style.Theme_Xpense)
+
+        // Use Mockito to create NavController mock
+        val navController = mock(NavController::class.java)
+
+        // Attach mock NavController to fragment
+        scenario.onFragment { Navigation.setViewNavController(it.view!!, navController) }
+
+        // WHEN - Click on the first list item
+        onView(withId(R.id.transaction_list))
+            .perform(RecyclerViewActions.actionOnItem<RecyclerView.ViewHolder>(
+                hasDescendant(withText("one")), click()))
+
+        // THEN - Verify navigation with correct param(s)
+        verify(navController).navigate(
+            TransactionsFragmentDirections
+                .actionMainFragmentToTransactionFragment()
+                .setTransactionId(1)
+        )
+
+        // WHEN - Click on the second list item
+        onView(withId(R.id.transaction_list))
+            .perform(RecyclerViewActions.actionOnItem<RecyclerView.ViewHolder>(
+                hasDescendant(withText("two")), click()))
+
+        // THEN - Verify navigation with correct param(s)
+        verify(navController).navigate(
+            TransactionsFragmentDirections
+                .actionMainFragmentToTransactionFragment()
+                .setTransactionId(2)
+        )
     }
 }
