@@ -3,7 +3,7 @@ package com.xpense.android.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
-class TransactionDataSourceFake(
+class FakeTransactionDataSource(
     var transactions: MutableList<Transaction>? = mutableListOf()
 ) : TransactionDataSource {
     override fun observeTransactions(): LiveData<List<Transaction>> {

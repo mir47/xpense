@@ -2,7 +2,7 @@ package com.xpense.android.ui.transactions
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.xpense.android.data.Transaction
-import com.xpense.android.data.TransactionRepositoryFake
+import com.xpense.android.data.FakeTransactionRepository
 import com.xpense.android.getOrAwaitValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsEqual
@@ -13,7 +13,7 @@ import org.junit.Test
 class TransactionsViewModelTest {
 
     // Use a fake repository to be injected into the ViewModel
-    private lateinit var fakeRepository: TransactionRepositoryFake
+    private lateinit var fakeRepository: FakeTransactionRepository
 
     // Required for LiveData testing
     @get:Rule
@@ -25,7 +25,7 @@ class TransactionsViewModelTest {
     @Before
     fun setupViewModel() {
         // We initialise the transactions to 3
-        fakeRepository = TransactionRepositoryFake()
+        fakeRepository = FakeTransactionRepository()
         val task1 = Transaction(transactionId = 1)
         val task2 = Transaction(transactionId = 2)
         val task3 = Transaction(transactionId = 3)

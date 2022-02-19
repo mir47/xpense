@@ -20,8 +20,8 @@ class TransactionRepositoryImplTest {
     private val remoteTransactions = listOf(transaction3).sortedBy { it.transactionId }
     private val newTransaction = listOf(transaction3).sortedBy { it.transactionId }
 
-    private lateinit var localDataSourceFake: TransactionDataSourceFake
-    private lateinit var remoteDataSourceFake: TransactionDataSourceFake
+    private lateinit var fakeLocalDataSource: FakeTransactionDataSource
+    private lateinit var fakeRemoteDataSource: FakeTransactionDataSource
 
     // Required for LiveData testing
     @get:Rule
@@ -32,15 +32,15 @@ class TransactionRepositoryImplTest {
 
     @Before
     fun createRepository() {
-        localDataSourceFake = TransactionDataSourceFake(localTransactions.toMutableList())
-        remoteDataSourceFake = TransactionDataSourceFake(remoteTransactions.toMutableList())
+        fakeLocalDataSource = FakeTransactionDataSource(localTransactions.toMutableList())
+        fakeRemoteDataSource = FakeTransactionDataSource(remoteTransactions.toMutableList())
 
         // Get reference to the class under test
         repository = TransactionRepositoryImpl(
             // TODO Dispatchers.Unconfined should be replaced with Dispatchers.Main
             //  this requires understanding more about coroutines + testing
             //  so we will keep this as Unconfined for now.
-            localDataSourceFake, remoteDataSourceFake, Dispatchers.Unconfined
+            fakeLocalDataSource, fakeRemoteDataSource, Dispatchers.Unconfined
         )
     }
 

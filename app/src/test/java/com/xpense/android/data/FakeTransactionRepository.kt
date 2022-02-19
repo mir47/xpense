@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.runBlocking
 
-class TransactionRepositoryFake : TransactionRepository {
+class FakeTransactionRepository : TransactionRepository {
 
     var transactionsServiceData: LinkedHashMap<Long, Transaction> = LinkedHashMap()
 
