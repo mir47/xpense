@@ -28,7 +28,7 @@ class FakeTransactionRepository : TransactionRepository {
         TODO("Not yet implemented")
     }
 
-    override suspend fun refreshTasks() {
+    override suspend fun refreshTransactions() {
         observableTransactions.value = getTransactions()
     }
 
@@ -36,6 +36,6 @@ class FakeTransactionRepository : TransactionRepository {
         for (transaction in transactions) {
             transactionsServiceData[transaction.transactionId] = transaction
         }
-        runBlocking { refreshTasks() }
+        runBlocking { refreshTransactions() }
     }
 }

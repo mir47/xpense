@@ -3,6 +3,7 @@ package com.xpense.android.data.source.remote
 import androidx.lifecycle.LiveData
 import com.xpense.android.data.TransactionDataSource
 import com.xpense.android.data.Transaction
+import kotlinx.coroutines.delay
 
 object TransactionDataSourceRemote : TransactionDataSource {
 
@@ -14,7 +15,7 @@ object TransactionDataSourceRemote : TransactionDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun insertTransaction(transaction: Transaction) {
+    override suspend fun saveTransaction(transaction: Transaction) {
         TODO("Not yet implemented")
     }
 
@@ -23,7 +24,10 @@ object TransactionDataSourceRemote : TransactionDataSource {
     }
 
     override suspend fun getTransactions(): List<Transaction> {
-        TODO("Not yet implemented")
+        // Simulate network by delaying the execution
+        val transactions = TRANSACTIONS_SERVICE_DATA.values.toList()
+        delay(SERVICE_LATENCY_IN_MILLIS)
+        return transactions
     }
 
     override suspend fun updateTransaction(transaction: Transaction) {

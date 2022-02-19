@@ -14,7 +14,7 @@ class TransactionRepositoryImpl constructor(
         transactionDataSourceLocal.observeTransactions()
 
     override suspend fun insertTransaction(transaction: Transaction) =
-        transactionDataSourceLocal.insertTransaction(transaction)
+        transactionDataSourceLocal.saveTransaction(transaction)
 
     override suspend fun getTransaction(transactionId: Long) =
         transactionDataSourceLocal.getTransaction(transactionId)
@@ -25,8 +25,14 @@ class TransactionRepositoryImpl constructor(
     override suspend fun updateTransaction(transaction: Transaction) =
         transactionDataSourceLocal.updateTransaction(transaction)
 
-    override suspend fun refreshTasks() {
-        TODO("Not yet implemented")
+    override suspend fun refreshTransactions() {
+        val remoteTransactions = transactionDataSourceRemote.getTransactions()
+
+        // Real apps might want to do a proper sync
+        transactionDataSourceLocal.deleteAllTransactions()
+        remoteTransactions.forEach { transaction ->
+            transactionDataSourceLocal.saveTransaction(transaction)
+        }
     }
 
 }

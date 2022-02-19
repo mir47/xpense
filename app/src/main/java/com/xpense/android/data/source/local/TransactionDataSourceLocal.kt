@@ -10,7 +10,7 @@ class TransactionDataSourceLocal internal constructor(
     override fun observeTransactions(): LiveData<List<Transaction>> =
         transactionDao.getAllTransactions()
 
-    override suspend fun insertTransaction(transaction: Transaction) =
+    override suspend fun saveTransaction(transaction: Transaction) =
         transactionDao.insert(transaction)
 
     override suspend fun getTransaction(transactionId: Long): Transaction? =

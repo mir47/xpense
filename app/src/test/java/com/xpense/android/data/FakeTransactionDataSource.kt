@@ -10,7 +10,7 @@ class FakeTransactionDataSource(
         return MutableLiveData(transactions)
     }
 
-    override suspend fun insertTransaction(transaction: Transaction) {
+    override suspend fun saveTransaction(transaction: Transaction) {
         transactions?.add(transaction)
     }
 

@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.xpense.android.data.TransactionRepository
+import kotlinx.coroutines.launch
 
 class TransactionsViewModel(
     private val transactionRepository: TransactionRepository
@@ -27,6 +29,9 @@ class TransactionsViewModel(
     val navigateToCreateTransaction: LiveData<Boolean>
         get() = _navigateToCreateTransaction
 
+    private val _dataLoading = MutableLiveData(false)
+    val dataLoading: LiveData<Boolean> = _dataLoading
+
     /**
      * Call this immediately after navigating to [com.xpense.android.ui.addedittransaction.AddEditTransactionFragment]
      *
@@ -38,6 +43,14 @@ class TransactionsViewModel(
 
     fun navigateToCreateTransaction() {
         _navigateToCreateTransaction.value = true
+    }
+
+    fun refresh() {
+        _dataLoading.value = true
+        viewModelScope.launch {
+            transactionRepository.refreshTransactions()
+            _dataLoading.value = false
+        }
     }
 
     @Suppress("UNCHECKED_CAST")

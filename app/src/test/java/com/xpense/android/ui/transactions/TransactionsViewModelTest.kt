@@ -1,23 +1,21 @@
 package com.xpense.android.ui.transactions
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.xpense.android.BaseTest
 import com.xpense.android.data.Transaction
 import com.xpense.android.data.FakeTransactionRepository
 import com.xpense.android.getOrAwaitValue
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsEqual
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 
-class TransactionsViewModelTest {
+@ExperimentalCoroutinesApi
+class TransactionsViewModelTest : BaseTest() {
 
     // Use a fake repository to be injected into the ViewModel
     private lateinit var fakeRepository: FakeTransactionRepository
-
-    // Required for LiveData testing
-    @get:Rule
-    var instantExecutorRule = InstantTaskExecutorRule()
 
     // Subject under test
     private lateinit var viewModel: TransactionsViewModel
@@ -58,5 +56,23 @@ class TransactionsViewModelTest {
         // Then nav live data is cleared
         val navOff = viewModel.navigateToCreateTransaction.getOrAwaitValue()
         assertThat(navOff, IsEqual(false))
+    }
+
+    @Test
+    fun refresh_loading() {
+        // Pause dispatcher to verify initial values
+        pauseCoroutine()
+
+        // When view model is refreshed
+        viewModel.refresh()
+
+        // Then assert that the progress indicator is shown
+        assertThat(viewModel.dataLoading.getOrAwaitValue(), `is`(true))
+
+        // Execute pending coroutines actions
+        resumeCoroutine()
+
+        // Then assert that the progress indicator is hidden
+        assertThat(viewModel.dataLoading.getOrAwaitValue(), `is`(false))
     }
 }

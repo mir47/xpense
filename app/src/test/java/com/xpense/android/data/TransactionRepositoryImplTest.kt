@@ -1,18 +1,16 @@
 package com.xpense.android.data
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.xpense.android.BaseTest
 import com.xpense.android.getOrAwaitValue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsEqual
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class TransactionRepositoryImplTest {
+class TransactionRepositoryImplTest: BaseTest() {
     private val transaction1 = Transaction(transactionId = 1)
     private val transaction2 = Transaction(transactionId = 2)
     private val transaction3 = Transaction(transactionId = 3)
@@ -22,10 +20,6 @@ class TransactionRepositoryImplTest {
 
     private lateinit var fakeLocalDataSource: FakeTransactionDataSource
     private lateinit var fakeRemoteDataSource: FakeTransactionDataSource
-
-    // Required for LiveData testing
-    @get:Rule
-    var instantExecutorRule = InstantTaskExecutorRule()
 
     // Class under test
     private lateinit var repository: TransactionRepositoryImpl
@@ -40,12 +34,12 @@ class TransactionRepositoryImplTest {
             // TODO Dispatchers.Unconfined should be replaced with Dispatchers.Main
             //  this requires understanding more about coroutines + testing
             //  so we will keep this as Unconfined for now.
-            fakeLocalDataSource, fakeRemoteDataSource, Dispatchers.Unconfined
+            fakeLocalDataSource, fakeRemoteDataSource, Dispatchers.Main
         )
     }
 
     @Test
-    fun getTransaction_requestsTransactionFromLocalDataSource() = runBlockingTest {
+    fun getTransaction_requestsTransactionFromLocalDataSource() = coroutineTest {
         // When transaction is requested from repository
         val transaction = repository.getTransaction(1)
 
@@ -54,7 +48,7 @@ class TransactionRepositoryImplTest {
     }
 
     @Test
-    fun getTransactions_requestsAllTransactionsFromLocalDataSource() = runBlockingTest {
+    fun getTransactions_requestsAllTransactionsFromLocalDataSource() = coroutineTest {
         // When transactions are requested from repository
         val transactions = repository.getTransactions()
 
@@ -63,7 +57,7 @@ class TransactionRepositoryImplTest {
     }
 
     @Test
-    fun observeTransactions_requestsAllTransactionsFromLocalDataSource() = runBlockingTest {
+    fun observeTransactions_requestsAllTransactionsFromLocalDataSource() = coroutineTest {
         // When transactions are observed from repository
         val transactions = repository.observeTransactions().getOrAwaitValue()
 
@@ -72,7 +66,7 @@ class TransactionRepositoryImplTest {
     }
 
     @Test
-    fun insertTransaction_insertsTransactionInLocalDataSource() = runBlockingTest {
+    fun insertTransaction_insertsTransactionInLocalDataSource() = coroutineTest {
         // When transaction is inserted into repository
         repository.insertTransaction(transaction3)
 
@@ -85,7 +79,7 @@ class TransactionRepositoryImplTest {
     }
 
     @Test
-    fun updateTransaction_updatesTransactionInLocalDataSource() = runBlockingTest {
+    fun updateTransaction_updatesTransactionInLocalDataSource() = coroutineTest {
         // Given transaction with id that exists in data source
         val updatedTransaction1 = Transaction(transactionId = 1, description = "updated")
 
