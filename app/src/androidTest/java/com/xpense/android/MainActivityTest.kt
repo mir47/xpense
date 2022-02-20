@@ -3,6 +3,7 @@ package com.xpense.android
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.replaceText
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
@@ -12,6 +13,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.xpense.android.data.Transaction
 import com.xpense.android.data.TransactionRepository
+import com.xpense.android.util.DataBindingIdlingResource
+import com.xpense.android.util.EspressoIdlingResource
+import com.xpense.android.util.monitorActivity
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
@@ -40,6 +44,28 @@ class MainActivityTest {
     @After
     fun reset() = ServiceLocator.resetRepository()
 
+    // An idling resource that waits for Data Binding to have no pending bindings.
+    private val dataBindingIdlingResource = DataBindingIdlingResource()
+
+    /**
+     * Idling resources tell Espresso that the app is idle or busy. This is needed when operations
+     * are not scheduled in the main Looper (for example when executed on a different thread).
+     */
+    @Before
+    fun registerIdlingResource() {
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource)
+        IdlingRegistry.getInstance().register(dataBindingIdlingResource)
+    }
+
+    /**
+     * Unregister your Idling Resource so it can be garbage collected and does not leak any memory.
+     */
+    @After
+    fun unregisterIdlingResource() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource)
+        IdlingRegistry.getInstance().unregister(dataBindingIdlingResource)
+    }
+
     @Test
     fun templateTest() = runBlocking {
         // Set initial state.
@@ -66,6 +92,7 @@ class MainActivityTest {
 
         // Start up Transactions screen.
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+        dataBindingIdlingResource.monitorActivity(activityScenario)
 
         // Click on the transaction on the list and verify that all the data is correct.
         onView(withText("R 12.34")).check(matches(isDisplayed()))
@@ -85,5 +112,22 @@ class MainActivityTest {
 
         // Make sure the activity is closed before resetting the db:
         activityScenario.close()
+    }
+
+    @Test
+    fun createOneTransaction_deleteTransaction() {
+
+        // 1. Start TasksActivity.
+
+        // 2. Add an active task by clicking on the FAB and saving a new task.
+
+        // 3. Open the new task in a details view.
+
+        // 4. Click delete task in menu.
+
+        // 5. Verify it was deleted.
+
+        // 6. Make sure the activity is closed.
+
     }
 }
