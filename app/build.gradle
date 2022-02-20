@@ -29,6 +29,7 @@ android {
         }
     }
 
+    // Set both the Java and Kotlin compilers to target Java 8.
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -38,9 +39,15 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
+    composeOptions {
+        kotlinCompilerExtensionVersion version_compose
+    }
+
     // Enable data binding
     buildFeatures {
         dataBinding true
+        // Enables Jetpack Compose for this module
+        compose true
     }
 
     // Always show the result of every unit test when running via command line, even if it passes.
@@ -91,6 +98,26 @@ dependencies {
     // Add the dependencies for any other desired Firebase products:
     // https://firebase.google.com/docs/android/setup#available-libraries
 
+    // Compose
+    // Integration with activities
+    implementation "androidx.activity:activity-compose:$version_compose_activity"
+    // Compose Material Design
+    implementation "androidx.compose.material:material:$version_compose_material"
+    // Animations
+    implementation "androidx.compose.animation:animation:$version_compose_animation"
+    // Tooling support (Previews, etc.)
+    implementation "androidx.compose.ui:ui-tooling:$version_compose_ui_tooling"
+    // Integration with ViewModels
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$version_compose_lifecycle_viewmodel"
+    // Runtime livedata
+//    implementation "androidx.compose.runtime:runtime-livedata:$version_compose_runtime_livedata"
+    // When using a MDC theme
+    implementation "com.google.android.material:compose-theme-adapter:$version_compose_material_theme_adapter"
+    // When using a AppCompat theme
+//    implementation "com.google.accompanist:accompanist-appcompat-theme:0.16.0"
+    // When using a MDC theme
+    implementation "com.google.android.material:compose-theme-adapter:$version_compose_material_theme_adapter"
+
     implementation "androidx.test.espresso:espresso-idling-resource:$version_espresso"
 
     // Unit Test
@@ -125,4 +152,7 @@ dependencies {
     // Once https://issuetracker.google.com/128612536 is fixed this can be fixed.
     debugImplementation "androidx.fragment:fragment-testing:$version_fragment"
     implementation "androidx.test:core:$version_androidx_test_core"
+
+    // UI Tests
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$version_compose_ui_test_junit4"
 }

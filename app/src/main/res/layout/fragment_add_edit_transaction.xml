@@ -15,37 +15,11 @@
         android:orientation="vertical"
         android:padding="@dimen/spacing_normal">
 
-        <TextView
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/compose_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/amount" />
-
-        <!-- TODO: rework input field, consider using TextInputLayout -->
-        <EditText
-            android:id="@+id/amount_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/amount"
-            android:importantForAutofill="no"
-            android:inputType="numberDecimal"
-            android:text="@={viewModel.amountField}"
-            tools:ignore="LabelFor" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/description" />
-
-        <!-- TODO: rework input field, consider using TextInputLayout -->
-        <EditText
-            android:id="@+id/description_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/description"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:text="@={viewModel.descriptionField}"
-            tools:ignore="LabelFor" />
+            tools:text="Hello" />
 
         <Button
             android:id="@+id/save_button"
@@ -56,4 +30,5 @@
             android:text="@string/save" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
 </layout>
