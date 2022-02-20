@@ -71,7 +71,7 @@ fun InputForm() {
                 amount = it
                 viewModel.amount = it
             },
-            label = { Text("Amount") }
+            label = { Text("Amount") } // replace hard coded string with R.string.amount
         )
         OutlinedTextField(
             value = description,
@@ -79,12 +79,12 @@ fun InputForm() {
                 description = it
                 viewModel.description = it
             },
-            label = { Text("Description") }
+            label = { Text("Description") } // replace hard coded string with R.string.description
         )
         Button(
             onClick = { viewModel.submit() }
         ) {
-            Text(text = "SAVE")
+            Text(text = "SAVE") // replace hard coded string with R.string.save
         }
     }
 }

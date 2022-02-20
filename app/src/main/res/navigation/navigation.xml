@@ -24,6 +24,7 @@
         android:name="com.xpense.android.ui.addedittransaction.AddEditTransactionFragment"
         android:label="@string/transaction_screen_title"
         tools:layout="@layout/fragment_add_edit_transaction">
+        <!-- TODO: fix line above, layout was replaced by composable -->
         <deepLink
             android:id="@+id/deepLink"
             app:uri="xpense://xpense.com/transaction" />

@@ -7,8 +7,9 @@ import androidx.lifecycle.MutableLiveData
 import com.xpense.android.R
 
 /**
- * Example AndroidViewModel that takes Application as constructor parameter,
- * which gives access to application resources in the view model.
+ * Example AndroidViewModel that takes Application as constructor parameter.
+ * Useful when access to application resources is needed in the view model,
+ * e.g. application.getString(R.string.app_name)
  */
 class MyAndroidViewModel(application: Application) : AndroidViewModel(application) {
 
