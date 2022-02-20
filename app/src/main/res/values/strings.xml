@@ -19,5 +19,8 @@
     <string name="about_menu_item">About</string>
     <string name="about_text">Xpense is an app to help keep track of your expenses and budget.\n\nIt is currently in early development with more updates in the works.</string>
     <string name="share">Share</string>
+    <string name="android_view_model_menu_item">AndroidViewModel</string>
+    <string name="android_view_model_screen_title">AndroidViewModel</string>
+    <string name="android_view_model_text">Hello Android View Model</string>
     <string name="amount_format_example">R %.2f</string>
 </resources>
