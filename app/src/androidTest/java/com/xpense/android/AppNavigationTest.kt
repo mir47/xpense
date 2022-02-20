@@ -2,7 +2,7 @@ package com.xpense.android
 
 import android.view.Gravity
 import androidx.test.core.app.ActivityScenario
-import androidx.test.core.app.ApplicationProvider.getApplicationContext
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.IdlingRegistry
@@ -38,7 +38,9 @@ class AppNavigationTest {
 
     @Before
     fun init() {
-        repository = ServiceLocator.provideTransactionRepository(getApplicationContext())
+        repository = ServiceLocator.provideTransactionRepository(
+            ApplicationProvider.getApplicationContext()
+        )
     }
 
     @After
