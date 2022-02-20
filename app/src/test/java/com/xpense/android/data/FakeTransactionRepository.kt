@@ -21,7 +21,7 @@ class FakeTransactionRepository : TransactionRepository {
     override fun observeTransactions(): LiveData<Result<List<Transaction>>> =
         observableTransactions
 
-    override suspend fun insertTransaction(transaction: Transaction) {
+    override suspend fun saveTransaction(transaction: Transaction) {
         TODO("Not yet implemented")
     }
 
@@ -52,6 +52,10 @@ class FakeTransactionRepository : TransactionRepository {
 
     override suspend fun refreshTransactions() {
         observableTransactions.value = getTransactions()
+    }
+
+    override suspend fun deleteAllTransactions() {
+        TODO("Not yet implemented")
     }
 
     fun addTasks(vararg transactions: Transaction) {

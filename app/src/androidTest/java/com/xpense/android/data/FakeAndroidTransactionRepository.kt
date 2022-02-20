@@ -20,7 +20,7 @@ class FakeAndroidTransactionRepository : TransactionRepository {
     override fun observeTransactions(): LiveData<Result<List<Transaction>>> =
         _observableTransactions
 
-    override suspend fun insertTransaction(transaction: Transaction) {
+    override suspend fun saveTransaction(transaction: Transaction) {
         transactionsServiceData[transaction.transactionId] = transaction
         _observableTransactions.postValue(Success(transactionsServiceData.values.toList()))
     }
@@ -42,6 +42,10 @@ class FakeAndroidTransactionRepository : TransactionRepository {
 
     override suspend fun refreshTransactions() {
         _observableTransactions.value = getTransactions()
+    }
+
+    override suspend fun deleteAllTransactions() {
+        TODO("Not yet implemented")
     }
 
     fun addTasks(vararg transactions: Transaction) {

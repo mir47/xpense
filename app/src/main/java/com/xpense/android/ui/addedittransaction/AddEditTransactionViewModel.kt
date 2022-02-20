@@ -74,7 +74,7 @@ class AddEditTransactionViewModel(
                     )
                 }
             } else {
-                transactionRepository.insertTransaction(
+                transactionRepository.saveTransaction(
                     Transaction(
                         createdTimestamp = Date(System.currentTimeMillis()),
                         amount = amount,

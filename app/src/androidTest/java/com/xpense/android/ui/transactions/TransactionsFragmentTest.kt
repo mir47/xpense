@@ -50,8 +50,8 @@ class TransactionsFragmentTest {
     @Test
     fun activeTaskDetails_DisplayedInUi() = runBlockingTest {
         // GIVEN - Add active (incomplete) task to the DB
-        repository.insertTransaction(Transaction(1, amount = 1.2, description = "one"))
-        repository.insertTransaction(Transaction(2, amount = 2.22, description = "two"))
+        repository.saveTransaction(Transaction(1, amount = 1.2, description = "one"))
+        repository.saveTransaction(Transaction(2, amount = 2.22, description = "two"))
 
         // WHEN - Details fragment launched to display task
         launchFragmentInContainer<TransactionsFragment>(Bundle(), R.style.Theme_Xpense)
@@ -101,8 +101,8 @@ class TransactionsFragmentTest {
     @Test
     fun clickItem_navigateTo() = runBlockingTest {
         // GIVEN - On the transactions screen with two items
-        repository.insertTransaction(Transaction(1, amount = 1.2, description = "one"))
-        repository.insertTransaction(Transaction(2, amount = 2.22, description = "two"))
+        repository.saveTransaction(Transaction(1, amount = 1.2, description = "one"))
+        repository.saveTransaction(Transaction(2, amount = 2.22, description = "two"))
 
         val scenario = launchFragmentInContainer<TransactionsFragment>(Bundle(), R.style.Theme_Xpense)
 

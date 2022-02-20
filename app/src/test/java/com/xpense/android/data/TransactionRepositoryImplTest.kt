@@ -66,7 +66,7 @@ class TransactionRepositoryImplTest: BaseTest() {
     @Test
     fun insertTransaction_insertsTransactionInLocalDataSource() = coroutineTest {
         // When transaction is inserted into repository
-        repository.insertTransaction(transaction3)
+        repository.saveTransaction(transaction3)
 
         // Then transaction is added to all transactions
         val transactions = repository.getTransactions()

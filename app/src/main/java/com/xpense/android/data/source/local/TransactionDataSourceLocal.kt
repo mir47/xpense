@@ -36,7 +36,6 @@ class TransactionDataSourceLocal internal constructor(
     override suspend fun flagTransaction(transactionId: Long, flagged: Boolean) =
         transactionDao.updateFlagged(transactionId, flagged)
 
-    override suspend fun deleteAllTransactions() {
-        TODO("Not yet implemented")
-    }
+    override suspend fun deleteAllTransactions() =
+        transactionDao.clear()
 }

@@ -11,14 +11,15 @@ object TransactionDataSourceRemote : TransactionDataSource {
 
     private const val SERVICE_LATENCY_IN_MILLIS = 2000L
 
-    private var TRANSACTIONS_SERVICE_DATA = LinkedHashMap<String, Transaction>(2)
+    private var TRANSACTIONS_SERVICE_DATA = LinkedHashMap<Long, Transaction>(2)
 
     override fun observeTransactions(): LiveData<Result<List<Transaction>>> {
         TODO("Not yet implemented")
     }
 
     override suspend fun saveTransaction(transaction: Transaction) {
-        TODO("Not yet implemented")
+        delay(SERVICE_LATENCY_IN_MILLIS)
+        TRANSACTIONS_SERVICE_DATA[transaction.transactionId] = transaction
     }
 
     override suspend fun getTransaction(transactionId: Long): Result<Transaction> {
