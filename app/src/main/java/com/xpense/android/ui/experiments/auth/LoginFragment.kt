@@ -1,4 +1,4 @@
-package com.xpense.android.ui.experiments.login
+package com.xpense.android.ui.experiments.auth
 
 import android.app.Activity
 import android.content.Intent
@@ -6,45 +6,62 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.xpense.android.R
 import com.xpense.android.databinding.FragmentLoginBinding
 import timber.log.Timber
-import androidx.navigation.fragment.findNavController
 
 class LoginFragment : Fragment() {
 
-    private val _viewModel by viewModels<LoginViewModel>()
+    // Get a reference to the ViewModel scoped to this Fragment.
+    private val _authViewModel by viewModels<AuthViewModel>()
 
-    private lateinit var binding: FragmentLoginBinding
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentLoginBinding.inflate(inflater)
-//        binding.authButton.setOnClickListener { launchSignInFlow() }
-        binding.settingsButton.setOnClickListener {
-            val action = LoginFragmentDirections.actionLoginFragmentToSettingsFragment()
-            findNavController().navigate(action)
+        val binding = FragmentLoginBinding.inflate(inflater)
+
+        binding.loginButton.setOnClickListener { launchSignInFlow() }
+
+        // If the user presses the back button, bring them back to the home screen
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            navController.popBackStack(R.id.auth_fragment, false)
         }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeAuthenticationState()
+
+        navController = findNavController()
+
+        // Observe the authentication state so we can know if the user has logged in successfully.
+        // If the user has logged in successfully, bring them back to the settings screen.
+        // If the user did not log in successfully, display an error message.
+        _authViewModel.authenticationState.observe(viewLifecycleOwner) { authenticationState ->
+            when (authenticationState) {
+                AuthViewModel.AuthenticationState.AUTHENTICATED -> navController.popBackStack()
+                else -> Timber.e("Authentication state that doesn't require any UI change $authenticationState")
+            }
+        }
     }
 
     // TODO: onActivityResult is deprecated
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == SIGN_IN_REQUEST_CODE) {
+        if (requestCode == FIREBASE_AUTH_REQUEST_CODE) {
             val response = IdpResponse.fromResultIntent(data)
             if (resultCode == Activity.RESULT_OK) {
                 // User successfully signed in
@@ -77,46 +94,7 @@ class LoginFragment : Fragment() {
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
                 .build(),
-            SIGN_IN_REQUEST_CODE
+            FIREBASE_AUTH_REQUEST_CODE
         )
-    }
-
-    private fun signOut() = AuthUI.getInstance().signOut(requireContext())
-
-    /**
-     * Observes the authentication state and changes the UI accordingly.
-     * If there is a logged in user: (1) show a logout button and (2) display their name.
-     * If there is no logged in user: show a login button
-     */
-    private fun observeAuthenticationState() {
-        val welcomeText = _viewModel.getTextToDisplay(requireContext())
-        _viewModel.authenticationState.observe(viewLifecycleOwner) { authenticationState ->
-            when (authenticationState) {
-                LoginViewModel.AuthenticationState.AUTHENTICATED -> {
-                    binding.authText.text = getTextWithPersonalization(welcomeText)
-                    binding.authButton.text = getString(R.string.logout_button_text)
-                    binding.authButton.setOnClickListener { signOut() }
-                }
-                else -> {
-                    binding.authText.text = getString(R.string.welcome_message)
-                    binding.authButton.text = getString(R.string.login_button_text)
-                    binding.authButton.setOnClickListener { launchSignInFlow() }
-                }
-            }
-        }
-    }
-
-    private fun getTextWithPersonalization(text: String): String {
-        return String.format(
-            getString(
-                R.string.welcome_message_authed,
-                text,
-                FirebaseAuth.getInstance().currentUser?.displayName
-            )
-        )
-    }
-
-    companion object {
-        const val SIGN_IN_REQUEST_CODE = 1001
     }
 }

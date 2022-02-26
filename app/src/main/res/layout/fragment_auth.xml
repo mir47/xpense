@@ -8,25 +8,34 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/login_text"
+            android:id="@+id/auth_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login_text"
-            app:layout_constraintBottom_toTopOf="@id/login_button"
+            app:layout_constraintBottom_toTopOf="@id/auth_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="login" />
+            tools:text="hello" />
 
         <Button
-            android:id="@+id/login_button"
+            android:id="@+id/auth_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_button_text"
+            app:layout_constraintBottom_toTopOf="@id/settings_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/auth_text" />
+
+        <Button
+            android:id="@+id/settings_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_button_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_text" />
+            app:layout_constraintTop_toBottomOf="@+id/auth_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

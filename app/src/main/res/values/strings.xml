@@ -23,17 +23,17 @@
     <string name="android_view_model_menu_item">AndroidViewModel</string>
     <string name="android_view_model_screen_title">AndroidViewModel</string>
     <string name="android_view_model_text">Hello Android View Model</string>
-    <string name="login_menu_item">Login</string>
-    <string name="login_screen_title">Login Test</string>
-    <string name="login_text">Please login to access this feature</string>
+    <string name="auth_menu_item">Auth</string>
+    <string name="auth_screen_title">Authentication</string>
     <string name="login_button_text">Login</string>
     <string name="logout_button_text">Logout</string>
     <string name="settings_button_text">Settings</string>
     <string name="welcome_message">Welcome</string>
     <string name="welcome_message_authed">%1$s %2$s!</string>
-    <string name="login_settings_screen_title">Settings</string>
-    <string name="login_settings_welcome_type_title">Welcome Type</string>
-    <string name="login_step_screen_title">Login</string>
+    <string name="settings_screen_title">Settings</string>
+    <string name="settings_welcome_type_title">Welcome Type</string>
+    <string name="login_screen_title">Login</string>
+    <string name="login_text">Please login to access this feature</string>
 
     <!-- Welcome Types -->
     <string name="welcome_type_hi">Hi</string>

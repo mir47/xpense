@@ -1,4 +1,4 @@
-package com.xpense.android.ui.experiments.login
+package com.xpense.android.ui.experiments.auth
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
@@ -6,7 +6,7 @@ import androidx.lifecycle.map
 import androidx.preference.PreferenceManager
 import com.xpense.android.R
 
-class LoginViewModel : ViewModel() {
+class AuthViewModel : ViewModel() {
 
     enum class AuthenticationState {
         AUTHENTICATED, UNAUTHENTICATED, INVALID_AUTHENTICATION

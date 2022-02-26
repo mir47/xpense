@@ -5,6 +5,6 @@
         app:entries="@array/welcome_type"
         app:entryValues="@array/welcome_type"
         app:key="@string/preference_welcome_type_key"
-        app:title="@string/login_settings_welcome_type_title"
+        app:title="@string/settings_welcome_type_title"
         app:useSimpleSummaryProvider="true" />
 </PreferenceScreen>
