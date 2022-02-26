@@ -11,4 +11,9 @@
         android:id="@+id/my_android_view_model_fragment"
         android:icon="@drawable/android"
         android:title="@string/android_view_model_menu_item" />
+
+    <item
+        android:id="@+id/login_fragment"
+        android:icon="@drawable/android"
+        android:title="@string/login_menu_item" />
 </menu>

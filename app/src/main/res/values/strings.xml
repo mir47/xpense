@@ -22,5 +22,11 @@
     <string name="android_view_model_menu_item">AndroidViewModel</string>
     <string name="android_view_model_screen_title">AndroidViewModel</string>
     <string name="android_view_model_text">Hello Android View Model</string>
+    <string name="login_menu_item">Login</string>
+    <string name="login_screen_title">Login</string>
+    <string name="login_button_text">Login</string>
+    <string name="logout_button_text">Logout</string>
+    <string name="welcome_message">Welcome</string>
+    <string name="welcome_message_authed">Hi %1$s!</string>
     <string name="amount_format_example">R %.2f</string>
 </resources>
