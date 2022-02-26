@@ -47,5 +47,17 @@
         android:id="@+id/login_fragment"
         android:name="com.xpense.android.ui.experiments.login.LoginFragment"
         android:label="@string/login_screen_title"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_login_fragment_to_settings_fragment"
+            app:destination="@id/settings_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settings_fragment"
+        android:name="com.xpense.android.ui.experiments.login.LoginSettingsFragment"
+        android:label="@string/login_settings_screen_title" />
+    <fragment
+        android:id="@+id/login_step_fragment"
+        android:name="com.xpense.android.ui.experiments.login.LoginStepFragment"
+        android:label="@string/login_step_screen_title" />
 </navigation>

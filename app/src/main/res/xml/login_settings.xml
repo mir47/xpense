@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ListPreference
+        app:defaultValue="@string/welcome_type_hi"
+        app:entries="@array/welcome_type"
+        app:entryValues="@array/welcome_type"
+        app:key="@string/preference_welcome_type_key"
+        app:title="@string/login_settings_welcome_type_title"
+        app:useSimpleSummaryProvider="true" />
+</PreferenceScreen>

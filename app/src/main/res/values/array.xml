@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="welcome_type">
+        <item>@string/welcome_type_hi</item>
+        <item>@string/welcome_type_hello</item>
+    </array>
+</resources>
