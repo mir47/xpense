@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:title="Experiments" />
+
     <!-- note: item id must match destination id, if you want to use the navigation graph -->
     <item
         android:id="@+id/about_fragment"
@@ -16,4 +19,10 @@
         android:id="@+id/auth_fragment"
         android:icon="@drawable/android"
         android:title="@string/auth_menu_item" />
+
+    <item
+        android:id="@+id/maps_fragment"
+        android:icon="@drawable/android"
+        android:title="@string/map_menu_item" />
+
 </menu>

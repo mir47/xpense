@@ -60,4 +60,9 @@
         android:id="@+id/login_fragment"
         android:name="com.xpense.android.ui.experiments.auth.LoginFragment"
         android:label="@string/login_screen_title" />
+    <fragment
+        android:id="@+id/maps_fragment"
+        android:name="com.xpense.android.ui.experiments.map.MapsFragment"
+        android:label="@string/map_screen_title"
+        tools:layout="@layout/fragment_maps" />
 </navigation>

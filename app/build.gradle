@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 apply plugin: 'com.android.application'
@@ -120,6 +121,9 @@ dependencies {
 //    implementation "com.google.accompanist:accompanist-appcompat-theme:0.16.0"
     // When using a MDC theme
     implementation "com.google.android.material:compose-theme-adapter:$version_compose_material_theme_adapter"
+
+    // Maps
+    implementation "com.google.android.gms:play-services-maps:$version_maps"
 
     implementation "androidx.test.espresso:espresso-idling-resource:$version_espresso"
 

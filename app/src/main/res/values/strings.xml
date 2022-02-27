@@ -34,6 +34,15 @@
     <string name="settings_welcome_type_title">Welcome Type</string>
     <string name="login_screen_title">Login</string>
     <string name="login_text">Please login to access this feature</string>
+    <string name="map_screen_title">Map</string>
+    <string name="map_menu_item">Map</string>
+    <string name="dropped_pin">Dropped Pin</string>
+
+    <!-- Map menu items -->
+    <string name="normal_map_menu_item">Normal Map</string>
+    <string name="hybrid_map_menu_item">Hybrid Map</string>
+    <string name="satellite_map_menu_item">Satellite Map</string>
+    <string name="terrain_map_menu_item">Terrain Map</string>
 
     <!-- Welcome Types -->
     <string name="welcome_type_hi">Hi</string>
