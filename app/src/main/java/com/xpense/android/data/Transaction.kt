@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 import java.util.Date
 
+// TODO: rename to database object (for database Transaction model) - see dev-bytes project
 @Entity(tableName = "transaction_table")
 @Parcelize
 data class Transaction(

@@ -1,0 +1,6 @@
+<resources>
+<!-- TODO: translations -->
+    <!-- Welcome Types -->
+    <string name="welcome_type_hi">Alo</string>
+    <string name="welcome_type_hello">Zdravei</string>
+</resources>

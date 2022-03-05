@@ -7,6 +7,7 @@ import com.xpense.android.data.Transaction
 import com.xpense.android.data.TransactionDataSource
 import kotlinx.coroutines.delay
 
+// TODO: create data transfer object (for remote Transaction model) - see dev-bytes project
 object TransactionDataSourceRemote : TransactionDataSource {
 
     private const val SERVICE_LATENCY_IN_MILLIS = 2000L
