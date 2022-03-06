@@ -36,7 +36,7 @@ class TransactionsFragment : Fragment() {
         binding.viewModel = _viewModel
 
         // Make data binding lifecycle aware, to automatically update layout with LiveData
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         // Add an Observer on the state variable for navigating when button is pressed.
         _viewModel.navigateToCreateTransaction.observe(viewLifecycleOwner) {

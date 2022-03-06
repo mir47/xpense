@@ -41,7 +41,16 @@ class MainActivity : AppCompatActivity() {
         appBarConfig = AppBarConfiguration(navController.graph, binding.drawerLayout)
         NavigationUI.setupWithNavController(binding.navView, navController)
 
-        createNotificationChannel()
+        createNotificationChannel(
+            getString(R.string.sms_notification_channel_id),
+            getString(R.string.sms_notification_channel_name),
+            getString(R.string.sms_notification_channel_description)
+        )
+        createNotificationChannel(
+            getString(R.string.fcm_notification_channel_id),
+            getString(R.string.fcm_notification_channel_name),
+            getString(R.string.fcm_notification_channel_description)
+        )
     }
 
     override fun onSupportNavigateUp() =
@@ -53,18 +62,22 @@ class MainActivity : AppCompatActivity() {
         else super.onBackPressed()
     }
 
-    private fun createNotificationChannel() {
+    private fun createNotificationChannel(
+        channelId: String,
+        channelName: String,
+        channelDescription: String
+    ) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
-                getString(R.string.sms_notification_channel_id),
-                getString(R.string.sms_notification_channel_name),
-                NotificationManager.IMPORTANCE_HIGH
+                channelId,
+                channelName,
+                NotificationManager.IMPORTANCE_DEFAULT
             ).apply {
                 setShowBadge(false)
                 enableLights(true)
                 lightColor = Color.RED
                 enableVibration(true)
-                description = getString(R.string.sms_notification_channel_description)
+                description = channelDescription
             }
 
             val notificationManager: NotificationManager =

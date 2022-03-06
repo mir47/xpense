@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">xpense</string>
+    <string name="fcm_notification_channel_id" translatable="false">fcm_channel</string>
+    <string name="fcm_notification_channel_name" translatable="true">FCM</string>
+    <string name="fcm_notification_channel_description" translatable="true">FCM Notif Channel Description</string>
     <string name="sms_notification_channel_id" translatable="false">sms_channel</string>
     <string name="sms_notification_channel_name" translatable="true">SMS</string>
     <string name="sms_notification_channel_description" translatable="true">SMS detection</string>

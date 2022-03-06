@@ -16,8 +16,9 @@ private val NOTIFICATION_ID = 0
  * Builds and delivers the notification.
  *
  * @param context Context
+ * @param messageBody, notification text.
  */
-fun NotificationManager.sendNotification(context: Context) {
+fun NotificationManager.sendNotification(context: Context, messageBody: String) {
     // Create an explicit intent for the activity to be launched
     val contentIntent = Intent(context, MainActivity::class.java)
         .apply { flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK }
@@ -39,7 +40,7 @@ fun NotificationManager.sendNotification(context: Context) {
     val notification = NotificationCompat.Builder(context, channelId)
         .setSmallIcon(android.R.drawable.ic_dialog_info)
         .setContentTitle(context.getString(R.string.sms_notification_title))
-        .setContentText(context.getString(R.string.sms_notification_text))
+        .setContentText(messageBody)
         .setContentIntent(contentPendingIntent)
         .setAutoCancel(true)
         .setStyle(bigPicStyle)

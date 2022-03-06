@@ -19,7 +19,7 @@ class MyAndroidViewModelFragment : Fragment() {
     ): View {
         val binding = FragmentMyAndroidViewModelBinding.inflate(inflater)
         binding.viewModel = _viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 }
