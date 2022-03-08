@@ -25,4 +25,9 @@
         android:icon="@drawable/android"
         android:title="@string/map_menu_item" />
 
+    <item
+        android:id="@+id/property_animation_fragment"
+        android:icon="@drawable/android"
+        android:title="@string/property_animation_menu_item" />
+
 </menu>

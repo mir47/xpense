@@ -65,4 +65,9 @@
         android:name="com.xpense.android.ui.experiments.map.MapsFragment"
         android:label="@string/map_screen_title"
         tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/property_animation_fragment"
+        android:name="com.xpense.android.ui.experiments.animations.PropertyAnimationFragment"
+        android:label="@string/property_animation_screen_title"
+        tools:layout="@layout/fragment_property_animation" />
 </navigation>

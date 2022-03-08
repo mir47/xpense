@@ -40,6 +40,8 @@
     <string name="map_screen_title">Map</string>
     <string name="map_menu_item">Map</string>
     <string name="dropped_pin">Dropped Pin</string>
+    <string name="property_animation_screen_title">Property Animation</string>
+    <string name="property_animation_menu_item">Property Animation</string>
 
     <!-- Map menu items -->
     <string name="normal_map_menu_item">Normal Map</string>
