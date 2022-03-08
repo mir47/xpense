@@ -70,4 +70,19 @@
         android:name="com.xpense.android.ui.experiments.animations.PropertyAnimationFragment"
         android:label="@string/property_animation_screen_title"
         tools:layout="@layout/fragment_property_animation" />
+    <fragment
+        android:id="@+id/motion_click_fragment"
+        android:name="com.xpense.android.ui.experiments.motionlayout.MotionClickFragment"
+        android:label="@string/motion_click_screen_title"
+        tools:layout="@layout/fragment_motion_click" />
+    <fragment
+        android:id="@+id/motion_drag_fragment"
+        android:name="com.xpense.android.ui.experiments.motionlayout.MotionDragFragment"
+        android:label="@string/motion_drag_screen_title"
+        tools:layout="@layout/fragment_motion_drag" />
+    <fragment
+        android:id="@+id/motion_toolbar_fragment"
+        android:name="com.xpense.android.ui.experiments.motionlayout.MotionToolbarFragment"
+        android:label="@string/motion_toolbar_screen_title"
+        tools:layout="@layout/fragment_motion_toolbar" />
 </navigation>
