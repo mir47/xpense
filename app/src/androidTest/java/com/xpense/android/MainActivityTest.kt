@@ -21,7 +21,6 @@ import com.xpense.android.util.monitorActivity
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -86,7 +85,6 @@ class MainActivityTest {
         activityScenario.close()
     }
 
-    @Ignore("Update for composable fields")
     @Test
     fun editTransaction() = runBlocking {
         // Set initial state.
@@ -103,13 +101,13 @@ class MainActivityTest {
         // Click on the transaction on the list and verify that all the data is correct.
         onView(withText("R 12.34")).check(matches(isDisplayed()))
         onView(withText("description")).check(matches(isDisplayed())).perform(click())
-//        onView(withId(R.id.amount_input)).check(matches(withText("12.34")))
-//        onView(withId(R.id.description_input)).check(matches(withText("description")))
+        onView(withId(R.id.amount_input)).check(matches(withText("12.34")))
+        onView(withId(R.id.description_input)).check(matches(withText("description")))
 
         // Edit and click on the save button
-//        onView(withId(R.id.amount_input)).perform(replaceText("21.43"))
-//        onView(withId(R.id.description_input)).perform(replaceText("new description"))
-//        onView(withId(R.id.save_button)).perform(click())
+        onView(withId(R.id.amount_input)).perform(replaceText("21.43"))
+        onView(withId(R.id.description_input)).perform(replaceText("new description"))
+        onView(withId(R.id.save_button)).perform(click())
 
         // Verify transaction is displayed on screen in the transaction list.
         onView(withText("R 21.43")).check(matches(isDisplayed()))

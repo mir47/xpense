@@ -17,12 +17,8 @@ class AddEditTransactionViewModel(
     private val transactionRepository: TransactionRepository
 ) : ViewModel() {
 
-    // TODO: use state instead of public fields
-    var amount: String = ""
-    var description: String = ""
-
-//    val amountField = ObservableField<String>()
-//    val descriptionField = ObservableField<String>()
+    val amountField = ObservableField<String>()
+    val descriptionField = ObservableField<String>()
 
     /**
      * Variable that tells the Fragment to close.
@@ -56,16 +52,16 @@ class AddEditTransactionViewModel(
             viewModelScope.launch {
                 val txn = transactionRepository.getTransaction(transactionId)
                 if (txn is Result.Success) {
-                    amount = txn.data.amount.toString()
-                    description = txn.data.description
+                    amountField.set(txn.data.amount.toString())
+                    descriptionField.set(txn.data.description)
                 }
             }
         }
     }
 
     fun submit() {
-        val description = description
-        val amount = amount.toDoubleOrNull() ?: 0.0
+        val description = descriptionField.get().orEmpty()
+        val amount = amountField.get()?.toDoubleOrNull() ?: 0.0
         viewModelScope.launch {
             if (transactionId != 0L) {
                 val txn = transactionRepository.getTransaction(transactionId)
