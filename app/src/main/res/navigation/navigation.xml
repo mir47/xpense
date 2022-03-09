@@ -34,6 +34,15 @@
             app:argType="long" />
     </fragment>
     <fragment
+        android:id="@+id/add_edit_txn_compose_fragment"
+        android:name="com.xpense.android.ui.experiments.compose.AddEditTxnComposeFragment"
+        android:label="@string/transaction_screen_title" >
+        <argument
+            android:name="transactionId"
+            android:defaultValue="0L"
+            app:argType="long" />
+    </fragment>
+    <fragment
         android:id="@+id/about_fragment"
         android:name="com.xpense.android.ui.about.AboutFragment"
         android:label="@string/about_screen_title"
