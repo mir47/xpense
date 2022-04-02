@@ -15,6 +15,7 @@ class AddEditTransactionFragment : Fragment() {
     private val _viewModelAddEdit by viewModels<AddEditTransactionViewModel> {
         AddEditTransactionViewModel.AddEditTransactionViewModelFactory(
             AddEditTransactionFragmentArgs.fromBundle(requireArguments()).transactionId,
+            AddEditTransactionFragmentArgs.fromBundle(requireArguments()).sms,
             (requireContext().applicationContext as XpenseApplication).transactionRepository
         )
     }

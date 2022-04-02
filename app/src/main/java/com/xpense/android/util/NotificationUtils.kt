@@ -11,6 +11,7 @@ import com.xpense.android.R
 
 // Notification ID
 private val NOTIFICATION_ID = 0
+const val SMS_EXTRA = "sms_extra"
 
 /**
  * Builds and delivers the notification.
@@ -18,10 +19,14 @@ private val NOTIFICATION_ID = 0
  * @param context Context
  * @param messageBody, notification text.
  */
-fun NotificationManager.sendNotification(context: Context, messageBody: String) {
+fun NotificationManager.sendNotification(
+    context: Context,
+    messageBody: String,
+    smsData: String? = null
+) {
     // Create an explicit intent for the activity to be launched
     val contentIntent = Intent(context, MainActivity::class.java)
-        .apply { flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK }
+        .apply { putExtra(SMS_EXTRA, smsData) }
 
     val contentPendingIntent = PendingIntent.getActivity(
         context,

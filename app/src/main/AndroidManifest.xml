@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xpense.android">
 
-<!--    TODO: re-enable when SMS receiver permission is resolved on Play Store -->
-<!--     <uses-permission android:name="android.permission.RECEIVE_SMS" />-->
+     <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
@@ -59,15 +58,14 @@
 <!--            android:name="com.google.android.gms.version"-->
 <!--            android:value="@integer/google_play_services_version" />-->
 
-<!--    TODO: re-enable when SMS receiver permission is resolved on Play Store -->
-<!--        <receiver-->
-<!--            android:name=".receiver.SmsReceiver"-->
-<!--            android:exported="true"-->
-<!--            android:permission="android.permission.BROADCAST_SMS">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.provider.Telephony.SMS_RECEIVED" />-->
-<!--            </intent-filter>-->
-<!--        </receiver>-->
+        <receiver
+            android:name=".receiver.SmsReceiver"
+            android:exported="true"
+            android:permission="android.permission.BROADCAST_SMS">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
     </application>
 
     <!-- Related to restrictions on "package visibility" introduced in Android 11. -->

@@ -22,9 +22,8 @@
     <fragment
         android:id="@+id/transaction_fragment"
         android:name="com.xpense.android.ui.addedittransaction.AddEditTransactionFragment"
-        android:label="@string/transaction_screen_title">
-<!--        tools:layout="@layout/fragment_add_edit_transaction">-->
-        <!-- TODO: fix line above, layout was replaced by composable -->
+        android:label="@string/transaction_screen_title"
+        tools:layout="@layout/fragment_add_edit_transaction">
         <deepLink
             android:id="@+id/deepLink"
             app:uri="xpense://xpense.com/transaction" />
@@ -32,6 +31,11 @@
             android:name="transactionId"
             android:defaultValue="0L"
             app:argType="long" />
+        <argument
+            android:name="sms"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/add_edit_txn_compose_fragment"

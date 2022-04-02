@@ -14,6 +14,7 @@ import java.util.Date
 
 class AddEditTransactionViewModel(
     private val transactionId: Long,
+    private val transactionSms: String?,
     private val transactionRepository: TransactionRepository
 ) : ViewModel() {
 
@@ -56,6 +57,8 @@ class AddEditTransactionViewModel(
                     descriptionField.set(txn.data.description)
                 }
             }
+        } else if (transactionSms?.isNotBlank() == true) {
+            descriptionField.set(transactionSms)
         }
     }
 
@@ -89,9 +92,10 @@ class AddEditTransactionViewModel(
     @Suppress("UNCHECKED_CAST")
     class AddEditTransactionViewModelFactory (
         private val transactionId: Long,
+        private val transactionSms: String?,
         private val transactionRepository: TransactionRepository
     ) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel> create(modelClass: Class<T>) =
-            AddEditTransactionViewModel(transactionId, transactionRepository) as T
+            AddEditTransactionViewModel(transactionId, transactionSms, transactionRepository) as T
     }
 }
