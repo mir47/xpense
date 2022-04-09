@@ -169,8 +169,9 @@ class MapsFragment : Fragment() {
         return ContextCompat.checkSelfPermission(requireContext(), perm) == granted
     }
 
-    // Checks if users have given their location and sets location enabled if so.
+    // Fixes lint error
     @SuppressLint("MissingPermission")
+    // Checks if users have given their location and sets location enabled if so.
     private fun enableMyLocation() {
         if (isPermissionGranted()) {
             map.isMyLocationEnabled = true

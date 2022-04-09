@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -109,6 +110,8 @@ class PropertyAnimationFragment : Fragment() {
         // "backgroundColor" will cause the animator to call the backgroundColor property
         // (in Kotlin) or setBackgroundColor(int) (in Java).
 
+        // Fixes lint error
+        @SuppressLint("ObjectAnimatorBinding")
         val animator = ObjectAnimator.ofArgb(
             _star.parent,
             "backgroundColor",
