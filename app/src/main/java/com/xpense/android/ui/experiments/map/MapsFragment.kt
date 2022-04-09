@@ -1,6 +1,7 @@
 package com.xpense.android.ui.experiments.map
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.Bundle
@@ -169,9 +170,10 @@ class MapsFragment : Fragment() {
     }
 
     // Checks if users have given their location and sets location enabled if so.
+    @SuppressLint("MissingPermission")
     private fun enableMyLocation() {
         if (isPermissionGranted()) {
-            map.setMyLocationEnabled(true)
+            map.isMyLocationEnabled = true
         }
         else {
             ActivityCompat.requestPermissions(
