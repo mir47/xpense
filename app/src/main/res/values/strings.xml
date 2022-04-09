@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation"> <!-- Fixes lint error -->
     <string name="app_name">xpense</string>
     <string name="fcm_notification_channel_id" translatable="false">fcm_channel</string>
     <string name="fcm_notification_channel_name" translatable="true">FCM</string>
