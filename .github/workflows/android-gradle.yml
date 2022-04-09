@@ -1,0 +1,101 @@
+name: Android CI using gradle and r0adkll
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Gradle Build
+
+    # Disable build job
+    if: ${{ false }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+#    - name: Load app signing Key Store from secrets
+#      env:
+#        $SIGNING_KEY_STORE: ${{ secrets.SIGNING_KEY_STORE_BASE_64 }}
+#      run: echo $SIGNING_KEY_STORE | base64 -d > ./keystore.jks
+
+    - name: Load Maps API Key from secrets
+      env:
+        MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
+      run: echo MAPS_API_KEY=\"MAPS_API_KEY\" > ./local.properties
+
+    - name: Load Firebase config file from secrets
+      env:
+        GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+      run: echo $GOOGLE_SERVICES_JSON > /home/runner/work/xpense/xpense/app/google-services.json
+
+#    - name: Build with Gradle
+#      run: ./gradlew build
+
+#    - name: Test with Gradle
+#      run: ./gradlew test
+
+#    - name: Build debug variant with Gradle
+#      run: ./gradlew clean assembleDebug
+
+#    - name: Test debug variant with Gradle
+#      run: ./gradlew testDebugUnitTest
+
+    - name: Build release AAB
+      id: buildRelease
+      run: ./gradlew bundleRelease
+
+    - name: Sign AAB
+      id: sign
+      uses: r0adkll/sign-android-release@v1
+      with:
+        releaseDirectory: app/build/outputs/bundle/release
+        signingKeyBase64: ${{ secrets.SIGNING_KEY_STORE_BASE_64 }}
+        keyStorePassword: ${{ secrets.SIGNING_KEY_STORE_PASSWORD }}
+        alias: ${{ secrets.SIGNING_KEY_ALIAS }}
+        keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
+
+#      env:
+#        KEY_STORE_FILE: keystore.jks
+#        KEY_STORE_PASSWORD: ${{ secrets.SIGNING_KEY_STORE_PASSWORD }}
+#        KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+#        KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+
+
+    - name: Save AAB to artifacts
+      id: uploadArtifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: app
+        path: app/build/outputs/bundle/release/app-release.aab
+
+    - name: Load Play Store service account from secrets
+      id: loadServiceAccount
+      run: echo '${{ secrets.SERVICE_ACCOUNT_2_JSON }}' > service-account-2.json
+
+    - name: Deploy to Play Store (Internal track)
+      id: deploy
+      uses: r0adkll/upload-google-play@v1
+      with:
+        serviceAccountJson: service-account-2.json
+        packageName: com.xpense.android
+        releaseFiles: app/build/outputs/bundle/release/app-release.aab
+        track: internal
+        status: completed
+
+#  deploy:
+#    name: r0adkll Deploy
