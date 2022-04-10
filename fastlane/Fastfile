@@ -52,12 +52,23 @@ platform :android do
     )
   end
 
-  desc "Deploy to Google Play"
-  lane :deploy_play_store do
+  # Uses aab path for Github build
+  desc "Deploy Github artifact to Google Play Store"
+  lane :deploy_github_aab_to_play_store do
     upload_to_play_store(
       skip_upload_apk: true,
       track: 'internal',
       aab: 'release-aab/app-release.aab'
+    )
+  end
+
+  # Uses aab path for local build
+  desc "Deploy local artifact to Google Play Store"
+  lane :deploy_local_aab_to_play_store do
+    upload_to_play_store(
+      skip_upload_apk: true,
+      track: 'internal',
+      aab: 'app/build/outputs/bundle/release/app-release.aab'
     )
   end
 end

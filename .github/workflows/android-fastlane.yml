@@ -9,6 +9,10 @@ on:
 jobs:
   build:
     name: Fastlane Build
+
+    # Disable build job
+#    if: ${{ false }}
+
     runs-on: ubuntu-latest
 
     steps:
@@ -128,13 +132,10 @@ jobs:
       with:
         name: release-aab
 
-    - run: ls
-    - run: ls release-aab
-
     - name: Load Play Store service account from secrets
       id: loadServiceAccount
       run: echo '${{ secrets.SERVICE_ACCOUNT_2_JSON }}' > service-account-2.json
 
     # Upload to Play Store
     - name: Upload to Play Store
-      run: bundle exec fastlane deploy_play_store
+      run: bundle exec fastlane deploy_github_aab_to_play_store
