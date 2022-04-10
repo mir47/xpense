@@ -36,8 +36,8 @@ platform :android do
     upload_to_play_store
   end
 
-  desc "Build a signed release AAB and deploy to Google Play"
-  lane :aab_play_store do
+  desc "Build a signed release AAB"
+  lane :build_aab do
     gradle(
       task: 'bundle',
       build_type: 'Release',
@@ -50,9 +50,25 @@ platform :android do
         "android.injected.signing.key.password" => ENV['KEY_PASSWORD']
       }
     )
+  end
+
+  # Uses aab path for Github build
+  desc "Deploy Github artifact to Google Play Store"
+  lane :deploy_github_aab_to_play_store do
     upload_to_play_store(
       skip_upload_apk: true,
-      track: 'internal'
+      track: 'internal',
+      aab: 'release-aab/app-release.aab'
+    )
+  end
+
+  # Uses aab path for local build
+  desc "Deploy local artifact to Google Play Store"
+  lane :deploy_local_aab_to_play_store do
+    upload_to_play_store(
+      skip_upload_apk: true,
+      track: 'internal',
+      aab: 'app/build/outputs/bundle/release/app-release.aab'
     )
   end
 end

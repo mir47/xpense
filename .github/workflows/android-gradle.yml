@@ -76,15 +76,15 @@ jobs:
 #        KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
 
 
-    - name: Upload AAB
+    - name: Save AAB to artifacts
       id: uploadArtifact
       uses: actions/upload-artifact@v1
       with:
         name: app
         path: app/build/outputs/bundle/release/app-release.aab
 
-    - name: Create service-account-2.json
-      id: createServiceAccount
+    - name: Load Play Store service account from secrets
+      id: loadServiceAccount
       run: echo '${{ secrets.SERVICE_ACCOUNT_2_JSON }}' > service-account-2.json
 
     - name: Deploy to Play Store (Internal track)
