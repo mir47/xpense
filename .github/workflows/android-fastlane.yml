@@ -128,6 +128,9 @@ jobs:
       with:
         name: release-aab
 
+    - run: ls
+    - run: ls release-aab
+
     - name: Load Play Store service account from secrets
       id: loadServiceAccount
       run: echo '${{ secrets.SERVICE_ACCOUNT_2_JSON }}' > service-account-2.json
