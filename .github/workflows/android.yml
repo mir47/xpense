@@ -2,12 +2,15 @@ name: Android CI
 
 on:
   push:
-#    branches: [ main ]
+    branches: [ main ]
   pull_request:
-#    branches: [ main ]
+    branches: [ main ]
 
 jobs:
   build:
+    # Disable build job
+    if: ${{ false }}
+
     runs-on: ubuntu-latest
 
     steps:
