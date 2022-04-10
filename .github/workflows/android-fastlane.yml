@@ -59,7 +59,7 @@ jobs:
     - name: Load KEY_ALIAS
       env:
         KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
-      run: echo KEY_ALIAS=\"KEY_ALIAS\" > ./fastlane/.env
+      run: echo KEY_ALIAS=\"KEY_ALIAS\" >> ./fastlane/.env
 
     - run: cat fastlane/.env
 
