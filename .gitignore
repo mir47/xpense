@@ -11,3 +11,4 @@ local.properties
 *.jks
 /fastlane/.env
 service-account-2.json
+
