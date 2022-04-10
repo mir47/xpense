@@ -51,28 +51,28 @@ jobs:
         SIGNING_KEY_STORE: ${{ secrets.SIGNING_KEY_STORE_BASE_64 }}
       run: echo $SIGNING_KEY_STORE | base64 -d > /home/runner/work/xpense/xpense/upload-keystore.jks
 
-    # TODO: if possible, combine the fastlane signing variables somehow
+    # TODO: simplify if possible, combine the fastlane signing variables somehow
     # Add KEYSTORE_PATH to fastlane env
     - name: Load KEYSTORE_PATH
       env:
         KEYSTORE_PATH: /home/runner/work/xpense/xpense/upload-keystore.jks
       run: echo KEYSTORE_PATH=\'$KEYSTORE_PATH\' > ./fastlane/.env
 
-    # TODO: if possible, combine the fastlane signing variables somehow
+    # TODO: simplify if possible, combine the fastlane signing variables somehow
     # Add SIGNING_KEY_STORE_PASSWORD to fastlane env
     - name: Load SIGNING_KEY_STORE_PASSWORD
       env:
         STORE_PASSWORD: ${{ secrets.SIGNING_KEY_STORE_PASSWORD }}
       run: echo STORE_PASSWORD=\'$STORE_PASSWORD\' >> ./fastlane/.env
 
-    # TODO: if possible, combine the fastlane signing variables somehow
+    # TODO: simplify if possible, combine the fastlane signing variables somehow
     # Add KEY_ALIAS to fastlane env
     - name: Load KEY_ALIAS
       env:
         KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
       run: echo KEY_ALIAS=\'$KEY_ALIAS\' >> ./fastlane/.env
 
-    # TODO: if possible, combine the fastlane signing variables somehow
+    # TODO: simplify if possible, combine the fastlane signing variables somehow
     # Add KEY_PASSWORD to fastlane env
     - name: Load KEY_PASSWORD
       env:
@@ -94,7 +94,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: release-aab
-        path: build/app/outputs/bundle/release/app-release.aab
+        path: app/build/outputs/bundle/release/app-release.aab
 
   deploy:
     name: Fastlane Deploy
