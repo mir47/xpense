@@ -48,7 +48,7 @@ jobs:
       id: loadKeystore
       env:
         SIGNING_KEY: ${{ secrets.SIGNING_KEY_STORE_BASE_64 }}
-      run: echo $SIGNING_KEY | base64 -d > upload-keystore.jks
+      run: echo $SIGNING_KEY | base64 -d > /home/runner/work/xpense/xpense/upload-keystore.jks
 
     - name: Load Play Store service account from secrets
       id: loadServiceAccount
