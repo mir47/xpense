@@ -1,3 +1,5 @@
 /build
-google-services.json
 release/*.aab
+
+# required for build / sign / deploy:
+google-services.json
