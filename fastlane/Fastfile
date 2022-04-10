@@ -57,7 +57,7 @@ platform :android do
     upload_to_play_store(
       skip_upload_apk: true,
       track: 'internal',
-      aab: '/release-aab/app-release.aab'
+      aab: 'release-aab/app-release.aab'
     )
   end
 end
