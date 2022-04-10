@@ -39,13 +39,29 @@ Submit a new Beta Build to Crashlytics Beta
 
 Deploy a new version to the Google Play
 
-### android aab_play_store
+### android build_aab
 
 ```sh
-[bundle exec] fastlane android aab_play_store
+[bundle exec] fastlane android build_aab
 ```
 
-Build a signed release AAB and deploy to Google Play
+Build a signed release AAB
+
+### android deploy_github_aab_to_play_store
+
+```sh
+[bundle exec] fastlane android deploy_github_aab_to_play_store
+```
+
+Deploy Github artifact to Google Play Store
+
+### android deploy_local_aab_to_play_store
+
+```sh
+[bundle exec] fastlane android deploy_local_aab_to_play_store
+```
+
+Deploy local artifact to Google Play Store
 
 ----
 
