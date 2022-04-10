@@ -50,6 +50,19 @@ jobs:
         SIGNING_KEY: ${{ secrets.SIGNING_KEY_STORE_BASE_64 }}
       run: echo $SIGNING_KEY | base64 -d > /home/runner/work/xpense/xpense/upload-keystore.jks
 
+    - name: Load KEYSTORE_PATH
+      env:
+        KEYSTORE_PATH: /home/runner/work/xpense/xpense/upload-keystore.jks
+      run: echo KEYSTORE_PATH=\"KEYSTORE_PATH\" > ./fastlane/.env
+#      run: echo KEYSTORE_PATH=\"KEYSTORE_PATH\" > /home/runner/work/xpense/xpense/fastlane/.env
+
+    - name: Load KEY_ALIAS
+      env:
+        KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+      run: echo KEY_ALIAS=\"KEY_ALIAS\" > ./fastlane/.env
+
+    - run: cat fastlane/.env
+
     - name: Load Play Store service account from secrets
       id: loadServiceAccount
       run: echo '${{ secrets.SERVICE_ACCOUNT_2_JSON }}' > service-account-2.json
