@@ -2,7 +2,7 @@ name: Android CI using Fastlane
 
 on:
   push:
-    branches: [ fastlane-ci ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
