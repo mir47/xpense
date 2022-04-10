@@ -36,13 +36,13 @@ platform :android do
     upload_to_play_store
   end
 
-  desc "Build a signed release AAB and deploy to Google Play"
-  lane :aab_play_store do
+  desc "Build a signed release AAB"
+  lane :build_aab do
     gradle(
       task: 'bundle',
       build_type: 'Release',
-#       print_command: false,
-#       print_command_output: false,
+      print_command: false,
+      print_command_output: false,
       properties: {
         "android.injected.signing.store.file" => ENV['KEYSTORE_PATH'],
         "android.injected.signing.store.password" => ENV['STORE_PASSWORD'],
@@ -50,6 +50,10 @@ platform :android do
         "android.injected.signing.key.password" => ENV['KEY_PASSWORD']
       }
     )
+  end
+
+  desc "Deploy to Google Play"
+  lane :deploy_play_store do
     upload_to_play_store(
       skip_upload_apk: true,
       track: 'internal'

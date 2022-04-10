@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Fastlane Build and Deploy
+    name: Fastlane Build
     runs-on: ubuntu-latest
 
     steps:
@@ -28,6 +28,7 @@ jobs:
       with:
         ruby-version: '2.7'
 
+    # Setup fastlane
     - name: Setup fastlane
       run: bundle install
 
@@ -37,7 +38,7 @@ jobs:
     - name: Load Maps API Key from secrets
       env:
         MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
-      run: echo MAPS_API_KEY=\"MAPS_API_KEY\" > ./local.properties
+      run: echo MAPS_API_KEY=\"$MAPS_API_KEY\" > ./local.properties
 
     - name: Load Firebase config file from secrets
       env:
@@ -47,62 +48,77 @@ jobs:
     - name: Load signing keystore from secrets
       id: loadKeystore
       env:
-        SIGNING_KEY: ${{ secrets.SIGNING_KEY_STORE_BASE_64 }}
-      run: echo $SIGNING_KEY | base64 -d > /home/runner/work/xpense/xpense/upload-keystore.jks
+        SIGNING_KEY_STORE: ${{ secrets.SIGNING_KEY_STORE_BASE_64 }}
+      run: echo SIGNING_KEY_STORE | base64 -d > /home/runner/work/xpense/xpense/upload-keystore.jks
 
+    # TODO: if possible, combine the fastlane signing variables somehow
+    # Add KEYSTORE_PATH to fastlane env
     - name: Load KEYSTORE_PATH
       env:
         KEYSTORE_PATH: /home/runner/work/xpense/xpense/upload-keystore.jks
       run: echo KEYSTORE_PATH=\'$KEYSTORE_PATH\' > ./fastlane/.env
-#      run: echo KEYSTORE_PATH=\"KEYSTORE_PATH\" > /home/runner/work/xpense/xpense/fastlane/.env
 
+    # TODO: if possible, combine the fastlane signing variables somehow
+    # Add SIGNING_KEY_STORE_PASSWORD to fastlane env
     - name: Load SIGNING_KEY_STORE_PASSWORD
       env:
         STORE_PASSWORD: ${{ secrets.SIGNING_KEY_STORE_PASSWORD }}
       run: echo STORE_PASSWORD=\'$STORE_PASSWORD\' >> ./fastlane/.env
 
+    # TODO: if possible, combine the fastlane signing variables somehow
+    # Add KEY_ALIAS to fastlane env
     - name: Load KEY_ALIAS
       env:
         KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
       run: echo KEY_ALIAS=\'$KEY_ALIAS\' >> ./fastlane/.env
 
+    # TODO: if possible, combine the fastlane signing variables somehow
+    # Add KEY_PASSWORD to fastlane env
     - name: Load KEY_PASSWORD
       env:
         KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
       run: echo KEY_PASSWORD=\'$KEY_PASSWORD\' >> ./fastlane/.env
 
-    - name: Load Play Store service account from secrets
-      id: loadServiceAccount
-      run: echo '${{ secrets.SERVICE_ACCOUNT_2_JSON }}' > service-account-2.json
-
-      # Build AAB and upload to Play Store
-    - name: Build and Deploy
+    # Build signed AAB
+    - name: Build signed AAB
       id: buildRelease
       env:
         KEY_PATH: upload-keystore.jks
         KEY_STORE_PASSWORD: ${{ secrets.SIGNING_KEY_STORE_PASSWORD }}
         KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
         KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
-      run: bundle exec fastlane aab_play_store
+      run: bundle exec fastlane build_aab
 
-#  deploy:
-#    name: Fastlane Deploy
-#    needs: build
-#    runs-on: ubuntu-latest
-#    steps:
-#    - uses: actions/checkout@v3
-#
-#    # Setup Java environment
-#    - name: set up JDK 11
-#      uses: actions/setup-java@v3
-#      with:
-#        java-version: '11'
-#        distribution: 'temurin'
-#        cache: gradle
-#
-#    - name: Setup fastlane
-#      run: bundle install
-#
-#    # Upload to Play Store
-#    - name: Build AAB and upload to Play Store
-#      run: bundle exec fastlane aab_play_store
+  deploy:
+    name: Fastlane Deploy
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    # Setup java environment
+    - name: set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: gradle
+
+    # Setup ruby environment (for fastlane)
+    - name: Setup ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: '2.7'
+
+    # Setup fastlane
+    - name: Setup fastlane
+      run: bundle install
+
+    - name: Load Play Store service account from secrets
+      id: loadServiceAccount
+      run: echo '${{ secrets.SERVICE_ACCOUNT_2_JSON }}' > service-account-2.json
+
+    # Upload to Play Store
+    - name: Upload to Play Store
+      run: bundle exec fastlane deploy_play_store
