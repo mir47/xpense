@@ -7,8 +7,9 @@
 /captures
 .externalNativeBuild
 .cxx
+
+# required for build / sign / deploy:
 local.properties
 *.jks
 /fastlane/.env
 service-account-2.json
-
