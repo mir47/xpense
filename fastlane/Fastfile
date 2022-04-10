@@ -35,4 +35,24 @@ platform :android do
     gradle(task: "clean assembleRelease")
     upload_to_play_store
   end
+
+  desc "Build a signed release AAB and deploy to Google Play"
+  lane :aab_play_store do
+    gradle(
+      task: 'bundle',
+      build_type: 'Release',
+      print_command: false,
+      print_command_output: false,
+      properties: {
+        "android.injected.signing.store.file" => ENV['KEYSTORE_PATH'],
+        "android.injected.signing.store.password" => ENV['STORE_PASSWORD'],
+        "android.injected.signing.key.alias" => ENV['KEY_ALIAS'],
+        "android.injected.signing.key.password" => ENV['KEY_PASSWORD']
+      }
+    )
+    upload_to_play_store(
+      skip_upload_apk: true,
+      track: 'internal'
+    )
+  end
 end

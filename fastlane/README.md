@@ -39,6 +39,14 @@ Submit a new Beta Build to Crashlytics Beta
 
 Deploy a new version to the Google Play
 
+### android aab_play_store
+
+```sh
+[bundle exec] fastlane android aab_play_store
+```
+
+Build a signed release AAB and deploy to Google Play
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.

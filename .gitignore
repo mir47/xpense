@@ -9,4 +9,5 @@
 .cxx
 local.properties
 *.jks
-/fastlane/api-secret.json
+/fastlane/.env
+service-account-2.json
