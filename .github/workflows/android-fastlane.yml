@@ -53,23 +53,23 @@ jobs:
     - name: Load KEYSTORE_PATH
       env:
         KEYSTORE_PATH: /home/runner/work/xpense/xpense/upload-keystore.jks
-      run: echo KEYSTORE_PATH=\"KEYSTORE_PATH\" > ./fastlane/.env
+      run: echo KEYSTORE_PATH=\"$KEYSTORE_PATH\" > ./fastlane/.env
 #      run: echo KEYSTORE_PATH=\"KEYSTORE_PATH\" > /home/runner/work/xpense/xpense/fastlane/.env
 
     - name: Load SIGNING_KEY_STORE_PASSWORD
       env:
         STORE_PASSWORD: ${{ secrets.SIGNING_KEY_STORE_PASSWORD }}
-      run: echo STORE_PASSWORD=\"STORE_PASSWORD\" >> ./fastlane/.env
+      run: echo STORE_PASSWORD=\"$STORE_PASSWORD\" >> ./fastlane/.env
 
     - name: Load KEY_ALIAS
       env:
         KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
-      run: echo KEY_ALIAS=\"KEY_ALIAS\" >> ./fastlane/.env
+      run: echo KEY_ALIAS=\"$KEY_ALIAS\" >> ./fastlane/.env
 
     - name: Load KEY_PASSWORD
       env:
         KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
-      run: echo KEY_PASSWORD=\"KEY_PASSWORD\" >> ./fastlane/.env
+      run: echo KEY_PASSWORD=\"$KEY_PASSWORD\" >> ./fastlane/.env
 
     - run: cat fastlane/.env
 
