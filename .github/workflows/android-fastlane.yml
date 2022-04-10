@@ -89,6 +89,13 @@ jobs:
         KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
       run: bundle exec fastlane build_aab
 
+    # Upload built AAB to artifacts, for use in deploy job
+    - name: Upload bundle to artifacts
+      uses: actions/upload-artifact@v1
+      with:
+        name: release-aab
+        path: build/app/outputs/bundle/release/app-release.aab
+
   deploy:
     name: Fastlane Deploy
     needs: build
@@ -114,6 +121,12 @@ jobs:
     # Setup fastlane
     - name: Setup fastlane
       run: bundle install
+
+    # Download AAB from artifacts
+    - name: Download bundle from artifacts
+      uses: actions/download-artifact@v1
+      with:
+        name: release-aab
 
     - name: Load Play Store service account from secrets
       id: loadServiceAccount
