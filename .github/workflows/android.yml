@@ -90,4 +90,3 @@ jobs:
         packageName: com.xpense.android
         releaseFile: app/build/outputs/bundle/release/app-release.aab
         track: internal
-        whatsNewDirectory: whatsnew/
