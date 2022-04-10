@@ -71,8 +71,6 @@ jobs:
         KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
       run: echo KEY_PASSWORD=\'$KEY_PASSWORD\' >> ./fastlane/.env
 
-    - run: cat fastlane/.env
-
     - name: Load Play Store service account from secrets
       id: loadServiceAccount
       run: echo '${{ secrets.SERVICE_ACCOUNT_2_JSON }}' > service-account-2.json
