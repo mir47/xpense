@@ -49,7 +49,7 @@ jobs:
       id: loadKeystore
       env:
         SIGNING_KEY_STORE: ${{ secrets.SIGNING_KEY_STORE_BASE_64 }}
-      run: echo SIGNING_KEY_STORE | base64 -d > /home/runner/work/xpense/xpense/upload-keystore.jks
+      run: echo $SIGNING_KEY_STORE | base64 -d > /home/runner/work/xpense/xpense/upload-keystore.jks
 
     # TODO: if possible, combine the fastlane signing variables somehow
     # Add KEYSTORE_PATH to fastlane env
