@@ -88,5 +88,6 @@ jobs:
       with:
         serviceAccountJson: service-account-2.json
         packageName: com.xpense.android
-        releaseFile: app/build/outputs/bundle/release/app-release.aab
+        releaseFiles: app/build/outputs/bundle/release/app-release.aab
         track: internal
+        status: completed
