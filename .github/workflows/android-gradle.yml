@@ -1,4 +1,4 @@
-name: Android CI
+name: Android CI using gradle and r0adkll
 
 on:
   push:
@@ -8,6 +8,8 @@ on:
 
 jobs:
   build:
+    name: Gradle Build
+
     # Disable build job
     if: ${{ false }}
 
@@ -94,3 +96,6 @@ jobs:
         releaseFiles: app/build/outputs/bundle/release/app-release.aab
         track: internal
         status: completed
+
+#  deploy:
+#    name: r0adkll Deploy
