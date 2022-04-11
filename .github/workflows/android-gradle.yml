@@ -2,7 +2,7 @@ name: Android CI using gradle and r0adkll
 
 on:
   push:
-    branches: [ test-ci ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -11,7 +11,7 @@ jobs:
     name: Gradle Build
 
     # Disable build job
-#    if: ${{ false }}
+    if: ${{ false }}
 
     runs-on: ubuntu-latest
 
