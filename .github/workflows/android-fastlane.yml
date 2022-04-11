@@ -11,7 +11,7 @@ jobs:
     name: Fastlane Build
 
     # Disable build job
-    if: ${{ false }}
+#    if: ${{ false }}
 
     runs-on: ubuntu-latest
 
