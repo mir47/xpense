@@ -1,2 +1,4 @@
-sdk.dir=C\:\\Users\\User\\AppData\\Local\\Android\\Sdk
-MAPS_API_KEY=AIza...
+# Windows: sdk.dir=C\:\\Users\\User\\AppData\\Local\\Android\\Sdk
+# Mac: sdk.dir=/Users/user/Library/Android/sdk
+sdk.dir=/path/to/Android/sdk
+MAPS_API_KEY="AIza..."
