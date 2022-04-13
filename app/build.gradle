@@ -11,6 +11,13 @@ apply plugin: 'kotlin-parcelize'
 apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'com.google.gms.google-services'
 
+String getMapsApiKey() {
+    def propFile = rootProject.file("./local.properties")
+    def properties = new Properties()
+    properties.load(new FileInputStream(propFile))
+    return properties['MAPS_API_KEY']
+}
+
 android {
     compileSdkVersion rootProject.compileSdkVersion
 
@@ -163,11 +170,4 @@ dependencies {
 
     // UI Tests
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$version_compose_ui_test_junit4"
-}
-
-String getMapsApiKey() {
-    def propFile = rootProject.file("./local.properties")
-    def properties = new Properties()
-    properties.load(new FileInputStream(propFile))
-    return properties['MAPS_API_KEY']
 }
