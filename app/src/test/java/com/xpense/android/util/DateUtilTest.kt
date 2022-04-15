@@ -9,7 +9,7 @@ class DateUtilTest {
     @Test
     fun getFormattedDateString_givenDate_returnsCorrectFormat() {
         // GIVEN a date of 14 Feb 2022 in milliseconds
-        val date = Date(16448621241099) // 1644862124109
+        val date = Date(1644862124109)
 
         // WHEN getFormattedDateString is called
         val result = getFormattedDateString(date)
