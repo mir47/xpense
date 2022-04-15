@@ -71,6 +71,22 @@ Deploy Github artifact to Google Play Store
 
 Deploy local artifact to Google Play Store
 
+### android increment_vc
+
+```sh
+[bundle exec] fastlane android increment_vc
+```
+
+Increment version code
+
+### android increment_vn
+
+```sh
+[bundle exec] fastlane android increment_vn
+```
+
+Increment version name
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.
