@@ -91,51 +91,51 @@ jobs:
         KEY_STORE_PASSWORD: ${{ secrets.SIGNING_KEY_STORE_PASSWORD }}
         KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
         KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
-      run: bundle exec fastlane build_apk
+      run: bundle exec fastlane build_aab
 
     # Upload built AAB to artifacts, for use in deploy job
     - name: Upload bundle to artifacts
       uses: actions/upload-artifact@v1
       with:
-        name: release-apk
-        path: app/build/outputs/apk/release/app-release.apk
+        name: release-aab
+        path: app/build/outputs/bundle/release/app-release.aab
 
-#  deploy:
-#    name: Fastlane Deploy
-#    needs: build
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#    - uses: actions/checkout@v3
-#
-#    # Setup java environment
-#    - name: set up JDK 11
-#      uses: actions/setup-java@v3
-#      with:
-#        java-version: '11'
-#        distribution: 'temurin'
-#        cache: gradle
-#
-#    # Setup ruby environment (for fastlane)
-#    - name: Setup ruby
-#      uses: actions/setup-ruby@v1
-#      with:
-#        ruby-version: '2.7'
-#
-#    # Setup fastlane
-#    - name: Setup fastlane
-#      run: bundle install
-#
-#    # Download AAB from artifacts
-#    - name: Download bundle from artifacts
-#      uses: actions/download-artifact@v1
-#      with:
-#        name: release-aab
-#
-#    - name: Load Play Store service account from secrets
-#      id: loadServiceAccount
-#      run: echo '${{ secrets.SERVICE_ACCOUNT_2_JSON }}' > service-account-2.json
-#
-#    # Upload to Play Store
-#    - name: Upload to Play Store
-#      run: bundle exec fastlane deploy_github_aab_to_play_store
+  deploy:
+    name: Fastlane Deploy
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    # Setup java environment
+    - name: set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: gradle
+
+    # Setup ruby environment (for fastlane)
+    - name: Setup ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: '2.7'
+
+    # Setup fastlane
+    - name: Setup fastlane
+      run: bundle install
+
+    # Download AAB from artifacts
+    - name: Download bundle from artifacts
+      uses: actions/download-artifact@v1
+      with:
+        name: release-aab
+
+    - name: Load Play Store service account from secrets
+      id: loadServiceAccount
+      run: echo '${{ secrets.SERVICE_ACCOUNT_2_JSON }}' > service-account-2.json
+
+    # Upload to Play Store
+    - name: Upload to Play Store
+      run: bundle exec fastlane deploy_github_aab_to_play_store
