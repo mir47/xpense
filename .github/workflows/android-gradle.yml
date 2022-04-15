@@ -1,4 +1,4 @@
-name: Android CI using gradle and r0adkll
+name: Gradle build (AAB) and r0adkll deploy
 
 on:
   push:
