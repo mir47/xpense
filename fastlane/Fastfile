@@ -10,6 +10,10 @@
 #     https://docs.fastlane.tools/plugins/available-plugins
 #
 
+# Interesting articles:
+#  - https://www.runway.team/blog/how-to-build-the-perfect-fastlane-pipeline-for-android
+#
+
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
@@ -85,6 +89,21 @@ platform :android do
       skip_upload_apk: true,
       track: 'internal',
       aab: 'app/build/outputs/bundle/release/app-release.aab'
+    )
+  end
+
+  desc "Increment version code"
+  lane :increment_vc do
+    increment_version_code(
+      gradle_file_path: "./app/build.gradle",
+    )
+  end
+
+  desc "Increment version name"
+  lane :increment_vn do
+    increment_version_name(
+      gradle_file_path: "./app/build.gradle",
+      version_name: File.read("../VERSION")
     )
   end
 end
