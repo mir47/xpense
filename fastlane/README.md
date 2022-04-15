@@ -47,6 +47,14 @@ Deploy a new version to the Google Play
 
 Build a signed release AAB
 
+### android build_apk
+
+```sh
+[bundle exec] fastlane android build_apk
+```
+
+Build a signed release APK
+
 ### android deploy_github_aab_to_play_store
 
 ```sh
