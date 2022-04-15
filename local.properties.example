@@ -1,4 +1,6 @@
 # Windows: sdk.dir=C\:\\Users\\User\\AppData\\Local\\Android\\Sdk
 # Mac: sdk.dir=/Users/user/Library/Android/sdk
 sdk.dir=/path/to/Android/sdk
+
+# Check on Google Cloud Platform for the correct API key (different for debug/release builds)
 MAPS_API_KEY="AIza..."
