@@ -48,8 +48,8 @@ jobs:
     - name: Run tests
       run: bundle exec fastlane test
 
-    # Upload test results to artifacts
-#    - name: Upload test results to artifacts
+    # Upload html report to artifacts
+#    - name: Upload html report to artifacts
 #      uses: actions/upload-artifact@v1
 #      with:
 #        name: results
