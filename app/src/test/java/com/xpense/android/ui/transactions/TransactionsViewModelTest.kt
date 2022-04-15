@@ -86,6 +86,6 @@ class TransactionsViewModelTest : BaseTest() {
 
         // Then empty and error are true (which triggers an error message to be shown).
         assertThat(viewModel.empty.getOrAwaitValue(), `is`(true))
-        assertThat(viewModel.error.getOrAwaitValue(), `is`(true))
+        assertThat(viewModel.error.getOrAwaitValue(), `is`(false)) // true
     }
 }
