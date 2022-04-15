@@ -49,8 +49,15 @@ jobs:
       run: bundle exec fastlane test
 
     # Upload test results to artifacts
-    - name: Upload test results to artifacts
-      uses: actions/upload-artifact@v1
+#    - name: Upload test results to artifacts
+#      uses: actions/upload-artifact@v1
+#      with:
+#        name: results
+#        path: app/build/reports
+
+    - name: Publish Unit Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      if: always()
       with:
-        name: results
-        path: app/build/reports
+        files: "app/build/test-results/**/*.xml"
+#        files: "app/build/test-results/testDebugUnitTest/*.xml"
