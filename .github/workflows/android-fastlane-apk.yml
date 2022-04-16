@@ -1,15 +1,15 @@
-name: Fastlane build (APK)
+name: Fastlane APK (build)
 
 on:
   push:
-    branches: [ main ]
+    branches: [ release-fastlane-apk ]
 
 jobs:
   build:
     name: Fastlane Build
 
-    # Disable build job
-    if: ${{ false }}
+    # Uncomment to disable job:
+#    if: ${{ false }}
 
     runs-on: ubuntu-latest
 
