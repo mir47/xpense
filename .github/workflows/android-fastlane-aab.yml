@@ -1,15 +1,15 @@
-name: Fastlane build (AAB) and deploy
+name: Fastlane AAB (build and deploy)
 
 on:
   push:
-    branches: [ main ]
+    branches: [ release-fastlane-aab ]
 
 jobs:
   build:
     name: Fastlane Build
 
-    # Disable build job
-    if: ${{ false }}
+    # Uncomment to disable job:
+#    if: ${{ false }}
 
     runs-on: ubuntu-latest
 

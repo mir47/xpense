@@ -1,15 +1,15 @@
-name: Gradle build (AAB) and r0adkll deploy
+name: Gradle AAB (build and deploy)
 
 on:
   push:
-    branches: [ main ]
+    branches: [ release-gradle-aab ]
 
 jobs:
   build:
     name: Gradle Build
 
-    # Disable build job
-    if: ${{ false }}
+    # Uncomment to disable job:
+#    if: ${{ false }}
 
     runs-on: ubuntu-latest
 
