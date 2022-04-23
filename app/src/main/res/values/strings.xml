@@ -19,6 +19,7 @@
     <string name="green_question_mark">Green Question Mark</string>
     <string name="main_screen_title">Xpense</string>
     <string name="transaction_screen_title">Transaction</string>
+    <string name="compose_screen_title">Compose</string>
     <string name="compose_txn_menu_item">Compose Transaction</string>
     <string name="about_screen_title">About</string>
     <string name="about_menu_item">About</string>
