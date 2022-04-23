@@ -38,6 +38,21 @@
             app:nullable="true" />
     </fragment>
     <fragment
+        android:id="@+id/compose_playground_fragment"
+        android:name="com.xpense.android.ui.experiments.compose.ComposePlaygroundFragment"
+        android:label="@string/compose_playground_screen_title" >
+    </fragment>
+    <fragment
+        android:id="@+id/compose_tutorial_fragment"
+        android:name="com.xpense.android.ui.experiments.compose.ComposeTutorialFragment"
+        android:label="@string/compose_tutorial_screen_title" >
+    </fragment>
+    <fragment
+        android:id="@+id/compose_basics_fragment"
+        android:name="com.xpense.android.ui.experiments.compose.ComposeBasicsFragment"
+        android:label="@string/compose_basics_screen_title" >
+    </fragment>
+    <fragment
         android:id="@+id/add_edit_txn_compose_fragment"
         android:name="com.xpense.android.ui.experiments.compose.AddEditTxnComposeFragment"
         android:label="@string/transaction_screen_title" >
@@ -45,11 +60,6 @@
             android:name="transactionId"
             android:defaultValue="0L"
             app:argType="long" />
-    </fragment>
-    <fragment
-        android:id="@+id/compose_fragment"
-        android:name="com.xpense.android.ui.experiments.compose.ComposeFragment"
-        android:label="@string/compose_screen_title" >
     </fragment>
     <fragment
         android:id="@+id/about_fragment"

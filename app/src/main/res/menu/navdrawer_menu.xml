@@ -16,9 +16,19 @@
         android:title="@string/android_view_model_menu_item" />
 
     <item
-        android:id="@+id/compose_fragment"
+        android:id="@+id/compose_playground_fragment"
         android:icon="@drawable/android"
-        android:title="@string/compose_screen_title" />
+        android:title="@string/compose_playground_screen_title" />
+
+    <item
+        android:id="@+id/compose_tutorial_fragment"
+        android:icon="@drawable/android"
+        android:title="@string/compose_tutorial_screen_title" />
+
+    <item
+        android:id="@+id/compose_basics_fragment"
+        android:icon="@drawable/android"
+        android:title="@string/compose_basics_screen_title" />
 
     <item
         android:id="@+id/add_edit_txn_compose_fragment"
