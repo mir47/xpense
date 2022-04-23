@@ -36,9 +36,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import com.xpense.android.R
-import com.xpense.android.ui.theme.ComposeTutorialTheme
+import com.xpense.android.ui.theme.XpenseTheme
 
-class ComposeFragment : Fragment() {
+class ComposeTutorialFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +47,7 @@ class ComposeFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                ComposeTutorialTheme {
+                XpenseTheme {
                     // single message
 //                    MessageCard(Message("Android", "Jetpack Compose"))
 
@@ -124,7 +124,7 @@ fun MessageCard(msg: Message) {
 )
 @Composable
 fun PreviewMessageCard() {
-    ComposeTutorialTheme {
+    XpenseTheme {
         MessageCard(
             msg = Message("Colleague", "Hey, take a look at Jetpack Compose, it's great!")
         )
@@ -143,7 +143,7 @@ fun Conversation(messages: List<Message>) {
 @Preview
 @Composable
 fun PreviewConversation() {
-    ComposeTutorialTheme {
+    XpenseTheme {
         Conversation(SampleData.conversationSample)
     }
 }

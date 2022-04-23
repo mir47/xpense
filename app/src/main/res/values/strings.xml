@@ -19,7 +19,9 @@
     <string name="green_question_mark">Green Question Mark</string>
     <string name="main_screen_title">Xpense</string>
     <string name="transaction_screen_title">Transaction</string>
-    <string name="compose_screen_title">Compose</string>
+    <string name="compose_playground_screen_title">Compose Playground</string>
+    <string name="compose_tutorial_screen_title">Compose Tutorial</string>
+    <string name="compose_basics_screen_title">Compose Basics</string>
     <string name="compose_txn_menu_item">Compose Transaction</string>
     <string name="about_screen_title">About</string>
     <string name="about_menu_item">About</string>
@@ -76,4 +78,7 @@
 
     <!-- Shared Preference Keys -->
     <string name="preference_welcome_type_key">welcome_type_pref</string>
+
+    <string name="show_less">Show less</string>
+    <string name="show_more">Show mess</string>
 </resources>
