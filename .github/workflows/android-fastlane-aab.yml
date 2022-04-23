@@ -3,9 +3,6 @@ name: Fastlane AAB (build and deploy)
 on:
   push:
     branches: [ release-fastlane-aab ]
-  pull_request:
-    types: [opened, synchronize]
-    branches: [ main ]
 
 jobs:
   build:
