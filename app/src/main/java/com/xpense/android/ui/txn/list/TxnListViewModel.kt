@@ -60,7 +60,7 @@ class TxnListViewModel(
     }
 
     @Suppress("UNCHECKED_CAST")
-    class TransactionsViewModelFactory (
+    class TxnListViewModelFactory (
         private val transactionRepository: TransactionRepository
     ) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel> create(modelClass: Class<T>) =

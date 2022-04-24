@@ -20,7 +20,7 @@ import com.xpense.android.databinding.FragmentTxnListBinding
 class TxnListFragment : Fragment() {
 
     private val _viewModel by viewModels<TxnListViewModel> {
-        TxnListViewModel.TransactionsViewModelFactory(
+        TxnListViewModel.TxnListViewModelFactory(
             (requireContext().applicationContext as XpenseApplication).transactionRepository
         )
     }
