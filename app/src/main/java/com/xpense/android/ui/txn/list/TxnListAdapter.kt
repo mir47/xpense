@@ -1,4 +1,4 @@
-package com.xpense.android.ui.transactions
+package com.xpense.android.ui.txn.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,7 +11,7 @@ import com.xpense.android.data.Transaction
 /**
  * Adapter for transactions
  */
-class TransactionsAdapter(private val clickListener: TransactionListener):
+class TxnListAdapter(private val clickListener: TransactionListener):
     ListAdapter<Transaction, TransactionViewHolder>(TransactionDiffCallback()) {
 
     override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) =

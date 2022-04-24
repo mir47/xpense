@@ -10,7 +10,7 @@
             type="com.xpense.android.data.Transaction" />
 
         <variable
-            name="clickListener" type="com.xpense.android.ui.transactions.TransactionListener"/>
+            name="clickListener" type="com.xpense.android.ui.txn.list.TransactionListener"/>
 
     </data>
 

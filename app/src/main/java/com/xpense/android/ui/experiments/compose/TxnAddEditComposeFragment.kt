@@ -44,11 +44,11 @@ import com.xpense.android.XpenseApplication
 import com.xpense.android.ui.theme.XpenseTheme
 
 @ExperimentalMaterialApi
-class AddEditTxnComposeFragment : Fragment() {
+class TxnAddEditComposeFragment : Fragment() {
 
     private val _viewModelAddEdit by viewModels<AddEditTxnComposeViewModel> {
         AddEditTxnComposeViewModel.AddEditTxnComposeViewModelFactory(
-            AddEditTxnComposeFragmentArgs.fromBundle(requireArguments()).transactionId,
+            TxnAddEditComposeFragmentArgs.fromBundle(requireArguments()).transactionId,
             (requireContext().applicationContext as XpenseApplication).transactionRepository
         )
     }

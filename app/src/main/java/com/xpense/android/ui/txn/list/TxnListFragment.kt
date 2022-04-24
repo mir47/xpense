@@ -1,4 +1,4 @@
-package com.xpense.android.ui.transactions
+package com.xpense.android.ui.txn.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,12 +15,12 @@ import androidx.navigation.ui.NavigationUI
 import com.xpense.android.R
 import com.xpense.android.XpenseApplication
 import com.xpense.android.data.Result.Success
-import com.xpense.android.databinding.FragmentTransactionsBinding
+import com.xpense.android.databinding.FragmentTxnListBinding
 
-class TransactionsFragment : Fragment() {
+class TxnListFragment : Fragment() {
 
-    private val _viewModel by viewModels<TransactionsViewModel> {
-        TransactionsViewModel.TransactionsViewModelFactory(
+    private val _viewModel by viewModels<TxnListViewModel> {
+        TxnListViewModel.TransactionsViewModelFactory(
             (requireContext().applicationContext as XpenseApplication).transactionRepository
         )
     }
@@ -30,8 +30,8 @@ class TransactionsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: FragmentTransactionsBinding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_transactions, container, false)
+        val binding: FragmentTxnListBinding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_txn_list, container, false)
 
         binding.viewModel = _viewModel
 
@@ -42,18 +42,16 @@ class TransactionsFragment : Fragment() {
         _viewModel.navigateToCreateTransaction.observe(viewLifecycleOwner) {
             if (it) {
                 findNavController().navigate(
-                    TransactionsFragmentDirections
-                        .actionMainFragmentToTransactionFragment()
+                    TxnListFragmentDirections.actionTxnListFragmentToTxnAddEditFragment()
                 )
                 _viewModel.doneNavigating()
             }
         }
 
-        val transactionsAdapter = TransactionsAdapter(TransactionListener { transactionId ->
+        val transactionsAdapter = TxnListAdapter(TransactionListener { transactionId ->
             // TODO: click logic should be handled in the view model, with navigation event sent to fragment via LiveData
             findNavController().navigate(
-                TransactionsFragmentDirections
-                    .actionMainFragmentToTransactionFragment()
+                TxnListFragmentDirections.actionTxnListFragmentToTxnAddEditFragment()
                     .setTransactionId(transactionId)
             )
         })

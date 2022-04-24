@@ -1,4 +1,4 @@
-package com.xpense.android.ui.transactions
+package com.xpense.android.ui.txn.list
 
 import android.os.Bundle
 import androidx.fragment.app.testing.launchFragmentInContainer
@@ -32,7 +32,7 @@ import org.mockito.Mockito.verify
 @MediumTest
 @RunWith(AndroidJUnit4::class)
 @ExperimentalCoroutinesApi
-class TransactionsFragmentTest {
+class TxnListFragmentTest {
 
     private lateinit var repository: TransactionRepository
 
@@ -54,7 +54,7 @@ class TransactionsFragmentTest {
         repository.saveTransaction(Transaction(2, amount = 2.22, description = "two"))
 
         // WHEN - Details fragment launched to display task
-        launchFragmentInContainer<TransactionsFragment>(Bundle(), R.style.Theme_Xpense)
+        launchFragmentInContainer<TxnListFragment>(Bundle(), R.style.Theme_Xpense)
 
 //        Thread.sleep(2000)
 
@@ -104,7 +104,7 @@ class TransactionsFragmentTest {
         repository.saveTransaction(Transaction(1, amount = 1.2, description = "one"))
         repository.saveTransaction(Transaction(2, amount = 2.22, description = "two"))
 
-        val scenario = launchFragmentInContainer<TransactionsFragment>(Bundle(), R.style.Theme_Xpense)
+        val scenario = launchFragmentInContainer<TxnListFragment>(Bundle(), R.style.Theme_Xpense)
 
         // Use Mockito to create NavController mock
         val navController = mock(NavController::class.java)
@@ -119,8 +119,8 @@ class TransactionsFragmentTest {
 
         // THEN - Verify navigation with correct param(s)
         verify(navController).navigate(
-            TransactionsFragmentDirections
-                .actionMainFragmentToTransactionFragment()
+            TxnListFragmentDirections
+                .actionTxnListFragmentToTxnAddEditFragment()
                 .setTransactionId(1)
         )
 
@@ -131,8 +131,8 @@ class TransactionsFragmentTest {
 
         // THEN - Verify navigation with correct param(s)
         verify(navController).navigate(
-            TransactionsFragmentDirections
-                .actionMainFragmentToTransactionFragment()
+            TxnListFragmentDirections
+                .actionTxnListFragmentToTxnAddEditFragment()
                 .setTransactionId(2)
         )
     }

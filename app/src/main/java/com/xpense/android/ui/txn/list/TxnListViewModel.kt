@@ -1,4 +1,4 @@
-package com.xpense.android.ui.transactions
+package com.xpense.android.ui.txn.list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +11,7 @@ import com.xpense.android.data.Result.Success
 import com.xpense.android.data.TransactionRepository
 import kotlinx.coroutines.launch
 
-class TransactionsViewModel(
+class TxnListViewModel(
     private val transactionRepository: TransactionRepository
 ) : ViewModel() {
 
@@ -19,14 +19,14 @@ class TransactionsViewModel(
 
     /**
      * Variable that tells the Fragment to navigate to a specific
-     * [com.xpense.android.ui.addedittransaction.AddEditTransactionFragment]
+     * [com.xpense.android.ui.txn.add_edit.TxnAddEditFragment]
      *
      * This is private because we don't want to expose setting this value to the Fragment.
      */
     private val _navigateToCreateTransaction = MutableLiveData<Boolean>()
 
     /**
-     * If this is true, immediately navigate to [com.xpense.android.ui.addedittransaction.AddEditTransactionFragment]
+     * If this is true, immediately navigate to [com.xpense.android.ui.txn.add_edit.TxnAddEditFragment]
      * and call [doneNavigating]
      */
     val navigateToCreateTransaction: LiveData<Boolean>
@@ -39,7 +39,7 @@ class TransactionsViewModel(
     val empty: LiveData<Boolean> = transactions.map { (it as? Success)?.data.isNullOrEmpty() }
 
     /**
-     * Call this immediately after navigating to [com.xpense.android.ui.addedittransaction.AddEditTransactionFragment]
+     * Call this immediately after navigating to [com.xpense.android.ui.txn.add_edit.TxnAddEditFragment]
      *
      * It will clear the navigation request, so if the device is rotated it won't navigate twice.
      */
@@ -64,6 +64,6 @@ class TransactionsViewModel(
         private val transactionRepository: TransactionRepository
     ) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel> create(modelClass: Class<T>) =
-            TransactionsViewModel(transactionRepository) as T
+            TxnListViewModel(transactionRepository) as T
     }
 }
