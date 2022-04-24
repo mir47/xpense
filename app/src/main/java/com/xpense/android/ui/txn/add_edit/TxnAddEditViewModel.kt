@@ -1,4 +1,4 @@
-package com.xpense.android.ui.addedittransaction
+package com.xpense.android.ui.txn.add_edit
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
@@ -12,7 +12,7 @@ import com.xpense.android.data.TransactionRepository
 import kotlinx.coroutines.launch
 import java.util.Date
 
-class AddEditTransactionViewModel(
+class TxnAddEditViewModel(
     private val transactionId: Long,
     private val transactionSms: String?,
     private val transactionRepository: TransactionRepository
@@ -90,12 +90,12 @@ class AddEditTransactionViewModel(
     }
 
     @Suppress("UNCHECKED_CAST")
-    class AddEditTransactionViewModelFactory (
+    class TxnAddEditViewModelFactory (
         private val transactionId: Long,
         private val transactionSms: String?,
         private val transactionRepository: TransactionRepository
     ) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel> create(modelClass: Class<T>) =
-            AddEditTransactionViewModel(transactionId, transactionSms, transactionRepository) as T
+            TxnAddEditViewModel(transactionId, transactionSms, transactionRepository) as T
     }
 }

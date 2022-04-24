@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:title="Experiments" />
-
     <!-- note: item id must match destination id, if you want to use the navigation graph -->
     <item
         android:id="@+id/about_fragment"
         android:icon="@drawable/android"
         android:title="@string/about_menu_item" />
+
+    <item
+        android:enabled="false"
+        android:title="@string/android_experiments_menu_item" />
 
     <item
         android:id="@+id/my_android_view_model_fragment"
@@ -31,7 +32,7 @@
         android:title="@string/compose_basics_screen_title" />
 
     <item
-        android:id="@+id/add_edit_txn_compose_fragment"
+        android:id="@+id/txn_add_edit_compose_fragment"
         android:icon="@drawable/android"
         android:title="@string/compose_txn_menu_item" />
 

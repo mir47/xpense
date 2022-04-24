@@ -1,4 +1,4 @@
-package com.xpense.android.ui.addedittransaction
+package com.xpense.android.ui.txn.add_edit
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,14 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.xpense.android.XpenseApplication
-import com.xpense.android.databinding.FragmentAddEditTransactionBinding
+import com.xpense.android.databinding.FragmentTxnAddEditBinding
 
-class AddEditTransactionFragment : Fragment() {
+class TxnAddEditFragment : Fragment() {
 
-    private val _viewModelAddEdit by viewModels<AddEditTransactionViewModel> {
-        AddEditTransactionViewModel.AddEditTransactionViewModelFactory(
-            AddEditTransactionFragmentArgs.fromBundle(requireArguments()).transactionId,
-            AddEditTransactionFragmentArgs.fromBundle(requireArguments()).sms,
+    private val _viewModelAddEdit by viewModels<TxnAddEditViewModel> {
+        TxnAddEditViewModel.TxnAddEditViewModelFactory(
+            TxnAddEditFragmentArgs.fromBundle(requireArguments()).transactionId,
+            TxnAddEditFragmentArgs.fromBundle(requireArguments()).sms,
             (requireContext().applicationContext as XpenseApplication).transactionRepository
         )
     }
@@ -25,7 +25,7 @@ class AddEditTransactionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentAddEditTransactionBinding.inflate(inflater)
+        val binding = FragmentTxnAddEditBinding.inflate(inflater)
 
         binding.viewModel = _viewModelAddEdit
 

@@ -1,4 +1,4 @@
-package com.xpense.android.ui.transactions
+package com.xpense.android.ui.txn.list
 
 import com.xpense.android.BaseTest
 import com.xpense.android.data.Transaction
@@ -13,13 +13,13 @@ import org.junit.Before
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class TransactionsViewModelTest : BaseTest() {
+class TxnListViewModelTest : BaseTest() {
 
     // Use a fake repository to be injected into the ViewModel
     private lateinit var fakeRepository: FakeTransactionRepository
 
     // Subject under test
-    private lateinit var viewModel: TransactionsViewModel
+    private lateinit var viewModel: TxnListViewModel
 
     @Before
     fun setupViewModel() {
@@ -30,7 +30,7 @@ class TransactionsViewModelTest : BaseTest() {
         val task3 = Transaction(transactionId = 3)
         fakeRepository.addTasks(task1, task2, task3)
 
-        viewModel = TransactionsViewModel(fakeRepository)
+        viewModel = TxnListViewModel(fakeRepository)
     }
 
     @Test
