@@ -51,6 +51,11 @@ class MainFragment : Fragment() {
             }
         }
 
+        binding.button0.setOnClickListener {
+            findNavController().navigate(MainFragmentDirections
+                .actionMainFragmentToTestFragment())
+        }
+
         return binding.root
     }
 }

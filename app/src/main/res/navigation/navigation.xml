@@ -18,6 +18,9 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@+id/main_fragment" />
+        <action
+            android:id="@+id/action_main_fragment_to_test_fragment"
+            app:destination="@id/test_fragment" />
     </fragment>
     <fragment
         android:id="@+id/transaction_fragment"
@@ -27,5 +30,26 @@
         <deepLink
             android:id="@+id/deepLink"
             app:uri="xpense://xpense.com/transaction" />
+    </fragment>
+    <fragment
+        android:id="@+id/test_fragment"
+        android:name="com.xpense.android.ui.test.TestFragment"
+        android:label="test_fragment"
+        tools:layout="@layout/fragment_test">
+        <action
+            android:id="@+id/action_test_fragment_to_transaction_fragment"
+            app:destination="@id/transaction_fragment" />
+        <action
+            android:id="@+id/action_test_fragment_to_testt_fragment"
+            app:destination="@id/testt_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/testt_fragment"
+        android:name="com.xpense.android.ui.test.TesttFragment"
+        android:label="testt_fragment"
+        tools:layout="@layout/fragment_testt">
+        <deepLink
+            android:id="@+id/deepLink3"
+            app:uri="xpense://xpense.com/test" />
     </fragment>
 </navigation>
