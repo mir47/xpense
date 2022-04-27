@@ -16,7 +16,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import com.xpense.android.R
-import com.xpense.android.ServiceLocator
+import com.xpense.android.di.ServiceLocator
 import com.xpense.android.domain.repository.FakeAndroidTxnRepository
 import com.xpense.android.data.source.local.model.TxnEntity
 import com.xpense.android.domain.repository.TxnRepository

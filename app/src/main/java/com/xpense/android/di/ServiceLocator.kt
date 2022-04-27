@@ -1,4 +1,4 @@
-package com.xpense.android
+package com.xpense.android.di
 
 import android.content.Context
 import androidx.annotation.VisibleForTesting

@@ -1,6 +1,7 @@
 package com.xpense.android
 
 import android.app.Application
+import com.xpense.android.di.ServiceLocator
 import com.xpense.android.domain.repository.TxnRepository
 import timber.log.Timber
 
