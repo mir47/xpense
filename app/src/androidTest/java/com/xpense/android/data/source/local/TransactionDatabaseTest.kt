@@ -15,7 +15,7 @@ import java.io.IOException
 @RunWith(AndroidJUnit4::class)
 class TransactionDatabaseTest {
 
-    private lateinit var dao: TransactionDao
+    private lateinit var dao: TxnDao
     private lateinit var db: TransactionDatabase
 
     @Before
@@ -27,7 +27,7 @@ class TransactionDatabaseTest {
             // Allowing main thread queries, just for testing.
             .allowMainThreadQueries()
             .build()
-        dao = db.transactionDao()
+        dao = db.txnDao()
     }
 
     @After

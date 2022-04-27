@@ -20,7 +20,7 @@ import org.junit.runner.RunWith
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 @SmallTest
-class TransactionDaoTest {
+class TxnDaoTest {
 
     // Executes each task synchronously using Architecture Components
     @get:Rule
@@ -43,10 +43,10 @@ class TransactionDaoTest {
     fun insertTransactionAndGetById() = runBlockingTest {
         // GIVEN - Insert a transaction
         val txn = TxnEntity(transactionId = 1, amount = 12.34, description = "description")
-        database.transactionDao().insert(txn)
+        database.txnDao().insert(txn)
 
         // WHEN - Get the transaction by id from the database
-        val loaded = database.transactionDao().getTransactionWithId(txn.transactionId)
+        val loaded = database.txnDao().getTransactionWithId(txn.transactionId)
 
         // THEN - The loaded data contains the expected values
         assertThat(loaded as TxnEntity, notNullValue())
@@ -59,13 +59,13 @@ class TransactionDaoTest {
     fun updateTransactionAndGetById() = runBlockingTest {
         // GIVEN - Insert a transaction into the DAO
         val txn = TxnEntity(transactionId = 1, amount = 12.34, description = "description")
-        database.transactionDao().insert(txn)
+        database.txnDao().insert(txn)
 
         // WHEN - Update transaction by creating new transaction with same ID but
         // different attributes, and get by id
         val txnNew = txn.copy(description = "updated")
-        database.transactionDao().update(txnNew)
-        val loaded = database.transactionDao().getTransactionWithId(txn.transactionId)
+        database.txnDao().update(txnNew)
+        val loaded = database.txnDao().getTransactionWithId(txn.transactionId)
 
         // THEN - The loaded data contains the updated values
         assertThat(loaded as TxnEntity, notNullValue())

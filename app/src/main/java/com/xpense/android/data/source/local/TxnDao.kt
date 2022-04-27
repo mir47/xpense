@@ -12,7 +12,7 @@ import com.xpense.android.data.TxnEntity
  * Defines methods for using the Transaction class with Room.
  */
 @Dao
-interface TransactionDao {
+interface TxnDao {
 
     @Insert
     suspend fun insert(txnEntity: TxnEntity)

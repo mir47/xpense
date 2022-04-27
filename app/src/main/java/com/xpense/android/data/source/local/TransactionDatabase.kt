@@ -20,14 +20,14 @@ abstract class TransactionDatabase : RoomDatabase() {
     /**
      * Connects the database to the DAO.
      */
-    abstract fun transactionDao(): TransactionDao
+    abstract fun txnDao(): TxnDao
 
     companion object {
 
         /**
          * Static method that creates an instance of [TransactionDatabase] and returns the DAO
          */
-        fun createTransactionDao(context: Context): TransactionDao {
+        fun createTxnDao(context: Context): TxnDao {
             return Room.databaseBuilder(
                 context.applicationContext,
                 TransactionDatabase::class.java,
@@ -35,7 +35,7 @@ abstract class TransactionDatabase : RoomDatabase() {
             )
                 // migration strategy - use destructive to recreate a new db
                 .fallbackToDestructiveMigration()
-                .build().transactionDao()
+                .build().txnDao()
         }
     }
 }

@@ -38,7 +38,7 @@ object ServiceLocator {
 
     private fun createLocalDataSource(context: Context): TransactionDataSource {
         val db = database ?: createDataBase(context)
-        return TransactionDataSourceLocal(db.transactionDao())
+        return TransactionDataSourceLocal(db.txnDao())
     }
 
     private fun createDataBase(context: Context): TransactionDatabase {

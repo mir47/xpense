@@ -43,7 +43,7 @@ class TransactionDataSourceLocalTest {
 
         localDataSource =
             TransactionDataSourceLocal(
-                database.transactionDao(),
+                database.txnDao(),
                 Dispatchers.Main
             )
     }
