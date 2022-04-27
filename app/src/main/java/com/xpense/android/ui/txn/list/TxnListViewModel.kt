@@ -8,7 +8,7 @@ import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.xpense.android.data.Result.Error
 import com.xpense.android.data.Result.Success
-import com.xpense.android.data.TxnRepository
+import com.xpense.android.domain.repository.TxnRepository
 import kotlinx.coroutines.launch
 
 class TxnListViewModel(

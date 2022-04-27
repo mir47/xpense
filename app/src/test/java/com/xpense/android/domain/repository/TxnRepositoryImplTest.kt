@@ -1,6 +1,7 @@
-package com.xpense.android.data
+package com.xpense.android.domain.repository
 
 import com.xpense.android.BaseTest
+import com.xpense.android.data.FakeTxnDataSource
 import com.xpense.android.getOrAwaitValue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -9,6 +10,7 @@ import org.hamcrest.core.IsEqual
 import org.junit.Before
 import org.junit.Test
 import com.xpense.android.data.Result.Success
+import com.xpense.android.data.TxnEntity
 
 @ExperimentalCoroutinesApi
 class TxnRepositoryImplTest: BaseTest() {

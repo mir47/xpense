@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.xpense.android.data.Result
 import com.xpense.android.data.TxnEntity
-import com.xpense.android.data.TxnRepository
+import com.xpense.android.domain.repository.TxnRepository
 import kotlinx.coroutines.launch
 import java.util.Date
 

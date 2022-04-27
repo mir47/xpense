@@ -1,7 +1,7 @@
 package com.xpense.android
 
 import android.app.Application
-import com.xpense.android.data.TxnRepository
+import com.xpense.android.domain.repository.TxnRepository
 import timber.log.Timber
 
 class XpenseApplication : Application() {

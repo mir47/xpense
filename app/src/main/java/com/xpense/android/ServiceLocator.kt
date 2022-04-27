@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.annotation.VisibleForTesting
 import androidx.room.Room
 import com.xpense.android.data.TxnDataSource
-import com.xpense.android.data.TxnRepository
-import com.xpense.android.data.TxnRepositoryImpl
+import com.xpense.android.domain.repository.TxnRepository
+import com.xpense.android.domain.repository.TxnRepositoryImpl
 import com.xpense.android.data.source.local.TxnDataSourceLocal
 import com.xpense.android.data.source.local.TxnDatabase
 import com.xpense.android.data.source.remote.TxnDataSourceRemote
