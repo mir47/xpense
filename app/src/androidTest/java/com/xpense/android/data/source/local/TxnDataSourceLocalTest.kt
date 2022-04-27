@@ -6,7 +6,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import com.xpense.android.data.Result
-import com.xpense.android.data.Transaction
+import com.xpense.android.data.TxnEntity
 import com.xpense.android.data.succeeded
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -23,27 +23,27 @@ import org.junit.runner.RunWith
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 @MediumTest
-class TransactionDataSourceLocalTest {
+class TxnDataSourceLocalTest {
 
     // Executes each task synchronously using Architecture Components.
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var localDataSource: TransactionDataSourceLocal
+    private lateinit var localDataSource: TxnDataSourceLocal
 
-    private lateinit var database: TransactionDatabase
+    private lateinit var database: TxnDatabase
 
     @Before
     fun initDb() {
         // Using an in-memory database for testing, because it doesn't survive killing the process.
         database = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(),
-            TransactionDatabase::class.java
+            TxnDatabase::class.java
         ).allowMainThreadQueries().build()
 
         localDataSource =
-            TransactionDataSourceLocal(
-                database.transactionDao(),
+            TxnDataSourceLocal(
+                database.txnDao(),
                 Dispatchers.Main
             )
     }
@@ -54,7 +54,7 @@ class TransactionDataSourceLocalTest {
     @Test
     fun saveTransaction_retrievesTransaction() = runBlockingTest {
         // GIVEN - A new transaction saved in the data store.
-        val txn = Transaction(transactionId = 1, amount = 12.34, description = "description")
+        val txn = TxnEntity(transactionId = 1, amount = 12.34, description = "description")
         localDataSource.saveTransaction(txn)
 
         // WHEN - Transaction retrieved by ID.
@@ -70,7 +70,7 @@ class TransactionDataSourceLocalTest {
     @Test
     fun flagTransaction_retrievedTransactionIsFlagged() = runBlockingTest {
         // GIVEN - A new transaction saved in the data store.
-        val txn = Transaction(transactionId = 1)
+        val txn = TxnEntity(transactionId = 1)
         localDataSource.saveTransaction(txn)
 
         // WHEN - transaction is flagged.

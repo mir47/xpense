@@ -3,69 +3,69 @@ package com.xpense.android
 import android.content.Context
 import androidx.annotation.VisibleForTesting
 import androidx.room.Room
-import com.xpense.android.data.TransactionDataSource
-import com.xpense.android.data.TransactionRepository
-import com.xpense.android.data.TransactionRepositoryImpl
-import com.xpense.android.data.source.local.TransactionDataSourceLocal
-import com.xpense.android.data.source.local.TransactionDatabase
-import com.xpense.android.data.source.remote.TransactionDataSourceRemote
+import com.xpense.android.data.TxnDataSource
+import com.xpense.android.domain.repository.TxnRepository
+import com.xpense.android.domain.repository.TxnRepositoryImpl
+import com.xpense.android.data.source.local.TxnDataSourceLocal
+import com.xpense.android.data.source.local.TxnDatabase
+import com.xpense.android.data.source.remote.TxnDataSourceRemote
 import kotlinx.coroutines.runBlocking
 
 object ServiceLocator {
 
     private val lock = Any()
 
-    private var database: TransactionDatabase? = null
+    private var db: TxnDatabase? = null
 
     @Volatile
-    var repository: TransactionRepository? = null
+    var repository: TxnRepository? = null
         @VisibleForTesting set
 
-    fun provideTransactionRepository(context: Context): TransactionRepository {
+    fun provideTransactionRepository(context: Context): TxnRepository {
         synchronized(this) {
             return repository ?: createRepository(context)
         }
     }
 
-    private fun createRepository(context: Context): TransactionRepository {
-        val newRepo = TransactionRepositoryImpl(
+    private fun createRepository(context: Context): TxnRepository {
+        val newRepo = TxnRepositoryImpl(
             createLocalDataSource(context),
-            TransactionDataSourceRemote
+            TxnDataSourceRemote
         )
         repository = newRepo
         return newRepo
     }
 
-    private fun createLocalDataSource(context: Context): TransactionDataSource {
-        val db = database ?: createDataBase(context)
-        return TransactionDataSourceLocal(db.transactionDao())
+    private fun createLocalDataSource(context: Context): TxnDataSource {
+        val db = db ?: createDataBase(context)
+        return TxnDataSourceLocal(db.txnDao())
     }
 
-    private fun createDataBase(context: Context): TransactionDatabase {
-        val db = Room.databaseBuilder(
+    private fun createDataBase(context: Context): TxnDatabase {
+        val roomDb = Room.databaseBuilder(
             context.applicationContext,
-            TransactionDatabase::class.java,
+            TxnDatabase::class.java,
             "transaction_database"
         )
             // migration strategy - use destructive to recreate a new db
             .fallbackToDestructiveMigration()
             .build()
-        database = db
-        return db
+        db = roomDb
+        return roomDb
     }
 
     @VisibleForTesting
     fun resetRepository() {
         synchronized(lock) {
             runBlocking {
-                TransactionDataSourceRemote.deleteAllTransactions()
+                TxnDataSourceRemote.deleteAllTransactions()
             }
             // Clear all data to avoid test pollution.
-            database?.apply {
+            db?.apply {
                 clearAllTables()
                 close()
             }
-            database = null
+            db = null
             repository = null
         }
     }

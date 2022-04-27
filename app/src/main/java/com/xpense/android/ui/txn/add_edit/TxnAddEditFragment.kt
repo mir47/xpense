@@ -16,7 +16,7 @@ class TxnAddEditFragment : Fragment() {
         TxnAddEditViewModel.TxnAddEditViewModelFactory(
             TxnAddEditFragmentArgs.fromBundle(requireArguments()).transactionId,
             TxnAddEditFragmentArgs.fromBundle(requireArguments()).sms,
-            (requireContext().applicationContext as XpenseApplication).transactionRepository
+            (requireContext().applicationContext as XpenseApplication).txnRepository
         )
     }
 

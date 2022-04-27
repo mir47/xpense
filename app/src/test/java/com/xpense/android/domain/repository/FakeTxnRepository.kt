@@ -1,16 +1,18 @@
-package com.xpense.android.data
+package com.xpense.android.domain.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Error
 import com.xpense.android.data.Result.Success
+import com.xpense.android.data.TxnEntity
 import kotlinx.coroutines.runBlocking
 
-class FakeTransactionRepository : TransactionRepository {
+class FakeTxnRepository : TxnRepository {
 
-    var transactionsServiceData: LinkedHashMap<Long, Transaction> = LinkedHashMap()
+    var transactionsServiceData: LinkedHashMap<Long, TxnEntity> = LinkedHashMap()
 
-    private val observableTransactions = MutableLiveData<Result<List<Transaction>>>()
+    private val observableTransactions = MutableLiveData<Result<List<TxnEntity>>>()
 
     private var shouldReturnError = false
 
@@ -18,14 +20,14 @@ class FakeTransactionRepository : TransactionRepository {
         shouldReturnError = value
     }
 
-    override fun observeTransactions(): LiveData<Result<List<Transaction>>> =
+    override fun observeTransactions(): LiveData<Result<List<TxnEntity>>> =
         observableTransactions
 
-    override suspend fun saveTransaction(transaction: Transaction) {
+    override suspend fun saveTransaction(txnEntity: TxnEntity) {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getTransaction(transactionId: Long): Result<Transaction> {
+    override suspend fun getTransaction(transactionId: Long): Result<TxnEntity> {
         if (shouldReturnError) {
             return Error(Exception("Test exception"))
         }
@@ -35,14 +37,14 @@ class FakeTransactionRepository : TransactionRepository {
         return Error(Exception("Could not find transaction"))
     }
 
-    override suspend fun getTransactions(): Result<List<Transaction>> {
+    override suspend fun getTransactions(): Result<List<TxnEntity>> {
         if (shouldReturnError) {
             return Error(Exception("Test exception"))
         }
         return Success(transactionsServiceData.values.toList())
     }
 
-    override suspend fun updateTransaction(transaction: Transaction) {
+    override suspend fun updateTransaction(txnEntity: TxnEntity) {
         TODO("Not yet implemented")
     }
 
@@ -58,9 +60,9 @@ class FakeTransactionRepository : TransactionRepository {
         TODO("Not yet implemented")
     }
 
-    fun addTasks(vararg transactions: Transaction) {
-        for (transaction in transactions) {
-            transactionsServiceData[transaction.transactionId] = transaction
+    fun addTransactions(vararg txnEntities: TxnEntity) {
+        for (txn in txnEntities) {
+            transactionsServiceData[txn.transactionId] = txn
         }
         runBlocking { refreshTransactions() }
     }

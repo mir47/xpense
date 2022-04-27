@@ -5,14 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.xpense.android.databinding.ItemTransactionBinding
-import com.xpense.android.data.Transaction
+import com.xpense.android.databinding.ItemTxnBinding
+import com.xpense.android.data.TxnEntity
 
 /**
  * Adapter for transactions
  */
 class TxnListAdapter(private val clickListener: TransactionListener):
-    ListAdapter<Transaction, TransactionViewHolder>(TransactionDiffCallback()) {
+    ListAdapter<TxnEntity, TransactionViewHolder>(TransactionDiffCallback()) {
 
     override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) =
         holder.bind(getItem(position), clickListener)
@@ -24,17 +24,17 @@ class TxnListAdapter(private val clickListener: TransactionListener):
 /**
  * ViewHolder for a transaction item
  */
-class TransactionViewHolder private constructor(private val binding: ItemTransactionBinding)
+class TransactionViewHolder private constructor(private val binding: ItemTxnBinding)
     : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: Transaction, clickListener: TransactionListener) {
-        binding.transaction = item
+    fun bind(txnEntity: TxnEntity, clickListener: TransactionListener) {
+        binding.txnEntity = txnEntity
         binding.clickListener = clickListener
         binding.executePendingBindings()
     }
 
     companion object {
-        fun from(parent: ViewGroup) = TransactionViewHolder(ItemTransactionBinding
+        fun from(parent: ViewGroup) = TransactionViewHolder(ItemTxnBinding
             .inflate(LayoutInflater.from(parent.context), parent, false))
     }
 }
@@ -45,11 +45,11 @@ class TransactionViewHolder private constructor(private val binding: ItemTransac
  * Used by ListAdapter to calculate the minimum number of changes between
  * and old list and a new list that's been passed to `submitList`.
  */
-class TransactionDiffCallback : DiffUtil.ItemCallback<Transaction>() {
-    override fun areItemsTheSame(oldItem: Transaction, newItem: Transaction) =
+class TransactionDiffCallback : DiffUtil.ItemCallback<TxnEntity>() {
+    override fun areItemsTheSame(oldItem: TxnEntity, newItem: TxnEntity) =
         oldItem.transactionId == newItem.transactionId
 
-    override fun areContentsTheSame(oldItem: Transaction, newItem: Transaction) =
+    override fun areContentsTheSame(oldItem: TxnEntity, newItem: TxnEntity) =
         oldItem == newItem
 }
 
@@ -57,5 +57,5 @@ class TransactionDiffCallback : DiffUtil.ItemCallback<Transaction>() {
  * Item click listener
  */
 class TransactionListener(val clickListener: (transactionId: Long) -> Unit) {
-    fun onClick(transaction: Transaction) = clickListener(transaction.transactionId)
+    fun onClick(txnEntity: TxnEntity) = clickListener(txnEntity.transactionId)
 }

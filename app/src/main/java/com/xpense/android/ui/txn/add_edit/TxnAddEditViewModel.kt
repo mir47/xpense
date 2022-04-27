@@ -7,15 +7,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.xpense.android.data.Result
-import com.xpense.android.data.Transaction
-import com.xpense.android.data.TransactionRepository
+import com.xpense.android.data.TxnEntity
+import com.xpense.android.domain.repository.TxnRepository
 import kotlinx.coroutines.launch
 import java.util.Date
 
 class TxnAddEditViewModel(
     private val transactionId: Long,
     private val transactionSms: String?,
-    private val transactionRepository: TransactionRepository
+    private val txnRepository: TxnRepository
 ) : ViewModel() {
 
     val amountField = ObservableField<String>()
@@ -51,7 +51,7 @@ class TxnAddEditViewModel(
     init {
         if (transactionId != 0L) {
             viewModelScope.launch {
-                val txn = transactionRepository.getTransaction(transactionId)
+                val txn = txnRepository.getTransaction(transactionId)
                 if (txn is Result.Success) {
                     amountField.set(txn.data.amount.toString())
                     descriptionField.set(txn.data.description)
@@ -67,9 +67,9 @@ class TxnAddEditViewModel(
         val amount = amountField.get()?.toDoubleOrNull() ?: 0.0
         viewModelScope.launch {
             if (transactionId != 0L) {
-                val txn = transactionRepository.getTransaction(transactionId)
+                val txn = txnRepository.getTransaction(transactionId)
                 if (txn is Result.Success) {
-                    transactionRepository.updateTransaction(
+                    txnRepository.updateTransaction(
                         txn.data.apply {
                             txn.data.amount = amount
                             txn.data.description = description
@@ -77,8 +77,8 @@ class TxnAddEditViewModel(
                     )
                 }
             } else {
-                transactionRepository.saveTransaction(
-                    Transaction(
+                txnRepository.saveTransaction(
+                    TxnEntity(
                         createdTimestamp = Date(System.currentTimeMillis()),
                         amount = amount,
                         description = description
@@ -93,9 +93,9 @@ class TxnAddEditViewModel(
     class TxnAddEditViewModelFactory (
         private val transactionId: Long,
         private val transactionSms: String?,
-        private val transactionRepository: TransactionRepository
+        private val txnRepository: TxnRepository
     ) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel> create(modelClass: Class<T>) =
-            TxnAddEditViewModel(transactionId, transactionSms, transactionRepository) as T
+            TxnAddEditViewModel(transactionId, transactionSms, txnRepository) as T
     }
 }

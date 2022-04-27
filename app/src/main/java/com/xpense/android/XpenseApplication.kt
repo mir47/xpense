@@ -1,12 +1,12 @@
 package com.xpense.android
 
 import android.app.Application
-import com.xpense.android.data.TransactionRepository
+import com.xpense.android.domain.repository.TxnRepository
 import timber.log.Timber
 
 class XpenseApplication : Application() {
 
-    val transactionRepository: TransactionRepository
+    val txnRepository: TxnRepository
         get() = ServiceLocator.provideTransactionRepository(this)
 
     override fun onCreate() {

@@ -1,8 +1,8 @@
 package com.xpense.android.ui.txn.list
 
 import com.xpense.android.BaseTest
-import com.xpense.android.data.Transaction
-import com.xpense.android.data.FakeTransactionRepository
+import com.xpense.android.data.TxnEntity
+import com.xpense.android.domain.repository.FakeTxnRepository
 import com.xpense.android.data.Result.Success
 import com.xpense.android.getOrAwaitValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -16,7 +16,7 @@ import org.junit.Test
 class TxnListViewModelTest : BaseTest() {
 
     // Use a fake repository to be injected into the ViewModel
-    private lateinit var fakeRepository: FakeTransactionRepository
+    private lateinit var fakeRepository: FakeTxnRepository
 
     // Subject under test
     private lateinit var viewModel: TxnListViewModel
@@ -24,11 +24,11 @@ class TxnListViewModelTest : BaseTest() {
     @Before
     fun setupViewModel() {
         // We initialise the transactions to 3
-        fakeRepository = FakeTransactionRepository()
-        val task1 = Transaction(transactionId = 1)
-        val task2 = Transaction(transactionId = 2)
-        val task3 = Transaction(transactionId = 3)
-        fakeRepository.addTasks(task1, task2, task3)
+        fakeRepository = FakeTxnRepository()
+        val txn1 = TxnEntity(transactionId = 1)
+        val txn2 = TxnEntity(transactionId = 2)
+        val txn3 = TxnEntity(transactionId = 3)
+        fakeRepository.addTransactions(txn1, txn2, txn3)
 
         viewModel = TxnListViewModel(fakeRepository)
     }

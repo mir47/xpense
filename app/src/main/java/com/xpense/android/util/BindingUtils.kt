@@ -2,10 +2,10 @@ package com.xpense.android.util
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.xpense.android.data.Transaction
+import com.xpense.android.data.TxnEntity
 
-@BindingAdapter("transactionTimestampString")
-fun TextView.setTransactionTimestampString(item: Transaction?) {
+@BindingAdapter("timestampString")
+fun TextView.setTimestampString(item: TxnEntity?) {
     item?.let {
         text = getFormattedDateString(item.createdTimestamp)
     }

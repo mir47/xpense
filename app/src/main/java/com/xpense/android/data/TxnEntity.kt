@@ -8,9 +8,9 @@ import kotlinx.parcelize.Parcelize
 import java.util.Date
 
 // TODO: rename to database object (for database Transaction model) - see dev-bytes project
-@Entity(tableName = "transaction_table")
+@Entity(tableName = "txn_table")
 @Parcelize
-data class Transaction(
+data class TxnEntity(
         @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = "transaction_id")
         var transactionId: Long = 0L,

@@ -1,6 +1,7 @@
-package com.xpense.android.data
+package com.xpense.android.domain.repository
 
 import com.xpense.android.BaseTest
+import com.xpense.android.data.FakeTxnDataSource
 import com.xpense.android.getOrAwaitValue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -9,29 +10,30 @@ import org.hamcrest.core.IsEqual
 import org.junit.Before
 import org.junit.Test
 import com.xpense.android.data.Result.Success
+import com.xpense.android.data.TxnEntity
 
 @ExperimentalCoroutinesApi
-class TransactionRepositoryImplTest: BaseTest() {
-    private val transaction1 = Transaction(transactionId = 1)
-    private val transaction2 = Transaction(transactionId = 2)
-    private val transaction3 = Transaction(transactionId = 3)
+class TxnRepositoryImplTest: BaseTest() {
+    private val transaction1 = TxnEntity(transactionId = 1)
+    private val transaction2 = TxnEntity(transactionId = 2)
+    private val transaction3 = TxnEntity(transactionId = 3)
     private val localTransactions = listOf(transaction1, transaction2).sortedBy { it.transactionId }
     private val remoteTransactions = listOf(transaction3).sortedBy { it.transactionId }
     private val newTransaction = listOf(transaction3).sortedBy { it.transactionId }
 
-    private lateinit var fakeLocalDataSource: FakeTransactionDataSource
-    private lateinit var fakeRemoteDataSource: FakeTransactionDataSource
+    private lateinit var fakeLocalDataSource: FakeTxnDataSource
+    private lateinit var fakeRemoteDataSource: FakeTxnDataSource
 
     // Class under test
-    private lateinit var repository: TransactionRepositoryImpl
+    private lateinit var repository: TxnRepositoryImpl
 
     @Before
     fun createRepository() {
-        fakeLocalDataSource = FakeTransactionDataSource(localTransactions.toMutableList())
-        fakeRemoteDataSource = FakeTransactionDataSource(remoteTransactions.toMutableList())
+        fakeLocalDataSource = FakeTxnDataSource(localTransactions.toMutableList())
+        fakeRemoteDataSource = FakeTxnDataSource(remoteTransactions.toMutableList())
 
         // Get reference to the class under test
-        repository = TransactionRepositoryImpl(
+        repository = TxnRepositoryImpl(
             fakeLocalDataSource, fakeRemoteDataSource, Dispatchers.Main
         )
     }
@@ -79,7 +81,7 @@ class TransactionRepositoryImplTest: BaseTest() {
     @Test
     fun updateTransaction_updatesTransactionInLocalDataSource() = coroutineTest {
         // Given transaction with id that exists in data source
-        val updatedTransaction1 = Transaction(transactionId = 1, description = "updated")
+        val updatedTransaction1 = TxnEntity(transactionId = 1, description = "updated")
 
         // When transaction is updated in repository
         repository.updateTransaction(updatedTransaction1)

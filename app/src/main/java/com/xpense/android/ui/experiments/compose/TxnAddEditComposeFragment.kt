@@ -46,10 +46,10 @@ import com.xpense.android.ui.theme.XpenseTheme
 @ExperimentalMaterialApi
 class TxnAddEditComposeFragment : Fragment() {
 
-    private val _viewModelAddEdit by viewModels<AddEditTxnComposeViewModel> {
-        AddEditTxnComposeViewModel.AddEditTxnComposeViewModelFactory(
+    private val _viewModelAddEdit by viewModels<TxnAddEditComposeViewModel> {
+        TxnAddEditComposeViewModel.TxnAddEditComposeViewModelFactory(
             TxnAddEditComposeFragmentArgs.fromBundle(requireArguments()).transactionId,
-            (requireContext().applicationContext as XpenseApplication).transactionRepository
+            (requireContext().applicationContext as XpenseApplication).txnRepository
         )
     }
 
@@ -79,7 +79,7 @@ class TxnAddEditComposeFragment : Fragment() {
 @Preview
 @Composable
 fun InputForm() {
-    val viewModel: AddEditTxnComposeViewModel = viewModel()
+    val viewModel: TxnAddEditComposeViewModel = viewModel()
 
     var amount by remember { mutableStateOf(viewModel.amount) }
     var description by remember { mutableStateOf(viewModel.description) }

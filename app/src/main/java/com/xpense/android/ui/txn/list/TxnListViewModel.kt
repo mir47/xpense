@@ -8,14 +8,14 @@ import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.xpense.android.data.Result.Error
 import com.xpense.android.data.Result.Success
-import com.xpense.android.data.TransactionRepository
+import com.xpense.android.domain.repository.TxnRepository
 import kotlinx.coroutines.launch
 
 class TxnListViewModel(
-    private val transactionRepository: TransactionRepository
+    private val txnRepository: TxnRepository
 ) : ViewModel() {
 
-    val transactions = transactionRepository.observeTransactions()
+    val transactions = txnRepository.observeTransactions()
 
     /**
      * Variable that tells the Fragment to navigate to a specific
@@ -54,16 +54,16 @@ class TxnListViewModel(
     fun refresh() {
         _dataLoading.value = true
         viewModelScope.launch {
-            transactionRepository.refreshTransactions()
+            txnRepository.refreshTransactions()
             _dataLoading.value = false
         }
     }
 
     @Suppress("UNCHECKED_CAST")
     class TxnListViewModelFactory (
-        private val transactionRepository: TransactionRepository
+        private val txnRepository: TxnRepository
     ) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel> create(modelClass: Class<T>) =
-            TxnListViewModel(transactionRepository) as T
+            TxnListViewModel(txnRepository) as T
     }
 }

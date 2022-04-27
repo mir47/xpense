@@ -16,8 +16,8 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import com.xpense.android.data.Transaction
-import com.xpense.android.data.TransactionRepository
+import com.xpense.android.data.TxnEntity
+import com.xpense.android.domain.repository.TxnRepository
 import com.xpense.android.util.DataBindingIdlingResource
 import com.xpense.android.util.EspressoIdlingResource
 import com.xpense.android.util.monitorActivity
@@ -31,7 +31,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class AppNavigationTest {
 
-    private lateinit var repository: TransactionRepository
+    private lateinit var repository: TxnRepository
 
     // An Idling Resource that waits for Data Binding to have no pending bindings.
     private val dataBindingIdlingResource = DataBindingIdlingResource()
@@ -98,9 +98,9 @@ class AppNavigationTest {
     }
 
     @Test
-    fun transactionScreen_upButton() = runBlocking {
+    fun txnScreen_upButton() = runBlocking {
         // Set initial state
-        val txn = Transaction(transactionId = 1, amount = 12.34, description = "description")
+        val txn = TxnEntity(transactionId = 1, amount = 12.34, description = "description")
         repository.saveTransaction(txn)
 
         // Start activity
@@ -129,9 +129,9 @@ class AppNavigationTest {
     }
 
     @Test
-    fun transactionScreen_backButton() = runBlocking {
+    fun txnScreen_backButton() = runBlocking {
         // Set initial state
-        val txn = Transaction(transactionId = 1, amount = 12.34, description = "description")
+        val txn = TxnEntity(transactionId = 1, amount = 12.34, description = "description")
         repository.saveTransaction(txn)
 
         // Start activity

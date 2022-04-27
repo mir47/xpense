@@ -21,7 +21,7 @@ class TxnListFragment : Fragment() {
 
     private val _viewModel by viewModels<TxnListViewModel> {
         TxnListViewModel.TxnListViewModelFactory(
-            (requireContext().applicationContext as XpenseApplication).transactionRepository
+            (requireContext().applicationContext as XpenseApplication).txnRepository
         )
     }
 
