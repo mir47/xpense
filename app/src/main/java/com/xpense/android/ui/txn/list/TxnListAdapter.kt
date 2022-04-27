@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.xpense.android.databinding.ItemTransactionBinding
+import com.xpense.android.databinding.ItemTxnBinding
 import com.xpense.android.data.TxnEntity
 
 /**
@@ -24,7 +24,7 @@ class TxnListAdapter(private val clickListener: TransactionListener):
 /**
  * ViewHolder for a transaction item
  */
-class TransactionViewHolder private constructor(private val binding: ItemTransactionBinding)
+class TransactionViewHolder private constructor(private val binding: ItemTxnBinding)
     : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(txnEntity: TxnEntity, clickListener: TransactionListener) {
@@ -34,7 +34,7 @@ class TransactionViewHolder private constructor(private val binding: ItemTransac
     }
 
     companion object {
-        fun from(parent: ViewGroup) = TransactionViewHolder(ItemTransactionBinding
+        fun from(parent: ViewGroup) = TransactionViewHolder(ItemTxnBinding
             .inflate(LayoutInflater.from(parent.context), parent, false))
     }
 }
