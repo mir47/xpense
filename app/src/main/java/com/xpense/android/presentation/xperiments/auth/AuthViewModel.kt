@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.ui.experiments.auth
+package com.xpense.android.presentation.xperiments.auth
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

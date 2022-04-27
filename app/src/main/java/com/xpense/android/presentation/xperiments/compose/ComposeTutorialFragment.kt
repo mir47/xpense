@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.ui.experiments.compose
+package com.xpense.android.presentation.xperiments.compose
 
 import android.content.res.Configuration
 import android.os.Bundle

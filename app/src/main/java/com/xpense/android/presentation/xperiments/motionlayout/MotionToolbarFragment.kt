@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.ui.experiments.motionlayout
+package com.xpense.android.presentation.xperiments.motionlayout
 
 import android.os.Bundle
 import android.view.LayoutInflater

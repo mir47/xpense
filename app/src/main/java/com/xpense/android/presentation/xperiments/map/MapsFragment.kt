@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.ui.experiments.map
+package com.xpense.android.presentation.xperiments.map
 
 import android.Manifest
 import android.annotation.SuppressLint

@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.ui.experiments.auth
+package com.xpense.android.presentation.xperiments.auth
 
 import android.os.Bundle
 import android.view.View

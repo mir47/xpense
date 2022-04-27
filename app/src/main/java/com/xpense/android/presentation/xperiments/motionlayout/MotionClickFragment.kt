@@ -1,20 +1,20 @@
-package com.xpense.android.presentation.ui.experiments.motionlayout
+package com.xpense.android.presentation.xperiments.motionlayout
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.xpense.android.databinding.FragmentMotionDragBinding
+import com.xpense.android.databinding.FragmentMotionClickBinding
 
-class MotionDragFragment : Fragment() {
+class MotionClickFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentMotionDragBinding.inflate(inflater)
+        val binding = FragmentMotionClickBinding.inflate(inflater)
         return binding.root
     }
 }

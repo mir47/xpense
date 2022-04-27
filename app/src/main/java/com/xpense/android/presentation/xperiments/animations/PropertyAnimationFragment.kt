@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.ui.experiments.animations
+package com.xpense.android.presentation.xperiments.animations
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
