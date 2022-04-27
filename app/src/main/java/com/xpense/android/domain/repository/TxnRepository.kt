@@ -2,7 +2,7 @@ package com.xpense.android.domain.repository
 
 import androidx.lifecycle.LiveData
 import com.xpense.android.data.Result
-import com.xpense.android.data.TxnEntity
+import com.xpense.android.data.source.local.model.TxnEntity
 
 // TODO: create domain object (for domain Transaction model) - see dev-bytes project
 interface TxnRepository {

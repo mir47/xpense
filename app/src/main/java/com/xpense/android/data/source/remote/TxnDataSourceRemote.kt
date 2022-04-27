@@ -3,7 +3,7 @@ package com.xpense.android.data.source.remote
 import androidx.lifecycle.LiveData
 import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Success
-import com.xpense.android.data.TxnEntity
+import com.xpense.android.data.source.local.model.TxnEntity
 import com.xpense.android.data.TxnDataSource
 import kotlinx.coroutines.delay
 

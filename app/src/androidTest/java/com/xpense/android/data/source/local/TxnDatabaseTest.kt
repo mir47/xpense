@@ -3,7 +3,7 @@ package com.xpense.android.data.source.local
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.xpense.android.data.TxnEntity
+import com.xpense.android.data.source.local.model.TxnEntity
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.After

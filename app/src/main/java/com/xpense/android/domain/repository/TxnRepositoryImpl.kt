@@ -5,7 +5,7 @@ import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Error
 import com.xpense.android.data.Result.Success
 import com.xpense.android.data.TxnDataSource
-import com.xpense.android.data.TxnEntity
+import com.xpense.android.data.source.local.model.TxnEntity
 import com.xpense.android.util.wrapEspressoIdlingResource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Error
 import com.xpense.android.data.Result.Success
-import com.xpense.android.data.TxnEntity
+import com.xpense.android.data.source.local.model.TxnEntity
 import kotlinx.coroutines.runBlocking
 
 class FakeTxnRepository : TxnRepository {

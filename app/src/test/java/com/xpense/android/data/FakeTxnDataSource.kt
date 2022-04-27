@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.xpense.android.data.Result.Success
 import com.xpense.android.data.Result.Error
+import com.xpense.android.data.source.local.model.TxnEntity
 
 class FakeTxnDataSource(
     var txnEntities: MutableList<TxnEntity> = mutableListOf()

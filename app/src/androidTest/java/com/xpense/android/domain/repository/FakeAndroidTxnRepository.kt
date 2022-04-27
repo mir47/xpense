@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Success
-import com.xpense.android.data.TxnEntity
+import com.xpense.android.data.source.local.model.TxnEntity
 import kotlinx.coroutines.runBlocking
 
 // TODO:

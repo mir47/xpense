@@ -1,6 +1,7 @@
 package com.xpense.android.data
 
 import androidx.lifecycle.LiveData
+import com.xpense.android.data.source.local.model.TxnEntity
 
 // TODO: consider moving to data.source package
 interface TxnDataSource {

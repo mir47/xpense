@@ -1,7 +1,7 @@
 package com.xpense.android.ui.txn.list
 
 import com.xpense.android.BaseTest
-import com.xpense.android.data.TxnEntity
+import com.xpense.android.data.source.local.model.TxnEntity
 import com.xpense.android.domain.repository.FakeTxnRepository
 import com.xpense.android.data.Result.Success
 import com.xpense.android.getOrAwaitValue

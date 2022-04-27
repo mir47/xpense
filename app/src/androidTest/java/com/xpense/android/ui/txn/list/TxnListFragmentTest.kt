@@ -18,7 +18,7 @@ import androidx.test.filters.MediumTest
 import com.xpense.android.R
 import com.xpense.android.ServiceLocator
 import com.xpense.android.domain.repository.FakeAndroidTxnRepository
-import com.xpense.android.data.TxnEntity
+import com.xpense.android.data.source.local.model.TxnEntity
 import com.xpense.android.domain.repository.TxnRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
