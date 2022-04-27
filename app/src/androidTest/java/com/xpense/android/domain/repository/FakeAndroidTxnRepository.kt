@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Success
 import com.xpense.android.data.source.local.model.TxnEntity
+import com.xpense.android.domain.model.Txn
 import kotlinx.coroutines.runBlocking
 
 // TODO:
@@ -33,6 +34,10 @@ class FakeAndroidTxnRepository : TxnRepository {
 
     override suspend fun getTransactions(): Result<List<TxnEntity>> =
         Success(transactionsServiceData.values.toList())
+
+    override suspend fun getTxns(): List<Txn> {
+        TODO("Not yet implemented")
+    }
 
     override suspend fun updateTransaction(txnEntity: TxnEntity) {
         TODO("Not yet implemented")

@@ -6,6 +6,7 @@ import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Error
 import com.xpense.android.data.Result.Success
 import com.xpense.android.data.source.local.model.TxnEntity
+import com.xpense.android.domain.model.Txn
 import kotlinx.coroutines.runBlocking
 
 class FakeTxnRepository : TxnRepository {
@@ -42,6 +43,10 @@ class FakeTxnRepository : TxnRepository {
             return Error(Exception("Test exception"))
         }
         return Success(transactionsServiceData.values.toList())
+    }
+
+    override suspend fun getTxns(): List<Txn> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun updateTransaction(txnEntity: TxnEntity) {

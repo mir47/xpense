@@ -45,7 +45,6 @@ interface TxnDao {
 
     /**
      * Selects and returns all rows in the table,
-     *
      * sorted by id in descending order.
      */
     @Query("SELECT * FROM txn_table ORDER BY transaction_id DESC")
@@ -62,6 +61,13 @@ interface TxnDao {
      */
     @Query("SELECT * from txn_table WHERE transaction_id = :key")
     suspend fun getTransactionWithId(key: Long): TxnEntity?
+
+    /**
+     * Selects and returns all rows in the table,
+     * sorted by id in descending order.
+     */
+    @Query("SELECT * from txn_table ORDER BY transaction_id DESC")
+    suspend fun getAllTransactions(): List<TxnEntity>
 
     /**
      * Selects and returns the last inserted transaction.

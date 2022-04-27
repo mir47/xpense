@@ -14,6 +14,8 @@ interface TxnDataSource {
 
     suspend fun getTransactions(): Result<List<TxnEntity>>
 
+    suspend fun getTxnsData(): List<TxnEntity>
+
     suspend fun updateTransaction(txnEntity: TxnEntity)
 
     suspend fun flagTransaction(transactionId: Long, flagged: Boolean)

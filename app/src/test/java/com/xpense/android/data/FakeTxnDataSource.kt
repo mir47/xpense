@@ -27,6 +27,10 @@ class FakeTxnDataSource(
     override suspend fun getTransactions(): Result<List<TxnEntity>> =
         Success(txnEntities)
 
+    override suspend fun getTxnsData(): List<TxnEntity> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun updateTransaction(txnEntity: TxnEntity) {
         txnEntities.find { it.transactionId == txnEntity.transactionId }?.let {
             txnEntities.remove(it)

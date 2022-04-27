@@ -34,6 +34,10 @@ object TxnDataSourceRemote : TxnDataSource {
         return Success(transactions)
     }
 
+    override suspend fun getTxnsData(): List<TxnEntity> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun updateTransaction(txnEntity: TxnEntity) {
         TODO("Not yet implemented")
     }

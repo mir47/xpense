@@ -6,6 +6,8 @@ import com.xpense.android.data.Result.Error
 import com.xpense.android.data.Result.Success
 import com.xpense.android.data.TxnDataSource
 import com.xpense.android.data.source.local.model.TxnEntity
+import com.xpense.android.domain.model.Txn
+import com.xpense.android.domain.model.toTxn
 import com.xpense.android.util.wrapEspressoIdlingResource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -38,6 +40,12 @@ class TxnRepositoryImpl constructor(
     override suspend fun getTransactions(): Result<List<TxnEntity>> {
         wrapEspressoIdlingResource {
             return txnDataSourceLocal.getTransactions()
+        }
+    }
+
+    override suspend fun getTxns(): List<Txn> {
+        wrapEspressoIdlingResource {
+            return txnDataSourceLocal.getTxnsData().map { it.toTxn() }
         }
     }
 

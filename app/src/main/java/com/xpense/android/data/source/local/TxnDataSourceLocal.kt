@@ -30,6 +30,9 @@ class TxnDataSourceLocal internal constructor(
         TODO("Not yet implemented")
     }
 
+    override suspend fun getTxnsData(): List<TxnEntity> =
+        txnDao.getAllTransactions()
+
     override suspend fun updateTransaction(txnEntity: TxnEntity) =
         txnDao.update(txnEntity)
 
