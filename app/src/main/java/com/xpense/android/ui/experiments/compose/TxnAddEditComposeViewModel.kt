@@ -11,7 +11,7 @@ import com.xpense.android.data.TransactionRepository
 import kotlinx.coroutines.launch
 import java.util.Date
 
-class AddEditTxnComposeViewModel(
+class TxnAddEditComposeViewModel(
     private val transactionId: Long,
     private val transactionRepository: TransactionRepository
 ) : ViewModel() {
@@ -90,11 +90,11 @@ class AddEditTxnComposeViewModel(
     }
 
     @Suppress("UNCHECKED_CAST")
-    class AddEditTxnComposeViewModelFactory (
+    class TxnAddEditComposeViewModelFactory (
         private val transactionId: Long,
         private val transactionRepository: TransactionRepository
     ) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel> create(modelClass: Class<T>) =
-            AddEditTxnComposeViewModel(transactionId, transactionRepository) as T
+            TxnAddEditComposeViewModel(transactionId, transactionRepository) as T
     }
 }
