@@ -31,14 +31,14 @@ class TransactionDataSourceLocalTest {
 
     private lateinit var localDataSource: TransactionDataSourceLocal
 
-    private lateinit var database: TransactionDatabase
+    private lateinit var database: TxnDatabase
 
     @Before
     fun initDb() {
         // Using an in-memory database for testing, because it doesn't survive killing the process.
         database = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(),
-            TransactionDatabase::class.java
+            TxnDatabase::class.java
         ).allowMainThreadQueries().build()
 
         localDataSource =

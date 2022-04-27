@@ -26,27 +26,27 @@ class TxnDaoTest {
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var database: TransactionDatabase
+    private lateinit var db: TxnDatabase
 
     @Before
     fun initDb() {
-        database = Room.inMemoryDatabaseBuilder(
+        db = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(),
-            TransactionDatabase::class.java
+            TxnDatabase::class.java
         ).build()
     }
 
     @After
-    fun closeDb() = database.close()
+    fun closeDb() = db.close()
 
     @Test
     fun insertTransactionAndGetById() = runBlockingTest {
         // GIVEN - Insert a transaction
         val txn = TxnEntity(transactionId = 1, amount = 12.34, description = "description")
-        database.txnDao().insert(txn)
+        db.txnDao().insert(txn)
 
         // WHEN - Get the transaction by id from the database
-        val loaded = database.txnDao().getTransactionWithId(txn.transactionId)
+        val loaded = db.txnDao().getTransactionWithId(txn.transactionId)
 
         // THEN - The loaded data contains the expected values
         assertThat(loaded as TxnEntity, notNullValue())
@@ -59,13 +59,13 @@ class TxnDaoTest {
     fun updateTransactionAndGetById() = runBlockingTest {
         // GIVEN - Insert a transaction into the DAO
         val txn = TxnEntity(transactionId = 1, amount = 12.34, description = "description")
-        database.txnDao().insert(txn)
+        db.txnDao().insert(txn)
 
         // WHEN - Update transaction by creating new transaction with same ID but
         // different attributes, and get by id
         val txnNew = txn.copy(description = "updated")
-        database.txnDao().update(txnNew)
-        val loaded = database.txnDao().getTransactionWithId(txn.transactionId)
+        db.txnDao().update(txnNew)
+        val loaded = db.txnDao().getTransactionWithId(txn.transactionId)
 
         // THEN - The loaded data contains the updated values
         assertThat(loaded as TxnEntity, notNullValue())

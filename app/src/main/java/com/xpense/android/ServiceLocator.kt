@@ -7,7 +7,7 @@ import com.xpense.android.data.TransactionDataSource
 import com.xpense.android.data.TransactionRepository
 import com.xpense.android.data.TransactionRepositoryImpl
 import com.xpense.android.data.source.local.TransactionDataSourceLocal
-import com.xpense.android.data.source.local.TransactionDatabase
+import com.xpense.android.data.source.local.TxnDatabase
 import com.xpense.android.data.source.remote.TransactionDataSourceRemote
 import kotlinx.coroutines.runBlocking
 
@@ -15,7 +15,7 @@ object ServiceLocator {
 
     private val lock = Any()
 
-    private var database: TransactionDatabase? = null
+    private var db: TxnDatabase? = null
 
     @Volatile
     var repository: TransactionRepository? = null
@@ -37,21 +37,21 @@ object ServiceLocator {
     }
 
     private fun createLocalDataSource(context: Context): TransactionDataSource {
-        val db = database ?: createDataBase(context)
+        val db = db ?: createDataBase(context)
         return TransactionDataSourceLocal(db.txnDao())
     }
 
-    private fun createDataBase(context: Context): TransactionDatabase {
-        val db = Room.databaseBuilder(
+    private fun createDataBase(context: Context): TxnDatabase {
+        val roomDb = Room.databaseBuilder(
             context.applicationContext,
-            TransactionDatabase::class.java,
+            TxnDatabase::class.java,
             "transaction_database"
         )
             // migration strategy - use destructive to recreate a new db
             .fallbackToDestructiveMigration()
             .build()
-        database = db
-        return db
+        db = roomDb
+        return roomDb
     }
 
     @VisibleForTesting
@@ -61,11 +61,11 @@ object ServiceLocator {
                 TransactionDataSourceRemote.deleteAllTransactions()
             }
             // Clear all data to avoid test pollution.
-            database?.apply {
+            db?.apply {
                 clearAllTables()
                 close()
             }
-            database = null
+            db = null
             repository = null
         }
     }

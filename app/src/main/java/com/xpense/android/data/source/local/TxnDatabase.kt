@@ -15,7 +15,7 @@ import com.xpense.android.data.TxnEntity
  */
 @Database(entities = [TxnEntity::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
-abstract class TransactionDatabase : RoomDatabase() {
+abstract class TxnDatabase : RoomDatabase() {
 
     /**
      * Connects the database to the DAO.
@@ -25,12 +25,12 @@ abstract class TransactionDatabase : RoomDatabase() {
     companion object {
 
         /**
-         * Static method that creates an instance of [TransactionDatabase] and returns the DAO
+         * Static method that creates an instance of [TxnDatabase] and returns the DAO
          */
         fun createTxnDao(context: Context): TxnDao {
             return Room.databaseBuilder(
                 context.applicationContext,
-                TransactionDatabase::class.java,
+                TxnDatabase::class.java,
                 "transaction_database"
             )
                 // migration strategy - use destructive to recreate a new db

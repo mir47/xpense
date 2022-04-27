@@ -13,17 +13,17 @@ import org.junit.runner.RunWith
 import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
-class TransactionDatabaseTest {
+class TxnDatabaseTest {
 
     private lateinit var dao: TxnDao
-    private lateinit var db: TransactionDatabase
+    private lateinit var db: TxnDatabase
 
     @Before
     fun createDb() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         // Using an in-memory database because the information stored here
         // disappears when the process is killed.
-        db = Room.inMemoryDatabaseBuilder(context, TransactionDatabase::class.java)
+        db = Room.inMemoryDatabaseBuilder(context, TxnDatabase::class.java)
             // Allowing main thread queries, just for testing.
             .allowMainThreadQueries()
             .build()
