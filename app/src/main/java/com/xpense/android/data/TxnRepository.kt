@@ -3,7 +3,7 @@ package com.xpense.android.data
 import androidx.lifecycle.LiveData
 
 // TODO: create domain object (for domain Transaction model) - see dev-bytes project
-interface TransactionRepository {
+interface TxnRepository {
 
     fun observeTransactions(): LiveData<Result<List<TxnEntity>>>
 

@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.annotation.VisibleForTesting
 import androidx.room.Room
 import com.xpense.android.data.TxnDataSource
-import com.xpense.android.data.TransactionRepository
-import com.xpense.android.data.TransactionRepositoryImpl
+import com.xpense.android.data.TxnRepository
+import com.xpense.android.data.TxnRepositoryImpl
 import com.xpense.android.data.source.local.TxnDataSourceLocal
 import com.xpense.android.data.source.local.TxnDatabase
 import com.xpense.android.data.source.remote.TxnDataSourceRemote
@@ -18,17 +18,17 @@ object ServiceLocator {
     private var db: TxnDatabase? = null
 
     @Volatile
-    var repository: TransactionRepository? = null
+    var repository: TxnRepository? = null
         @VisibleForTesting set
 
-    fun provideTransactionRepository(context: Context): TransactionRepository {
+    fun provideTransactionRepository(context: Context): TxnRepository {
         synchronized(this) {
             return repository ?: createRepository(context)
         }
     }
 
-    private fun createRepository(context: Context): TransactionRepository {
-        val newRepo = TransactionRepositoryImpl(
+    private fun createRepository(context: Context): TxnRepository {
+        val newRepo = TxnRepositoryImpl(
             createLocalDataSource(context),
             TxnDataSourceRemote
         )

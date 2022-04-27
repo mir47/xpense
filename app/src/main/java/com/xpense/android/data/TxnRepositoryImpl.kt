@@ -7,11 +7,11 @@ import com.xpense.android.util.wrapEspressoIdlingResource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
-class TransactionRepositoryImpl constructor(
+class TxnRepositoryImpl constructor(
     private val txnDataSourceLocal: TxnDataSource,
     private val txnDataSourceRemote: TxnDataSource,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-) : TransactionRepository {
+) : TxnRepository {
 
     override fun observeTransactions(): LiveData<Result<List<TxnEntity>>> {
         wrapEspressoIdlingResource {

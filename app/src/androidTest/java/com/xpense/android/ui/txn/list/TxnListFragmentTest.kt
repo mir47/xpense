@@ -17,9 +17,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import com.xpense.android.R
 import com.xpense.android.ServiceLocator
-import com.xpense.android.data.FakeAndroidTransactionRepository
+import com.xpense.android.data.FakeAndroidTxnRepository
 import com.xpense.android.data.TxnEntity
-import com.xpense.android.data.TransactionRepository
+import com.xpense.android.data.TxnRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
@@ -34,11 +34,11 @@ import org.mockito.Mockito.verify
 @ExperimentalCoroutinesApi
 class TxnListFragmentTest {
 
-    private lateinit var repository: TransactionRepository
+    private lateinit var repository: TxnRepository
 
     @Before
     fun setup() {
-        repository = FakeAndroidTransactionRepository()
+        repository = FakeAndroidTxnRepository()
         ServiceLocator.repository = repository
     }
 

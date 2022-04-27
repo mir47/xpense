@@ -11,7 +11,7 @@ import kotlinx.coroutines.runBlocking
 //  configure,via gradle (https://github.com/android/architecture-samples/blob/f4128dd8dbea5d1aac5d5acd5f346bb82187fbe6/app/build.gradle#L20),
 //  a sharedTest folder (https://github.com/android/architecture-samples/tree/reactive/app/src)
 //  as seen in the Architecture Blueprints reactive sample (https://github.com/android/architecture-samples/tree/reactive).
-class FakeAndroidTransactionRepository : TransactionRepository {
+class FakeAndroidTxnRepository : TxnRepository {
 
     var transactionsServiceData: LinkedHashMap<Long, TxnEntity> = LinkedHashMap()
 

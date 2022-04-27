@@ -49,7 +49,7 @@ class TxnAddEditComposeFragment : Fragment() {
     private val _viewModelAddEdit by viewModels<TxnAddEditComposeViewModel> {
         TxnAddEditComposeViewModel.TxnAddEditComposeViewModelFactory(
             TxnAddEditComposeFragmentArgs.fromBundle(requireArguments()).transactionId,
-            (requireContext().applicationContext as XpenseApplication).transactionRepository
+            (requireContext().applicationContext as XpenseApplication).txnRepository
         )
     }
 

@@ -17,7 +17,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.xpense.android.data.TxnEntity
-import com.xpense.android.data.TransactionRepository
+import com.xpense.android.data.TxnRepository
 import com.xpense.android.util.DataBindingIdlingResource
 import com.xpense.android.util.EspressoIdlingResource
 import com.xpense.android.util.monitorActivity
@@ -31,7 +31,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class AppNavigationTest {
 
-    private lateinit var repository: TransactionRepository
+    private lateinit var repository: TxnRepository
 
     // An Idling Resource that waits for Data Binding to have no pending bindings.
     private val dataBindingIdlingResource = DataBindingIdlingResource()

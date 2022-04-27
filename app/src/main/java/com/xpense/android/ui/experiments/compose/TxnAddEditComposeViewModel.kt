@@ -7,13 +7,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.xpense.android.data.Result
 import com.xpense.android.data.TxnEntity
-import com.xpense.android.data.TransactionRepository
+import com.xpense.android.data.TxnRepository
 import kotlinx.coroutines.launch
 import java.util.Date
 
 class TxnAddEditComposeViewModel(
     private val transactionId: Long,
-    private val transactionRepository: TransactionRepository
+    private val txnRepository: TxnRepository
 ) : ViewModel() {
 
     // TODO: use state instead of public fields
@@ -53,7 +53,7 @@ class TxnAddEditComposeViewModel(
     init {
         if (transactionId != 0L) {
             viewModelScope.launch {
-                val txn = transactionRepository.getTransaction(transactionId)
+                val txn = txnRepository.getTransaction(transactionId)
                 if (txn is Result.Success) {
                     amount = txn.data.amount.toString()
                     description = txn.data.description
@@ -67,9 +67,9 @@ class TxnAddEditComposeViewModel(
         val amount = amount.toDoubleOrNull() ?: 0.0
         viewModelScope.launch {
             if (transactionId != 0L) {
-                val txn = transactionRepository.getTransaction(transactionId)
+                val txn = txnRepository.getTransaction(transactionId)
                 if (txn is Result.Success) {
-                    transactionRepository.updateTransaction(
+                    txnRepository.updateTransaction(
                         txn.data.apply {
                             txn.data.amount = amount
                             txn.data.description = description
@@ -77,7 +77,7 @@ class TxnAddEditComposeViewModel(
                     )
                 }
             } else {
-                transactionRepository.saveTransaction(
+                txnRepository.saveTransaction(
                     TxnEntity(
                         createdTimestamp = Date(System.currentTimeMillis()),
                         amount = amount,
@@ -92,9 +92,9 @@ class TxnAddEditComposeViewModel(
     @Suppress("UNCHECKED_CAST")
     class TxnAddEditComposeViewModelFactory (
         private val transactionId: Long,
-        private val transactionRepository: TransactionRepository
+        private val txnRepository: TxnRepository
     ) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel> create(modelClass: Class<T>) =
-            TxnAddEditComposeViewModel(transactionId, transactionRepository) as T
+            TxnAddEditComposeViewModel(transactionId, txnRepository) as T
     }
 }

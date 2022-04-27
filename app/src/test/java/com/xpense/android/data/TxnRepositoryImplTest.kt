@@ -11,7 +11,7 @@ import org.junit.Test
 import com.xpense.android.data.Result.Success
 
 @ExperimentalCoroutinesApi
-class TransactionRepositoryImplTest: BaseTest() {
+class TxnRepositoryImplTest: BaseTest() {
     private val transaction1 = TxnEntity(transactionId = 1)
     private val transaction2 = TxnEntity(transactionId = 2)
     private val transaction3 = TxnEntity(transactionId = 3)
@@ -23,7 +23,7 @@ class TransactionRepositoryImplTest: BaseTest() {
     private lateinit var fakeRemoteDataSource: FakeTxnDataSource
 
     // Class under test
-    private lateinit var repository: TransactionRepositoryImpl
+    private lateinit var repository: TxnRepositoryImpl
 
     @Before
     fun createRepository() {
@@ -31,7 +31,7 @@ class TransactionRepositoryImplTest: BaseTest() {
         fakeRemoteDataSource = FakeTxnDataSource(remoteTransactions.toMutableList())
 
         // Get reference to the class under test
-        repository = TransactionRepositoryImpl(
+        repository = TxnRepositoryImpl(
             fakeLocalDataSource, fakeRemoteDataSource, Dispatchers.Main
         )
     }

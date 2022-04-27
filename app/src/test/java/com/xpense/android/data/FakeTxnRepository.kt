@@ -6,7 +6,7 @@ import com.xpense.android.data.Result.Error
 import com.xpense.android.data.Result.Success
 import kotlinx.coroutines.runBlocking
 
-class FakeTransactionRepository : TransactionRepository {
+class FakeTxnRepository : TxnRepository {
 
     var transactionsServiceData: LinkedHashMap<Long, TxnEntity> = LinkedHashMap()
 
