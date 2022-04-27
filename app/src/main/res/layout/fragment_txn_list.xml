@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.xpense.android.ui.txn.list.TxnListViewModel" />
+            type="com.xpense.android.presentation.txn_list.TxnListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

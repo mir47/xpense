@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
-import com.xpense.android.MainActivity
+import com.xpense.android.presentation.MainActivity
 import com.xpense.android.R
 
 // Notification ID

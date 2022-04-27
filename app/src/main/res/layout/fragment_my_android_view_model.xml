@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.xpense.android.ui.experiments.androidviewmodel.MyAndroidViewModel" />
+            type="com.xpense.android.presentation.ui.experiments.androidviewmodel.MyAndroidViewModel" />
     </data>
 
     <FrameLayout

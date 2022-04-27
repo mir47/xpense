@@ -10,7 +10,7 @@
             type="com.xpense.android.data.source.local.model.TxnEntity" />
 
         <variable
-            name="clickListener" type="com.xpense.android.ui.txn.list.TransactionListener"/>
+            name="clickListener" type="com.xpense.android.presentation.txn_list.TransactionListener"/>
 
     </data>
 
