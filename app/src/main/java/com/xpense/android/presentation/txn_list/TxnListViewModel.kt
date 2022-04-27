@@ -19,14 +19,14 @@ class TxnListViewModel(
 
     /**
      * Variable that tells the Fragment to navigate to a specific
-     * [com.xpense.android.ui.txn.add_edit.TxnAddEditFragment]
+     * [com.xpense.android.presentation.txn_add_edit.TxnAddEditFragment]
      *
      * This is private because we don't want to expose setting this value to the Fragment.
      */
     private val _navigateToCreateTransaction = MutableLiveData<Boolean>()
 
     /**
-     * If this is true, immediately navigate to [com.xpense.android.ui.txn.add_edit.TxnAddEditFragment]
+     * If this is true, immediately navigate to [com.xpense.android.presentation.txn_add_edit.TxnAddEditFragment]
      * and call [doneNavigating]
      */
     val navigateToCreateTransaction: LiveData<Boolean>
@@ -39,7 +39,7 @@ class TxnListViewModel(
     val empty: LiveData<Boolean> = transactions.map { (it as? Success)?.data.isNullOrEmpty() }
 
     /**
-     * Call this immediately after navigating to [com.xpense.android.ui.txn.add_edit.TxnAddEditFragment]
+     * Call this immediately after navigating to [com.xpense.android.presentation.txn_add_edit.TxnAddEditFragment]
      *
      * It will clear the navigation request, so if the device is rotated it won't navigate twice.
      */
