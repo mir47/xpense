@@ -16,7 +16,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import com.xpense.android.data.Transaction
+import com.xpense.android.data.TxnEntity
 import com.xpense.android.data.TransactionRepository
 import com.xpense.android.util.DataBindingIdlingResource
 import com.xpense.android.util.EspressoIdlingResource
@@ -98,9 +98,9 @@ class AppNavigationTest {
     }
 
     @Test
-    fun transactionScreen_upButton() = runBlocking {
+    fun txnScreen_upButton() = runBlocking {
         // Set initial state
-        val txn = Transaction(transactionId = 1, amount = 12.34, description = "description")
+        val txn = TxnEntity(transactionId = 1, amount = 12.34, description = "description")
         repository.saveTransaction(txn)
 
         // Start activity
@@ -129,9 +129,9 @@ class AppNavigationTest {
     }
 
     @Test
-    fun transactionScreen_backButton() = runBlocking {
+    fun txnScreen_backButton() = runBlocking {
         // Set initial state
-        val txn = Transaction(transactionId = 1, amount = 12.34, description = "description")
+        val txn = TxnEntity(transactionId = 1, amount = 12.34, description = "description")
         repository.saveTransaction(txn)
 
         // Start activity

@@ -12,9 +12,9 @@ import com.xpense.android.data.Result.Success
 
 @ExperimentalCoroutinesApi
 class TransactionRepositoryImplTest: BaseTest() {
-    private val transaction1 = Transaction(transactionId = 1)
-    private val transaction2 = Transaction(transactionId = 2)
-    private val transaction3 = Transaction(transactionId = 3)
+    private val transaction1 = TxnEntity(transactionId = 1)
+    private val transaction2 = TxnEntity(transactionId = 2)
+    private val transaction3 = TxnEntity(transactionId = 3)
     private val localTransactions = listOf(transaction1, transaction2).sortedBy { it.transactionId }
     private val remoteTransactions = listOf(transaction3).sortedBy { it.transactionId }
     private val newTransaction = listOf(transaction3).sortedBy { it.transactionId }
@@ -79,7 +79,7 @@ class TransactionRepositoryImplTest: BaseTest() {
     @Test
     fun updateTransaction_updatesTransactionInLocalDataSource() = coroutineTest {
         // Given transaction with id that exists in data source
-        val updatedTransaction1 = Transaction(transactionId = 1, description = "updated")
+        val updatedTransaction1 = TxnEntity(transactionId = 1, description = "updated")
 
         // When transaction is updated in repository
         repository.updateTransaction(updatedTransaction1)

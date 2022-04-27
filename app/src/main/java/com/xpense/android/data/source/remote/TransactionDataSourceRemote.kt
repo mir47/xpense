@@ -3,7 +3,7 @@ package com.xpense.android.data.source.remote
 import androidx.lifecycle.LiveData
 import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Success
-import com.xpense.android.data.Transaction
+import com.xpense.android.data.TxnEntity
 import com.xpense.android.data.TransactionDataSource
 import kotlinx.coroutines.delay
 
@@ -12,29 +12,29 @@ object TransactionDataSourceRemote : TransactionDataSource {
 
     private const val SERVICE_LATENCY_IN_MILLIS = 500L
 
-    private var TRANSACTIONS_SERVICE_DATA = LinkedHashMap<Long, Transaction>(2)
+    private var TRANSACTIONS_SERVICE_DATA = LinkedHashMap<Long, TxnEntity>(2)
 
-    override fun observeTransactions(): LiveData<Result<List<Transaction>>> {
+    override fun observeTransactions(): LiveData<Result<List<TxnEntity>>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun saveTransaction(transaction: Transaction) {
+    override suspend fun saveTransaction(txnEntity: TxnEntity) {
         delay(SERVICE_LATENCY_IN_MILLIS)
-        TRANSACTIONS_SERVICE_DATA[transaction.transactionId] = transaction
+        TRANSACTIONS_SERVICE_DATA[txnEntity.transactionId] = txnEntity
     }
 
-    override suspend fun getTransaction(transactionId: Long): Result<Transaction> {
+    override suspend fun getTransaction(transactionId: Long): Result<TxnEntity> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getTransactions(): Result<List<Transaction>> {
+    override suspend fun getTransactions(): Result<List<TxnEntity>> {
         // Simulate network by delaying the execution
         val transactions = TRANSACTIONS_SERVICE_DATA.values.toList()
         delay(SERVICE_LATENCY_IN_MILLIS)
         return Success(transactions)
     }
 
-    override suspend fun updateTransaction(transaction: Transaction) {
+    override suspend fun updateTransaction(txnEntity: TxnEntity) {
         TODO("Not yet implemented")
     }
 

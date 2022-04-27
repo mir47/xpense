@@ -18,7 +18,7 @@ import androidx.test.filters.MediumTest
 import com.xpense.android.R
 import com.xpense.android.ServiceLocator
 import com.xpense.android.data.FakeAndroidTransactionRepository
-import com.xpense.android.data.Transaction
+import com.xpense.android.data.TxnEntity
 import com.xpense.android.data.TransactionRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
@@ -50,8 +50,8 @@ class TxnListFragmentTest {
     @Test
     fun activeTaskDetails_DisplayedInUi() = runBlockingTest {
         // GIVEN - Add active (incomplete) task to the DB
-        repository.saveTransaction(Transaction(1, amount = 1.2, description = "one"))
-        repository.saveTransaction(Transaction(2, amount = 2.22, description = "two"))
+        repository.saveTransaction(TxnEntity(1, amount = 1.2, description = "one"))
+        repository.saveTransaction(TxnEntity(2, amount = 2.22, description = "two"))
 
         // WHEN - Details fragment launched to display task
         launchFragmentInContainer<TxnListFragment>(Bundle(), R.style.Theme_Xpense)
@@ -101,8 +101,8 @@ class TxnListFragmentTest {
     @Test
     fun clickItem_navigateTo() = runBlockingTest {
         // GIVEN - On the transactions screen with two items
-        repository.saveTransaction(Transaction(1, amount = 1.2, description = "one"))
-        repository.saveTransaction(Transaction(2, amount = 2.22, description = "two"))
+        repository.saveTransaction(TxnEntity(1, amount = 1.2, description = "one"))
+        repository.saveTransaction(TxnEntity(2, amount = 2.22, description = "two"))
 
         val scenario = launchFragmentInContainer<TxnListFragment>(Bundle(), R.style.Theme_Xpense)
 

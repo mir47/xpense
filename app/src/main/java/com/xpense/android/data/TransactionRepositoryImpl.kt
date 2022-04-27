@@ -13,34 +13,34 @@ class TransactionRepositoryImpl constructor(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : TransactionRepository {
 
-    override fun observeTransactions(): LiveData<Result<List<Transaction>>> {
+    override fun observeTransactions(): LiveData<Result<List<TxnEntity>>> {
         wrapEspressoIdlingResource {
             return transactionDataSourceLocal.observeTransactions()
         }
     }
 
-    override suspend fun saveTransaction(transaction: Transaction) {
+    override suspend fun saveTransaction(txnEntity: TxnEntity) {
         wrapEspressoIdlingResource {
-            transactionDataSourceLocal.saveTransaction(transaction)
-            transactionDataSourceRemote.saveTransaction(transaction)
+            transactionDataSourceLocal.saveTransaction(txnEntity)
+            transactionDataSourceRemote.saveTransaction(txnEntity)
         }
     }
 
-    override suspend fun getTransaction(transactionId: Long): Result<Transaction> {
+    override suspend fun getTransaction(transactionId: Long): Result<TxnEntity> {
         wrapEspressoIdlingResource {
             return transactionDataSourceLocal.getTransaction(transactionId)
         }
     }
 
-    override suspend fun getTransactions(): Result<List<Transaction>> {
+    override suspend fun getTransactions(): Result<List<TxnEntity>> {
         wrapEspressoIdlingResource {
             return transactionDataSourceLocal.getTransactions()
         }
     }
 
-    override suspend fun updateTransaction(transaction: Transaction) {
+    override suspend fun updateTransaction(txnEntity: TxnEntity) {
         wrapEspressoIdlingResource {
-            transactionDataSourceLocal.updateTransaction(transaction)
+            transactionDataSourceLocal.updateTransaction(txnEntity)
         }
     }
 

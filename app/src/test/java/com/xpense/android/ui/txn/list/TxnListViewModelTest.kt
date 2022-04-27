@@ -1,7 +1,7 @@
 package com.xpense.android.ui.txn.list
 
 import com.xpense.android.BaseTest
-import com.xpense.android.data.Transaction
+import com.xpense.android.data.TxnEntity
 import com.xpense.android.data.FakeTransactionRepository
 import com.xpense.android.data.Result.Success
 import com.xpense.android.getOrAwaitValue
@@ -25,10 +25,10 @@ class TxnListViewModelTest : BaseTest() {
     fun setupViewModel() {
         // We initialise the transactions to 3
         fakeRepository = FakeTransactionRepository()
-        val task1 = Transaction(transactionId = 1)
-        val task2 = Transaction(transactionId = 2)
-        val task3 = Transaction(transactionId = 3)
-        fakeRepository.addTasks(task1, task2, task3)
+        val txn1 = TxnEntity(transactionId = 1)
+        val txn2 = TxnEntity(transactionId = 2)
+        val txn3 = TxnEntity(transactionId = 3)
+        fakeRepository.addTransactions(txn1, txn2, txn3)
 
         viewModel = TxnListViewModel(fakeRepository)
     }

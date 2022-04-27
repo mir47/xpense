@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="transaction"
-            type="com.xpense.android.data.Transaction" />
+            name="txnEntity"
+            type="com.xpense.android.data.TxnEntity" />
 
         <variable
             name="clickListener" type="com.xpense.android.ui.txn.list.TransactionListener"/>
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/spacing_half"
-            android:onClick="@{() -> clickListener.onClick(transaction)}"
+            android:onClick="@{() -> clickListener.onClick(txnEntity)}"
             android:orientation="vertical">
 
             <ImageView
@@ -49,7 +49,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/star_image"
                 app:layout_constraintTop_toTopOf="parent"
-                app:transactionTimestampString="@{transaction}"
+                app:timestampString="@{txnEntity}"
                 tools:text="09 February 2022" />
 
             <TextView
@@ -60,7 +60,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/star_image"
                 app:layout_constraintTop_toBottomOf="@id/timestamp"
-                android:text="@{@string/amount_format_example(transaction.amount)}"
+                android:text="@{@string/amount_format_example(txnEntity.amount)}"
                 tools:text="123.00" />
 
             <TextView
@@ -68,7 +68,7 @@
                 style="@style/TextStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{transaction.description}"
+                android:text="@{txnEntity.description}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/star_image"

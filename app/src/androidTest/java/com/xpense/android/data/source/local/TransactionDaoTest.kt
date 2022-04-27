@@ -5,7 +5,7 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
-import com.xpense.android.data.Transaction
+import com.xpense.android.data.TxnEntity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.`is`
@@ -42,14 +42,14 @@ class TransactionDaoTest {
     @Test
     fun insertTransactionAndGetById() = runBlockingTest {
         // GIVEN - Insert a transaction
-        val txn = Transaction(transactionId = 1, amount = 12.34, description = "description")
+        val txn = TxnEntity(transactionId = 1, amount = 12.34, description = "description")
         database.transactionDao().insert(txn)
 
         // WHEN - Get the transaction by id from the database
         val loaded = database.transactionDao().getTransactionWithId(txn.transactionId)
 
         // THEN - The loaded data contains the expected values
-        assertThat(loaded as Transaction, notNullValue())
+        assertThat(loaded as TxnEntity, notNullValue())
         assertThat(loaded.transactionId, `is`(txn.transactionId))
         assertThat(loaded.amount, `is`(txn.amount))
         assertThat(loaded.description, `is`(txn.description))
@@ -58,7 +58,7 @@ class TransactionDaoTest {
     @Test
     fun updateTransactionAndGetById() = runBlockingTest {
         // GIVEN - Insert a transaction into the DAO
-        val txn = Transaction(transactionId = 1, amount = 12.34, description = "description")
+        val txn = TxnEntity(transactionId = 1, amount = 12.34, description = "description")
         database.transactionDao().insert(txn)
 
         // WHEN - Update transaction by creating new transaction with same ID but
@@ -68,7 +68,7 @@ class TransactionDaoTest {
         val loaded = database.transactionDao().getTransactionWithId(txn.transactionId)
 
         // THEN - The loaded data contains the updated values
-        assertThat(loaded as Transaction, notNullValue())
+        assertThat(loaded as TxnEntity, notNullValue())
         assertThat(loaded.transactionId, `is`(txn.transactionId))
         assertThat(loaded.amount, `is`(txn.amount))
         assertThat(loaded.description, `is`(txnNew.description))
