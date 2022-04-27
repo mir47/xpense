@@ -10,7 +10,7 @@ import org.hamcrest.core.IsEqual
 import org.junit.Before
 import org.junit.Test
 import com.xpense.android.data.Result.Success
-import com.xpense.android.data.TxnEntity
+import com.xpense.android.data.source.local.model.TxnEntity
 
 @ExperimentalCoroutinesApi
 class TxnRepositoryImplTest: BaseTest() {

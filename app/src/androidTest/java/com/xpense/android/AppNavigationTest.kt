@@ -16,8 +16,10 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import com.xpense.android.data.TxnEntity
+import com.xpense.android.data.source.local.model.TxnEntity
+import com.xpense.android.di.ServiceLocator
 import com.xpense.android.domain.repository.TxnRepository
+import com.xpense.android.presentation.MainActivity
 import com.xpense.android.util.DataBindingIdlingResource
 import com.xpense.android.util.EspressoIdlingResource
 import com.xpense.android.util.monitorActivity
