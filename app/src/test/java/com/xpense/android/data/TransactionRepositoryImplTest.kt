@@ -19,16 +19,16 @@ class TransactionRepositoryImplTest: BaseTest() {
     private val remoteTransactions = listOf(transaction3).sortedBy { it.transactionId }
     private val newTransaction = listOf(transaction3).sortedBy { it.transactionId }
 
-    private lateinit var fakeLocalDataSource: FakeTransactionDataSource
-    private lateinit var fakeRemoteDataSource: FakeTransactionDataSource
+    private lateinit var fakeLocalDataSource: FakeTxnDataSource
+    private lateinit var fakeRemoteDataSource: FakeTxnDataSource
 
     // Class under test
     private lateinit var repository: TransactionRepositoryImpl
 
     @Before
     fun createRepository() {
-        fakeLocalDataSource = FakeTransactionDataSource(localTransactions.toMutableList())
-        fakeRemoteDataSource = FakeTransactionDataSource(remoteTransactions.toMutableList())
+        fakeLocalDataSource = FakeTxnDataSource(localTransactions.toMutableList())
+        fakeRemoteDataSource = FakeTxnDataSource(remoteTransactions.toMutableList())
 
         // Get reference to the class under test
         repository = TransactionRepositoryImpl(

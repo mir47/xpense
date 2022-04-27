@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import com.xpense.android.data.Result.Success
 import com.xpense.android.data.Result.Error
 
-class FakeTransactionDataSource(
+class FakeTxnDataSource(
     var txnEntities: MutableList<TxnEntity> = mutableListOf()
-) : TransactionDataSource {
+) : TxnDataSource {
 
     override fun observeTransactions(): LiveData<Result<List<TxnEntity>>> {
         return MutableLiveData(Success(txnEntities))

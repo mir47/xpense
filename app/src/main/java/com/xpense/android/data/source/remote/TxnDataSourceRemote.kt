@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Success
 import com.xpense.android.data.TxnEntity
-import com.xpense.android.data.TransactionDataSource
+import com.xpense.android.data.TxnDataSource
 import kotlinx.coroutines.delay
 
 // TODO: create data transfer object (for remote Transaction model) - see dev-bytes project
-object TransactionDataSourceRemote : TransactionDataSource {
+object TxnDataSourceRemote : TxnDataSource {
 
     private const val SERVICE_LATENCY_IN_MILLIS = 500L
 

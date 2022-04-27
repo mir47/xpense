@@ -3,12 +3,12 @@ package com.xpense.android
 import android.content.Context
 import androidx.annotation.VisibleForTesting
 import androidx.room.Room
-import com.xpense.android.data.TransactionDataSource
+import com.xpense.android.data.TxnDataSource
 import com.xpense.android.data.TransactionRepository
 import com.xpense.android.data.TransactionRepositoryImpl
-import com.xpense.android.data.source.local.TransactionDataSourceLocal
+import com.xpense.android.data.source.local.TxnDataSourceLocal
 import com.xpense.android.data.source.local.TxnDatabase
-import com.xpense.android.data.source.remote.TransactionDataSourceRemote
+import com.xpense.android.data.source.remote.TxnDataSourceRemote
 import kotlinx.coroutines.runBlocking
 
 object ServiceLocator {
@@ -30,15 +30,15 @@ object ServiceLocator {
     private fun createRepository(context: Context): TransactionRepository {
         val newRepo = TransactionRepositoryImpl(
             createLocalDataSource(context),
-            TransactionDataSourceRemote
+            TxnDataSourceRemote
         )
         repository = newRepo
         return newRepo
     }
 
-    private fun createLocalDataSource(context: Context): TransactionDataSource {
+    private fun createLocalDataSource(context: Context): TxnDataSource {
         val db = db ?: createDataBase(context)
-        return TransactionDataSourceLocal(db.txnDao())
+        return TxnDataSourceLocal(db.txnDao())
     }
 
     private fun createDataBase(context: Context): TxnDatabase {
@@ -58,7 +58,7 @@ object ServiceLocator {
     fun resetRepository() {
         synchronized(lock) {
             runBlocking {
-                TransactionDataSourceRemote.deleteAllTransactions()
+                TxnDataSourceRemote.deleteAllTransactions()
             }
             // Clear all data to avoid test pollution.
             db?.apply {

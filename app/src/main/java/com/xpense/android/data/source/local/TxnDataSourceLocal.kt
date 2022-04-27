@@ -6,14 +6,14 @@ import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Error
 import com.xpense.android.data.Result.Success
 import com.xpense.android.data.TxnEntity
-import com.xpense.android.data.TransactionDataSource
+import com.xpense.android.data.TxnDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
-class TransactionDataSourceLocal internal constructor(
+class TxnDataSourceLocal internal constructor(
     private val txnDao: TxnDao,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-): TransactionDataSource {
+): TxnDataSource {
     override fun observeTransactions(): LiveData<Result<List<TxnEntity>>> =
         txnDao.observeTransactions().map {
             Success(it)

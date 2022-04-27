@@ -3,7 +3,7 @@ package com.xpense.android.data
 import androidx.lifecycle.LiveData
 
 // TODO: consider moving to data.source package
-interface TransactionDataSource {
+interface TxnDataSource {
 
     fun observeTransactions(): LiveData<Result<List<TxnEntity>>>
 

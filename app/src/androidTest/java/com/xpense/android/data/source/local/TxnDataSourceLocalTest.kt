@@ -23,13 +23,13 @@ import org.junit.runner.RunWith
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 @MediumTest
-class TransactionDataSourceLocalTest {
+class TxnDataSourceLocalTest {
 
     // Executes each task synchronously using Architecture Components.
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var localDataSource: TransactionDataSourceLocal
+    private lateinit var localDataSource: TxnDataSourceLocal
 
     private lateinit var database: TxnDatabase
 
@@ -42,7 +42,7 @@ class TransactionDataSourceLocalTest {
         ).allowMainThreadQueries().build()
 
         localDataSource =
-            TransactionDataSourceLocal(
+            TxnDataSourceLocal(
                 database.txnDao(),
                 Dispatchers.Main
             )
