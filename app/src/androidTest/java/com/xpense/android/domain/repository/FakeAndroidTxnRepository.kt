@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Success
-import com.xpense.android.data.source.local.model.TxnEntity
 import com.xpense.android.domain.model.Txn
 import kotlinx.coroutines.runBlocking
 
@@ -16,34 +15,34 @@ import kotlinx.coroutines.runBlocking
 //  as seen in the Architecture Blueprints reactive sample (https://github.com/android/architecture-samples/tree/reactive).
 class FakeAndroidTxnRepository : TxnRepository {
 
-    var transactionsServiceData: LinkedHashMap<Long, TxnEntity> = LinkedHashMap()
+    var transactionsServiceData: LinkedHashMap<Long, Txn> = LinkedHashMap()
 
-    private val _observableTransactions = MutableLiveData<Result<List<TxnEntity>>>()
+    private val _observableTransactions = MutableLiveData<Result<List<Txn>>>()
 
-    override fun observeTransactions(): LiveData<Result<List<TxnEntity>>> =
+    override fun observeTransactions(): LiveData<Result<List<Txn>>> =
         _observableTransactions
 
-    override suspend fun saveTransaction(txnEntity: TxnEntity) {
-        transactionsServiceData[txnEntity.transactionId] = txnEntity
+    override suspend fun saveTransaction(txn: Txn) {
+        transactionsServiceData[txn.id] = txn
         _observableTransactions.postValue(Success(transactionsServiceData.values.toList()))
     }
 
-    override suspend fun getTransaction(transactionId: Long): Result<TxnEntity> {
+    override suspend fun getTransaction(txnId: Long): Result<Txn> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getTransactions(): Result<List<TxnEntity>> =
+    override suspend fun getTransactions(): Result<List<Txn>> =
         Success(transactionsServiceData.values.toList())
 
     override suspend fun getTxns(): List<Txn> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun updateTransaction(txnEntity: TxnEntity) {
+    override suspend fun updateTransaction(txn: Txn) {
         TODO("Not yet implemented")
     }
 
-    override suspend fun flagTransaction(transactionId: Long, flagged: Boolean) {
+    override suspend fun flagTransaction(txnId: Long, flagged: Boolean) {
         TODO("Not yet implemented")
     }
 
@@ -55,9 +54,9 @@ class FakeAndroidTxnRepository : TxnRepository {
         TODO("Not yet implemented")
     }
 
-    fun addTasks(vararg txnEntities: TxnEntity) {
-        for (transaction in txnEntities) {
-            transactionsServiceData[transaction.transactionId] = transaction
+    fun addTransaction(vararg txns: Txn) {
+        for (txn in txns) {
+            transactionsServiceData[txn.id] = txn
         }
         runBlocking { refreshTransactions() }
     }

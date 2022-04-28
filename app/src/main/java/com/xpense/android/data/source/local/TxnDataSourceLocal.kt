@@ -15,9 +15,7 @@ class TxnDataSourceLocal internal constructor(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ): TxnDataSource {
     override fun observeTransactions(): LiveData<Result<List<TxnEntity>>> =
-        txnDao.observeTransactions().map {
-            Success(it)
-        }
+        txnDao.observeTransactions().map { Success(it) }
 
     override suspend fun saveTransaction(txnEntity: TxnEntity) =
         txnDao.insert(txnEntity)

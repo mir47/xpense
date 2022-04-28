@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.xpense.android.data.Result
-import com.xpense.android.data.source.local.model.TxnEntity
+import com.xpense.android.domain.model.Txn
 import com.xpense.android.domain.repository.TxnRepository
 import kotlinx.coroutines.launch
 import java.util.Date
@@ -78,7 +78,8 @@ class TxnAddEditViewModel(
                 }
             } else {
                 txnRepository.saveTransaction(
-                    TxnEntity(
+                    Txn(
+                        id = 0,
                         createdTimestamp = Date(System.currentTimeMillis()),
                         amount = amount,
                         description = description

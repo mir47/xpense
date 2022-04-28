@@ -1,9 +1,9 @@
 package com.xpense.android.presentation.txn_list
 
 import com.xpense.android.BaseTest
-import com.xpense.android.data.source.local.model.TxnEntity
 import com.xpense.android.domain.repository.FakeTxnRepository
 import com.xpense.android.data.Result.Success
+import com.xpense.android.domain.model.Txn
 import com.xpense.android.getOrAwaitValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.hamcrest.CoreMatchers.`is`
@@ -25,9 +25,9 @@ class TxnListViewModelTest : BaseTest() {
     fun setupViewModel() {
         // We initialise the transactions to 3
         fakeRepository = FakeTxnRepository()
-        val txn1 = TxnEntity(transactionId = 1)
-        val txn2 = TxnEntity(transactionId = 2)
-        val txn3 = TxnEntity(transactionId = 3)
+        val txn1 = Txn(id = 1)
+        val txn2 = Txn(id = 2)
+        val txn3 = Txn(id = 3)
         fakeRepository.addTransactions(txn1, txn2, txn3)
 
         viewModel = TxnListViewModel(fakeRepository)

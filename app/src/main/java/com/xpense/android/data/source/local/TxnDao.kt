@@ -51,12 +51,6 @@ interface TxnDao {
     fun observeTransactions(): LiveData<List<TxnEntity>>
 
     /**
-     * Selects and returns an observable transaction with given transactionId.
-     */
-    @Query("SELECT * from txn_table WHERE transaction_id = :key")
-    fun observeTransactionWithId(key: Long): LiveData<TxnEntity>
-
-    /**
      * Selects and returns the transaction with given transactionId.
      */
     @Query("SELECT * from txn_table WHERE transaction_id = :key")

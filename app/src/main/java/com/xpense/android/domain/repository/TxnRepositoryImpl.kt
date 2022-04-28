@@ -1,13 +1,14 @@
 package com.xpense.android.domain.repository
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Error
 import com.xpense.android.data.Result.Success
 import com.xpense.android.data.TxnDataSource
-import com.xpense.android.data.source.local.model.TxnEntity
 import com.xpense.android.domain.model.Txn
 import com.xpense.android.domain.model.toTxn
+import com.xpense.android.domain.model.toTxnEntity
 import com.xpense.android.util.wrapEspressoIdlingResource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -18,28 +19,30 @@ class TxnRepositoryImpl constructor(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : TxnRepository {
 
-    override fun observeTransactions(): LiveData<Result<List<TxnEntity>>> {
+    override fun observeTransactions(): LiveData<Result<List<Txn>>> {
         wrapEspressoIdlingResource {
-            return txnDataSourceLocal.observeTransactions()
+            return Transformations.map(txnDataSourceLocal.observeTransactions()) {
+                Success((it as Success).data.map { txnEntity -> txnEntity.toTxn() })
+            }
         }
     }
 
-    override suspend fun saveTransaction(txnEntity: TxnEntity) {
+    override suspend fun saveTransaction(txn: Txn) {
         wrapEspressoIdlingResource {
-            txnDataSourceLocal.saveTransaction(txnEntity)
-            txnDataSourceRemote.saveTransaction(txnEntity)
+            txnDataSourceLocal.saveTransaction(txn.toTxnEntity())
+            txnDataSourceRemote.saveTransaction(txn.toTxnEntity())
         }
     }
 
-    override suspend fun getTransaction(transactionId: Long): Result<TxnEntity> {
+    override suspend fun getTransaction(txnId: Long): Result<Txn> {
         wrapEspressoIdlingResource {
-            return txnDataSourceLocal.getTransaction(transactionId)
+            return Success((txnDataSourceLocal.getTransaction(txnId) as Success).data.toTxn())
         }
     }
 
-    override suspend fun getTransactions(): Result<List<TxnEntity>> {
+    override suspend fun getTransactions(): Result<List<Txn>> {
         wrapEspressoIdlingResource {
-            return txnDataSourceLocal.getTransactions()
+            return Success((txnDataSourceLocal.getTransactions() as Success).data.map { it.toTxn() })
         }
     }
 
@@ -49,13 +52,13 @@ class TxnRepositoryImpl constructor(
         }
     }
 
-    override suspend fun updateTransaction(txnEntity: TxnEntity) {
+    override suspend fun updateTransaction(txn: Txn) {
         wrapEspressoIdlingResource {
-            txnDataSourceLocal.updateTransaction(txnEntity)
+            txnDataSourceLocal.updateTransaction(txn.toTxnEntity())
         }
     }
 
-    override suspend fun flagTransaction(transactionId: Long, flagged: Boolean) {
+    override suspend fun flagTransaction(txnId: Long, flagged: Boolean) {
         wrapEspressoIdlingResource {
             TODO("Not yet implemented")
         }

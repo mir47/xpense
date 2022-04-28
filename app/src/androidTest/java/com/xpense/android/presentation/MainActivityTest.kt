@@ -14,8 +14,8 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.xpense.android.R
-import com.xpense.android.data.source.local.model.TxnEntity
 import com.xpense.android.di.ServiceLocator
+import com.xpense.android.domain.model.Txn
 import com.xpense.android.domain.repository.TxnRepository
 import com.xpense.android.util.DataBindingIdlingResource
 import com.xpense.android.util.EspressoIdlingResource
@@ -75,7 +75,7 @@ class MainActivityTest {
     @Test
     fun templateTest() = runBlocking {
         // Set initial state.
-        repository.saveTransaction(TxnEntity(transactionId = 1))
+        repository.saveTransaction(Txn(id = 1))
 
         // Start up Transactions screen.
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
@@ -91,8 +91,8 @@ class MainActivityTest {
     fun editTransaction() = runBlocking {
         // Set initial state.
         repository.saveTransaction(
-            TxnEntity(
-                transactionId = 1,
+            Txn(
+                id = 1,
                 amount = 12.34,
                 description = "description"
             )

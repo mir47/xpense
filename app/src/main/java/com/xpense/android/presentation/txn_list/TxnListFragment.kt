@@ -48,19 +48,19 @@ class TxnListFragment : Fragment() {
             }
         }
 
-        val transactionsAdapter = TxnListAdapter(TransactionListener { transactionId ->
+        val txnListAdapter = TxnListAdapter(TxnListener { txnId ->
             // TODO: click logic should be handled in the view model, with navigation event sent to fragment via LiveData
             findNavController().navigate(
                 TxnListFragmentDirections.actionTxnListFragmentToTxnAddEditFragment()
-                    .setTransactionId(transactionId)
+                    .setTransactionId(txnId)
             )
         })
 
-        binding.transactionList.adapter = transactionsAdapter
+        binding.transactionList.adapter = txnListAdapter
 
         _viewModel.transactions.observe(viewLifecycleOwner) {
             if (it is Success) {
-                transactionsAdapter.submitList(it.data)
+                txnListAdapter.submitList(it.data)
             }
         }
 
