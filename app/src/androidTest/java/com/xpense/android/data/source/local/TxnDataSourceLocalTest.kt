@@ -58,7 +58,7 @@ class TxnDataSourceLocalTest {
         localDataSource.saveTransaction(txn)
 
         // WHEN - Transaction retrieved by ID.
-        val result = localDataSource.getTransaction(txn.transactionId)
+        val result = localDataSource.getTransactionResultById(txn.transactionId)
 
         // THEN - Same transaction is returned.
         assertTrue(result.succeeded)
@@ -77,7 +77,7 @@ class TxnDataSourceLocalTest {
         localDataSource.flagTransaction(txn.transactionId, true)
 
         // THEN - transaction can be retrieved from local data source and is flagged.
-        val result = localDataSource.getTransaction(txn.transactionId)
+        val result = localDataSource.getTransactionResultById(txn.transactionId)
         assertTrue(result.succeeded)
         result as Result.Success
         assertThat(result.data.flagged, `is`(true))

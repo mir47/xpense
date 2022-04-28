@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Success
 import com.xpense.android.data.source.local.model.TxnEntity
-import com.xpense.android.data.TxnDataSource
+import com.xpense.android.data.source.TxnDataSource
 import kotlinx.coroutines.delay
 
 // TODO: create data transfer object (for remote Transaction model) - see dev-bytes project
@@ -14,7 +14,7 @@ object TxnDataSourceRemote : TxnDataSource {
 
     private var TRANSACTIONS_SERVICE_DATA = LinkedHashMap<Long, TxnEntity>(2)
 
-    override fun observeTransactions(): LiveData<Result<List<TxnEntity>>> {
+    override fun observeTransactionsResult(): LiveData<Result<List<TxnEntity>>> {
         TODO("Not yet implemented")
     }
 
@@ -23,18 +23,18 @@ object TxnDataSourceRemote : TxnDataSource {
         TRANSACTIONS_SERVICE_DATA[txnEntity.transactionId] = txnEntity
     }
 
-    override suspend fun getTransaction(transactionId: Long): Result<TxnEntity> {
+    override suspend fun getTransactionResultById(txnId: Long): Result<TxnEntity> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getTransactions(): Result<List<TxnEntity>> {
+    override suspend fun getTransactionsResult(): Result<List<TxnEntity>> {
         // Simulate network by delaying the execution
         val transactions = TRANSACTIONS_SERVICE_DATA.values.toList()
         delay(SERVICE_LATENCY_IN_MILLIS)
         return Success(transactions)
     }
 
-    override suspend fun getTxnsData(): List<TxnEntity> {
+    override suspend fun getTransactions(): List<TxnEntity> {
         TODO("Not yet implemented")
     }
 
@@ -42,7 +42,7 @@ object TxnDataSourceRemote : TxnDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun flagTransaction(transactionId: Long, flagged: Boolean) {
+    override suspend fun flagTransaction(txnId: Long, flagged: Boolean) {
         TODO("Not yet implemented")
     }
 

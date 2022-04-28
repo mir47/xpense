@@ -5,7 +5,7 @@ import androidx.lifecycle.Transformations
 import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Error
 import com.xpense.android.data.Result.Success
-import com.xpense.android.data.TxnDataSource
+import com.xpense.android.data.source.TxnDataSource
 import com.xpense.android.domain.model.Txn
 import com.xpense.android.domain.model.toTxn
 import com.xpense.android.domain.model.toTxnEntity
@@ -21,7 +21,7 @@ class TxnRepositoryImpl constructor(
 
     override fun observeTransactions(): LiveData<Result<List<Txn>>> {
         wrapEspressoIdlingResource {
-            return Transformations.map(txnDataSourceLocal.observeTransactions()) {
+            return Transformations.map(txnDataSourceLocal.observeTransactionsResult()) {
                 Success((it as Success).data.map { txnEntity -> txnEntity.toTxn() })
             }
         }
@@ -36,19 +36,19 @@ class TxnRepositoryImpl constructor(
 
     override suspend fun getTransaction(txnId: Long): Result<Txn> {
         wrapEspressoIdlingResource {
-            return Success((txnDataSourceLocal.getTransaction(txnId) as Success).data.toTxn())
+            return Success((txnDataSourceLocal.getTransactionResultById(txnId) as Success).data.toTxn())
         }
     }
 
     override suspend fun getTransactions(): Result<List<Txn>> {
         wrapEspressoIdlingResource {
-            return Success((txnDataSourceLocal.getTransactions() as Success).data.map { it.toTxn() })
+            return Success((txnDataSourceLocal.getTransactionsResult() as Success).data.map { it.toTxn() })
         }
     }
 
     override suspend fun getTxns(): List<Txn> {
         wrapEspressoIdlingResource {
-            return txnDataSourceLocal.getTxnsData().map { it.toTxn() }
+            return txnDataSourceLocal.getTransactions().map { it.toTxn() }
         }
     }
 
@@ -78,7 +78,7 @@ class TxnRepositoryImpl constructor(
 
     private suspend fun updateTransactionsFromRemoteDataSource() {
         wrapEspressoIdlingResource {
-            val remoteTransactions = txnDataSourceRemote.getTransactions()
+            val remoteTransactions = txnDataSourceRemote.getTransactionsResult()
 
             if (remoteTransactions is Success) {
                 // Real apps might want to do a proper sync

@@ -5,7 +5,7 @@ import androidx.lifecycle.map
 import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Error
 import com.xpense.android.data.Result.Success
-import com.xpense.android.data.TxnDataSource
+import com.xpense.android.data.source.TxnDataSource
 import com.xpense.android.data.source.local.model.TxnEntity
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -14,28 +14,28 @@ class TxnDataSourceLocal internal constructor(
     private val txnDao: TxnDao,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ): TxnDataSource {
-    override fun observeTransactions(): LiveData<Result<List<TxnEntity>>> =
+    override fun observeTransactionsResult(): LiveData<Result<List<TxnEntity>>> =
         txnDao.observeTransactions().map { Success(it) }
 
     override suspend fun saveTransaction(txnEntity: TxnEntity) =
         txnDao.insert(txnEntity)
 
-    override suspend fun getTransaction(transactionId: Long) =
-        txnDao.getTransactionWithId(transactionId)?.let { Success(it) }
+    override suspend fun getTransactionResultById(txnId: Long) =
+        txnDao.getTransactionWithId(txnId)?.let { Success(it) }
             ?: Error(Exception("Error"))
 
-    override suspend fun getTransactions(): Result<List<TxnEntity>> {
+    override suspend fun getTransactionsResult(): Result<List<TxnEntity>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getTxnsData(): List<TxnEntity> =
+    override suspend fun getTransactions(): List<TxnEntity> =
         txnDao.getAllTransactions()
 
     override suspend fun updateTransaction(txnEntity: TxnEntity) =
         txnDao.update(txnEntity)
 
-    override suspend fun flagTransaction(transactionId: Long, flagged: Boolean) =
-        txnDao.updateFlagged(transactionId, flagged)
+    override suspend fun flagTransaction(txnId: Long, flagged: Boolean) =
+        txnDao.updateFlagged(txnId, flagged)
 
     override suspend fun deleteAllTransactions() =
         txnDao.clear()
