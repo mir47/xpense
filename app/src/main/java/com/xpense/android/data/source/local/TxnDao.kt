@@ -47,6 +47,7 @@ interface TxnDao {
      * Selects and returns all rows in the table,
      * sorted by id in descending order.
      */
+    // TODO: Migrate LiveData to Kotlin Flow
     @Query("SELECT * FROM txn_table ORDER BY transaction_id DESC")
     fun observeTransactions(): LiveData<List<TxnEntity>>
 

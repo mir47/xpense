@@ -39,7 +39,7 @@ class TxnListFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         // Add an Observer on the state variable for navigating when button is pressed.
-        _viewModel.navigateToCreateTransaction.observe(viewLifecycleOwner) {
+        _viewModel.navigateToTxnAddEdit.observe(viewLifecycleOwner) {
             if (it) {
                 findNavController().navigate(
                     TxnListFragmentDirections.actionTxnListFragmentToTxnAddEditFragment()

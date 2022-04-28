@@ -23,14 +23,15 @@ class TxnListViewModel(
      *
      * This is private because we don't want to expose setting this value to the Fragment.
      */
-    private val _navigateToCreateTransaction = MutableLiveData<Boolean>()
+    private val _navigateToTxnAddEdit = MutableLiveData<Boolean>()
 
     /**
-     * If this is true, immediately navigate to [com.xpense.android.presentation.txn_add_edit.TxnAddEditFragment]
+     * If this is true, immediately navigate to
+     * [com.xpense.android.presentation.txn_add_edit.TxnAddEditFragment]
      * and call [doneNavigating]
      */
-    val navigateToCreateTransaction: LiveData<Boolean>
-        get() = _navigateToCreateTransaction
+    val navigateToTxnAddEdit: LiveData<Boolean>
+        get() = _navigateToTxnAddEdit
 
     private val _dataLoading = MutableLiveData(false)
     val dataLoading: LiveData<Boolean> = _dataLoading
@@ -39,16 +40,16 @@ class TxnListViewModel(
     val empty: LiveData<Boolean> = transactions.map { (it as? Success)?.data.isNullOrEmpty() }
 
     /**
-     * Call this immediately after navigating to [com.xpense.android.presentation.txn_add_edit.TxnAddEditFragment]
-     *
+     * Call this immediately after navigating to
+     * [com.xpense.android.presentation.txn_add_edit.TxnAddEditFragment]
      * It will clear the navigation request, so if the device is rotated it won't navigate twice.
      */
     fun doneNavigating() {
-        _navigateToCreateTransaction.value = false
+        _navigateToTxnAddEdit.value = false
     }
 
-    fun navigateToCreateTransaction() {
-        _navigateToCreateTransaction.value = true
+    fun onFabClick() {
+        _navigateToTxnAddEdit.value = true
     }
 
     fun refresh() {

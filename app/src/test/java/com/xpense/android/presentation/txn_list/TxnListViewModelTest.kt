@@ -43,19 +43,19 @@ class TxnListViewModelTest : BaseTest() {
     }
 
     @Test
-    fun navigateToCreateTransaction_() {
-        // When navigate called
-        viewModel.navigateToCreateTransaction()
+    fun clickFab_navigateToCreateTransaction() {
+        // When FAB clicked
+        viewModel.onFabClick()
 
         // Then nav live data is set
-        val navOn = viewModel.navigateToCreateTransaction.getOrAwaitValue()
+        val navOn = viewModel.navigateToTxnAddEdit.getOrAwaitValue()
         assertThat(navOn, IsEqual(true))
 
         // When done navigating
         viewModel.doneNavigating()
 
         // Then nav live data is cleared
-        val navOff = viewModel.navigateToCreateTransaction.getOrAwaitValue()
+        val navOff = viewModel.navigateToTxnAddEdit.getOrAwaitValue()
         assertThat(navOff, IsEqual(false))
     }
 
