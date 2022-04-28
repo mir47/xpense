@@ -51,7 +51,7 @@ class TxnAddEditViewModel(
     init {
         if (transactionId != 0L) {
             viewModelScope.launch {
-                val txn = txnRepository.getTransaction(transactionId)
+                val txn = txnRepository.getTransactionResultById(transactionId)
                 if (txn is Result.Success) {
                     amountField.set(txn.data.amount.toString())
                     descriptionField.set(txn.data.description)
@@ -67,7 +67,7 @@ class TxnAddEditViewModel(
         val amount = amountField.get()?.toDoubleOrNull() ?: 0.0
         viewModelScope.launch {
             if (transactionId != 0L) {
-                val txn = txnRepository.getTransaction(transactionId)
+                val txn = txnRepository.getTransactionResultById(transactionId)
                 if (txn is Result.Success) {
                     txnRepository.updateTransaction(
                         txn.data.apply {

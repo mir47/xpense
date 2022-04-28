@@ -19,7 +19,7 @@ class FakeAndroidTxnRepository : TxnRepository {
 
     private val _observableTransactions = MutableLiveData<Result<List<Txn>>>()
 
-    override fun observeTransactions(): LiveData<Result<List<Txn>>> =
+    override fun observeTransactionsResult(): LiveData<Result<List<Txn>>> =
         _observableTransactions
 
     override suspend fun saveTransaction(txn: Txn) {
@@ -27,14 +27,14 @@ class FakeAndroidTxnRepository : TxnRepository {
         _observableTransactions.postValue(Success(transactionsServiceData.values.toList()))
     }
 
-    override suspend fun getTransaction(txnId: Long): Result<Txn> {
+    override suspend fun getTransactionResultById(txnId: Long): Result<Txn> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getTransactions(): Result<List<Txn>> =
+    override suspend fun getTransactionsResult(): Result<List<Txn>> =
         Success(transactionsServiceData.values.toList())
 
-    override suspend fun getTxns(): List<Txn> {
+    override suspend fun getTransactions(): List<Txn> {
         TODO("Not yet implemented")
     }
 
@@ -47,7 +47,7 @@ class FakeAndroidTxnRepository : TxnRepository {
     }
 
     override suspend fun refreshTransactions() {
-        _observableTransactions.value = getTransactions()
+        _observableTransactions.value = getTransactionsResult()
     }
 
     override suspend fun deleteAllTransactions() {

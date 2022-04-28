@@ -15,7 +15,7 @@ class TxnListViewModel(
     private val txnRepository: TxnRepository
 ) : ViewModel() {
 
-    val transactions = txnRepository.observeTransactions()
+    val transactions = txnRepository.observeTransactionsResult()
 
     /**
      * Variable that tells the Fragment to navigate to a specific

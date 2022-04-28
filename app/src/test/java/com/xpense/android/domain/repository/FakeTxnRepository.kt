@@ -20,14 +20,14 @@ class FakeTxnRepository : TxnRepository {
         shouldReturnError = value
     }
 
-    override fun observeTransactions(): LiveData<Result<List<Txn>>> =
+    override fun observeTransactionsResult(): LiveData<Result<List<Txn>>> =
         observableTransactions
 
     override suspend fun saveTransaction(txnEntity: Txn) {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getTransaction(txnId: Long): Result<Txn> {
+    override suspend fun getTransactionResultById(txnId: Long): Result<Txn> {
         if (shouldReturnError) {
             return Error(Exception("Test exception"))
         }
@@ -37,14 +37,14 @@ class FakeTxnRepository : TxnRepository {
         return Error(Exception("Could not find transaction"))
     }
 
-    override suspend fun getTransactions(): Result<List<Txn>> {
+    override suspend fun getTransactionsResult(): Result<List<Txn>> {
         if (shouldReturnError) {
             return Error(Exception("Test exception"))
         }
         return Success(transactionsServiceData.values.toList())
     }
 
-    override suspend fun getTxns(): List<Txn> {
+    override suspend fun getTransactions(): List<Txn> {
         TODO("Not yet implemented")
     }
 
@@ -57,7 +57,7 @@ class FakeTxnRepository : TxnRepository {
     }
 
     override suspend fun refreshTransactions() {
-        observableTransactions.value = getTransactions()
+        observableTransactions.value = getTransactionsResult()
     }
 
     override suspend fun deleteAllTransactions() {

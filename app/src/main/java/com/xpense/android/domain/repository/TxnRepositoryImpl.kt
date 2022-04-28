@@ -19,7 +19,7 @@ class TxnRepositoryImpl constructor(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : TxnRepository {
 
-    override fun observeTransactions(): LiveData<Result<List<Txn>>> {
+    override fun observeTransactionsResult(): LiveData<Result<List<Txn>>> {
         wrapEspressoIdlingResource {
             return Transformations.map(txnDataSourceLocal.observeTransactionsResult()) {
                 Success((it as Success).data.map { txnEntity -> txnEntity.toTxn() })
@@ -34,19 +34,19 @@ class TxnRepositoryImpl constructor(
         }
     }
 
-    override suspend fun getTransaction(txnId: Long): Result<Txn> {
+    override suspend fun getTransactionResultById(txnId: Long): Result<Txn> {
         wrapEspressoIdlingResource {
             return Success((txnDataSourceLocal.getTransactionResultById(txnId) as Success).data.toTxn())
         }
     }
 
-    override suspend fun getTransactions(): Result<List<Txn>> {
+    override suspend fun getTransactionsResult(): Result<List<Txn>> {
         wrapEspressoIdlingResource {
             return Success((txnDataSourceLocal.getTransactionsResult() as Success).data.map { it.toTxn() })
         }
     }
 
-    override suspend fun getTxns(): List<Txn> {
+    override suspend fun getTransactions(): List<Txn> {
         wrapEspressoIdlingResource {
             return txnDataSourceLocal.getTransactions().map { it.toTxn() }
         }

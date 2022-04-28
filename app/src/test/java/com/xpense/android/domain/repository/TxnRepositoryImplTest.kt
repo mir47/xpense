@@ -43,7 +43,7 @@ class TxnRepositoryImplTest: BaseTest() {
     @Test
     fun getTransaction_requestsTransactionFromLocalDataSource() = coroutineTest {
         // When transaction is requested from repository
-        val transaction = repository.getTransaction(1)
+        val transaction = repository.getTransactionResultById(1)
 
         // Then transaction is returned
         assertThat((transaction as Success).data, IsEqual(txn1.toTxn()))
@@ -52,7 +52,7 @@ class TxnRepositoryImplTest: BaseTest() {
     @Test
     fun getTransactions_requestsAllTransactionsFromLocalDataSource() = coroutineTest {
         // When transactions are requested from repository
-        val transactions = repository.getTransactions()
+        val transactions = repository.getTransactionsResult()
 
         // Then transactions are loaded from local data source
         assertThat((transactions as Success).data, IsEqual(localTransactions.map { it.toTxn() }))
@@ -61,7 +61,7 @@ class TxnRepositoryImplTest: BaseTest() {
     @Test
     fun observeTransactions_requestsAllTransactionsFromLocalDataSource() = coroutineTest {
         // When transactions are observed from repository
-        val transactions = repository.observeTransactions().getOrAwaitValue()
+        val transactions = repository.observeTransactionsResult().getOrAwaitValue()
 
         // Then transactions are loaded from local data source
         assertThat((transactions as Success).data, IsEqual(localTransactions.map { it.toTxn() }))
@@ -73,7 +73,7 @@ class TxnRepositoryImplTest: BaseTest() {
         repository.saveTransaction(txn3.toTxn())
 
         // Then transaction is added to all transactions
-        val transactions = repository.getTransactions()
+        val transactions = repository.getTransactionsResult()
         assertThat((transactions as Success).data.size, IsEqual(3))
         assertThat(transactions.data[0], IsEqual(txn1.toTxn()))
         assertThat(transactions.data[1], IsEqual(txn2.toTxn()))
@@ -89,7 +89,7 @@ class TxnRepositoryImplTest: BaseTest() {
         repository.updateTransaction(updatedTxn1)
 
         // Then transaction is updated in all transactions
-        val transactions = repository.getTransactions()
+        val transactions = repository.getTransactionsResult()
         assertThat((transactions as Success).data.size, IsEqual(2))
         assertThat(transactions.data[0], IsEqual(txn2.toTxn()))
         assertThat(transactions.data[1].id, IsEqual(1))

@@ -13,7 +13,7 @@ class GetTxnsUseCase(
     operator fun invoke(): Flow<Resource<List<Txn>>> = flow {
         try {
             emit(Resource.Loading())
-            val txns = txnRepo.getTxns()
+            val txns = txnRepo.getTransactions()
             emit(Resource.Success(txns))
         } catch (e: IOException) {
             emit(Resource.Error("error"))

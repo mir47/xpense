@@ -6,15 +6,15 @@ import com.xpense.android.domain.model.Txn
 
 interface TxnRepository {
 
-    fun observeTransactions(): LiveData<Result<List<Txn>>>
+    fun observeTransactionsResult(): LiveData<Result<List<Txn>>>
 
     suspend fun saveTransaction(txn: Txn)
 
-    suspend fun getTransaction(txnId: Long): Result<Txn>
+    suspend fun getTransactionResultById(txnId: Long): Result<Txn>
 
-    suspend fun getTransactions(): Result<List<Txn>>
+    suspend fun getTransactionsResult(): Result<List<Txn>>
 
-    suspend fun getTxns(): List<Txn>
+    suspend fun getTransactions(): List<Txn>
 
     suspend fun updateTransaction(txn: Txn)
 

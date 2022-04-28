@@ -50,7 +50,7 @@ class TxnAddEditComposeViewModel(
     init {
         if (txnId != 0L) {
             viewModelScope.launch {
-                val txn = txnRepo.getTransaction(txnId)
+                val txn = txnRepo.getTransactionResultById(txnId)
                 if (txn is Result.Success) {
                     amount = txn.data.amount.toString()
                     description = txn.data.description
@@ -64,7 +64,7 @@ class TxnAddEditComposeViewModel(
         val amount = amount.toDoubleOrNull() ?: 0.0
         viewModelScope.launch {
             if (txnId != 0L) {
-                val txn = txnRepo.getTransaction(txnId)
+                val txn = txnRepo.getTransactionResultById(txnId)
                 if (txn is Result.Success) {
                     txnRepo.updateTransaction(
                         txn.data.apply {
