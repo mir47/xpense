@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.xperiments.compose
+package com.xpense.android.presentation.xperiments.compose.txn_list
 
 import com.xpense.android.domain.model.Txn
 

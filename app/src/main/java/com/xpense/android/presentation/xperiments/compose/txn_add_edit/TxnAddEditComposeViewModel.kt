@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.xperiments.compose
+package com.xpense.android.presentation.xperiments.compose.txn_add_edit
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

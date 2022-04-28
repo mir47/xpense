@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.xperiments.compose
+package com.xpense.android.presentation.xperiments.compose.txn_list
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
