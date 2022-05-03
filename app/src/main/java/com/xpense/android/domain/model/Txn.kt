@@ -6,8 +6,8 @@ import java.util.Date
 
 data class Txn(
     val id: Long,
-    var amount: Double,
-    var description: String,
+    var amount: Double = 0.0,
+    var description: String = "",
     val createdTimestamp: Date? = null
 )
 

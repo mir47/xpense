@@ -6,35 +6,35 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.xpense.android.databinding.ItemTxnBinding
-import com.xpense.android.data.source.local.model.TxnEntity
+import com.xpense.android.domain.model.Txn
 
 /**
  * Adapter for transactions
  */
-class TxnListAdapter(private val clickListener: TransactionListener):
-    ListAdapter<TxnEntity, TransactionViewHolder>(TransactionDiffCallback()) {
+class TxnListAdapter(private val clickListener: TxnListener):
+    ListAdapter<Txn, TxnViewHolder>(TxnDiffCallback()) {
 
-    override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: TxnViewHolder, position: Int) =
         holder.bind(getItem(position), clickListener)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        TransactionViewHolder.from(parent)
+        TxnViewHolder.from(parent)
 }
 
 /**
  * ViewHolder for a transaction item
  */
-class TransactionViewHolder private constructor(private val binding: ItemTxnBinding)
+class TxnViewHolder private constructor(private val binding: ItemTxnBinding)
     : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(txnEntity: TxnEntity, clickListener: TransactionListener) {
-        binding.txnEntity = txnEntity
+    fun bind(txn: Txn, clickListener: TxnListener) {
+        binding.txn = txn
         binding.clickListener = clickListener
         binding.executePendingBindings()
     }
 
     companion object {
-        fun from(parent: ViewGroup) = TransactionViewHolder(ItemTxnBinding
+        fun from(parent: ViewGroup) = TxnViewHolder(ItemTxnBinding
             .inflate(LayoutInflater.from(parent.context), parent, false))
     }
 }
@@ -45,17 +45,17 @@ class TransactionViewHolder private constructor(private val binding: ItemTxnBind
  * Used by ListAdapter to calculate the minimum number of changes between
  * and old list and a new list that's been passed to `submitList`.
  */
-class TransactionDiffCallback : DiffUtil.ItemCallback<TxnEntity>() {
-    override fun areItemsTheSame(oldItem: TxnEntity, newItem: TxnEntity) =
-        oldItem.transactionId == newItem.transactionId
+class TxnDiffCallback : DiffUtil.ItemCallback<Txn>() {
+    override fun areItemsTheSame(oldItem: Txn, newItem: Txn) =
+        oldItem.id == newItem.id
 
-    override fun areContentsTheSame(oldItem: TxnEntity, newItem: TxnEntity) =
+    override fun areContentsTheSame(oldItem: Txn, newItem: Txn) =
         oldItem == newItem
 }
 
 /**
  * Item click listener
  */
-class TransactionListener(val clickListener: (transactionId: Long) -> Unit) {
-    fun onClick(txnEntity: TxnEntity) = clickListener(txnEntity.transactionId)
+class TxnListener(val clickListener: (txnId: Long) -> Unit) {
+    fun onClick(txn: Txn) = clickListener(txn.id)
 }

@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.xperiments.compose
+package com.xpense.android.presentation.xperiments.compose.txn_add_edit
 
 import android.os.Bundle
 import android.view.LayoutInflater

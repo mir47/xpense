@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/txn_add_edit_compose_fragment"
-        android:name="com.xpense.android.presentation.xperiments.compose.TxnAddEditComposeFragment"
+        android:name="com.xpense.android.presentation.xperiments.compose.txn_add_edit.TxnAddEditComposeFragment"
         android:label="@string/transaction_screen_title" >
         <argument
             android:name="transactionId"

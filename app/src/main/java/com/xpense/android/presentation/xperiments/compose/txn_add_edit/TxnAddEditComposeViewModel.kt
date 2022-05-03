@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.xperiments.compose
+package com.xpense.android.presentation.xperiments.compose.txn_add_edit
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.xpense.android.data.Result
-import com.xpense.android.data.source.local.model.TxnEntity
+import com.xpense.android.domain.model.Txn
 import com.xpense.android.domain.repository.TxnRepository
 import kotlinx.coroutines.launch
 import java.util.Date
@@ -50,7 +50,7 @@ class TxnAddEditComposeViewModel(
     init {
         if (txnId != 0L) {
             viewModelScope.launch {
-                val txn = txnRepo.getTransaction(txnId)
+                val txn = txnRepo.getTransactionResultById(txnId)
                 if (txn is Result.Success) {
                     amount = txn.data.amount.toString()
                     description = txn.data.description
@@ -64,7 +64,7 @@ class TxnAddEditComposeViewModel(
         val amount = amount.toDoubleOrNull() ?: 0.0
         viewModelScope.launch {
             if (txnId != 0L) {
-                val txn = txnRepo.getTransaction(txnId)
+                val txn = txnRepo.getTransactionResultById(txnId)
                 if (txn is Result.Success) {
                     txnRepo.updateTransaction(
                         txn.data.apply {
@@ -75,7 +75,8 @@ class TxnAddEditComposeViewModel(
                 }
             } else {
                 txnRepo.saveTransaction(
-                    TxnEntity(
+                    Txn(
+                        id = 0,
                         createdTimestamp = Date(System.currentTimeMillis()),
                         amount = amount,
                         description = description
