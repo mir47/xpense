@@ -3,6 +3,7 @@ package com.xpense.android.presentation.xperiments.compose.txn_list
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.xpense.android.common.Resource
 import com.xpense.android.domain.use_case.get_txns.GetTxnsUseCase
@@ -31,5 +32,13 @@ class TxnListComposeViewModel(
                     TxnListState(isLoading = true)
             }
         }.launchIn(viewModelScope)
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    class TxnListComposeViewModelFactory (
+        private val getTxnsUseCase: GetTxnsUseCase
+    ) : ViewModelProvider.NewInstanceFactory() {
+        override fun <T : ViewModel> create(modelClass: Class<T>) =
+            TxnListComposeViewModel(getTxnsUseCase) as T
     }
 }

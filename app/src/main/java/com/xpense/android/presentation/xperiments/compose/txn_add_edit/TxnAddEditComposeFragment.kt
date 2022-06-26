@@ -46,7 +46,7 @@ import com.xpense.android.presentation.ui.theme.XpenseTheme
 @ExperimentalMaterialApi
 class TxnAddEditComposeFragment : Fragment() {
 
-    private val _viewModelAddEdit by viewModels<TxnAddEditComposeViewModel> {
+    private val viewModel by viewModels<TxnAddEditComposeViewModel> {
         TxnAddEditComposeViewModel.TxnAddEditComposeViewModelFactory(
             TxnAddEditComposeFragmentArgs.fromBundle(requireArguments()).transactionId,
             (requireContext().applicationContext as XpenseApplication).txnRepository
@@ -58,10 +58,10 @@ class TxnAddEditComposeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _viewModelAddEdit.navigateExit.observe(viewLifecycleOwner) {
+        viewModel.navigateExit.observe(viewLifecycleOwner) {
             if (it) {
                 findNavController().popBackStack()
-                _viewModelAddEdit.doneNavigating()
+                viewModel.doneNavigating()
             }
         }
 

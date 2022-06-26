@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_txn_list" >
         <action
             android:id="@+id/action_txn_list_fragment_to_txn_add_edit_fragment"
-            app:destination="@id/transaction_fragment"
+            app:destination="@id/transaction_add_edit_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -20,7 +20,7 @@
             app:popUpTo="@+id/txn_list_fragment" />
     </fragment>
     <fragment
-        android:id="@+id/transaction_fragment"
+        android:id="@+id/transaction_add_edit_fragment"
         android:name="com.xpense.android.presentation.txn_add_edit.TxnAddEditFragment"
         android:label="@string/transaction_screen_title"
         tools:layout="@layout/fragment_txn_add_edit">
@@ -51,6 +51,19 @@
         android:id="@+id/compose_basics_fragment"
         android:name="com.xpense.android.presentation.xperiments.compose.ComposeBasicsFragment"
         android:label="@string/compose_basics_screen_title" >
+    </fragment>
+    <fragment
+        android:id="@+id/txn_list_compose_fragment"
+        android:name="com.xpense.android.presentation.xperiments.compose.txn_list.TxnListComposeFragment"
+        android:label="@string/main_screen_title" >
+        <action
+            android:id="@+id/action_txn_list_compose_fragment_to_txn_add_edit_compose_fragment"
+            app:destination="@id/txn_add_edit_compose_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/txn_list_compose_fragment" />
     </fragment>
     <fragment
         android:id="@+id/txn_add_edit_compose_fragment"
