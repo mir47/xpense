@@ -71,6 +71,12 @@ android {
             excludes += ['META-INF/AL2.0', 'META-INF/LGPL2.1']
         }
     }
+
+    // Test source sets
+//    sourceSets {
+//        test.java.srcDirs += 'src/test/kotlin/'
+//        androidTest.java.srcDirs += 'src/androidTest/kotlin/'
+//    }
 }
 
 dependencies {
@@ -140,7 +146,7 @@ dependencies {
 
     // Unit Test
     testImplementation "junit:junit:$version_junit"
-    testImplementation "org.hamcrest:hamcrest-all:$version_hamcrest"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version_coroutine"
 
     // AndroidX Test
@@ -151,6 +157,7 @@ dependencies {
 
     // Android instrumented unit tests
     androidTestImplementation "junit:junit:$version_junit"
+    androidTestImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion"
     androidTestImplementation "org.mockito:mockito-core:$version_mockito"
     androidTestImplementation "org.mockito:mockito-android:$version_mockito"
 //    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$version_dex_maker"

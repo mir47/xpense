@@ -8,14 +8,14 @@ import androidx.test.filters.SmallTest
 import com.xpense.android.data.source.local.model.TxnEntity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.CoreMatchers.notNullValue
-import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import kotlin.test.assertEquals
+import kotlin.test.assertIs
+import kotlin.test.assertNotNull
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
@@ -49,10 +49,11 @@ class TxnDaoTest {
         val loaded = db.txnDao().getTransactionWithId(txn.transactionId)
 
         // THEN - The loaded data contains the expected values
-        assertThat(loaded as TxnEntity, notNullValue())
-        assertThat(loaded.transactionId, `is`(txn.transactionId))
-        assertThat(loaded.amount, `is`(txn.amount))
-        assertThat(loaded.description, `is`(txn.description))
+        assertIs<TxnEntity>(loaded)
+        assertNotNull(loaded)
+        assertEquals(txn.transactionId, loaded.transactionId)
+        assertEquals(txn.amount, loaded.amount)
+        assertEquals(txn.description, loaded.description)
     }
 
     @Test
@@ -68,9 +69,11 @@ class TxnDaoTest {
         val loaded = db.txnDao().getTransactionWithId(txn.transactionId)
 
         // THEN - The loaded data contains the updated values
-        assertThat(loaded as TxnEntity, notNullValue())
-        assertThat(loaded.transactionId, `is`(txn.transactionId))
-        assertThat(loaded.amount, `is`(txn.amount))
-        assertThat(loaded.description, `is`(txnNew.description))
+        assertIs<TxnEntity>(loaded)
+        assertNotNull(loaded)
+        assertEquals(txn.transactionId, loaded.transactionId)
+        assertEquals(txn.amount, loaded.amount)
+        assertEquals(txnNew.description, loaded.description)
+
     }
 }

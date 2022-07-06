@@ -54,7 +54,6 @@ ext {
     version_firebase = '29.1.0'
     version_firebase_ui_auth = '7.2.0'
     version_fragment = '1.4.1'
-    version_hamcrest = '1.3'
     version_junit = '4.13.2'
     version_lifecycle = '2.5.0-beta01'
     version_maps = '18.0.2'

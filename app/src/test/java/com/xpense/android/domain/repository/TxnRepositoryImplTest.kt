@@ -2,17 +2,17 @@ package com.xpense.android.domain.repository
 
 import com.xpense.android.BaseTest
 import com.xpense.android.data.FakeTxnDataSource
-import com.xpense.android.getOrAwaitValue
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.core.IsEqual
-import org.junit.Before
-import org.junit.Test
 import com.xpense.android.data.Result.Success
 import com.xpense.android.data.source.local.model.TxnEntity
 import com.xpense.android.domain.model.Txn
 import com.xpense.android.domain.model.toTxn
+import com.xpense.android.getOrAwaitValue
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.junit.Before
+import org.junit.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertIs
 
 @ExperimentalCoroutinesApi
 class TxnRepositoryImplTest: BaseTest() {
@@ -46,7 +46,8 @@ class TxnRepositoryImplTest: BaseTest() {
         val transaction = repository.getTransactionResultById(1)
 
         // Then transaction is returned
-        assertThat((transaction as Success).data, IsEqual(txn1.toTxn()))
+        assertIs<Success<Txn>>(transaction)
+        assertEquals(txn1.toTxn(), transaction.data)
     }
 
     @Test
@@ -55,7 +56,8 @@ class TxnRepositoryImplTest: BaseTest() {
         val transactions = repository.getTransactionsResult()
 
         // Then transactions are loaded from local data source
-        assertThat((transactions as Success).data, IsEqual(localTransactions.map { it.toTxn() }))
+        assertIs<Success<List<Txn>>>(transactions)
+        assertEquals(localTransactions.map { it.toTxn() }, transactions.data)
     }
 
     @Test
@@ -64,7 +66,8 @@ class TxnRepositoryImplTest: BaseTest() {
         val transactions = repository.observeTransactionsResult().getOrAwaitValue()
 
         // Then transactions are loaded from local data source
-        assertThat((transactions as Success).data, IsEqual(localTransactions.map { it.toTxn() }))
+        assertIs<Success<List<Txn>>>(transactions)
+        assertEquals(localTransactions.map { it.toTxn() }, transactions.data)
     }
 
     @Test
@@ -74,10 +77,11 @@ class TxnRepositoryImplTest: BaseTest() {
 
         // Then transaction is added to all transactions
         val transactions = repository.getTransactionsResult()
-        assertThat((transactions as Success).data.size, IsEqual(3))
-        assertThat(transactions.data[0], IsEqual(txn1.toTxn()))
-        assertThat(transactions.data[1], IsEqual(txn2.toTxn()))
-        assertThat(transactions.data[2], IsEqual(txn3.toTxn()))
+        assertIs<Success<List<Txn>>>(transactions)
+        assertEquals(3, transactions.data.size)
+        assertEquals(txn1.toTxn(), transactions.data[0])
+        assertEquals(txn2.toTxn(), transactions.data[1])
+        assertEquals(txn3.toTxn(), transactions.data[2])
     }
 
     @Test
@@ -90,9 +94,10 @@ class TxnRepositoryImplTest: BaseTest() {
 
         // Then transaction is updated in all transactions
         val transactions = repository.getTransactionsResult()
-        assertThat((transactions as Success).data.size, IsEqual(2))
-        assertThat(transactions.data[0], IsEqual(txn2.toTxn()))
-        assertThat(transactions.data[1].id, IsEqual(1))
-        assertThat(transactions.data[1].description, IsEqual(updatedTxn1.description))
+        assertIs<Success<List<Txn>>>(transactions)
+        assertEquals(2, transactions.data.size)
+        assertEquals(txn2.toTxn(), transactions.data[0])
+        assertEquals(1, transactions.data[1].id)
+        assertEquals(updatedTxn1.description, transactions.data[1].description)
     }
 }

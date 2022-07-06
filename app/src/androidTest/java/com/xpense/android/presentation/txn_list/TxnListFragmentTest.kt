@@ -17,8 +17,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import com.xpense.android.R
 import com.xpense.android.di.ServiceLocator
-import com.xpense.android.domain.repository.FakeAndroidTxnRepository
 import com.xpense.android.domain.model.Txn
+import com.xpense.android.domain.repository.FakeAndroidTxnRepository
 import com.xpense.android.domain.repository.TxnRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
