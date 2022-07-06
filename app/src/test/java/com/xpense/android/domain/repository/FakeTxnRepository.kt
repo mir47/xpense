@@ -14,16 +14,12 @@ class FakeTxnRepository : TxnRepository {
 
     private val observableTransactions = MutableLiveData<Result<List<Txn>>>()
 
-    private var shouldReturnError = false
-
-    fun setReturnError(value: Boolean) {
-        shouldReturnError = value
-    }
+    var shouldReturnError = false
 
     override fun observeTransactionsResult(): LiveData<Result<List<Txn>>> =
         observableTransactions
 
-    override suspend fun saveTransaction(txnEntity: Txn) {
+    override suspend fun saveTransaction(txn: Txn) {
         TODO("Not yet implemented")
     }
 
@@ -38,10 +34,11 @@ class FakeTxnRepository : TxnRepository {
     }
 
     override suspend fun getTransactionsResult(): Result<List<Txn>> {
-        if (shouldReturnError) {
-            return Error(Exception("Test exception"))
+        return if (shouldReturnError) {
+            Error(Exception("Test exception"))
+        } else {
+            Success(transactionsServiceData.values.toList())
         }
-        return Success(transactionsServiceData.values.toList())
     }
 
     override suspend fun getTransactions(): List<Txn> {

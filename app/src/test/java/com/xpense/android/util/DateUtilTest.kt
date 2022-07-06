@@ -1,9 +1,8 @@
 package com.xpense.android.util
 
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
 import java.util.Date
+import kotlin.test.assertEquals
 
 class DateUtilTest {
     @Test
@@ -15,6 +14,6 @@ class DateUtilTest {
         val result = getFormattedDateString(date)
 
         // THEN the date is returned in the correct format
-        assertThat(result, `is`("2022-02-14"))
+        assertEquals("2022-02-14", result)
     }
 }

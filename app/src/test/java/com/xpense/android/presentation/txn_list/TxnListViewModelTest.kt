@@ -1,16 +1,17 @@
 package com.xpense.android.presentation.txn_list
 
 import com.xpense.android.BaseTest
-import com.xpense.android.domain.repository.FakeTxnRepository
 import com.xpense.android.data.Result.Success
 import com.xpense.android.domain.model.Txn
+import com.xpense.android.domain.repository.FakeTxnRepository
 import com.xpense.android.getOrAwaitValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.core.IsEqual
 import org.junit.Before
 import org.junit.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertIs
+import kotlin.test.assertTrue
 
 @ExperimentalCoroutinesApi
 class TxnListViewModelTest : BaseTest() {
@@ -39,7 +40,8 @@ class TxnListViewModelTest : BaseTest() {
         val transactions = viewModel.transactions.getOrAwaitValue()
 
         // Then
-        assertThat((transactions as Success).data.size, IsEqual(3))
+        assertIs<Success<List<Txn>>>(transactions)
+        assertEquals(3, transactions.data.size)
     }
 
     @Test
@@ -49,14 +51,14 @@ class TxnListViewModelTest : BaseTest() {
 
         // Then nav live data is set
         val navOn = viewModel.navigateToTxnAddEdit.getOrAwaitValue()
-        assertThat(navOn, IsEqual(true))
+        assertTrue(navOn)
 
         // When done navigating
         viewModel.doneNavigating()
 
         // Then nav live data is cleared
         val navOff = viewModel.navigateToTxnAddEdit.getOrAwaitValue()
-        assertThat(navOff, IsEqual(false))
+        assertFalse(navOff)
     }
 
     @Test
@@ -68,24 +70,24 @@ class TxnListViewModelTest : BaseTest() {
         viewModel.refresh()
 
         // Then assert that the progress indicator is shown
-        assertThat(viewModel.dataLoading.getOrAwaitValue(), `is`(true))
+        assertTrue(viewModel.dataLoading.getOrAwaitValue())
 
         // Execute pending coroutines actions
         resumeCoroutine()
 
         // Then assert that the progress indicator is hidden
-        assertThat(viewModel.dataLoading.getOrAwaitValue(), `is`(false))
+        assertFalse(viewModel.dataLoading.getOrAwaitValue())
     }
 
     @Test
     fun loadStatisticsWhenTasksAreUnavailable_callErrorToDisplay() {
         // Make the repository return errors
-        fakeRepository.setReturnError(true)
+        fakeRepository.shouldReturnError = true
 
         viewModel.refresh()
 
         // Then empty and error are true (which triggers an error message to be shown).
-        assertThat(viewModel.empty.getOrAwaitValue(), `is`(true))
-        assertThat(viewModel.error.getOrAwaitValue(), `is`(true))
+        assertTrue(viewModel.empty.getOrAwaitValue())
+        assertTrue(viewModel.error.getOrAwaitValue())
     }
 }

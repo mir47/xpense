@@ -5,20 +5,20 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
-import com.xpense.android.data.Result
+import com.xpense.android.data.Result.Success
 import com.xpense.android.data.source.local.model.TxnEntity
 import com.xpense.android.data.succeeded
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
-import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import kotlin.test.assertEquals
+import kotlin.test.assertIs
+import kotlin.test.assertTrue
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
@@ -62,9 +62,9 @@ class TxnDataSourceLocalTest {
 
         // THEN - Same transaction is returned.
         assertTrue(result.succeeded)
-        result as Result.Success
-        assertThat(result.data.amount, `is`(12.34))
-        assertThat(result.data.description, `is`("description"))
+        assertIs<Success<TxnEntity>>(result)
+        assertEquals(12.34, result.data.amount)
+        assertEquals("description", result.data.description)
     }
 
     @Test
@@ -79,7 +79,7 @@ class TxnDataSourceLocalTest {
         // THEN - transaction can be retrieved from local data source and is flagged.
         val result = localDataSource.getTransactionResultById(txn.transactionId)
         assertTrue(result.succeeded)
-        result as Result.Success
-        assertThat(result.data.flagged, `is`(true))
+        assertIs<Success<TxnEntity>>(result)
+        assertTrue(result.data.flagged)
     }
 }
