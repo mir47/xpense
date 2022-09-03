@@ -32,6 +32,11 @@
         android:title="@string/compose_basics_screen_title" />
 
     <item
+        android:id="@+id/txn_list_compose_fragment"
+        android:icon="@drawable/android"
+        android:title="@string/compose_txn_list_menu_item" />
+
+    <item
         android:id="@+id/txn_add_edit_compose_fragment"
         android:icon="@drawable/android"
         android:title="@string/compose_txn_menu_item" />
