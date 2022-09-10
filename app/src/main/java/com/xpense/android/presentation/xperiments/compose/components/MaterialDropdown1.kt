@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 @Composable
 fun MaterialDropdown1(
     modifier: Modifier = Modifier,
+    label: String = "MaterialDropdown",
     items: List<String>
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -42,7 +43,7 @@ fun MaterialDropdown1(
                 )
             },
             colors = ExposedDropdownMenuDefaults.textFieldColors(),
-            label = { Text("MaterialDropdown1") } // replace hard coded string with resource
+            label = { Text(label) } // replace hard coded string with resource
         )
 
         ExposedDropdownMenu(

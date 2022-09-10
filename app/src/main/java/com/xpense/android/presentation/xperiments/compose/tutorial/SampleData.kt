@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.xperiments.compose
+package com.xpense.android.presentation.xperiments.compose.tutorial
 
 object SampleData {
     // Sample conversation data

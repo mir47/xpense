@@ -39,17 +39,17 @@
     </fragment>
     <fragment
         android:id="@+id/compose_playground_fragment"
-        android:name="com.xpense.android.presentation.xperiments.compose.ComposePlaygroundFragment"
+        android:name="com.xpense.android.presentation.xperiments.compose.playground.ComposePlaygroundFragment"
         android:label="@string/compose_playground_screen_title" >
     </fragment>
     <fragment
         android:id="@+id/compose_tutorial_fragment"
-        android:name="com.xpense.android.presentation.xperiments.compose.ComposeTutorialFragment"
+        android:name="com.xpense.android.presentation.xperiments.compose.tutorial.ComposeTutorialFragment"
         android:label="@string/compose_tutorial_screen_title" >
     </fragment>
     <fragment
         android:id="@+id/compose_basics_fragment"
-        android:name="com.xpense.android.presentation.xperiments.compose.ComposeBasicsFragment"
+        android:name="com.xpense.android.presentation.xperiments.compose.basics.ComposeBasicsFragment"
         android:label="@string/compose_basics_screen_title" >
     </fragment>
     <fragment
@@ -76,7 +76,7 @@
     </fragment>
     <fragment
         android:id="@+id/compose_examples_fragment"
-        android:name="com.xpense.android.presentation.xperiments.compose.components.ExamplesFragment"
+        android:name="com.xpense.android.presentation.xperiments.compose.examples.ExamplesFragment"
         android:label="Compose Examples" >
     </fragment>
     <fragment

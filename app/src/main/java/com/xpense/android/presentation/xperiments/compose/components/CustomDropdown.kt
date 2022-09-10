@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.toSize
 @Composable
 fun CustomDropdown(
     modifier: Modifier = Modifier,
+    label: String = "CustomDropdown",
     items: List<String>,
     onItemSelect: (item: String) -> Unit
 ) {
@@ -63,7 +64,7 @@ fun CustomDropdown(
                     // the DropDown the same width
                     textFieldSize = coordinates.size.toSize()
                 },
-            label = { Text(text = "CustomDropdown") },
+            label = { Text(text = label) },
             trailingIcon = {
                 Icon(icon,"contentDescription",
                     Modifier.clickable { expanded = !expanded })

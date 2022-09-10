@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.xperiments.compose.components
+package com.xpense.android.presentation.xperiments.compose.examples
 
 import android.os.Bundle
 import android.view.LayoutInflater

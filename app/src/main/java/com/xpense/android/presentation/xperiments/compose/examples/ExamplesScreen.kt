@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.xperiments.compose.components
+package com.xpense.android.presentation.xperiments.compose.examples
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,6 +10,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.xpense.android.presentation.xperiments.compose.components.CustomDropdown
+import com.xpense.android.presentation.xperiments.compose.components.MaterialDropdown1
+import com.xpense.android.presentation.xperiments.compose.components.MaterialDropdown2
 
 @ExperimentalMaterialApi
 @Preview
