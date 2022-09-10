@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.legacy.txn_list
+package com.xpense.android.presentation.txn.legacy.list
 
 import com.xpense.android.BaseTest
 import com.xpense.android.data.Result.Success

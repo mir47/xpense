@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.legacy.txn_add_edit
+package com.xpense.android.presentation.txn.legacy.add_edit
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData

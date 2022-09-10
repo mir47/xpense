@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.legacy.txn_list
+package com.xpense.android.presentation.txn.legacy.list
 
 import android.os.Bundle
 import androidx.fragment.app.testing.launchFragmentInContainer

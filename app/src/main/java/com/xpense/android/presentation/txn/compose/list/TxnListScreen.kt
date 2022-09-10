@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.xperiments.compose.txn_list
+package com.xpense.android.presentation.txn.compose.list
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -19,7 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.xpense.android.presentation.xperiments.compose.txn_list.components.TxnListItem
+import com.xpense.android.presentation.txn.compose.list.components.TxnListItem
 
 @ExperimentalMaterialApi
 @Composable

@@ -15,7 +15,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.xpense.android.R
 import com.xpense.android.databinding.ActivityMainBinding
-import com.xpense.android.presentation.legacy.txn_list.LegacyTxnListFragmentDirections
+import com.xpense.android.presentation.txn.legacy.list.LegacyTxnListFragmentDirections
 import com.xpense.android.util.SMS_EXTRA
 
 class MainActivity : AppCompatActivity() {

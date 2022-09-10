@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.xpense.android.presentation.legacy.txn_add_edit.LegacyTxnAddEditViewModel" />
+            type="com.xpense.android.presentation.txn.legacy.add_edit.LegacyTxnAddEditViewModel" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat

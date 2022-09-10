@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.xperiments.compose.txn_list.components
+package com.xpense.android.presentation.txn.compose.list.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement

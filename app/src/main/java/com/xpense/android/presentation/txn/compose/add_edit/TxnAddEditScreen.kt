@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.xperiments.compose.txn_add_edit
+package com.xpense.android.presentation.txn.compose.add_edit
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
