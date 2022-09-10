@@ -12,9 +12,24 @@
         android:title="@string/android_experiments_menu_item" />
 
     <item
+        android:id="@+id/compose_txn_list_fragment"
+        android:icon="@drawable/android"
+        android:title="@string/compose_txn_menu_item" />
+
+    <item
+        android:id="@+id/legacy_txn_list_fragment"
+        android:icon="@drawable/android"
+        android:title="@string/legacy_txn_menu_item" />
+
+    <item
         android:id="@+id/my_android_view_model_fragment"
         android:icon="@drawable/android"
         android:title="@string/android_view_model_menu_item" />
+
+    <item
+        android:id="@+id/compose_examples_fragment"
+        android:icon="@drawable/android"
+        android:title="@string/compose_examples_menu_item" />
 
     <item
         android:id="@+id/compose_playground_fragment"
@@ -30,16 +45,6 @@
         android:id="@+id/compose_basics_fragment"
         android:icon="@drawable/android"
         android:title="@string/compose_basics_screen_title" />
-
-    <item
-        android:id="@+id/txn_list_compose_fragment"
-        android:icon="@drawable/android"
-        android:title="@string/compose_txn_list_menu_item" />
-
-    <item
-        android:id="@+id/txn_add_edit_compose_fragment"
-        android:icon="@drawable/android"
-        android:title="@string/compose_txn_menu_item" />
 
     <item
         android:id="@+id/auth_fragment"

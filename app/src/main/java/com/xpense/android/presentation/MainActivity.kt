@@ -15,7 +15,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.xpense.android.R
 import com.xpense.android.databinding.ActivityMainBinding
-import com.xpense.android.presentation.txn_list.TxnListFragmentDirections
+import com.xpense.android.presentation.txn.legacy.list.LegacyTxnListFragmentDirections
 import com.xpense.android.util.SMS_EXTRA
 
 class MainActivity : AppCompatActivity() {
@@ -58,8 +58,8 @@ class MainActivity : AppCompatActivity() {
         // check if launched from notification from SMS detection
         intent?.extras?.getString(SMS_EXTRA)?.let {
             navController.navigate(
-                TxnListFragmentDirections
-                    .actionTxnListFragmentToTxnAddEditFragment()
+                LegacyTxnListFragmentDirections
+                    .actionLegacyTxnListFragmentToTxnAddEditFragment()
                     .setSms(it)
             )
         }

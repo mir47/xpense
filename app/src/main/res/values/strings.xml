@@ -19,11 +19,12 @@
     <string name="green_question_mark">Green Question Mark</string>
     <string name="main_screen_title">Xpense</string>
     <string name="transaction_screen_title">Transaction</string>
+    <string name="compose_examples_menu_item">Compose Examples</string>
     <string name="compose_playground_screen_title">Compose Playground</string>
     <string name="compose_tutorial_screen_title">Compose Tutorial</string>
     <string name="compose_basics_screen_title">Compose Basics</string>
-    <string name="compose_txn_list_menu_item">Compose Transaction List</string>
-    <string name="compose_txn_menu_item">Compose Transaction</string>
+    <string name="compose_txn_menu_item">Transactions (Compose)</string>
+    <string name="legacy_txn_menu_item">Transactions (Legacy)</string>
     <string name="about_screen_title">About</string>
     <string name="about_menu_item">About</string>
     <string name="about_text">Xpense is an app to help keep track of your expenses and budget.\n\nIt is currently in early development with more updates in the works.</string>
