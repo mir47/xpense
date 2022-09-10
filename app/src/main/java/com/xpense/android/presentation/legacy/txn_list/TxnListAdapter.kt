@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.txn_list
+package com.xpense.android.presentation.legacy.txn_list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

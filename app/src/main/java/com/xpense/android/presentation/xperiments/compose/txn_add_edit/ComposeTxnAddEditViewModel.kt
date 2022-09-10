@@ -11,7 +11,7 @@ import com.xpense.android.domain.repository.TxnRepository
 import kotlinx.coroutines.launch
 import java.util.Date
 
-class TxnAddEditComposeViewModel(
+class ComposeTxnAddEditViewModel(
     private val txnId: Long,
     private val txnRepo: TxnRepository
 ) : ViewModel() {
@@ -94,6 +94,6 @@ class TxnAddEditComposeViewModel(
         private val txnRepo: TxnRepository
     ) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel> create(modelClass: Class<T>) =
-            TxnAddEditComposeViewModel(txnId, txnRepo) as T
+            ComposeTxnAddEditViewModel(txnId, txnRepo) as T
     }
 }

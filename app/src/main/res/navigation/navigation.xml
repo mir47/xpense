@@ -3,27 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/txn_list_fragment">
+    app:startDestination="@id/legacy_txn_list_fragment">
 
     <fragment
-        android:id="@+id/txn_list_fragment"
-        android:name="com.xpense.android.presentation.txn_list.TxnListFragment"
+        android:id="@+id/legacy_txn_list_fragment"
+        android:name="com.xpense.android.presentation.legacy.txn_list.LegacyTxnListFragment"
         android:label="@string/main_screen_title"
-        tools:layout="@layout/fragment_txn_list" >
+        tools:layout="@layout/fragment_legacy_txn_list" >
         <action
-            android:id="@+id/action_txn_list_fragment_to_txn_add_edit_fragment"
-            app:destination="@id/transaction_add_edit_fragment"
+            android:id="@+id/action_legacy_txn_list_fragment_to_txn_add_edit_fragment"
+            app:destination="@id/legacy_txn_add_edit_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@+id/txn_list_fragment" />
+            app:popUpTo="@+id/legacy_txn_list_fragment" />
     </fragment>
     <fragment
-        android:id="@+id/transaction_add_edit_fragment"
-        android:name="com.xpense.android.presentation.txn_add_edit.TxnAddEditFragment"
+        android:id="@+id/legacy_txn_add_edit_fragment"
+        android:name="com.xpense.android.presentation.legacy.txn_add_edit.LegacyTxnAddEditFragment"
         android:label="@string/transaction_screen_title"
-        tools:layout="@layout/fragment_txn_add_edit">
+        tools:layout="@layout/fragment_legacy_txn_add_edit">
         <deepLink
             android:id="@+id/deepLink"
             app:uri="xpense://xpense.com/transaction" />
@@ -53,21 +53,21 @@
         android:label="@string/compose_basics_screen_title" >
     </fragment>
     <fragment
-        android:id="@+id/txn_list_compose_fragment"
-        android:name="com.xpense.android.presentation.xperiments.compose.txn_list.TxnListComposeFragment"
+        android:id="@+id/compose_txn_list_fragment"
+        android:name="com.xpense.android.presentation.xperiments.compose.txn_list.ComposeTxnListFragment"
         android:label="@string/main_screen_title" >
         <action
-            android:id="@+id/action_txn_list_compose_fragment_to_txn_add_edit_compose_fragment"
-            app:destination="@id/txn_add_edit_compose_fragment"
+            android:id="@+id/action_compose_txn_list_fragment_to_compose_txn_add_edit_fragment"
+            app:destination="@id/compose_txn_add_edit_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@+id/txn_list_compose_fragment" />
+            app:popUpTo="@+id/compose_txn_list_fragment" />
     </fragment>
     <fragment
-        android:id="@+id/txn_add_edit_compose_fragment"
-        android:name="com.xpense.android.presentation.xperiments.compose.txn_add_edit.TxnAddEditComposeFragment"
+        android:id="@+id/compose_txn_add_edit_fragment"
+        android:name="com.xpense.android.presentation.xperiments.compose.txn_add_edit.ComposeTxnAddEditFragment"
         android:label="@string/transaction_screen_title" >
         <argument
             android:name="transactionId"

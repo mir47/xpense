@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.xperiments.compose.txn_add_edit
+package com.xpense.android.presentation.xperiments.compose.txn_list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,15 +10,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.xpense.android.XpenseApplication
+import com.xpense.android.domain.use_case.get_txns.GetTxnsUseCase
 import com.xpense.android.presentation.ui.theme.XpenseTheme
 
 @ExperimentalMaterialApi
-class TxnAddEditComposeFragment : Fragment() {
+class ComposeTxnListFragment : Fragment() {
 
-    private val viewModel by viewModels<TxnAddEditComposeViewModel> {
-        TxnAddEditComposeViewModel.TxnAddEditComposeViewModelFactory(
-            TxnAddEditComposeFragmentArgs.fromBundle(requireArguments()).transactionId,
-            (requireContext().applicationContext as XpenseApplication).txnRepository
+    private val viewModel by viewModels<ComposeTxnListViewModel> {
+        ComposeTxnListViewModel.TxnListComposeViewModelFactory(
+            GetTxnsUseCase(
+                (requireContext().applicationContext as XpenseApplication).txnRepository
+            )
         )
     }
 
@@ -27,19 +29,17 @@ class TxnAddEditComposeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel.navigateExit.observe(viewLifecycleOwner) {
-            if (it) {
-                findNavController().popBackStack()
-                viewModel.doneNavigating()
-            }
-        }
-
         return ComposeView(requireContext()).apply {
             setContent {
                 XpenseTheme {
-                    TxnAddEditComposeScreen()
+                    TxnListScreen(findNavController(), viewModel)
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getTxns()
     }
 }

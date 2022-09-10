@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.txn_add_edit
+package com.xpense.android.presentation.legacy.txn_add_edit
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
@@ -12,7 +12,7 @@ import com.xpense.android.domain.repository.TxnRepository
 import kotlinx.coroutines.launch
 import java.util.Date
 
-class TxnAddEditViewModel(
+class LegacyTxnAddEditViewModel(
     private val transactionId: Long,
     private val transactionSms: String?,
     private val txnRepository: TxnRepository
@@ -97,6 +97,6 @@ class TxnAddEditViewModel(
         private val txnRepository: TxnRepository
     ) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel> create(modelClass: Class<T>) =
-            TxnAddEditViewModel(transactionId, transactionSms, txnRepository) as T
+            LegacyTxnAddEditViewModel(transactionId, transactionSms, txnRepository) as T
     }
 }

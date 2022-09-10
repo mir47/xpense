@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.txn_list
+package com.xpense.android.presentation.legacy.txn_list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,12 +15,12 @@ import androidx.navigation.ui.NavigationUI
 import com.xpense.android.R
 import com.xpense.android.XpenseApplication
 import com.xpense.android.data.Result.Success
-import com.xpense.android.databinding.FragmentTxnListBinding
+import com.xpense.android.databinding.FragmentLegacyTxnListBinding
 
-class TxnListFragment : Fragment() {
+class LegacyTxnListFragment : Fragment() {
 
-    private val _viewModel by viewModels<TxnListViewModel> {
-        TxnListViewModel.TxnListViewModelFactory(
+    private val _viewModel by viewModels<LegacyTxnListViewModel> {
+        LegacyTxnListViewModel.TxnListViewModelFactory(
             (requireContext().applicationContext as XpenseApplication).txnRepository
         )
     }
@@ -30,8 +30,8 @@ class TxnListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: FragmentTxnListBinding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_txn_list, container, false)
+        val binding: FragmentLegacyTxnListBinding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_legacy_txn_list, container, false)
 
         binding.viewModel = _viewModel
 
@@ -42,7 +42,7 @@ class TxnListFragment : Fragment() {
         _viewModel.navigateToTxnAddEdit.observe(viewLifecycleOwner) {
             if (it) {
                 findNavController().navigate(
-                    TxnListFragmentDirections.actionTxnListFragmentToTxnAddEditFragment()
+                    LegacyTxnListFragmentDirections.actionLegacyTxnListFragmentToTxnAddEditFragment()
                 )
                 _viewModel.doneNavigating()
             }
@@ -51,7 +51,7 @@ class TxnListFragment : Fragment() {
         val txnListAdapter = TxnListAdapter(TxnListener { txnId ->
             // TODO: click logic should be handled in the view model, with navigation event sent to fragment via LiveData
             findNavController().navigate(
-                TxnListFragmentDirections.actionTxnListFragmentToTxnAddEditFragment()
+                LegacyTxnListFragmentDirections.actionLegacyTxnListFragmentToTxnAddEditFragment()
                     .setTransactionId(txnId)
             )
         })

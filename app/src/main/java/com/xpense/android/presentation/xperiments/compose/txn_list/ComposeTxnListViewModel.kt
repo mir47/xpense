@@ -10,7 +10,7 @@ import com.xpense.android.domain.use_case.get_txns.GetTxnsUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
-class TxnListComposeViewModel(
+class ComposeTxnListViewModel(
     private val getTxnsUseCase: GetTxnsUseCase
 ) : ViewModel() {
 
@@ -39,6 +39,6 @@ class TxnListComposeViewModel(
         private val getTxnsUseCase: GetTxnsUseCase
     ) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel> create(modelClass: Class<T>) =
-            TxnListComposeViewModel(getTxnsUseCase) as T
+            ComposeTxnListViewModel(getTxnsUseCase) as T
     }
 }

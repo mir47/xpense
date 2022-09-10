@@ -24,8 +24,8 @@ import com.xpense.android.presentation.xperiments.compose.components.MaterialDro
 @ExperimentalMaterialApi
 @Preview
 @Composable
-fun TxnAddEditComposeScreen() {
-    val viewModel: TxnAddEditComposeViewModel = viewModel()
+fun TxnAddEditScreen() {
+    val viewModel: ComposeTxnAddEditViewModel = viewModel()
 
     var amount by remember { mutableStateOf(viewModel.amount) }
     var description by remember { mutableStateOf(viewModel.description) }

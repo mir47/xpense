@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.txn_list
+package com.xpense.android.presentation.legacy.txn_list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +11,7 @@ import com.xpense.android.data.Result.Success
 import com.xpense.android.domain.repository.TxnRepository
 import kotlinx.coroutines.launch
 
-class TxnListViewModel(
+class LegacyTxnListViewModel(
     private val txnRepository: TxnRepository
 ) : ViewModel() {
 
@@ -65,6 +65,6 @@ class TxnListViewModel(
         private val txnRepository: TxnRepository
     ) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel> create(modelClass: Class<T>) =
-            TxnListViewModel(txnRepository) as T
+            LegacyTxnListViewModel(txnRepository) as T
     }
 }

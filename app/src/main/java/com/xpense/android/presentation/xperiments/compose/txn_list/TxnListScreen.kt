@@ -25,7 +25,7 @@ import com.xpense.android.presentation.xperiments.compose.txn_list.components.Tx
 @Composable
 fun TxnListScreen(
     navController: NavController,
-    viewModel: TxnListComposeViewModel
+    viewModel: ComposeTxnListViewModel
 ) {
 
     val state = viewModel.state.value
@@ -37,8 +37,8 @@ fun TxnListScreen(
                     txn = txn,
                     onItemClick = {
                         navController.navigate(
-                            TxnListComposeFragmentDirections
-                                .actionTxnListComposeFragmentToTxnAddEditComposeFragment()
+                            ComposeTxnListFragmentDirections
+                                .actionComposeTxnListFragmentToComposeTxnAddEditFragment()
                                 .setTransactionId(txn.id)
                         )
                     }
@@ -52,8 +52,8 @@ fun TxnListScreen(
                 .align(alignment = Alignment.BottomEnd),
             onClick = {
                 navController.navigate(
-                    TxnListComposeFragmentDirections
-                        .actionTxnListComposeFragmentToTxnAddEditComposeFragment()
+                    ComposeTxnListFragmentDirections
+                        .actionComposeTxnListFragmentToComposeTxnAddEditFragment()
                 )
             }
         ) {

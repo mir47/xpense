@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.txn_list
+package com.xpense.android.presentation.legacy.txn_list
 
 import com.xpense.android.BaseTest
 import com.xpense.android.data.Result.Success
@@ -14,13 +14,13 @@ import kotlin.test.assertIs
 import kotlin.test.assertTrue
 
 @ExperimentalCoroutinesApi
-class TxnListViewModelTest : BaseTest() {
+class LegacyTxnListViewModelTest : BaseTest() {
 
     // Use a fake repository to be injected into the ViewModel
     private lateinit var fakeRepository: FakeTxnRepository
 
     // Subject under test
-    private lateinit var viewModel: TxnListViewModel
+    private lateinit var viewModel: LegacyTxnListViewModel
 
     @Before
     fun setupViewModel() {
@@ -31,7 +31,7 @@ class TxnListViewModelTest : BaseTest() {
         val txn3 = Txn(id = 3)
         fakeRepository.addTransactions(txn1, txn2, txn3)
 
-        viewModel = TxnListViewModel(fakeRepository)
+        viewModel = LegacyTxnListViewModel(fakeRepository)
     }
 
     @Test

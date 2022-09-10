@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.txn_list
+package com.xpense.android.presentation.legacy.txn_list
 
 import android.os.Bundle
 import androidx.fragment.app.testing.launchFragmentInContainer
@@ -32,7 +32,7 @@ import org.mockito.Mockito.verify
 @MediumTest
 @RunWith(AndroidJUnit4::class)
 @ExperimentalCoroutinesApi
-class TxnListFragmentTest {
+class LegacyTxnListFragmentTest {
 
     private lateinit var repository: TxnRepository
 
@@ -54,7 +54,7 @@ class TxnListFragmentTest {
         repository.saveTransaction(Txn(2, amount = 2.22, description = "two"))
 
         // WHEN - Details fragment launched to display task
-        launchFragmentInContainer<TxnListFragment>(Bundle(), R.style.Theme_Xpense)
+        launchFragmentInContainer<LegacyTxnListFragment>(Bundle(), R.style.Theme_Xpense)
 
 //        Thread.sleep(2000)
 
@@ -104,7 +104,7 @@ class TxnListFragmentTest {
         repository.saveTransaction(Txn(1, amount = 1.2, description = "one"))
         repository.saveTransaction(Txn(2, amount = 2.22, description = "two"))
 
-        val scenario = launchFragmentInContainer<TxnListFragment>(Bundle(), R.style.Theme_Xpense)
+        val scenario = launchFragmentInContainer<LegacyTxnListFragment>(Bundle(), R.style.Theme_Xpense)
 
         // Use Mockito to create NavController mock
         val navController = mock(NavController::class.java)
@@ -119,8 +119,8 @@ class TxnListFragmentTest {
 
         // THEN - Verify navigation with correct param(s)
         verify(navController).navigate(
-            TxnListFragmentDirections
-                .actionTxnListFragmentToTxnAddEditFragment()
+            LegacyTxnListFragmentDirections
+                .actionLegacyTxnListFragmentToTxnAddEditFragment()
                 .setTransactionId(1)
         )
 
@@ -131,8 +131,8 @@ class TxnListFragmentTest {
 
         // THEN - Verify navigation with correct param(s)
         verify(navController).navigate(
-            TxnListFragmentDirections
-                .actionTxnListFragmentToTxnAddEditFragment()
+            LegacyTxnListFragmentDirections
+                .actionLegacyTxnListFragmentToTxnAddEditFragment()
                 .setTransactionId(2)
         )
     }
