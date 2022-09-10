@@ -75,6 +75,11 @@
             app:argType="long" />
     </fragment>
     <fragment
+        android:id="@+id/compose_examples_fragment"
+        android:name="com.xpense.android.presentation.xperiments.compose.components.ExamplesFragment"
+        android:label="Compose Examples" >
+    </fragment>
+    <fragment
         android:id="@+id/about_fragment"
         android:name="com.xpense.android.presentation.about.AboutFragment"
         android:label="@string/about_screen_title"
