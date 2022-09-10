@@ -21,7 +21,7 @@ class TxnListComposeViewModel(
         getTxns()
     }
 
-    private fun getTxns() {
+    fun getTxns() {
         getTxnsUseCase().onEach { result ->
             when (result) {
                 is Resource.Success -> _state.value =

@@ -19,6 +19,7 @@ class TxnAddEditComposeViewModel(
     // TODO: use state instead of public fields
     var amount: String = ""
     var description: String = ""
+    var items = listOf("Travel", "Food", "Rent")
 
     /**
      * Variable that tells the Fragment to close.

@@ -37,4 +37,9 @@ class TxnListComposeFragment : Fragment() {
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getTxns()
+    }
 }
