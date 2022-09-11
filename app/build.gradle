@@ -170,6 +170,7 @@ dependencies {
     debugImplementation "androidx.fragment:fragment-testing:$version_fragment"
     implementation "androidx.test:core:$version_androidx_test_core"
 
-    // UI Tests
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$version_compose_ui_test_junit4"
+    // Compose testing dependencies
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$version_compose"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$version_compose"
 }
