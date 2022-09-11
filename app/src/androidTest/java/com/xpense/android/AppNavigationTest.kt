@@ -1,6 +1,11 @@
 package com.xpense.android
 
 import android.view.Gravity
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.printToLog
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
@@ -26,12 +31,17 @@ import com.xpense.android.util.monitorActivity
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
 class AppNavigationTest {
+
+    @Rule
+    @JvmField
+    val composeTestRule = createAndroidComposeRule<MainActivity>()
 
     private lateinit var repository: TxnRepository
 
@@ -100,7 +110,7 @@ class AppNavigationTest {
     }
 
     @Test
-    fun txnScreen_upButton() = runBlocking {
+    fun legacyTxnScreen_upButton() = runBlocking {
         // Set initial state
         val txn = Txn(id = 1, amount = 12.34, description = "description")
         repository.saveTransaction(txn)
@@ -115,6 +125,64 @@ class AppNavigationTest {
 
         // Check correct screen displayed
         onView(withText("Transaction"))
+            .check(matches(isDisplayed()))
+
+        // Click up button
+        onView(withContentDescription("Navigate up"))
+            .check(matches(isDisplayed()))
+            .perform(click())
+
+        // Check correct screen displayed
+        onView(withId(R.id.transaction_list))
+            .check(matches(isDisplayed()))
+
+        // When using ActivityScenario.launch(), always call close()
+        activityScenario.close()
+    }
+
+    @Test
+    fun composeTxnScreen_upButton() = runBlocking {
+        // Start activity
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+        dataBindingIdlingResource.monitorActivity(activityScenario)
+
+        // Open drawer by clicking drawer icon
+        onView(withContentDescription("Open navigation drawer"))
+            .check(matches(isDisplayed()))
+            .perform(click())
+
+        // Check drawer open
+        onView(withId(R.id.drawer_layout))
+            .check(matches(isOpen(Gravity.START)))
+
+        // Click drawer menu item
+        onView(withId(R.id.compose_txn_list_fragment))
+            .perform(click())
+
+        // Check correct screen displayed
+        onView(withText("Xpense"))
+            .check(matches(isDisplayed()))
+
+        composeTestRule
+            .onRoot(useUnmergedTree = true)
+            .printToLog("mmmmm1")
+
+        composeTestRule
+            .onNodeWithContentDescription("FAB")
+            .assertExists()
+            .performClick()
+
+        // Check correct screen displayed
+        onView(withText("Transaction"))
+            .check(matches(isDisplayed()))
+
+        // Click up button
+        onView(withContentDescription("Navigate up"))
+            .check(matches(isDisplayed()))
+            .perform(click())
+
+        // Check correct screen displayed
+        onView(withText("Xpense"))
             .check(matches(isDisplayed()))
 
         // Click up button
