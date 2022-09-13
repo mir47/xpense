@@ -7,9 +7,11 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.platform.ComposeView
 import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import com.xpense.android.R
+import com.xpense.android.presentation.ui.theme.XpenseTheme
 
 class AboutFragment : Fragment() {
 
@@ -18,9 +20,14 @@ class AboutFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_about, container, false)
-        setHasOptionsMenu(true)
-        return view
+        return ComposeView(requireContext()).apply {
+            setHasOptionsMenu(true)
+            setContent {
+                XpenseTheme {
+                    AboutScreen()
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

@@ -4,22 +4,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.xpense.android.databinding.FragmentMyAndroidViewModelBinding
+import com.xpense.android.presentation.ui.theme.XpenseTheme
 
 class MyAndroidViewModelFragment : Fragment() {
 
-    private val _viewModel by viewModels<MyAndroidViewModel>()
+    private val vm by viewModels<MyAndroidViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentMyAndroidViewModelBinding.inflate(inflater)
-        binding.viewModel = _viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
-        return binding.root
+        return ComposeView(requireContext()).apply {
+            setContent {
+                XpenseTheme {
+                    MyAndroidViewModelScreen(vm)
+                }
+            }
+        }
     }
 }
