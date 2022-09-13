@@ -1,9 +1,9 @@
 package com.xpense.android.presentation.xperiments.androidviewmodel
 
 import android.app.Application
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.xpense.android.R
 
 /**
@@ -13,10 +13,7 @@ import com.xpense.android.R
  */
 class MyAndroidViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _text = MutableLiveData<String>()
-    val text: LiveData<String> = _text
+    private val _text = mutableStateOf(application.getString(R.string.android_view_model_text))
+    val text: State<String> = _text
 
-    init {
-        _text.value = application.getString(R.string.android_view_model_text)
-    }
 }

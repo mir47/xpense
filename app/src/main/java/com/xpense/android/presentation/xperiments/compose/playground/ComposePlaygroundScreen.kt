@@ -10,7 +10,34 @@ import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+
+@Composable
+fun ComposePlaygroundScreen() {
+    var clicks by remember { mutableStateOf(0) }
+
+    Column {
+        var selectAll by remember { mutableStateOf(false) }
+
+        MyCheckbox(
+            selectAll = selectAll,
+            onSelectAll = { selectAll = it }
+        )
+
+        ClickCounter(clicks) { clicks++ }
+
+        var nameHeader by remember { mutableStateOf("New Header") }
+        NamePicker(
+            header = nameHeader,
+            names = listOf("Bill", "Linus", "Elon", "Jobs"),
+            onNameClicked = { nameHeader = it }
+        )
+    }
+}
 
 @Composable
 fun ClickCounter(
