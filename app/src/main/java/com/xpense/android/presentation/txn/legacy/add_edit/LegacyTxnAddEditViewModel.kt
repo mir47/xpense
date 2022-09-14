@@ -91,7 +91,7 @@ class LegacyTxnAddEditViewModel(
     }
 
     @Suppress("UNCHECKED_CAST")
-    class TxnAddEditViewModelFactory (
+    class LegacyTxnAddEditViewModelFactory (
         private val transactionId: Long,
         private val transactionSms: String?,
         private val txnRepository: TxnRepository

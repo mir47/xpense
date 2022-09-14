@@ -35,7 +35,7 @@ class ComposeTxnListViewModel(
     }
 
     @Suppress("UNCHECKED_CAST")
-    class TxnListComposeViewModelFactory (
+    class ComposeTxnListViewModelFactory (
         private val getTxnsUseCase: GetTxnsUseCase
     ) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel> create(modelClass: Class<T>) =
