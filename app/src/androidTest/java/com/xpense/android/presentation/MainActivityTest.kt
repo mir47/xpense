@@ -1,19 +1,14 @@
 package com.xpense.android.presentation
 
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTextReplacement
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.replaceText
-import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import com.xpense.android.R
 import com.xpense.android.di.ServiceLocator
 import com.xpense.android.domain.model.Txn
 import com.xpense.android.domain.repository.TxnRepository
@@ -23,12 +18,18 @@ import com.xpense.android.util.monitorActivity
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import kotlin.test.Ignore
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
+
+    @Rule
+    @JvmField
+    val composeTestRule = createAndroidComposeRule<MainActivity>()
 
     private lateinit var repository: TxnRepository
 
@@ -72,6 +73,7 @@ class MainActivityTest {
         IdlingRegistry.getInstance().unregister(dataBindingIdlingResource)
     }
 
+    @Ignore("example test, does nothing")
     @Test
     fun templateTest() = runBlocking {
         // Set initial state.
@@ -102,26 +104,45 @@ class MainActivityTest {
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
         dataBindingIdlingResource.monitorActivity(activityScenario)
 
-        // Click on the transaction on the list and verify that all the data is correct.
-        onView(withText("R 12.34")).check(matches(isDisplayed()))
-        onView(withText("description")).check(matches(isDisplayed())).perform(click())
-        onView(withId(R.id.amount_input)).check(matches(withText("12.34")))
-        onView(withId(R.id.description_input)).check(matches(withText("description")))
+        // Click on the transaction on the list
+        composeTestRule
+            .onNodeWithText("R 12.34")
+            .assertExists()
+        composeTestRule
+            .onNodeWithText("description")
+            .assertExists()
+            .performClick()
 
-        // Edit and click on the save button
-        onView(withId(R.id.amount_input)).perform(replaceText("21.43"))
-        onView(withId(R.id.description_input)).perform(replaceText("new description"))
-        onView(withId(R.id.save_button)).perform(click())
+        // Check that all the data is correct, and edit the data
+        composeTestRule
+            .onNodeWithText("12.34")
+            .assertExists()
+            .performTextReplacement("21.43")
+        composeTestRule
+            .onNodeWithText("description")
+            .assertExists()
+            .performTextReplacement("new description")
+
+        // Click on the save button
+        composeTestRule
+            .onNodeWithText("save", ignoreCase = true)
+            .performClick()
 
         // Verify transaction is displayed on screen in the transaction list.
-        onView(withText("R 21.43")).check(matches(isDisplayed()))
+        composeTestRule
+            .onNodeWithText("R 21.43")
+            .assertExists()
+
         // Verify previous transaction is not displayed.
-        onView(withText("R 12.34")).check(doesNotExist())
+        composeTestRule
+            .onNodeWithText("R 12.34")
+            .assertDoesNotExist()
 
         // Make sure the activity is closed before resetting the db:
         activityScenario.close()
     }
 
+    @Ignore("TODO: implement")
     @Test
     fun createOneTransaction_deleteTransaction() {
 

@@ -3,6 +3,7 @@ package com.xpense.android
 import android.view.Gravity
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.printToLog
@@ -119,6 +120,19 @@ class AppNavigationTest {
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
         dataBindingIdlingResource.monitorActivity(activityScenario)
 
+        // Open drawer by clicking drawer icon
+        onView(withContentDescription("Open navigation drawer"))
+            .check(matches(isDisplayed()))
+            .perform(click())
+
+        // Check drawer open
+        onView(withId(R.id.drawer_layout))
+            .check(matches(isOpen(Gravity.START)))
+
+        // Click drawer menu item
+        onView(withId(R.id.legacy_txn_list_fragment))
+            .perform(click())
+
         // Click list item
         onView(withText("description"))
             .perform(click())
@@ -136,6 +150,15 @@ class AppNavigationTest {
         onView(withId(R.id.transaction_list))
             .check(matches(isDisplayed()))
 
+        // Click up button
+        onView(withContentDescription("Navigate up"))
+            .check(matches(isDisplayed()))
+            .perform(click())
+
+        // Check correct screen displayed
+        onView(withText("Xpense"))
+            .check(matches(isDisplayed()))
+
         // When using ActivityScenario.launch(), always call close()
         activityScenario.close()
     }
@@ -145,19 +168,6 @@ class AppNavigationTest {
         // Start activity
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
         dataBindingIdlingResource.monitorActivity(activityScenario)
-
-        // Open drawer by clicking drawer icon
-        onView(withContentDescription("Open navigation drawer"))
-            .check(matches(isDisplayed()))
-            .perform(click())
-
-        // Check drawer open
-        onView(withId(R.id.drawer_layout))
-            .check(matches(isOpen(Gravity.START)))
-
-        // Click drawer menu item
-        onView(withId(R.id.compose_txn_list_fragment))
-            .perform(click())
 
         // Check correct screen displayed
         onView(withText("Xpense"))
@@ -185,15 +195,6 @@ class AppNavigationTest {
         onView(withText("Xpense"))
             .check(matches(isDisplayed()))
 
-        // Click up button
-        onView(withContentDescription("Navigate up"))
-            .check(matches(isDisplayed()))
-            .perform(click())
-
-        // Check correct screen displayed
-        onView(withId(R.id.transaction_list))
-            .check(matches(isDisplayed()))
-
         // When using ActivityScenario.launch(), always call close()
         activityScenario.close()
     }
@@ -208,9 +209,10 @@ class AppNavigationTest {
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
         dataBindingIdlingResource.monitorActivity(activityScenario)
 
-        // Click list item
-        onView(withText("description"))
-            .perform(click())
+        composeTestRule
+            .onNodeWithText("description")
+            .assertExists()
+            .performClick()
 
         // Check correct screen displayed
         onView(withText("Transaction"))
@@ -220,7 +222,8 @@ class AppNavigationTest {
         pressBack()
 
         // Check correct screen displayed
-        onView(withId(R.id.transaction_list))
+        // todo: check that transaction list is displayed
+        onView(withText("Xpense"))
             .check(matches(isDisplayed()))
 
         // When using ActivityScenario.launch(), always call close()

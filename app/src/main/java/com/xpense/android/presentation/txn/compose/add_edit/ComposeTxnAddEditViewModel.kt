@@ -1,5 +1,7 @@
 package com.xpense.android.presentation.txn.compose.add_edit
 
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,10 +18,11 @@ class ComposeTxnAddEditViewModel(
     private val txnRepo: TxnRepository
 ) : ViewModel() {
 
-    // TODO: use state instead of public fields
-    var amount: String = ""
-    var description: String = ""
-    var items = listOf("Travel", "Food", "Rent")
+    val amount = mutableStateOf("")
+    val description = mutableStateOf("")
+
+    private val _items = mutableStateOf(listOf("Travel", "Food", "Rent"))
+    val items: State<List<String>> =_items
 
     /**
      * Variable that tells the Fragment to close.
@@ -53,8 +56,8 @@ class ComposeTxnAddEditViewModel(
             viewModelScope.launch {
                 val txn = txnRepo.getTransactionResultById(txnId)
                 if (txn is Result.Success) {
-                    amount = txn.data.amount.toString()
-                    description = txn.data.description
+                    amount.value = txn.data.amount.toString()
+                    description.value = txn.data.description
                 }
             }
         }
@@ -62,7 +65,7 @@ class ComposeTxnAddEditViewModel(
 
     fun submit() {
         val description = description
-        val amount = amount.toDoubleOrNull() ?: 0.0
+        val amount = amount.value.toDoubleOrNull() ?: 0.0
         viewModelScope.launch {
             if (txnId != 0L) {
                 val txn = txnRepo.getTransactionResultById(txnId)
@@ -70,7 +73,7 @@ class ComposeTxnAddEditViewModel(
                     txnRepo.updateTransaction(
                         txn.data.apply {
                             txn.data.amount = amount
-                            txn.data.description = description
+                            txn.data.description = description.value
                         }
                     )
                 }
@@ -80,7 +83,7 @@ class ComposeTxnAddEditViewModel(
                         id = 0,
                         createdTimestamp = Date(System.currentTimeMillis()),
                         amount = amount,
-                        description = description
+                        description = description.value
                     )
                 )
             }
@@ -89,7 +92,7 @@ class ComposeTxnAddEditViewModel(
     }
 
     @Suppress("UNCHECKED_CAST")
-    class TxnAddEditComposeViewModelFactory (
+    class ComposeTxnAddEditViewModelFactory (
         private val txnId: Long,
         private val txnRepo: TxnRepository
     ) : ViewModelProvider.NewInstanceFactory() {

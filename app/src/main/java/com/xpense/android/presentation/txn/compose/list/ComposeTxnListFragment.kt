@@ -16,8 +16,8 @@ import com.xpense.android.presentation.ui.theme.XpenseTheme
 @ExperimentalMaterialApi
 class ComposeTxnListFragment : Fragment() {
 
-    private val viewModel by viewModels<ComposeTxnListViewModel> {
-        ComposeTxnListViewModel.TxnListComposeViewModelFactory(
+    private val vm by viewModels<ComposeTxnListViewModel> {
+        ComposeTxnListViewModel.ComposeTxnListViewModelFactory(
             GetTxnsUseCase(
                 (requireContext().applicationContext as XpenseApplication).txnRepository
             )
@@ -32,7 +32,7 @@ class ComposeTxnListFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 XpenseTheme {
-                    TxnListScreen(findNavController(), viewModel)
+                    TxnListScreen(findNavController(), vm)
                 }
             }
         }
@@ -40,6 +40,6 @@ class ComposeTxnListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getTxns()
+        vm.getTxns()
     }
 }

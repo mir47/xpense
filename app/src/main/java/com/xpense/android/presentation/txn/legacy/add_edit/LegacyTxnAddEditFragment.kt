@@ -12,8 +12,8 @@ import com.xpense.android.databinding.FragmentLegacyTxnAddEditBinding
 
 class LegacyTxnAddEditFragment : Fragment() {
 
-    private val _viewModelAddEdit by viewModels<LegacyTxnAddEditViewModel> {
-        LegacyTxnAddEditViewModel.TxnAddEditViewModelFactory(
+    private val vm by viewModels<LegacyTxnAddEditViewModel> {
+        LegacyTxnAddEditViewModel.LegacyTxnAddEditViewModelFactory(
             LegacyTxnAddEditFragmentArgs.fromBundle(requireArguments()).transactionId,
             LegacyTxnAddEditFragmentArgs.fromBundle(requireArguments()).sms,
             (requireContext().applicationContext as XpenseApplication).txnRepository
@@ -27,15 +27,15 @@ class LegacyTxnAddEditFragment : Fragment() {
     ): View {
         val binding = FragmentLegacyTxnAddEditBinding.inflate(inflater)
 
-        binding.viewModel = _viewModelAddEdit
+        binding.viewModel = vm
 
         // Make data binding lifecycle aware, to automatically update layout with LiveData
         binding.lifecycleOwner = viewLifecycleOwner
 
-        _viewModelAddEdit.navigateExit.observe(viewLifecycleOwner) {
+        vm.navigateExit.observe(viewLifecycleOwner) {
             if (it) {
                 findNavController().popBackStack()
-                _viewModelAddEdit.doneNavigating()
+                vm.doneNavigating()
             }
         }
 

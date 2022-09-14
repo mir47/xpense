@@ -25,57 +25,59 @@ import com.xpense.android.presentation.txn.compose.list.components.TxnListItem
 @Composable
 fun TxnListScreen(
     navController: NavController,
-    viewModel: ComposeTxnListViewModel
+    vm: ComposeTxnListViewModel
 ) {
 
-    val state = viewModel.state.value
+    val state = vm.state.value
 
-    Box(modifier = Modifier.fillMaxSize()) {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(state.txns) { txn ->
-                TxnListItem(
-                    txn = txn,
-                    onItemClick = {
-                        navController.navigate(
-                            ComposeTxnListFragmentDirections
-                                .actionComposeTxnListFragmentToComposeTxnAddEditFragment()
-                                .setTransactionId(txn.id)
-                        )
-                    }
-                )
+//    Surface {
+        Box(modifier = Modifier.fillMaxSize()) {
+            LazyColumn(modifier = Modifier.fillMaxSize()) {
+                items(state.txns) { txn ->
+                    TxnListItem(
+                        txn = txn,
+                        onItemClick = {
+                            navController.navigate(
+                                ComposeTxnListFragmentDirections
+                                    .actionComposeTxnListFragmentToComposeTxnAddEditFragment()
+                                    .setTransactionId(txn.id)
+                            )
+                        }
+                    )
+                }
             }
-        }
 
-        FloatingActionButton(
-            modifier = Modifier
-                .padding(16.dp)
-                .align(alignment = Alignment.BottomEnd),
-            onClick = {
-                navController.navigate(
-                    ComposeTxnListFragmentDirections
-                        .actionComposeTxnListFragmentToComposeTxnAddEditFragment()
-                )
-            }
-        ) {
-            Image(
-                painter = painterResource(android.R.drawable.ic_input_add),
-                contentDescription = "FAB"
-            )
-        }
-
-        if (state.error.isNotBlank()) {
-            Text(
-                text = state.error,
-                color = MaterialTheme.colors.error,
-                textAlign = TextAlign.Center,
+            FloatingActionButton(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp)
-                    .align(Alignment.Center)
-            )
+                    .padding(16.dp)
+                    .align(alignment = Alignment.BottomEnd),
+                onClick = {
+                    navController.navigate(
+                        ComposeTxnListFragmentDirections
+                            .actionComposeTxnListFragmentToComposeTxnAddEditFragment()
+                    )
+                }
+            ) {
+                Image(
+                    painter = painterResource(android.R.drawable.ic_input_add),
+                    contentDescription = "FAB"
+                )
+            }
+
+            if (state.error.isNotBlank()) {
+                Text(
+                    text = state.error,
+                    color = MaterialTheme.colors.error,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp)
+                        .align(Alignment.Center)
+                )
+            }
+            if (state.isLoading) {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            }
         }
-        if (state.isLoading) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-        }
-    }
+//    }
 }
