@@ -19,6 +19,7 @@ String getMapsApiKey() {
 }
 
 android {
+    namespace 'com.xpense.android'
     compileSdkVersion rootProject.compileSdkVersion
 
     defaultConfig {
