@@ -1,6 +1,5 @@
 package com.xpense.android
 
-import android.view.Gravity
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
@@ -14,11 +13,8 @@ import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.DrawerMatchers.isClosed
-import androidx.test.espresso.contrib.DrawerMatchers.isOpen
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
-import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
@@ -78,36 +74,6 @@ class AppNavigationTest {
     fun unregisterIdlingResource() {
         IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource)
         IdlingRegistry.getInstance().unregister(dataBindingIdlingResource)
-    }
-
-    @Test
-    fun mainScreen_clickDrawerIcon_OpensNavigation() {
-        // Start activity
-        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
-        dataBindingIdlingResource.monitorActivity(activityScenario)
-
-        // Check drawer closed at startup
-        onView(withId(R.id.drawer_layout))
-            .check(matches(isClosed(Gravity.START)))
-
-        // Open drawer by clicking drawer icon
-        onView(withContentDescription("Open navigation drawer"))
-            .check(matches(isDisplayed()))
-            .perform(click())
-
-        // Check drawer open
-        onView(withId(R.id.drawer_layout))
-            .check(matches(isOpen(Gravity.START)))
-
-        // Press system back button
-        pressBack()
-
-        // Check drawer closed
-        onView(withId(R.id.drawer_layout))
-            .check(matches(isClosed(Gravity.START)))
-
-        // When using ActivityScenario.launch(), always call close()
-        activityScenario.close()
     }
 
     @Test
