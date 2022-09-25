@@ -111,59 +111,6 @@ class AppNavigationTest {
     }
 
     @Test
-    fun legacyTxnScreen_upButton() = runBlocking {
-        // Set initial state
-        val txn = Txn(id = 1, amount = 12.34, description = "description")
-        repository.saveTransaction(txn)
-
-        // Start activity
-        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
-        dataBindingIdlingResource.monitorActivity(activityScenario)
-
-        // Open drawer by clicking drawer icon
-        onView(withContentDescription("Open navigation drawer"))
-            .check(matches(isDisplayed()))
-            .perform(click())
-
-        // Check drawer open
-        onView(withId(R.id.drawer_layout))
-            .check(matches(isOpen(Gravity.START)))
-
-        // Click drawer menu item
-        onView(withId(R.id.legacy_txn_list_fragment))
-            .perform(click())
-
-        // Click list item
-        onView(withText("description"))
-            .perform(click())
-
-        // Check correct screen displayed
-        onView(withText("Transaction"))
-            .check(matches(isDisplayed()))
-
-        // Click up button
-        onView(withContentDescription("Navigate up"))
-            .check(matches(isDisplayed()))
-            .perform(click())
-
-        // Check correct screen displayed
-        onView(withId(R.id.transaction_list))
-            .check(matches(isDisplayed()))
-
-        // Click up button
-        onView(withContentDescription("Navigate up"))
-            .check(matches(isDisplayed()))
-            .perform(click())
-
-        // Check correct screen displayed
-        onView(withText("Xpense"))
-            .check(matches(isDisplayed()))
-
-        // When using ActivityScenario.launch(), always call close()
-        activityScenario.close()
-    }
-
-    @Test
     fun composeTxnScreen_upButton() = runBlocking {
         // Start activity
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)

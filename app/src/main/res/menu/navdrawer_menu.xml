@@ -8,45 +8,6 @@
         android:title="@string/about_menu_item" />
 
     <item
-        android:enabled="false"
-        android:title="@string/android_experiments_menu_item" />
-
-    <item
-        android:id="@+id/compose_txn_list_fragment"
-        android:icon="@drawable/android"
-        android:title="@string/compose_txn_menu_item" />
-
-    <item
-        android:id="@+id/legacy_txn_list_fragment"
-        android:icon="@drawable/android"
-        android:title="@string/legacy_txn_menu_item" />
-
-    <item
-        android:id="@+id/my_android_view_model_fragment"
-        android:icon="@drawable/android"
-        android:title="@string/android_view_model_menu_item" />
-
-    <item
-        android:id="@+id/compose_examples_fragment"
-        android:icon="@drawable/android"
-        android:title="@string/compose_examples_menu_item" />
-
-    <item
-        android:id="@+id/compose_playground_fragment"
-        android:icon="@drawable/android"
-        android:title="@string/compose_playground_screen_title" />
-
-    <item
-        android:id="@+id/compose_tutorial_fragment"
-        android:icon="@drawable/android"
-        android:title="@string/compose_tutorial_screen_title" />
-
-    <item
-        android:id="@+id/compose_basics_fragment"
-        android:icon="@drawable/android"
-        android:title="@string/compose_basics_screen_title" />
-
-    <item
         android:id="@+id/auth_fragment"
         android:icon="@drawable/android"
         android:title="@string/auth_menu_item" />
@@ -55,25 +16,5 @@
         android:id="@+id/maps_fragment"
         android:icon="@drawable/android"
         android:title="@string/map_menu_item" />
-
-    <item
-        android:id="@+id/property_animation_fragment"
-        android:icon="@drawable/android"
-        android:title="@string/property_animation_menu_item" />
-
-    <item
-        android:id="@+id/motion_click_fragment"
-        android:icon="@drawable/android"
-        android:title="@string/motion_click_menu_item" />
-
-    <item
-        android:id="@+id/motion_drag_fragment"
-        android:icon="@drawable/android"
-        android:title="@string/motion_drag_menu_item" />
-
-    <item
-        android:id="@+id/motion_toolbar_fragment"
-        android:icon="@drawable/android"
-        android:title="@string/motion_toolbar_menu_item" />
 
 </menu>

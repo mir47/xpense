@@ -14,6 +14,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.printToLog
+import com.xpense.android.presentation.components.CustomDropdown
 import org.junit.Rule
 import org.junit.Test
 
