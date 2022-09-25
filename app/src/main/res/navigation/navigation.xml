@@ -29,11 +29,11 @@
     </fragment>
     <fragment
         android:id="@+id/about_fragment"
-        android:name="com.xpense.android.presentation.about.AboutFragment"
+        android:name="com.xpense.android.ui.about.AboutFragment"
         android:label="@string/about_screen_title" />
     <fragment
         android:id="@+id/auth_fragment"
-        android:name="com.xpense.android.presentation.xperiments.auth.AuthFragment"
+        android:name="com.xpense.android.ui.xperiments.auth.AuthFragment"
         android:label="@string/auth_screen_title"
         tools:layout="@layout/fragment_auth" >
         <action
@@ -42,15 +42,15 @@
     </fragment>
     <fragment
         android:id="@+id/settings_fragment"
-        android:name="com.xpense.android.presentation.xperiments.auth.SettingsFragment"
+        android:name="com.xpense.android.ui.xperiments.auth.SettingsFragment"
         android:label="@string/settings_screen_title" />
     <fragment
         android:id="@+id/login_fragment"
-        android:name="com.xpense.android.presentation.xperiments.auth.LoginFragment"
+        android:name="com.xpense.android.ui.xperiments.auth.LoginFragment"
         android:label="@string/login_screen_title" />
     <fragment
         android:id="@+id/maps_fragment"
-        android:name="com.xpense.android.presentation.xperiments.map.MapsFragment"
+        android:name="com.xpense.android.ui.xperiments.map.MapsFragment"
         android:label="@string/map_screen_title"
         tools:layout="@layout/fragment_maps" />
 </navigation>

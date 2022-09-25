@@ -131,6 +131,7 @@ dependencies {
 //    implementation "com.google.accompanist:accompanist-appcompat-theme:0.16.0"
     // Material icons
     implementation "androidx.compose.material:material-icons-extended:$version_compose"
+    implementation "androidx.navigation:navigation-compose:$version_compose_navigation"
 
     // Maps
     implementation "com.google.android.gms:play-services-maps:$version_maps"
@@ -173,5 +174,6 @@ dependencies {
 
     // Compose testing dependencies
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$version_compose"
+    androidTestImplementation "androidx.navigation:navigation-testing:$version_compose_navigation"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$version_compose"
 }
