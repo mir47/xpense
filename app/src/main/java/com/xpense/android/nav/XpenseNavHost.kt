@@ -10,10 +10,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.xpense.android.di.AppContainer
-import com.xpense.android.presentation.txn.add_edit.TxnAddEditScreen
-import com.xpense.android.presentation.txn.add_edit.TxnAddEditViewModel
-import com.xpense.android.presentation.txn.list.TxnListScreen
-import com.xpense.android.presentation.txn.list.TxnListViewModel
+import com.xpense.android.ui.txn.add_edit.TxnAddEditScreen
+import com.xpense.android.ui.txn.add_edit.TxnAddEditViewModel
+import com.xpense.android.ui.txn.list.TxnListScreen
+import com.xpense.android.ui.txn.list.TxnListViewModel
 
 @ExperimentalMaterialApi
 @Composable

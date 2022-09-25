@@ -22,7 +22,7 @@ import androidx.test.filters.LargeTest
 import com.xpense.android.di.ServiceLocator
 import com.xpense.android.domain.model.Txn
 import com.xpense.android.domain.repository.TxnRepository
-import com.xpense.android.presentation.MainActivity
+import com.xpense.android.ui.MainActivity
 import com.xpense.android.util.DataBindingIdlingResource
 import com.xpense.android.util.EspressoIdlingResource
 import kotlinx.coroutines.runBlocking
