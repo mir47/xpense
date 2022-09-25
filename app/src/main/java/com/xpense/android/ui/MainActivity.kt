@@ -10,10 +10,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.ExperimentalMaterialApi
 import com.xpense.android.R
-import com.xpense.android.XpenseApplication
 import com.xpense.android.util.SMS_EXTRA
+import dagger.hilt.android.AndroidEntryPoint
 
 @ExperimentalMaterialApi
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,9 +40,8 @@ class MainActivity : ComponentActivity() {
 //            )
         }
 
-        val appContainer = (application as XpenseApplication).container
         setContent {
-            XpenseApp(appContainer)
+            XpenseApp()
         }
     }
 

@@ -6,11 +6,9 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextReplacement
 import androidx.test.core.app.ActivityScenario
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import com.xpense.android.di.ServiceLocator
 import com.xpense.android.domain.model.Txn
 import com.xpense.android.domain.repository.TxnRepository
 import com.xpense.android.util.DataBindingIdlingResource
@@ -37,9 +35,9 @@ class MainActivityTest {
     @Before
     fun init() {
         // Not using fake repository
-        repository = ServiceLocator.provideTransactionRepository(
-            ApplicationProvider.getApplicationContext()
-        )
+//        repository = ServiceLocator.provideTransactionRepository(
+//            ApplicationProvider.getApplicationContext()
+//        )
 
         // use runBlocking because this itself is not a test, so we don't
         // need access to TestCoroutineDispatcher
@@ -49,8 +47,8 @@ class MainActivityTest {
         }
     }
 
-    @After
-    fun reset() = ServiceLocator.resetRepository()
+//    @After
+//    fun reset() = ServiceLocator.resetRepository()
 
     // An idling resource that waits for Data Binding to have no pending bindings.
     private val dataBindingIdlingResource = DataBindingIdlingResource()

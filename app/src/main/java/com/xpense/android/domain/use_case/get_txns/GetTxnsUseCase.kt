@@ -6,8 +6,9 @@ import com.xpense.android.domain.repository.TxnRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.io.IOException
+import javax.inject.Inject
 
-class GetTxnsUseCase(
+class GetTxnsUseCase @Inject constructor(
     private val txnRepo: TxnRepository
 ) {
     operator fun invoke(): Flow<Resource<List<Txn>>> = flow {

@@ -8,7 +8,6 @@ import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.printToLog
 import androidx.test.core.app.ActivityScenario
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.IdlingRegistry
@@ -19,7 +18,6 @@ import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import com.xpense.android.di.ServiceLocator
 import com.xpense.android.domain.model.Txn
 import com.xpense.android.domain.repository.TxnRepository
 import com.xpense.android.ui.MainActivity
@@ -49,15 +47,15 @@ class AppNavigationTest {
 
     @Before
     fun init() {
-        repository = ServiceLocator.provideTransactionRepository(
-            ApplicationProvider.getApplicationContext()
-        )
+//        repository = ServiceLocator.provideTransactionRepository(
+//            ApplicationProvider.getApplicationContext()
+//        )
     }
 
-    @After
-    fun reset() {
-        ServiceLocator.resetRepository()
-    }
+//    @After
+//    fun reset() {
+//        ServiceLocator.resetRepository()
+//    }
 
     /**
      * Idling resources tell Espresso that the app is idle or busy. This is needed when operations

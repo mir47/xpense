@@ -1,26 +1,29 @@
 package com.xpense.android.nav
 
+import android.app.Activity
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.xpense.android.di.AppContainer
+import com.xpense.android.di.ViewModelFactoryProvider
 import com.xpense.android.ui.txn.add_edit.TxnAddEditScreen
 import com.xpense.android.ui.txn.add_edit.TxnAddEditViewModel
 import com.xpense.android.ui.txn.list.TxnListScreen
 import com.xpense.android.ui.txn.list.TxnListViewModel
+import dagger.hilt.android.EntryPointAccessors
 
 @ExperimentalMaterialApi
 @Composable
 fun XpenseNavHost(
-    appContainer: AppContainer,
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
+    txnListViewModel: TxnListViewModel = viewModel() // Hilt constructor injection
 ) {
     NavHost(
         navController = navController,
@@ -28,15 +31,11 @@ fun XpenseNavHost(
         modifier = modifier
     ) {
         composable(route = TxnList.route) {
-            val vm: TxnListViewModel = viewModel(
-                factory = TxnListViewModel.provideFactory(appContainer.getTxnsUseCase)
-            )
-            TxnListScreen(vm)
+            TxnListScreen(txnListViewModel)
         }
         composable(route = TxnAddEdit.route) {
-            val vm: TxnAddEditViewModel = viewModel(
-                factory = TxnAddEditViewModel.provideFactory(0L, appContainer.txnRepository)
-            )
+            // Hilt assisted injection using factory
+            val vm: TxnAddEditViewModel = txnAddEditViewModel(0L)
             TxnAddEditScreen(vm)
         }
     }
@@ -58,3 +57,13 @@ fun NavHostController.navigateSingleTopTo(route: String) =
         // Restore state when reselecting a previously selected item
         restoreState = true
     }
+
+@Composable
+fun txnAddEditViewModel(txnId: Long): TxnAddEditViewModel {
+    val factory = EntryPointAccessors.fromActivity(
+        LocalContext.current as Activity,
+        ViewModelFactoryProvider::class.java
+    ).txnAddEditViewModelFactory()
+
+    return viewModel(factory = TxnAddEditViewModel.provideFactory(factory, txnId))
+}
