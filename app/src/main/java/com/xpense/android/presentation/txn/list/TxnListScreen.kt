@@ -17,6 +17,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.xpense.android.presentation.txn.list.components.TxnListItem
@@ -30,7 +32,13 @@ fun TxnListScreen(
         val state by vm.state
 
 //    Surface {
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .semantics {
+                    contentDescription = "Transaction List Screen"
+                }
+        ) {
             LazyColumn(modifier = Modifier.fillMaxSize()) {
                 items(state.txns) { txn ->
                     TxnListItem(
