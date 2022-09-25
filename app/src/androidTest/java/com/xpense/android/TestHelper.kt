@@ -10,9 +10,9 @@ import com.xpense.android.ui.XpenseApp
  */
 @ExperimentalMaterialApi
 fun ComposeContentTestRule.launchXpenseApp(context: Context) {
-    setContent {
-        XpenseApp(
-            appContainer = TestAppContainer(context),
-        )
-    }
+//    setContent {
+//        XpenseApp(
+//            appContainer = TestAppContainer(context),
+//        )
+//    }
 }

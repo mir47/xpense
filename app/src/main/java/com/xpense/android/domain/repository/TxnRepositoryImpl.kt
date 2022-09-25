@@ -12,8 +12,9 @@ import com.xpense.android.domain.model.toTxnEntity
 import com.xpense.android.util.wrapEspressoIdlingResource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 
-class TxnRepositoryImpl constructor(
+class TxnRepositoryImpl @Inject constructor(
     private val txnDataSourceLocal: TxnDataSource,
     private val txnDataSourceRemote: TxnDataSource,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO

@@ -10,12 +10,15 @@ import androidx.lifecycle.viewModelScope
 import com.xpense.android.data.Result
 import com.xpense.android.domain.model.Txn
 import com.xpense.android.domain.repository.TxnRepository
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.launch
 import java.util.Date
 
-class TxnAddEditViewModel(
-    private val txnId: Long,
-    private val txnRepo: TxnRepository
+class TxnAddEditViewModel @AssistedInject constructor(
+    private val txnRepo: TxnRepository,
+    @Assisted private val txnId: Long,
 ) : ViewModel() {
 
     val amount = mutableStateOf("")
@@ -91,17 +94,20 @@ class TxnAddEditViewModel(
         }
     }
 
-    /**
-     * Factory for TxnAddEditViewModel that takes TxnRepository as a dependency
-     */
+    @AssistedFactory
+    interface Factory {
+        fun create(txnId: Long): TxnAddEditViewModel
+    }
+
     companion object {
+
+        @Suppress("UNCHECKED_CAST")
         fun provideFactory(
+            assistedFactory: Factory,
             txnId: Long,
-            txnRepository: TxnRepository,
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
-            @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return TxnAddEditViewModel(txnId, txnRepository) as T
+                return assistedFactory.create(txnId) as T
             }
         }
     }

@@ -8,7 +8,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.xpense.android.di.AppContainer
 import com.xpense.android.nav.TxnList
 import com.xpense.android.nav.XpenseNavHost
 import com.xpense.android.nav.navigateSingleTopTo
@@ -18,9 +17,7 @@ import com.xpense.android.presentation.ui.theme.XpenseTheme
 
 @ExperimentalMaterialApi
 @Composable
-fun XpenseApp(
-    appContainer: AppContainer,
-) {
+fun XpenseApp() {
     XpenseTheme {
         val navController = rememberNavController()
         val currentBackStack by navController.currentBackStackEntryAsState()
@@ -39,7 +36,6 @@ fun XpenseApp(
             }
         ) { innerPadding ->
             XpenseNavHost(
-                appContainer = appContainer,
                 navController = navController,
                 modifier = Modifier.padding(innerPadding)
             )
