@@ -6,9 +6,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.telephony.SmsMessage
+import androidx.compose.material.ExperimentalMaterialApi
 import com.xpense.android.R
 import com.xpense.android.util.sendNotification
 
+@ExperimentalMaterialApi
 class SmsReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {

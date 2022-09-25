@@ -2,6 +2,7 @@ package com.xpense.android.services
 
 import android.app.NotificationManager
 import android.widget.Toast
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.core.content.ContextCompat
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
@@ -10,6 +11,7 @@ import com.google.firebase.messaging.RemoteMessage
 import com.xpense.android.util.sendNotification
 import timber.log.Timber
 
+@ExperimentalMaterialApi
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     /**

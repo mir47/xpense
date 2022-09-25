@@ -91,12 +91,18 @@ class TxnAddEditViewModel(
         }
     }
 
-    @Suppress("UNCHECKED_CAST")
-    class TxnAddEditViewModelFactory (
-        private val txnId: Long,
-        private val txnRepo: TxnRepository
-    ) : ViewModelProvider.NewInstanceFactory() {
-        override fun <T : ViewModel> create(modelClass: Class<T>) =
-            TxnAddEditViewModel(txnId, txnRepo) as T
+    /**
+     * Factory for TxnAddEditViewModel that takes TxnRepository as a dependency
+     */
+    companion object {
+        fun provideFactory(
+            txnId: Long,
+            txnRepository: TxnRepository,
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return TxnAddEditViewModel(txnId, txnRepository) as T
+            }
+        }
     }
 }

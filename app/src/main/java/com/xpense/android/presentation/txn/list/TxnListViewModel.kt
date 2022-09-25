@@ -34,11 +34,17 @@ class TxnListViewModel(
         }.launchIn(viewModelScope)
     }
 
-    @Suppress("UNCHECKED_CAST")
-    class TxnListViewModelFactory (
-        private val getTxnsUseCase: GetTxnsUseCase
-    ) : ViewModelProvider.NewInstanceFactory() {
-        override fun <T : ViewModel> create(modelClass: Class<T>) =
-            TxnListViewModel(getTxnsUseCase) as T
+    /**
+     * Factory for TxnListViewModel that takes GetTxnsUseCase as a dependency
+     */
+    companion object {
+        fun provideFactory(
+            getTxnsUseCase: GetTxnsUseCase
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return TxnListViewModel(getTxnsUseCase) as T
+            }
+        }
     }
 }

@@ -40,6 +40,7 @@ ext {
     version_compose = '1.1.1'
     version_compose_compiler = '1.2.0'
     version_compose_material_theme_adapter = '1.1.17'
+    version_compose_navigation = '2.5.0'
     version_compose_runtime_livedata = '1.0.0-beta01'
     version_compose_ui_tooling = '1.2.1'
     version_constraint_layout = '2.1.4'

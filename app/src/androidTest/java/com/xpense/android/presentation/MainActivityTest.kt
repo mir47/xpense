@@ -1,5 +1,6 @@
 package com.xpense.android.presentation
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
@@ -14,15 +15,15 @@ import com.xpense.android.domain.model.Txn
 import com.xpense.android.domain.repository.TxnRepository
 import com.xpense.android.util.DataBindingIdlingResource
 import com.xpense.android.util.EspressoIdlingResource
-import com.xpense.android.util.monitorActivity
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import kotlin.test.Ignore
 
+@ExperimentalMaterialApi
 @LargeTest
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
@@ -89,6 +90,7 @@ class MainActivityTest {
         activityScenario.close()
     }
 
+    @Ignore("Update for compose navigation testing")
     @Test
     fun editTransaction() = runBlocking {
         // Set initial state.
@@ -102,7 +104,7 @@ class MainActivityTest {
 
         // Start up Transactions screen.
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
-        dataBindingIdlingResource.monitorActivity(activityScenario)
+//        dataBindingIdlingResource.monitorActivity(activityScenario)
 
         // Click on the transaction on the list
         composeTestRule

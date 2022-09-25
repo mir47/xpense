@@ -13,8 +13,8 @@ import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.xpense.android.R
 import com.xpense.android.databinding.FragmentAuthBinding
-import timber.log.Timber
 import androidx.navigation.fragment.findNavController
+import timber.log.Timber
 
 class AuthFragment : Fragment() {
 

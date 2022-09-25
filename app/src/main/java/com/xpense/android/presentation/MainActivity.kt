@@ -5,31 +5,19 @@ import android.app.NotificationManager
 import android.content.Context
 import android.graphics.Color
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.material.ExperimentalMaterialApi
 import com.xpense.android.R
-import com.xpense.android.databinding.ActivityMainBinding
+import com.xpense.android.XpenseApplication
 import com.xpense.android.util.SMS_EXTRA
 
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var appBarConfig: AppBarConfiguration
+@ExperimentalMaterialApi
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-
-        val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
-        NavigationUI.setupActionBarWithNavController(this, navController)
-
-        appBarConfig = AppBarConfiguration(navController.graph)
 
         createNotificationChannel(
             getString(R.string.sms_notification_channel_id),
@@ -50,10 +38,12 @@ class MainActivity : AppCompatActivity() {
 //                    .setSms(it)
 //            )
         }
-    }
 
-    override fun onSupportNavigateUp() =
-        NavigationUI.navigateUp(findNavController(R.id.nav_host_fragment), appBarConfig)
+        val appContainer = (application as XpenseApplication).container
+        setContent {
+            XpenseApp(appContainer)
+        }
+    }
 
     private fun createNotificationChannel(
         channelId: String,

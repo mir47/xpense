@@ -13,22 +13,21 @@ import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.xpense.android.presentation.txn.list.components.TxnListItem
 
 @ExperimentalMaterialApi
 @Composable
 fun TxnListScreen(
-    navController: NavController,
     vm: TxnListViewModel
 ) {
 
-    val state = vm.state.value
+        val state by vm.state
 
 //    Surface {
         Box(modifier = Modifier.fillMaxSize()) {
@@ -37,11 +36,11 @@ fun TxnListScreen(
                     TxnListItem(
                         txn = txn,
                         onItemClick = {
-                            navController.navigate(
-                                TxnListFragmentDirections
-                                    .actionTxnListFragmentToTxnAddEditFragment()
-                                    .setTransactionId(txn.id)
-                            )
+//                            navController.navigate(
+//                                TxnListFragmentDirections
+//                                    .actionTxnListFragmentToTxnAddEditFragment()
+//                                    .setTransactionId(txn.id)
+//                            )
                         }
                     )
                 }
@@ -52,10 +51,10 @@ fun TxnListScreen(
                     .padding(16.dp)
                     .align(alignment = Alignment.BottomEnd),
                 onClick = {
-                    navController.navigate(
-                        TxnListFragmentDirections
-                            .actionTxnListFragmentToTxnAddEditFragment()
-                    )
+//                    navController.navigate(
+//                        TxnListFragmentDirections
+//                            .actionTxnListFragmentToTxnAddEditFragment()
+//                    )
                 }
             ) {
                 Image(
