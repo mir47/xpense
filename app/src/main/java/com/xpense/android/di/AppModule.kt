@@ -7,7 +7,8 @@ import com.xpense.android.data.source.local.TxnDatabase
 import com.xpense.android.data.source.remote.TxnDataSourceRemote
 import com.xpense.android.domain.repository.TxnRepository
 import com.xpense.android.domain.repository.TxnRepositoryImpl
-import com.xpense.android.domain.use_case.get_txns.GetTxnsUseCase
+import com.xpense.android.domain.use_case.GetTxnsUseCase
+import com.xpense.android.domain.use_case.ObserveTxnsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,4 +41,9 @@ class AppModule {
     @Provides
     fun provideGetTxnsUseCase(txnRepo: TxnRepository): GetTxnsUseCase =
         GetTxnsUseCase(txnRepo)
+
+    @Singleton
+    @Provides
+    fun provideObserveTxnsUseCase(txnRepo: TxnRepository): ObserveTxnsUseCase =
+        ObserveTxnsUseCase(txnRepo)
 }

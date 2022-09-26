@@ -21,12 +21,15 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.xpense.android.presentation.txn.list.components.TxnListItem
+import com.xpense.android.domain.model.Txn
+import com.xpense.android.ui.components.TxnListItem
 
 @ExperimentalMaterialApi
 @Composable
 fun TxnListScreen(
-    vm: TxnListViewModel
+    vm: TxnListViewModel,
+    onItemClick: (Txn) -> Unit,
+    onFabClick: () -> Unit,
 ) {
 
         val state by vm.state
@@ -39,18 +42,32 @@ fun TxnListScreen(
                     contentDescription = "Transaction List Screen"
                 }
         ) {
-            LazyColumn(modifier = Modifier.fillMaxSize()) {
-                items(state.txns) { txn ->
-                    TxnListItem(
-                        txn = txn,
-                        onItemClick = {
-//                            navController.navigate(
-//                                TxnListFragmentDirections
-//                                    .actionTxnListFragmentToTxnAddEditFragment()
-//                                    .setTransactionId(txn.id)
-//                            )
-                        }
+            when (state) {
+                is UiState.Loading -> {
+                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                }
+                is UiState.Error -> {
+                    Text(
+                        text = (state as UiState.Error).message,
+                        color = MaterialTheme.colors.error,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp)
+                            .align(Alignment.Center)
                     )
+                }
+                is UiState.Success -> {
+                    LazyColumn(modifier = Modifier.fillMaxSize()) {
+                        items((state as UiState.Success).txnsData) { txn ->
+                            TxnListItem(
+                                txn = txn,
+                                onItemClick = {
+                                    onItemClick(txn)
+                                }
+                            )
+                        }
+                    }
                 }
             }
 
@@ -58,12 +75,7 @@ fun TxnListScreen(
                 modifier = Modifier
                     .padding(16.dp)
                     .align(alignment = Alignment.BottomEnd),
-                onClick = {
-//                    navController.navigate(
-//                        TxnListFragmentDirections
-//                            .actionTxnListFragmentToTxnAddEditFragment()
-//                    )
-                }
+                onClick = { onFabClick() }
             ) {
                 Image(
                     painter = painterResource(android.R.drawable.ic_input_add),
@@ -71,20 +83,20 @@ fun TxnListScreen(
                 )
             }
 
-            if (state.error.isNotBlank()) {
-                Text(
-                    text = state.error,
-                    color = MaterialTheme.colors.error,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 20.dp)
-                        .align(Alignment.Center)
-                )
-            }
-            if (state.isLoading) {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-            }
+//            if (state.error.isNotBlank()) {
+//                Text(
+//                    text = state.error,
+//                    color = MaterialTheme.colors.error,
+//                    textAlign = TextAlign.Center,
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .padding(horizontal = 20.dp)
+//                        .align(Alignment.Center)
+//                )
+//            }
+//            if (state.isLoading) {
+//                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+//            }
         }
 //    }
 }

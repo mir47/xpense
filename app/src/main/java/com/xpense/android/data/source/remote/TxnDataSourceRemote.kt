@@ -6,6 +6,7 @@ import com.xpense.android.data.Result.Success
 import com.xpense.android.data.source.local.model.TxnEntity
 import com.xpense.android.data.source.TxnDataSource
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
 
 // TODO: create data transfer object (for remote Transaction model) - see dev-bytes project
 object TxnDataSourceRemote : TxnDataSource {
@@ -15,6 +16,10 @@ object TxnDataSourceRemote : TxnDataSource {
     private var TRANSACTIONS_SERVICE_DATA = LinkedHashMap<Long, TxnEntity>(2)
 
     override fun observeTransactionsResult(): LiveData<Result<List<TxnEntity>>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun observeTransactionsFlow(): Flow<List<TxnEntity>> {
         TODO("Not yet implemented")
     }
 

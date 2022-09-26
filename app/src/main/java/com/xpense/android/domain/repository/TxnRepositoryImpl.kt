@@ -12,6 +12,8 @@ import com.xpense.android.domain.model.toTxnEntity
 import com.xpense.android.util.wrapEspressoIdlingResource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class TxnRepositoryImpl @Inject constructor(
@@ -24,6 +26,14 @@ class TxnRepositoryImpl @Inject constructor(
         wrapEspressoIdlingResource {
             return Transformations.map(txnDataSourceLocal.observeTransactionsResult()) {
                 Success((it as Success).data.map { txnEntity -> txnEntity.toTxn() })
+            }
+        }
+    }
+
+    override fun observeTransactionsFlow(): Flow<List<Txn>> {
+        wrapEspressoIdlingResource {
+            return txnDataSourceLocal.observeTransactionsFlow().map { list ->
+                list.map { it.toTxn() }
             }
         }
     }

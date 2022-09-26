@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Success
 import com.xpense.android.domain.model.Txn
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.runBlocking
 
 // TODO:
@@ -21,6 +22,10 @@ class FakeAndroidTxnRepository : TxnRepository {
 
     override fun observeTransactionsResult(): LiveData<Result<List<Txn>>> =
         _observableTransactions
+
+    override fun observeTransactionsFlow(): Flow<List<Txn>> {
+        TODO("Not yet implemented")
+    }
 
     override suspend fun saveTransaction(txn: Txn) {
         transactionsServiceData[txn.id] = txn

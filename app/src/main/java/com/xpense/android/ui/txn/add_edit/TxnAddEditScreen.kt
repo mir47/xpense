@@ -10,6 +10,7 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
@@ -19,8 +20,17 @@ import com.xpense.android.ui.components.MaterialDropdown2
 @ExperimentalMaterialApi
 @Composable
 fun TxnAddEditScreen(
-    vm: TxnAddEditViewModel
+    vm: TxnAddEditViewModel,
+    onDone: () -> Unit,
 ) {
+    val state by vm.uiState
+
+    when (state) {
+        is UiState.Default -> {}
+        is UiState.Loading -> {}
+        is UiState.Error -> {}
+        is UiState.Done -> { onDone() }
+    }
 
     Surface {
         Column(

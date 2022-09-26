@@ -3,10 +3,13 @@ package com.xpense.android.domain.repository
 import androidx.lifecycle.LiveData
 import com.xpense.android.data.Result
 import com.xpense.android.domain.model.Txn
+import kotlinx.coroutines.flow.Flow
 
 interface TxnRepository {
 
     fun observeTransactionsResult(): LiveData<Result<List<Txn>>>
+
+    fun observeTransactionsFlow(): Flow<List<Txn>>
 
     suspend fun saveTransaction(txn: Txn)
 

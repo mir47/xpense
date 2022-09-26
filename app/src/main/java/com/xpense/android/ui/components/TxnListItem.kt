@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.txn.list.components
+package com.xpense.android.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -32,7 +32,7 @@ fun TxnListItem(
         Column(
             modifier = Modifier
                 .padding(16.dp)
-                .background(Color.Green)
+                .background(Color.LightGray)
         ) {
             Text(
                 text = getFormattedDateString(txn.createdTimestamp),
