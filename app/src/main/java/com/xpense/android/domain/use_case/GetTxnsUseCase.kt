@@ -1,4 +1,4 @@
-package com.xpense.android.domain.use_case.get_txns
+package com.xpense.android.domain.use_case
 
 import com.xpense.android.common.Resource
 import com.xpense.android.domain.model.Txn

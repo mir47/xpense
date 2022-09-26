@@ -1,18 +1,25 @@
 package com.xpense.android.ui
 
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
-import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.xpense.android.nav.TxnList
 import com.xpense.android.nav.XpenseNavHost
-import com.xpense.android.nav.navigateSingleTopTo
-import com.xpense.android.nav.xpenseTabRowScreens
-import com.xpense.android.ui.components.XpenseTabRow
 import com.xpense.android.presentation.ui.theme.XpenseTheme
 
 @ExperimentalMaterialApi
@@ -20,25 +27,43 @@ import com.xpense.android.presentation.ui.theme.XpenseTheme
 fun XpenseApp() {
     XpenseTheme {
         val navController = rememberNavController()
-        val currentBackStack by navController.currentBackStackEntryAsState()
-        val currentDestination = currentBackStack?.destination
-        val currentScreen = xpenseTabRowScreens.find { it.route == currentDestination?.route } ?: TxnList
+        var canPop by remember { mutableStateOf(false) }
+
+        DisposableEffect(navController) {
+            val listener = NavController.OnDestinationChangedListener { controller, _, _ ->
+                canPop = controller.previousBackStackEntry != null
+            }
+            navController.addOnDestinationChangedListener(listener)
+            onDispose {
+                navController.removeOnDestinationChangedListener(listener)
+            }
+        }
+
+        val navigationIcon: (@Composable () -> Unit)? =
+            if (canPop) { {
+                IconButton(onClick = { navController.popBackStack() }) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = "backIcon"
+                    )
+                }
+            } } else { null }
 
         Scaffold(
             topBar = {
-                XpenseTabRow(
-                    allScreens = xpenseTabRowScreens,
-                    onTabSelected = { newScreen ->
-                        navController.navigateSingleTopTo(newScreen.route)
-                    },
-                    currentScreen = currentScreen
+                TopAppBar(
+                    title = { Text(text = "Top App Bar") },
+                    navigationIcon = navigationIcon,
+                    backgroundColor = MaterialTheme.colors.primary,
+                    contentColor = Color.White,
+                    elevation = 10.dp,
+                )
+            },
+            content = {
+                XpenseNavHost(
+                    navController = navController,
                 )
             }
-        ) { innerPadding ->
-            XpenseNavHost(
-                navController = navController,
-                modifier = Modifier.padding(innerPadding)
-            )
-        }
+        )
     }
 }

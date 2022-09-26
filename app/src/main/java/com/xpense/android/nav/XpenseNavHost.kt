@@ -31,12 +31,24 @@ fun XpenseNavHost(
         modifier = modifier
     ) {
         composable(route = TxnList.route) {
-            TxnListScreen(txnListViewModel)
+            TxnListScreen(
+                vm = txnListViewModel,
+                onItemClick = {
+                    navController.navigateSingleTopTo(TxnAddEdit.route)
+                },
+                onFabClick = {
+                    navController.navigateSingleTopTo(TxnAddEdit.route)
+                }
+            )
         }
         composable(route = TxnAddEdit.route) {
             // Hilt assisted injection using factory
             val vm: TxnAddEditViewModel = txnAddEditViewModel(0L)
-            TxnAddEditScreen(vm)
+            TxnAddEditScreen(
+                vm
+            ) {
+                navController.navigateUp()
+            }
         }
     }
 }
