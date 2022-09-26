@@ -32,7 +32,7 @@ fun TxnListItem(
         Column(
             modifier = Modifier
                 .padding(16.dp)
-                .background(Color.Green)
+                .background(Color.LightGray)
         ) {
             Text(
                 text = getFormattedDateString(txn.createdTimestamp),
