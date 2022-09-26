@@ -6,6 +6,7 @@ import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Error
 import com.xpense.android.data.Result.Success
 import com.xpense.android.domain.model.Txn
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.runBlocking
 
 class FakeTxnRepository : TxnRepository {
@@ -18,6 +19,10 @@ class FakeTxnRepository : TxnRepository {
 
     override fun observeTransactionsResult(): LiveData<Result<List<Txn>>> =
         observableTransactions
+
+    override fun observeTransactionsFlow(): Flow<List<Txn>> {
+        TODO("Not yet implemented")
+    }
 
     override suspend fun saveTransaction(txn: Txn) {
         TODO("Not yet implemented")
