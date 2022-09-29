@@ -4,9 +4,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.xpense.android.data.Result.Success
 import com.xpense.android.domain.use_case.GetTxnsUseCase
-import com.xpense.android.domain.use_case.ObserveTxnsUseCase
-import com.xpense.android.common.Resource
+import com.xpense.android.domain.use_case.ObserveTxnsResultUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TxnListViewModel @Inject constructor(
     private val getTxnsUseCase: GetTxnsUseCase,
-    private val observeTxnsUseCase: ObserveTxnsUseCase,
+    private val observeTxnsResultUseCase: ObserveTxnsResultUseCase,
 ) : ViewModel() {
 
     private val _state = mutableStateOf<UiState>(UiState.Loading)
@@ -39,8 +39,10 @@ class TxnListViewModel @Inject constructor(
 //    }
 
     private fun observeTxns() {
-        observeTxnsUseCase().onEach { list ->
-            _state.value = UiState.Success(txnsData = list)
+        observeTxnsResultUseCase().onEach { result ->
+            if (result is Success) {
+                _state.value = UiState.Success(txnsData = result.data)
+            }
         }.launchIn(viewModelScope)
     }
 }

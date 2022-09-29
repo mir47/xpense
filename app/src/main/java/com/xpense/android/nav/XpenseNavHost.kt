@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.xpense.android.di.ViewModelFactoryProvider
+import com.xpense.android.ui.AppBarState
 import com.xpense.android.ui.txn.add_edit.TxnAddEditScreen
 import com.xpense.android.ui.txn.add_edit.TxnAddEditViewModel
 import com.xpense.android.ui.txn.list.TxnListScreen
@@ -23,7 +24,8 @@ import dagger.hilt.android.EntryPointAccessors
 fun XpenseNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    txnListViewModel: TxnListViewModel = viewModel() // Hilt constructor injection
+    txnListViewModel: TxnListViewModel = viewModel(), // Hilt constructor injection
+    onComposing: (AppBarState) -> Unit,
 ) {
     NavHost(
         navController = navController,
@@ -33,6 +35,9 @@ fun XpenseNavHost(
         composable(route = TxnList.route) {
             TxnListScreen(
                 vm = txnListViewModel,
+                onComposing = {
+                    onComposing(it)
+                },
                 onItemClick = {
                     navController.navigateSingleTopTo(TxnAddEdit.route)
                 },
@@ -45,10 +50,14 @@ fun XpenseNavHost(
             // Hilt assisted injection using factory
             val vm: TxnAddEditViewModel = txnAddEditViewModel(0L)
             TxnAddEditScreen(
-                vm
-            ) {
-                navController.navigateUp()
-            }
+                vm = vm,
+                onComposing = {
+                    onComposing(it)
+                },
+                onDone = {
+                    navController.navigateUp()
+                }
+            )
         }
     }
 }

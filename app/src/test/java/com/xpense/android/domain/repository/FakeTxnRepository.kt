@@ -1,6 +1,5 @@
 package com.xpense.android.domain.repository
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Error
@@ -17,10 +16,7 @@ class FakeTxnRepository : TxnRepository {
 
     var shouldReturnError = false
 
-    override fun observeTransactionsResult(): LiveData<Result<List<Txn>>> =
-        observableTransactions
-
-    override fun observeTransactionsFlow(): Flow<List<Txn>> {
+    override fun observeTransactionsResult(): Flow<Result<List<Txn>>> {
         TODO("Not yet implemented")
     }
 

@@ -1,6 +1,5 @@
 package com.xpense.android.data.source.local
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -48,16 +47,8 @@ interface TxnDao {
      * Selects and returns all rows in the table,
      * sorted by id in descending order.
      */
-    // TODO: Migrate LiveData to Kotlin Flow
     @Query("SELECT * FROM txn_table ORDER BY transaction_id DESC")
-    fun observeTransactions(): LiveData<List<TxnEntity>>
-
-    /**
-     * Selects and returns all rows in the table,
-     * sorted by id in descending order.
-     */
-    @Query("SELECT * FROM txn_table ORDER BY transaction_id DESC")
-    fun observeTransactionsFlow(): Flow<List<TxnEntity>>
+    fun observeTransactions(): Flow<List<TxnEntity>>
 
     /**
      * Selects and returns the transaction with given transactionId.

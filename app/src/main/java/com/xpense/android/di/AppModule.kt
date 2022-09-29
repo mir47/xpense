@@ -8,7 +8,7 @@ import com.xpense.android.data.source.remote.TxnDataSourceRemote
 import com.xpense.android.domain.repository.TxnRepository
 import com.xpense.android.domain.repository.TxnRepositoryImpl
 import com.xpense.android.domain.use_case.GetTxnsUseCase
-import com.xpense.android.domain.use_case.ObserveTxnsUseCase
+import com.xpense.android.domain.use_case.ObserveTxnsResultUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,7 +27,10 @@ class AppModule {
             appContext,
             TxnDatabase::class.java,
             "transaction_database"
-        ).build()
+        )
+            // migration strategy - use destructive to recreate a new db
+            .fallbackToDestructiveMigration()
+            .build()
 
     @Singleton
     @Provides
@@ -44,6 +47,6 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideObserveTxnsUseCase(txnRepo: TxnRepository): ObserveTxnsUseCase =
-        ObserveTxnsUseCase(txnRepo)
+    fun provideObserveTxnsResultUseCase(txnRepo: TxnRepository): ObserveTxnsResultUseCase =
+        ObserveTxnsResultUseCase(txnRepo)
 }

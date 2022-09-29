@@ -1,7 +1,5 @@
 package com.xpense.android.domain.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Error
 import com.xpense.android.data.Result.Success
@@ -13,7 +11,7 @@ import com.xpense.android.util.wrapEspressoIdlingResource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.transform
 import javax.inject.Inject
 
 class TxnRepositoryImpl @Inject constructor(
@@ -22,18 +20,13 @@ class TxnRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : TxnRepository {
 
-    override fun observeTransactionsResult(): LiveData<Result<List<Txn>>> {
+    override fun observeTransactionsResult(): Flow<Result<List<Txn>>> {
         wrapEspressoIdlingResource {
-            return Transformations.map(txnDataSourceLocal.observeTransactionsResult()) {
-                Success((it as Success).data.map { txnEntity -> txnEntity.toTxn() })
-            }
-        }
-    }
-
-    override fun observeTransactionsFlow(): Flow<List<Txn>> {
-        wrapEspressoIdlingResource {
-            return txnDataSourceLocal.observeTransactionsFlow().map { list ->
-                list.map { it.toTxn() }
+            return txnDataSourceLocal.observeTransactionsResult().transform {
+                if (it is Success) {
+                    // need to `emit` inside `transform` - but not sure why?
+                    emit(Success(it.data.map { txnEntity -> txnEntity.toTxn() }))
+                }
             }
         }
     }

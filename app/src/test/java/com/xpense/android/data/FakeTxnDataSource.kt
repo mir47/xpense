@@ -1,7 +1,5 @@
 package com.xpense.android.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.xpense.android.data.Result.Success
 import com.xpense.android.data.Result.Error
 import com.xpense.android.data.source.TxnDataSource
@@ -12,11 +10,7 @@ class FakeTxnDataSource(
     var txnEntities: MutableList<TxnEntity> = mutableListOf()
 ) : TxnDataSource {
 
-    override fun observeTransactionsResult(): LiveData<Result<List<TxnEntity>>> {
-        return MutableLiveData(Success(txnEntities))
-    }
-
-    override fun observeTransactionsFlow(): Flow<List<TxnEntity>> {
+    override fun observeTransactionsResult(): Flow<Result<List<TxnEntity>>> {
         TODO("Not yet implemented")
     }
 

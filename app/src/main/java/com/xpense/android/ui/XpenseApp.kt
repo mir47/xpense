@@ -1,5 +1,6 @@
 package com.xpense.android.ui
 
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -49,10 +50,17 @@ fun XpenseApp() {
                 }
             } } else { null }
 
+        var appBarState by remember { mutableStateOf(AppBarState()) }
+
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text(text = "Top App Bar") },
+                    title = {
+                        Text(text = appBarState.title)
+                    },
+                    actions = {
+                        appBarState.actions?.invoke(this)
+                    },
                     navigationIcon = navigationIcon,
                     backgroundColor = MaterialTheme.colors.primary,
                     contentColor = Color.White,
@@ -62,8 +70,16 @@ fun XpenseApp() {
             content = {
                 XpenseNavHost(
                     navController = navController,
+                    onComposing = {
+                        appBarState = it
+                    }
                 )
             }
         )
     }
 }
+
+data class AppBarState(
+    val title: String = "",
+    val actions: (@Composable RowScope.() -> Unit)? = null
+)
