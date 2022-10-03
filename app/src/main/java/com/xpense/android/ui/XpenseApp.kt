@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.xpense.android.nav.XpenseNavHost
-import com.xpense.android.presentation.ui.theme.XpenseTheme
+import com.xpense.android.ui.theme.XpenseTheme
 
 @ExperimentalMaterialApi
 @Composable

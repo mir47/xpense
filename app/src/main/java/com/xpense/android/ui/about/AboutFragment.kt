@@ -11,7 +11,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import com.xpense.android.R
-import com.xpense.android.presentation.ui.theme.XpenseTheme
+import com.xpense.android.ui.theme.XpenseTheme
 
 class AboutFragment : Fragment() {
 

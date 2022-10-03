@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.ui.theme
+package com.xpense.android.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
@@ -7,7 +7,6 @@ val Purple500 = Color(0xFF6200EE)
 val Purple700 = Color(0xFF3700B3)
 val Teal200 = Color(0xFF03DAC5)
 
-// from Compose Basics Codelab:
 val Navy = Color(0xFF073042)
 val Blue = Color(0xFF4285F4)
 val LightBlue = Color(0xFFD7EFFE)

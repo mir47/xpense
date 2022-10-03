@@ -1,6 +1,5 @@
 package com.xpense.android.ui.txn.list
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,15 +14,14 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Filter
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
@@ -41,78 +39,78 @@ fun TxnListScreen(
     onFabClick: () -> Unit,
 ) {
 
-        val state by vm.state
+    val state by vm.state
 
-        LaunchedEffect(key1 = true) {
-            onComposing(
-                AppBarState(
-                    title = "Xpense",
-                    actions = {
-                        IconButton(onClick = { }) {
-                            Icon(
-                                imageVector = Icons.Default.Delete,
-                                contentDescription = null
-                            )
-                        }
-                        IconButton(onClick = { }) {
-                            Icon(
-                                imageVector = Icons.Default.Filter,
-                                contentDescription = null
-                            )
-                        }
+    LaunchedEffect(key1 = true) {
+        onComposing(
+            AppBarState(
+                title = "Xpense",
+                actions = {
+                    IconButton(onClick = { vm.deleteAllTxns() }) {
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = null
+                        )
                     }
-                )
+                    IconButton(onClick = { }) {
+                        Icon(
+                            imageVector = Icons.Default.Filter,
+                            contentDescription = null
+                        )
+                    }
+                }
             )
+        )
+    }
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .semantics {
+                contentDescription = "Transaction List Screen"
+            }
+    ) {
+        when (state) {
+            is UiState.Loading -> {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            }
+            is UiState.Error -> {
+                Text(
+                    text = (state as UiState.Error).message,
+                    color = MaterialTheme.colors.error,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp)
+                        .align(Alignment.Center)
+                )
+            }
+            is UiState.Success -> {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(vertical = 8.dp)
+                ) {
+                    items((state as UiState.Success).txnsData) { txn ->
+                        TxnListItem(
+                            txn = txn,
+                            onItemClick = {
+                                onItemClick(txn)
+                            }
+                        )
+                    }
+                }
+            }
         }
 
-//    Surface {
-        Box(
+        FloatingActionButton(
             modifier = Modifier
-                .fillMaxSize()
-                .semantics {
-                    contentDescription = "Transaction List Screen"
-                }
+                .padding(16.dp)
+                .align(alignment = Alignment.BottomEnd),
+            onClick = { onFabClick() }
         ) {
-            when (state) {
-                is UiState.Loading -> {
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                }
-                is UiState.Error -> {
-                    Text(
-                        text = (state as UiState.Error).message,
-                        color = MaterialTheme.colors.error,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 20.dp)
-                            .align(Alignment.Center)
-                    )
-                }
-                is UiState.Success -> {
-                    LazyColumn(modifier = Modifier.fillMaxSize()) {
-                        items((state as UiState.Success).txnsData) { txn ->
-                            TxnListItem(
-                                txn = txn,
-                                onItemClick = {
-                                    onItemClick(txn)
-                                }
-                            )
-                        }
-                    }
-                }
-            }
-
-            FloatingActionButton(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .align(alignment = Alignment.BottomEnd),
-                onClick = { onFabClick() }
-            ) {
-                Image(
-                    painter = painterResource(android.R.drawable.ic_input_add),
-                    contentDescription = "FAB"
-                )
-            }
+            Icon(Icons.Filled.Add, "FAB")
+        }
 
 //            if (state.error.isNotBlank()) {
 //                Text(
@@ -128,6 +126,5 @@ fun TxnListScreen(
 //            if (state.isLoading) {
 //                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
 //            }
-        }
-//    }
+    }
 }

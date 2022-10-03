@@ -4,6 +4,7 @@ import com.xpense.android.BaseTest
 import com.xpense.android.advanceTimeByAndRun
 import com.xpense.android.domain.model.Txn
 import com.xpense.android.domain.repository.FakeTxnRepository
+import com.xpense.android.domain.use_case.DeleteTxnsUseCase
 import com.xpense.android.domain.use_case.ObserveTxnsResultUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -23,6 +24,7 @@ class TxnListViewModelTest : BaseTest() {
     // use cases to be injected into the ViewModel
     // TODO: possibility of creating fake use cases?
     private lateinit var observeTxnsResultUseCase: ObserveTxnsResultUseCase
+    private lateinit var deleteTxnsUseCase: DeleteTxnsUseCase
 
     // Subject under test
     private lateinit var viewModel: TxnListViewModel
@@ -37,8 +39,9 @@ class TxnListViewModelTest : BaseTest() {
         fakeRepository.addTransactions(txn1, txn2, txn3)
 
         observeTxnsResultUseCase = ObserveTxnsResultUseCase(fakeRepository)
+        deleteTxnsUseCase = DeleteTxnsUseCase(fakeRepository)
 
-        viewModel = TxnListViewModel(observeTxnsResultUseCase)
+        viewModel = TxnListViewModel(observeTxnsResultUseCase, deleteTxnsUseCase)
     }
 
     @Ignore("figure out how to test state updates")

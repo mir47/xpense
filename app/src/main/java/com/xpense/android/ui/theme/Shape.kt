@@ -1,4 +1,4 @@
-package com.xpense.android.presentation.ui.theme
+package com.xpense.android.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes
