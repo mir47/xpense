@@ -1,6 +1,5 @@
 package com.xpense.android.domain.repository
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Success
@@ -20,10 +19,7 @@ class FakeAndroidTxnRepository : TxnRepository {
 
     private val _observableTransactions = MutableLiveData<Result<List<Txn>>>()
 
-    override fun observeTransactionsResult(): LiveData<Result<List<Txn>>> =
-        _observableTransactions
-
-    override fun observeTransactionsFlow(): Flow<List<Txn>> {
+    override fun observeTransactionsResult(): Flow<Result<List<Txn>>> {
         TODO("Not yet implemented")
     }
 

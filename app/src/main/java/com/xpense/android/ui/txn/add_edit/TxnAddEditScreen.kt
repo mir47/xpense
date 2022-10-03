@@ -6,24 +6,55 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.xpense.android.ui.AppBarState
 import com.xpense.android.ui.components.MaterialDropdown2
 
 @ExperimentalMaterialApi
 @Composable
 fun TxnAddEditScreen(
     vm: TxnAddEditViewModel,
+    onComposing: (AppBarState) -> Unit,
     onDone: () -> Unit,
 ) {
     val state by vm.uiState
+
+    LaunchedEffect(key1 = true) {
+        onComposing(
+            AppBarState(
+                title = "Transaction",
+                actions = {
+                    IconButton(onClick = { }) {
+                        Icon(
+                            imageVector = Icons.Default.Home,
+                            contentDescription = null
+                        )
+                    }
+                    IconButton(onClick = { }) {
+                        Icon(
+                            imageVector = Icons.Default.Favorite,
+                            contentDescription = null
+                        )
+                    }
+                }
+            )
+        )
+    }
 
     when (state) {
         is UiState.Default -> {}

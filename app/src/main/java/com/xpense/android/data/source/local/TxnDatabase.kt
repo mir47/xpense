@@ -1,8 +1,6 @@
 package com.xpense.android.data.source.local
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.xpense.android.data.source.local.model.TxnEntity
@@ -16,26 +14,8 @@ import com.xpense.android.data.source.local.model.TxnEntity
 @Database(entities = [TxnEntity::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class TxnDatabase : RoomDatabase() {
-
     /**
      * Connects the database to the DAO.
      */
     abstract fun txnDao(): TxnDao
-
-    companion object {
-
-        /**
-         * Static method that creates an instance of [TxnDatabase] and returns the DAO
-         */
-        fun createTxnDao(context: Context): TxnDao {
-            return Room.databaseBuilder(
-                context.applicationContext,
-                TxnDatabase::class.java,
-                "transaction_database"
-            )
-                // migration strategy - use destructive to recreate a new db
-                .fallbackToDestructiveMigration()
-                .build().txnDao()
-        }
-    }
 }

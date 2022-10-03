@@ -1,10 +1,6 @@
 package com.xpense.android.domain.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import com.xpense.android.data.Result
-import com.xpense.android.data.Result.Error
-import com.xpense.android.data.Result.Success
 import com.xpense.android.data.source.TxnDataSource
 import com.xpense.android.domain.model.Txn
 import com.xpense.android.domain.model.toTxn
@@ -13,7 +9,7 @@ import com.xpense.android.util.wrapEspressoIdlingResource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.transform
 import javax.inject.Inject
 
 class TxnRepositoryImpl @Inject constructor(
@@ -22,18 +18,13 @@ class TxnRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : TxnRepository {
 
-    override fun observeTransactionsResult(): LiveData<Result<List<Txn>>> {
+    override fun observeTransactionsResult(): Flow<Result<List<Txn>>> {
         wrapEspressoIdlingResource {
-            return Transformations.map(txnDataSourceLocal.observeTransactionsResult()) {
-                Success((it as Success).data.map { txnEntity -> txnEntity.toTxn() })
-            }
-        }
-    }
-
-    override fun observeTransactionsFlow(): Flow<List<Txn>> {
-        wrapEspressoIdlingResource {
-            return txnDataSourceLocal.observeTransactionsFlow().map { list ->
-                list.map { it.toTxn() }
+            return txnDataSourceLocal.observeTransactionsResult().transform {
+                if (it is Result.Success) {
+                    // need to `emit` inside `transform` - but not sure why?
+                    emit(Result.Success(it.data.map { txnEntity -> txnEntity.toTxn() }))
+                }
             }
         }
     }
@@ -47,13 +38,17 @@ class TxnRepositoryImpl @Inject constructor(
 
     override suspend fun getTransactionResultById(txnId: Long): Result<Txn> {
         wrapEspressoIdlingResource {
-            return Success((txnDataSourceLocal.getTransactionResultById(txnId) as Success).data.toTxn())
+            return Result.Success(
+                (txnDataSourceLocal.getTransactionResultById(txnId) as Result.Success).data.toTxn()
+            )
         }
     }
 
     override suspend fun getTransactionsResult(): Result<List<Txn>> {
         wrapEspressoIdlingResource {
-            return Success((txnDataSourceLocal.getTransactionsResult() as Success).data.map { it.toTxn() })
+            return Result.Success(
+                (txnDataSourceLocal.getTransactionsResult() as Result.Success).data.map { it.toTxn() }
+            )
         }
     }
 
@@ -91,13 +86,13 @@ class TxnRepositoryImpl @Inject constructor(
         wrapEspressoIdlingResource {
             val remoteTransactions = txnDataSourceRemote.getTransactionsResult()
 
-            if (remoteTransactions is Success) {
+            if (remoteTransactions is Result.Success) {
                 // Real apps might want to do a proper sync
                 txnDataSourceLocal.deleteAllTransactions()
                 remoteTransactions.data.forEach { transaction ->
                     txnDataSourceLocal.saveTransaction(transaction)
                 }
-            } else if (remoteTransactions is Error) {
+            } else if (remoteTransactions is Result.Error) {
                 throw remoteTransactions.exception
             }
         }

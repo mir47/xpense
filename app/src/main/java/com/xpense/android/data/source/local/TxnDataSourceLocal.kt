@@ -1,10 +1,9 @@
 package com.xpense.android.data.source.local
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
 import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Error
 import com.xpense.android.data.Result.Success
+import com.xpense.android.data.asResult
 import com.xpense.android.data.source.TxnDataSource
 import com.xpense.android.data.source.local.model.TxnEntity
 import kotlinx.coroutines.CoroutineDispatcher
@@ -15,11 +14,8 @@ class TxnDataSourceLocal internal constructor(
     private val txnDao: TxnDao,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ): TxnDataSource {
-    override fun observeTransactionsResult(): LiveData<Result<List<TxnEntity>>> =
-        txnDao.observeTransactions().map { Success(it) }
-
-    override fun observeTransactionsFlow(): Flow<List<TxnEntity>> =
-        txnDao.observeTransactionsFlow()
+    override fun observeTransactionsResult(): Flow<Result<List<TxnEntity>>> =
+        txnDao.observeTransactions().asResult()
 
     override suspend fun saveTransaction(txnEntity: TxnEntity) =
         txnDao.insert(txnEntity)

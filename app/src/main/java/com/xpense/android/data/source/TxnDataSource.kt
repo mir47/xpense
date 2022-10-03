@@ -1,15 +1,12 @@
 package com.xpense.android.data.source
 
-import androidx.lifecycle.LiveData
 import com.xpense.android.data.Result
 import com.xpense.android.data.source.local.model.TxnEntity
 import kotlinx.coroutines.flow.Flow
 
 interface TxnDataSource {
 
-    fun observeTransactionsResult(): LiveData<Result<List<TxnEntity>>>
-
-    fun observeTransactionsFlow(): Flow<List<TxnEntity>>
+    fun observeTransactionsResult(): Flow<Result<List<TxnEntity>>>
 
     suspend fun saveTransaction(txnEntity: TxnEntity)
 

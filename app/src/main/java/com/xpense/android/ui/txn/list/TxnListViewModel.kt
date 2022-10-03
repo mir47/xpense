@@ -4,9 +4,8 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.xpense.android.domain.use_case.GetTxnsUseCase
-import com.xpense.android.domain.use_case.ObserveTxnsUseCase
-import com.xpense.android.common.Resource
+import com.xpense.android.data.Result
+import com.xpense.android.domain.use_case.ObserveTxnsResultUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -14,8 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TxnListViewModel @Inject constructor(
-    private val getTxnsUseCase: GetTxnsUseCase,
-    private val observeTxnsUseCase: ObserveTxnsUseCase,
+    private val observeTxnsResultUseCase: ObserveTxnsResultUseCase,
 ) : ViewModel() {
 
     private val _state = mutableStateOf<UiState>(UiState.Loading)
@@ -25,22 +23,13 @@ class TxnListViewModel @Inject constructor(
         observeTxns()
     }
 
-//    fun getTxns() {
-//        getTxnsUseCase().onEach { result ->
-//            when (result) {
-//                is Resource.Success -> _state.value =
-//                    UiState(txns = result.data ?: emptyList())
-//                is Resource.Error -> _state.value =
-//                    UiState(error = result.message ?: "An unexpected error occurred")
-//                is Resource.Loading -> _state.value =
-//                    UiState(isLoading = true)
-//            }
-//        }.launchIn(viewModelScope)
-//    }
-
     private fun observeTxns() {
-        observeTxnsUseCase().onEach { list ->
-            _state.value = UiState.Success(txnsData = list)
+        observeTxnsResultUseCase().onEach { result ->
+            _state.value = when (result) {
+                is Result.Success -> UiState.Success(txnsData = result.data)
+                is Result.Error -> UiState.Error(message = result.exception.message ?: "An unexpected error occurred")
+                is Result.Loading -> UiState.Loading
+            }
         }.launchIn(viewModelScope)
     }
 }

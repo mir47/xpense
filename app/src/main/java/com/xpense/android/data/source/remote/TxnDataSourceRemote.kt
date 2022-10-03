@@ -1,6 +1,5 @@
 package com.xpense.android.data.source.remote
 
-import androidx.lifecycle.LiveData
 import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Success
 import com.xpense.android.data.source.local.model.TxnEntity
@@ -15,11 +14,7 @@ object TxnDataSourceRemote : TxnDataSource {
 
     private var TRANSACTIONS_SERVICE_DATA = LinkedHashMap<Long, TxnEntity>(2)
 
-    override fun observeTransactionsResult(): LiveData<Result<List<TxnEntity>>> {
-        TODO("Not yet implemented")
-    }
-
-    override fun observeTransactionsFlow(): Flow<List<TxnEntity>> {
+    override fun observeTransactionsResult(): Flow<Result<List<TxnEntity>>> {
         TODO("Not yet implemented")
     }
 
