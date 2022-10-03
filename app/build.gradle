@@ -28,8 +28,8 @@ android {
         applicationId "com.xpense.android"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
-        versionCode 53
-        versionName "0.51.0"
+        versionCode 54
+        versionName "0.52.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField ("String", "MAPS_API_KEY", getMapsApiKey())
     }
