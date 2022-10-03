@@ -1,16 +1,16 @@
 package com.xpense.android.domain.repository
 
 import com.xpense.android.BaseTest
-import com.xpense.android.data.FakeTxnDataSource
+import com.xpense.android.data.source.FakeTxnDataSource
 import com.xpense.android.data.Result.Success
 import com.xpense.android.data.source.local.model.TxnEntity
 import com.xpense.android.domain.model.Txn
 import com.xpense.android.domain.model.toTxn
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.first
 import org.junit.Before
 import org.junit.Test
-import kotlin.test.Ignore
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 
@@ -27,7 +27,7 @@ class TxnRepositoryImplTest: BaseTest() {
     private lateinit var fakeRemoteDataSource: FakeTxnDataSource
 
     // Class under test
-    private lateinit var repository: TxnRepositoryImpl
+    private lateinit var repositoryImpl: TxnRepositoryImpl
 
     @Before
     fun createRepository() {
@@ -35,15 +35,15 @@ class TxnRepositoryImplTest: BaseTest() {
         fakeRemoteDataSource = FakeTxnDataSource(remoteTransactions.toMutableList())
 
         // Get reference to the class under test
-        repository = TxnRepositoryImpl(
+        repositoryImpl = TxnRepositoryImpl(
             fakeLocalDataSource, fakeRemoteDataSource, Dispatchers.Main
         )
     }
 
     @Test
-    fun getTransaction_requestsTransactionFromLocalDataSource() = coroutineTest {
+    fun getTransaction_requestsTransactionFromLocalDataSource() = runTest {
         // When transaction is requested from repository
-        val transaction = repository.getTransactionResultById(1)
+        val transaction = repositoryImpl.getTransactionResultById(1)
 
         // Then transaction is returned
         assertIs<Success<Txn>>(transaction)
@@ -51,33 +51,32 @@ class TxnRepositoryImplTest: BaseTest() {
     }
 
     @Test
-    fun getTransactions_requestsAllTransactionsFromLocalDataSource() = coroutineTest {
+    fun getTransactions_requestsAllTransactionsFromLocalDataSource() = runTest {
         // When transactions are requested from repository
-        val transactions = repository.getTransactionsResult()
+        val transactions = repositoryImpl.getTransactionsResult()
 
         // Then transactions are loaded from local data source
         assertIs<Success<List<Txn>>>(transactions)
         assertEquals(localTransactions.map { it.toTxn() }, transactions.data)
     }
 
-    @Ignore("migrate live data to flow")
     @Test
-    fun observeTransactions_requestsAllTransactionsFromLocalDataSource() = coroutineTest {
-//        // When transactions are observed from repository
-//        val transactions = repository.observeTransactionsResult().getOrAwaitValue()
-//
-//        // Then transactions are loaded from local data source
-//        assertIs<Success<List<Txn>>>(transactions)
-//        assertEquals(localTransactions.map { it.toTxn() }, transactions.data)
+    fun observeTransactionsResult_requestsAllTransactionsFromLocalDataSource() = runTest {
+        // When transactions are observed from repository
+        val transactions = repositoryImpl.observeTransactionsResult().first()
+
+        // Then transactions are loaded from local data source
+        assertIs<Success<List<Txn>>>(transactions)
+        assertEquals(localTransactions.map { it.toTxn() }, transactions.data)
     }
 
     @Test
-    fun insertTransaction_insertsTransactionInLocalDataSource() = coroutineTest {
+    fun insertTransaction_insertsTransactionInLocalDataSource() = runTest {
         // When transaction is inserted into repository
-        repository.saveTransaction(txn3.toTxn())
+        repositoryImpl.saveTransaction(txn3.toTxn())
 
         // Then transaction is added to all transactions
-        val transactions = repository.getTransactionsResult()
+        val transactions = repositoryImpl.getTransactionsResult()
         assertIs<Success<List<Txn>>>(transactions)
         assertEquals(3, transactions.data.size)
         assertEquals(txn1.toTxn(), transactions.data[0])
@@ -86,15 +85,15 @@ class TxnRepositoryImplTest: BaseTest() {
     }
 
     @Test
-    fun updateTransaction_updatesTransactionInLocalDataSource() = coroutineTest {
+    fun updateTransaction_updatesTransactionInLocalDataSource() = runTest {
         // Given transaction with id that exists in data source
         val updatedTxn1 = Txn(id = 1, description = "updated")
 
         // When transaction is updated in repository
-        repository.updateTransaction(updatedTxn1)
+        repositoryImpl.updateTransaction(updatedTxn1)
 
         // Then transaction is updated in all transactions
-        val transactions = repository.getTransactionsResult()
+        val transactions = repositoryImpl.getTransactionsResult()
         assertIs<Success<List<Txn>>>(transactions)
         assertEquals(2, transactions.data.size)
         assertEquals(txn2.toTxn(), transactions.data[0])

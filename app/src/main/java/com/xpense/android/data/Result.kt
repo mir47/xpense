@@ -1,6 +1,11 @@
 package com.xpense.android.data
 
 import com.xpense.android.data.Result.Success
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 
 /**
  * A generic class that holds a value with its loading status.
@@ -27,3 +32,16 @@ sealed class Result<out R> {
  */
 val Result<*>.succeeded
     get() = this is Success && data != null
+
+/**
+ * Wrap flow in [Result] to provide initial and error values
+ */
+fun <T> Flow<T>.asResult(): Flow<Result<T>> {
+    return this
+        .map<T, Result<T>> { Success(it) }
+        .onStart {
+            emit(Result.Loading)
+            delay(1000)
+        }
+        .catch { emit(Result.Error(Exception())) }
+}

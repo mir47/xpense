@@ -1,8 +1,6 @@
 package com.xpense.android.domain.repository
 
 import com.xpense.android.data.Result
-import com.xpense.android.data.Result.Error
-import com.xpense.android.data.Result.Success
 import com.xpense.android.data.source.TxnDataSource
 import com.xpense.android.domain.model.Txn
 import com.xpense.android.domain.model.toTxn
@@ -23,9 +21,9 @@ class TxnRepositoryImpl @Inject constructor(
     override fun observeTransactionsResult(): Flow<Result<List<Txn>>> {
         wrapEspressoIdlingResource {
             return txnDataSourceLocal.observeTransactionsResult().transform {
-                if (it is Success) {
+                if (it is Result.Success) {
                     // need to `emit` inside `transform` - but not sure why?
-                    emit(Success(it.data.map { txnEntity -> txnEntity.toTxn() }))
+                    emit(Result.Success(it.data.map { txnEntity -> txnEntity.toTxn() }))
                 }
             }
         }
@@ -40,13 +38,17 @@ class TxnRepositoryImpl @Inject constructor(
 
     override suspend fun getTransactionResultById(txnId: Long): Result<Txn> {
         wrapEspressoIdlingResource {
-            return Success((txnDataSourceLocal.getTransactionResultById(txnId) as Success).data.toTxn())
+            return Result.Success(
+                (txnDataSourceLocal.getTransactionResultById(txnId) as Result.Success).data.toTxn()
+            )
         }
     }
 
     override suspend fun getTransactionsResult(): Result<List<Txn>> {
         wrapEspressoIdlingResource {
-            return Success((txnDataSourceLocal.getTransactionsResult() as Success).data.map { it.toTxn() })
+            return Result.Success(
+                (txnDataSourceLocal.getTransactionsResult() as Result.Success).data.map { it.toTxn() }
+            )
         }
     }
 
@@ -84,13 +86,13 @@ class TxnRepositoryImpl @Inject constructor(
         wrapEspressoIdlingResource {
             val remoteTransactions = txnDataSourceRemote.getTransactionsResult()
 
-            if (remoteTransactions is Success) {
+            if (remoteTransactions is Result.Success) {
                 // Real apps might want to do a proper sync
                 txnDataSourceLocal.deleteAllTransactions()
                 remoteTransactions.data.forEach { transaction ->
                     txnDataSourceLocal.saveTransaction(transaction)
                 }
-            } else if (remoteTransactions is Error) {
+            } else if (remoteTransactions is Result.Error) {
                 throw remoteTransactions.exception
             }
         }

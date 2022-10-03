@@ -1,23 +1,28 @@
 package com.xpense.android.ui.txn.list
 
 import com.xpense.android.BaseTest
-import com.xpense.android.data.Result.Success
+import com.xpense.android.advanceTimeByAndRun
 import com.xpense.android.domain.model.Txn
 import com.xpense.android.domain.repository.FakeTxnRepository
-import com.xpense.android.getOrAwaitValue
+import com.xpense.android.domain.use_case.ObserveTxnsResultUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runCurrent
 import org.junit.Before
 import org.junit.Test
+import kotlin.test.Ignore
 import kotlin.test.assertEquals
-import kotlin.test.assertFalse
 import kotlin.test.assertIs
-import kotlin.test.assertTrue
 
 @ExperimentalCoroutinesApi
 class TxnListViewModelTest : BaseTest() {
 
-    // Use a fake repository to be injected into the ViewModel
+    // Use a fake repository to be injected into the use cases
     private lateinit var fakeRepository: FakeTxnRepository
+
+    // use cases to be injected into the ViewModel
+    // TODO: possibility of creating fake use cases?
+    private lateinit var observeTxnsResultUseCase: ObserveTxnsResultUseCase
 
     // Subject under test
     private lateinit var viewModel: TxnListViewModel
@@ -31,63 +36,25 @@ class TxnListViewModelTest : BaseTest() {
         val txn3 = Txn(id = 3)
         fakeRepository.addTransactions(txn1, txn2, txn3)
 
-//        viewModel = TxnListViewModel(fakeRepository)
+        observeTxnsResultUseCase = ObserveTxnsResultUseCase(fakeRepository)
+
+        viewModel = TxnListViewModel(observeTxnsResultUseCase)
     }
 
-//    @Test
-//    fun transactions_returnsAllTransactions() {
-//        // When
-//        val transactions = viewModel.transactions.getOrAwaitValue()
-//
-//        // Then
-//        assertIs<Success<List<Txn>>>(transactions)
-//        assertEquals(3, transactions.data.size)
-//    }
-//
-//    @Test
-//    fun clickFab_navigateToCreateTransaction() {
-//        // When FAB clicked
-//        viewModel.onFabClick()
-//
-//        // Then nav live data is set
-//        val navOn = viewModel.navigateToTxnAddEdit.getOrAwaitValue()
-//        assertTrue(navOn)
-//
-//        // When done navigating
-//        viewModel.doneNavigating()
-//
-//        // Then nav live data is cleared
-//        val navOff = viewModel.navigateToTxnAddEdit.getOrAwaitValue()
-//        assertFalse(navOff)
-//    }
-//
-//    @Test
-//    fun refresh_loading() {
-//        // Pause dispatcher to verify initial values
-//        pauseCoroutine()
-//
-//        // When view model is refreshed
-//        viewModel.refresh()
-//
-//        // Then assert that the progress indicator is shown
-//        assertTrue(viewModel.dataLoading.getOrAwaitValue())
-//
-//        // Execute pending coroutines actions
-//        resumeCoroutine()
-//
-//        // Then assert that the progress indicator is hidden
-//        assertFalse(viewModel.dataLoading.getOrAwaitValue())
-//    }
-//
-//    @Test
-//    fun loadStatisticsWhenTasksAreUnavailable_callErrorToDisplay() {
-//        // Make the repository return errors
-//        fakeRepository.shouldReturnError = true
-//
-//        viewModel.refresh()
-//
-//        // Then empty and error are true (which triggers an error message to be shown).
-//        assertTrue(viewModel.empty.getOrAwaitValue())
-//        assertTrue(viewModel.error.getOrAwaitValue())
-//    }
+    @Ignore("figure out how to test state updates")
+    @Test
+    fun state_returnsAllTransactions() = testCoroutineRule.runTest {
+        // When
+        val state = viewModel.state.value
+
+        // Then
+        runCurrent()
+        assertIs<UiState.Loading>(state)
+
+        advanceTimeByAndRun(400)
+        advanceUntilIdle()
+
+        assertIs<UiState.Success>(state)
+        assertEquals(3, state.txnsData.size)
+    }
 }

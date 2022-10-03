@@ -1,17 +1,18 @@
-package com.xpense.android.data
+package com.xpense.android.data.source
 
+import com.xpense.android.data.Result
 import com.xpense.android.data.Result.Success
 import com.xpense.android.data.Result.Error
-import com.xpense.android.data.source.TxnDataSource
 import com.xpense.android.data.source.local.model.TxnEntity
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 
 class FakeTxnDataSource(
     var txnEntities: MutableList<TxnEntity> = mutableListOf()
 ) : TxnDataSource {
 
     override fun observeTransactionsResult(): Flow<Result<List<TxnEntity>>> {
-        TODO("Not yet implemented")
+        return flowOf(Success(txnEntities))
     }
 
     override suspend fun saveTransaction(txnEntity: TxnEntity) {
