@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/txn_list_fragment"
-        android:name="com.xpense.android.presentation.txn.list.TxnListFragment"
+        android:name="com.xpense.android.ui.txn.list.TxnListFragment"
         android:label="@string/main_screen_title" >
         <action
             android:id="@+id/action_txn_list_fragment_to_txn_add_edit_fragment"
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/txn_add_edit_fragment"
-        android:name="com.xpense.android.presentation.txn.add_edit.TxnAddEditFragment"
+        android:name="com.xpense.android.ui.txn.add_edit.TxnAddEditFragment"
         android:label="@string/transaction_screen_title" >
         <argument
             android:name="transactionId"
