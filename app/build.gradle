@@ -55,8 +55,8 @@ android {
         kotlinCompilerExtensionVersion version_compose_compiler
     }
 
-    // Enable data binding
     buildFeatures {
+        // Enable data binding
         dataBinding true
         // Enables Jetpack Compose for this module
         compose true
