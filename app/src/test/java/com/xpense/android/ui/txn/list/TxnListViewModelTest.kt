@@ -1,17 +1,14 @@
 package com.xpense.android.ui.txn.list
 
 import com.xpense.android.BaseTest
-import com.xpense.android.advanceTimeByAndRun
 import com.xpense.android.domain.model.Txn
 import com.xpense.android.domain.repository.FakeTxnRepository
 import com.xpense.android.domain.use_case.DeleteTxnsUseCase
 import com.xpense.android.domain.use_case.ObserveTxnsResultUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
-import kotlinx.coroutines.test.runCurrent
 import org.junit.Before
 import org.junit.Test
-import kotlin.test.Ignore
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 
@@ -44,19 +41,16 @@ class TxnListViewModelTest : BaseTest() {
         viewModel = TxnListViewModel(observeTxnsResultUseCase, deleteTxnsUseCase)
     }
 
-    @Ignore("figure out how to test state updates")
     @Test
     fun state_returnsAllTransactions() = testCoroutineRule.runTest {
         // When
-        val state = viewModel.state.value
+        var state = viewModel.state
 
         // Then
-        runCurrent()
         assertIs<UiState.Loading>(state)
 
-        advanceTimeByAndRun(400)
         advanceUntilIdle()
-
+        state = viewModel.state
         assertIs<UiState.Success>(state)
         assertEquals(3, state.txnsData.size)
     }

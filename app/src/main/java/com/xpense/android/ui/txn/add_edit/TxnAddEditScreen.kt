@@ -12,12 +12,10 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
@@ -32,7 +30,7 @@ fun TxnAddEditScreen(
     onComposing: (AppBarState) -> Unit,
     onDone: () -> Unit,
 ) {
-    val state by vm.uiState
+    val state = vm.uiState
 
     LaunchedEffect(key1 = true) {
         onComposing(
@@ -95,7 +93,7 @@ fun TxnAddEditScreen(
             MaterialDropdown2(
                 modifier = Modifier.padding(vertical = 4.dp),
                 label = "Type",
-                items = vm.items.value
+                items = vm.items
             ) { }
 
             Button(

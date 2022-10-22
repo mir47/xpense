@@ -19,7 +19,6 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Filter
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.contentDescription
@@ -39,7 +38,7 @@ fun TxnListScreen(
     onFabClick: () -> Unit,
 ) {
 
-    val state by vm.state
+    val state = vm.state
 
     LaunchedEffect(key1 = true) {
         onComposing(
@@ -76,7 +75,7 @@ fun TxnListScreen(
             }
             is UiState.Error -> {
                 Text(
-                    text = (state as UiState.Error).message,
+                    text = state.message,
                     color = MaterialTheme.colors.error,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
@@ -91,7 +90,7 @@ fun TxnListScreen(
                         .fillMaxSize()
                         .padding(vertical = 8.dp)
                 ) {
-                    items((state as UiState.Success).txnsData) { txn ->
+                    items(state.txnsData) { txn ->
                         TxnListItem(
                             txn = txn,
                             onItemClick = {
