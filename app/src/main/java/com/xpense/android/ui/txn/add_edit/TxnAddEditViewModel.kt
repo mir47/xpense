@@ -1,7 +1,8 @@
 package com.xpense.android.ui.txn.add_edit
 
-import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -19,14 +20,14 @@ class TxnAddEditViewModel @AssistedInject constructor(
     @Assisted private val txnId: Long,
 ) : ViewModel() {
 
-    private val _uiState = mutableStateOf<UiState>(UiState.Default)
-    val uiState: State<UiState> = _uiState
+    var uiState by mutableStateOf<UiState>(UiState.Default)
+        private set
+
+    var items by mutableStateOf(listOf("Travel", "Food", "Rent"))
+        private set
 
     val amount = mutableStateOf("")
     val description = mutableStateOf("")
-
-    private val _items = mutableStateOf(listOf("Travel", "Food", "Rent"))
-    val items: State<List<String>> =_items
 
     init {
         if (txnId != 0L) {
@@ -64,7 +65,7 @@ class TxnAddEditViewModel @AssistedInject constructor(
                     )
                 )
             }
-            _uiState.value = UiState.Done
+            uiState = UiState.Done
         }
     }
 
