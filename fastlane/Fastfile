@@ -95,14 +95,14 @@ platform :android do
   desc "Increment version code"
   lane :increment_vc do
     increment_version_code(
-      gradle_file_path: "./app/build.gradle",
+      gradle_file_path: "./app/build.gradle.kts",
     )
   end
 
   desc "Increment version name"
   lane :increment_vn do
     increment_version_name(
-      gradle_file_path: "./app/build.gradle",
+      gradle_file_path: "./app/build.gradle.kts",
       version_name: File.read("../VERSION")
     )
   end

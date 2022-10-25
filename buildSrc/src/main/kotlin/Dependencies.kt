@@ -2,8 +2,10 @@ object Apps {
     const val minSdk = 23
     const val targetSdk = 33
     const val compileSdk = 33
-    const val versionCode = 56
-    const val versionName = "0.54.0"
+    // todo: move versionCode and versionName from build.gradle.kts (app module)
+    //  when fastlane increment_version_code and increment_version_name supports it
+    // const val versionCode = 56
+    // const val versionName = "0.54.0"
 }
 
 object Versions {
