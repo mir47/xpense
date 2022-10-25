@@ -15,8 +15,8 @@ buildscript {
         classpath(Libs.gradle)
         classpath(Libs.kotlinPlugin)
         classpath(Libs.navigationSafeArgsGradlePlugin)
-        classpath(Libs.google_services)
-        classpath(Libs.secrets_gradle_plugin)
+        classpath(Libs.googleServices)
+        classpath(Libs.secretsGradlePlugin)
         classpath(Libs.hiltPlugin)
     }
 }

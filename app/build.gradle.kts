@@ -79,13 +79,13 @@ dependencies {
 
     implementation(Libs.appcompat)
     implementation(Libs.material)
-    implementation(Libs.constraint_layout)
+    implementation(Libs.constraintLayout)
     implementation(Libs.fragment)
     implementation(Libs.lifecycle)
-    implementation(Libs.androidx_preference_ktx)
+    implementation(Libs.androidxPreferenceKtx)
 
     // Android KTX
-    implementation(Libs.android_ktx)
+    implementation(Libs.androidxCoreKtx)
 
     // Room
     implementation(Libs.room)
@@ -128,41 +128,41 @@ dependencies {
     implementation(Libs.hilt)
     kapt(Libs.hiltKapt)
 
-    implementation(TestLibs.espressoIdlingResource)
+    implementation(TestLibs.idlingResource)
 
     // Unit Test
     testImplementation(TestLibs.junit)
-    testImplementation(TestLibs.kotlinTest)
-    testImplementation(TestLibs.coroutineTest)
+    testImplementation(TestLibs.kotlin)
+    testImplementation(TestLibs.coroutine)
 
     // AndroidX Test
-    testImplementation(TestLibs.core)
-    testImplementation(TestLibs.coreKtx)
-    testImplementation(TestLibs.junitKtx)
+    testImplementation(TestLibs.androidxArch)
+    testImplementation(TestLibs.androidxCoreKtx)
+    testImplementation(TestLibs.androidxJunitKtx)
     testImplementation(TestLibs.robolectric)
 
     // Android instrumented unit tests
     androidTestImplementation(TestLibs.junit)
-    androidTestImplementation(TestLibs.kotlinTest)
-    androidTestImplementation(TestLibs.mockito)
+    androidTestImplementation(TestLibs.kotlin)
+    androidTestImplementation(TestLibs.mockitoCore)
     androidTestImplementation(TestLibs.mockitoAndroid)
 //    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$version_dex_maker"
-    androidTestImplementation(TestLibs.coroutineTest)
+    androidTestImplementation(TestLibs.coroutine)
 
-    androidTestImplementation(TestLibs.coreKtx)
-    androidTestImplementation(TestLibs.coreAndroidX)
+    androidTestImplementation(TestLibs.androidxCoreKtx)
+    androidTestImplementation(TestLibs.androidxCore)
 
     // AndroidX and Espresso Test
-    androidTestImplementation(TestLibs.junitAndroidX)
+    androidTestImplementation(TestLibs.androidxJunit)
     androidTestImplementation(TestLibs.espressoCore)
     androidTestImplementation(TestLibs.espressoContrib)
-    androidTestImplementation(TestLibs.core)
+    androidTestImplementation(TestLibs.androidxArch)
 
     // Fragments testing
     // Testing code should not be included in the main code.
     // Once https://issuetracker.google.com/128612536 is fixed this can be fixed.
     debugImplementation(TestLibs.fragment)
-    implementation(TestLibs.coreAndroidX)
+    implementation(TestLibs.androidxCore)
 
     // Compose testing dependencies
     androidTestImplementation(TestLibs.compose)
