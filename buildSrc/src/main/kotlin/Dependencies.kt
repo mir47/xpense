@@ -70,6 +70,7 @@ object Libs {
     const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
     const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+    const val maps = "com.google.android.gms:play-services-maps:${Versions.maps}"
 
     // Firebase
     const val firebaseUiAuth = "com.firebaseui:firebase-ui-auth:${Versions.firebaseUiAuth}"
@@ -92,9 +93,6 @@ object Libs {
     // Material icons
     const val composeMaterialIcons = "androidx.compose.material:material-icons-extended:${Versions.compose}"
     const val composeNav = "androidx.navigation:navigation-compose:${Versions.composeNavigation}"
-
-    // Maps
-    const val maps = "com.google.android.gms:play-services-maps:${Versions.maps}"
 }
 
 object TestLibs {
@@ -103,24 +101,24 @@ object TestLibs {
     const val kotlin = "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
     const val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutine}"
 
-    const val idlingResource = "androidx.test.espresso:espresso-idling-resource:${Versions.espresso}"
-
     // AndroidX Test
     const val androidxArch = "androidx.arch.core:core-testing:${Versions.archTesting}"
+    const val androidxCore = "androidx.test:core:${Versions.androidxTestCore}"
     const val androidxCoreKtx = "androidx.test:core-ktx:${Versions.androidxTestCore}"
+    const val androidxJunit = "androidx.test.ext:junit:${Versions.androidxJunitKtx}"
     const val androidxJunitKtx = "androidx.test.ext:junit-ktx:${Versions.androidxJunitKtx}"
+
+    // Robolectric
     const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
 
-    // Android instrumented unit tests
+    // Mockito
     const val mockitoCore = "org.mockito:mockito-core:${Versions.mockito}"
     const val mockitoAndroid = "org.mockito:mockito-android:${Versions.mockito}"
 
-    const val androidxCore = "androidx.test:core:${Versions.androidxTestCore}"
-
-    // AndroidX and Espresso Test
-    const val androidxJunit = "androidx.test.ext:junit:${Versions.androidxJunitKtx}"
+    // Espresso
     const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso}"
     const val espressoContrib = "androidx.test.espresso:espresso-contrib:${Versions.espresso}"
+    const val idlingResource = "androidx.test.espresso:espresso-idling-resource:${Versions.espresso}"
 
     // Fragments testing
     const val fragment = "androidx.fragment:fragment-testing:${Versions.fragment}"
