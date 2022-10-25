@@ -2,7 +2,7 @@ name: Gradle AAB (build and deploy)
 
 on:
   push:
-    branches: [ release-gradle-aab ]
+    branches: [ migrate_gradle_groovy_to_kts ]
 
 jobs:
   build:
