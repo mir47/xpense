@@ -15,12 +15,8 @@ object Versions {
     const val secretsGradlePlugin = "2.0.1"
     const val hilt = "2.44"
     const val navigation = "2.5.2"
-
-    const val androidxTestCore = "1.4.0"
-    const val androidxJunitKtx = "1.1.3"
     const val androidxPreferenceKtx = "1.2.0"
     const val appcompat = "1.5.1"
-    const val archTesting = "2.1.0"
     const val compose = "1.1.1"
     const val composeCompiler = "1.2.0"
     const val composeMaterialThemeAdapter = "1.1.17"
@@ -31,20 +27,23 @@ object Versions {
     const val core = "1.9.0"
     const val coroutine = "1.6.4"
     const val dexMaker = "2.28.1"
-    const val espresso = "3.4.0"
     const val firebase = "29.1.0"
     const val firebaseUiAuth = "7.2.0"
     const val fragment = "1.5.3"
     const val lifecycle = "2.6.0-alpha02"
     const val maps = "18.1.0"
     const val material = "1.6.1"
-    const val mockito = "3.1.0"
     const val room = "2.4.3"
-    const val robolectric = "4.7.3"
     const val timber = "5.0.1"
 
     /* test */
     const val junit = "4.13.2"
+    const val archTesting = "2.1.0"
+    const val androidxTestCore = "1.4.0"
+    const val androidxJunitKtx = "1.1.3"
+    const val espresso = "3.4.0"
+    const val robolectric = "4.7.3"
+    const val mockito = "3.1.0"
 }
 
 object Libs {
