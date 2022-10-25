@@ -2,7 +2,7 @@ name: Fastlane AAB (build and deploy)
 
 on:
   push:
-    branches: [ release-fastlane-aab ]
+    branches: [ migrate_gradle_groovy_to_kts ]
 
 jobs:
   build:
