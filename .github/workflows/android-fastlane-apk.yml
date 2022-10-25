@@ -2,7 +2,7 @@ name: Fastlane APK (build)
 
 on:
   push:
-    branches: [ release-fastlane-apk ]
+    branches: [ migrate_gradle_groovy_to_kts ]
 
 jobs:
   build:
