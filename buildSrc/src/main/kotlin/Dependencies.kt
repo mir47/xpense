@@ -56,7 +56,7 @@ object Libs {
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
     const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
     const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
-    const val hiltKapt = "com.google.dagger:hilt-compiler:${Versions.hilt}"
+    const val hiltCompiler = "com.google.dagger:hilt-compiler:${Versions.hilt}"
     const val material = "com.google.android.material:material:${Versions.material}"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     const val fragment = "androidx.fragment:fragment-ktx:${Versions.fragment}"

@@ -126,7 +126,7 @@ dependencies {
 
     // Hilt
     implementation(Libs.hilt)
-    kapt(Libs.hiltKapt)
+    kapt(Libs.hiltCompiler)
 
     implementation(TestLibs.idlingResource)
 
