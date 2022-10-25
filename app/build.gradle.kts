@@ -19,10 +19,10 @@ android {
         applicationId = "com.xpense.android"
         minSdk = Apps.minSdk
         targetSdk = Apps.targetSdk
-        // todo: move versionCode and versionName to Dependencies.Apps (buildSrc module)
+        // todo: move version code and name to Dependencies.Apps (buildSrc module)
         //  when fastlane increment_version_code and increment_version_name supports it
-        versionCode = 56
-        versionName = "0.54.0"
+        versionCode = 57
+        versionName = "0.55.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         val key: String = gradleLocalProperties(rootDir).getProperty("MAPS_API_KEY")
         buildConfigField ("String", "MAPS_API_KEY", key)
