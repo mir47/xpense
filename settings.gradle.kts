@@ -7,3 +7,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "xpense"
 include(":app")
+include(":watch")

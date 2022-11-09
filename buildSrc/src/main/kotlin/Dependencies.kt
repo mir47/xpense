@@ -1,5 +1,6 @@
 object Apps {
     const val minSdk = 23
+    const val minSdkWatch = 25
     const val targetSdk = 33
     const val compileSdk = 33
     // todo: move version code and name from build.gradle.kts (app module)
