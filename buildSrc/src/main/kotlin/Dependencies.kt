@@ -17,12 +17,10 @@ object Versions {
     const val navigation = "2.5.2"
     const val androidxPreferenceKtx = "1.2.0"
     const val appcompat = "1.5.1"
-    const val compose = "1.1.1"
+    const val composeBom = "2022.10.00"
     const val composeCompiler = "1.2.0"
-    const val composeMaterialThemeAdapter = "1.1.17"
+//    const val composeMaterialThemeAdapter = "1.1.17"
     const val composeNavigation = "2.5.0"
-    const val composeRuntimeLivedata = "1.0.0-beta01"
-    const val composeUiTooling = "1.2.1"
     const val constraintLayout = "2.1.4"
     const val core = "1.9.0"
     const val coroutine = "1.6.4"
@@ -30,7 +28,7 @@ object Versions {
     const val firebase = "29.1.0"
     const val firebaseUiAuth = "7.2.0"
     const val fragment = "1.5.3"
-    const val lifecycle = "2.6.0-alpha02"
+    const val lifecycle = "2.5.1"
     const val maps = "18.1.0"
     const val material = "1.6.1"
     const val room = "2.4.3"
@@ -73,26 +71,23 @@ object Libs {
     const val maps = "com.google.android.gms:play-services-maps:${Versions.maps}"
 
     // Firebase
-    const val firebaseUiAuth = "com.firebaseui:firebase-ui-auth:${Versions.firebaseUiAuth}"
     const val firebaseBom = "com.google.firebase:firebase-bom:${Versions.firebase}"
     const val firebaseAnalytics = "com.google.firebase:firebase-analytics-ktx"
-    const val firebaseMessaging = "com.google.firebase:firebase-messaging-ktx"
     const val firebaseAuth = "com.google.firebase:firebase-auth-ktx"
+    const val firebaseMessaging = "com.google.firebase:firebase-messaging-ktx"
+    const val firebaseUiAuth = "com.firebaseui:firebase-ui-auth:${Versions.firebaseUiAuth}"
 
     // Compose
-    // Compose Material Design
-    const val composeMaterial = "androidx.compose.material:material:${Versions.compose}"
-    // Tooling support (Previews, etc.)
-    const val composeTools = "androidx.compose.ui:ui-tooling:${Versions.compose}"
-    // Integration with ViewModels
+    const val composeBom = "androidx.compose:compose-bom:${Versions.composeBom}"
+    const val composeMaterial = "androidx.compose.material:material"
+    const val composeMaterialIcons = "androidx.compose.material:material-icons-extended"
+    const val composeNav = "androidx.navigation:navigation-compose:${Versions.composeNavigation}"
+    const val composeTools = "androidx.compose.ui:ui-tooling"
     const val composeViewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifecycle}"
     // When using a MDC theme
 //    implementation("com.google.android.material:compose-theme-adapter:$version_compose_material_theme_adapter")
     // When using a AppCompat theme
 //    implementation("com.google.accompanist:accompanist-appcompat-theme:0.16.0")
-    // Material icons
-    const val composeMaterialIcons = "androidx.compose.material:material-icons-extended:${Versions.compose}"
-    const val composeNav = "androidx.navigation:navigation-compose:${Versions.composeNavigation}"
 }
 
 object TestLibs {
@@ -124,7 +119,7 @@ object TestLibs {
     const val fragment = "androidx.fragment:fragment-testing:${Versions.fragment}"
 
     // Compose testing dependencies
-    const val compose = "androidx.compose.ui:ui-test-junit4:${Versions.compose}"
+    const val composeJunit = "androidx.compose.ui:ui-test-junit4"
+    const val composeManifest = "androidx.compose.ui:ui-test-manifest"
     const val composeNav = "androidx.navigation:navigation-testing:${Versions.composeNavigation}"
-    const val composeUi = "androidx.compose.ui:ui-test-manifest:${Versions.compose}"
 }

@@ -29,7 +29,6 @@ import com.xpense.android.domain.model.Txn
 import com.xpense.android.ui.AppBarState
 import com.xpense.android.ui.components.TxnListItem
 
-@ExperimentalMaterialApi
 @Composable
 fun TxnListScreen(
     vm: TxnListViewModel,

@@ -32,7 +32,6 @@ fun MaterialDropdown2(
 
 //    val focusManager = LocalFocusManager.current
 
-    // bug in material library 1.3.0 - label gets cut
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = { expanded = !expanded },
