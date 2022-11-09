@@ -106,20 +106,21 @@ dependencies {
     implementation(Libs.timber)
 
     // Firebase
-    implementation(Libs.firebaseUiAuth)
     implementation(platform(Libs.firebaseBom))
     implementation(Libs.firebaseAnalytics)
-    implementation(Libs.firebaseMessaging)
     implementation(Libs.firebaseAuth)
+    implementation(Libs.firebaseMessaging)
+    implementation(Libs.firebaseUiAuth)
     // Add dependencies for other desired Firebase products:
     // https://firebase.google.com/docs/android/setup#available-libraries
 
     // Compose
+    implementation(platform(Libs.composeBom))
     implementation(Libs.composeMaterial)
-    implementation(Libs.composeTools)
-    implementation(Libs.composeViewModel)
     implementation(Libs.composeMaterialIcons)
     implementation(Libs.composeNav)
+    implementation(Libs.composeTools)
+    implementation(Libs.composeViewModel)
 
     // Maps
     implementation(Libs.maps)
@@ -165,7 +166,8 @@ dependencies {
     implementation(TestLibs.androidxCore)
 
     // Compose testing dependencies
-    androidTestImplementation(TestLibs.compose)
+    androidTestImplementation(platform(Libs.composeBom))
+    androidTestImplementation(TestLibs.composeJunit)
+    debugImplementation(TestLibs.composeManifest)
     androidTestImplementation(TestLibs.composeNav)
-    debugImplementation(TestLibs.composeUi)
 }
