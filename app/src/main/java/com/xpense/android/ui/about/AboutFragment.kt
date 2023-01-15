@@ -30,6 +30,7 @@ class AboutFragment : Fragment() {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.about_menu, menu)
@@ -40,6 +41,7 @@ class AboutFragment : Fragment() {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.share) shareAbout()
         return super.onOptionsItemSelected(item)
