@@ -40,7 +40,7 @@ class AuthFragment : Fragment() {
         observeAuthenticationState()
     }
 
-    // TODO: onActivityResult is deprecated
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == FIREBASE_AUTH_REQUEST_CODE) {

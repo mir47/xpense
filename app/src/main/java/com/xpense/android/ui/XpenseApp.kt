@@ -1,6 +1,7 @@
 package com.xpense.android.ui
 
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -16,6 +17,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -67,11 +69,12 @@ fun XpenseApp() {
                     elevation = 10.dp,
                 )
             },
-            content = {
+            content = { paddingValues ->
                 XpenseNavHost(
+                    modifier = Modifier.padding(paddingValues),
                     navController = navController,
-                    onComposing = {
-                        appBarState = it
+                    onComposing = { state ->
+                        appBarState = state
                     }
                 )
             }
