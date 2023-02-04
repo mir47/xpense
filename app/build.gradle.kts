@@ -21,8 +21,8 @@ android {
         targetSdk = Apps.targetSdk
         // todo: move version code and name to Dependencies.Apps (buildSrc module)
         //  when fastlane increment_version_code and increment_version_name supports it
-        versionCode = 59
-        versionName = "0.57.0"
+        versionCode = 60
+        versionName = "0.58.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         val key: String = gradleLocalProperties(rootDir).getProperty("MAPS_API_KEY")
         buildConfigField ("String", "MAPS_API_KEY", key)
