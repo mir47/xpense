@@ -6,9 +6,13 @@ import com.xpense.android.domain.repository.TxnRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class ObserveTxnsResultUseCase @Inject constructor(
+interface ObserveTxnsResultUseCase {
+    operator fun invoke(): Flow<Result<List<Txn>>>
+}
+
+class ObserveTxnsResultUseCaseImpl @Inject constructor(
     private val txnRepo: TxnRepository
-) {
-    operator fun invoke(): Flow<Result<List<Txn>>> =
+) : ObserveTxnsResultUseCase {
+    override operator fun invoke(): Flow<Result<List<Txn>>> =
         txnRepo.observeTransactionsResult()
 }

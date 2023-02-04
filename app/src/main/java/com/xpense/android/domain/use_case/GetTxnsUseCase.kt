@@ -8,10 +8,14 @@ import kotlinx.coroutines.flow.flow
 import java.io.IOException
 import javax.inject.Inject
 
-class GetTxnsUseCase @Inject constructor(
+interface GetTxnsUseCase {
+    operator fun invoke(): Flow<Resource<List<Txn>>>
+}
+
+class GetTxnsUseCaseImpl @Inject constructor(
     private val txnRepo: TxnRepository
-) {
-    operator fun invoke(): Flow<Resource<List<Txn>>> = flow {
+): GetTxnsUseCase {
+    override operator fun invoke(): Flow<Resource<List<Txn>>> = flow {
         try {
             emit(Resource.Loading())
             val txns = txnRepo.getTransactions()
