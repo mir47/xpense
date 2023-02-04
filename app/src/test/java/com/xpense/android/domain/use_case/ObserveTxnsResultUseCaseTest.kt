@@ -26,7 +26,7 @@ class ObserveTxnsResultUseCaseTest: BaseTest() {
         val txn3 = Txn(id = 3)
         fakeRepository.addTransactions(txn1, txn2, txn3)
 
-        useCase = ObserveTxnsResultUseCase(fakeRepository)
+        useCase = ObserveTxnsResultUseCaseImpl(fakeRepository)
     }
 
     @Test

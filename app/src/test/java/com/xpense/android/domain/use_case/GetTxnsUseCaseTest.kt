@@ -25,7 +25,7 @@ internal class GetTxnsUseCaseTest: BaseTest() {
         val txn3 = Txn(id = 3)
         fakeRepository.addTransactions(txn1, txn2, txn3)
 
-        useCase = GetTxnsUseCase(fakeRepository)
+        useCase = GetTxnsUseCaseImpl(fakeRepository)
     }
 
     @Test

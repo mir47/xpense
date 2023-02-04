@@ -4,7 +4,9 @@ import com.xpense.android.BaseTest
 import com.xpense.android.domain.model.Txn
 import com.xpense.android.domain.repository.FakeTxnRepository
 import com.xpense.android.domain.use_case.DeleteTxnsUseCase
+import com.xpense.android.domain.use_case.DeleteTxnsUseCaseImpl
 import com.xpense.android.domain.use_case.ObserveTxnsResultUseCase
+import com.xpense.android.domain.use_case.ObserveTxnsResultUseCaseImpl
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import org.junit.Before
@@ -35,8 +37,8 @@ class TxnListViewModelTest : BaseTest() {
         val txn3 = Txn(id = 3)
         fakeRepository.addTransactions(txn1, txn2, txn3)
 
-        observeTxnsResultUseCase = ObserveTxnsResultUseCase(fakeRepository)
-        deleteTxnsUseCase = DeleteTxnsUseCase(fakeRepository)
+        observeTxnsResultUseCase = ObserveTxnsResultUseCaseImpl(fakeRepository)
+        deleteTxnsUseCase = DeleteTxnsUseCaseImpl(fakeRepository)
 
         viewModel = TxnListViewModel(observeTxnsResultUseCase, deleteTxnsUseCase)
     }
