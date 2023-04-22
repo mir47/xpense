@@ -9,7 +9,7 @@ object Apps {
 }
 
 object Versions {
-    const val gradle = "7.4.0"
+    const val gradle = "8.0.0"
     const val kotlin = "1.7.20"
     const val googleServices = "4.3.14"
     const val secretsGradlePlugin = "2.0.1"
